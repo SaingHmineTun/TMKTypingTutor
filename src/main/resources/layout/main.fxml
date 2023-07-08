@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/main_style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing.MainController">
+   <top>
+
+      <HBox alignment="CENTER" minHeight="35.0" prefHeight="40.0" style="-fx-background-color: black;">
+         <children>
+            <VBox alignment="CENTER" prefHeight="40.0" prefWidth="40.0">
+               <children>
+                  <ImageView fx:id="logo" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </VBox>
+            <Label id="title" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-size: 22;" text="TMK Typing Tutor" textFill="WHITE" HBox.hgrow="ALWAYS">
+            </Label>
+            <VBox fx:id="pos_close_bg" alignment="CENTER" prefHeight="40.0" prefWidth="40.0">
+               <children>
+                  <ImageView fx:id="ivClose" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/delete.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+         <children>
+            <HBox alignment="CENTER_RIGHT" minHeight="50.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btPrev" maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="Prev" />
+                  <ComboBox fx:id="cbLessons" maxHeight="1.7976931348623157E308" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="btNext" maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="Next" />
+               </children>
+            </HBox>
+            <TextField id="view" fx:id="tfView" editable="false" focusTraversable="false" layoutX="10.0" layoutY="26.0" text="ၵဝႃႈၵႆႇ ၵွပ်ႈတႆႇ မႆႉၼိူဝ်ၵွၼ်း။ ၶဝႃႈၶႆႇ မႄႈမၼ်း တႆႇမႃးငွမ်း။" />
+            <TextField id="practice" fx:id="tfPractice" />
+            <VBox alignment="CENTER" fillWidth="false" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox fx:id="row1" />
+                  <HBox fx:id="row2" />
+                  <HBox fx:id="row3" />
+                  <HBox fx:id="row4" />
+                  <HBox fx:id="row5" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+      </VBox>
+   </center>
+</BorderPane>

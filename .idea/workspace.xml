@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/MainController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/model/Key.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/model/Lesson.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/node/HightlightTextField.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/tai_lessons.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/utils/Perc.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/tai_lessons.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/main_style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/myanmar_taung_thu.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/pyidaungsu.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/delete.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/key.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaFXApplication" />
+        <option value="CSS File" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2SGlFR5wlDZryN6Jom4XEodTPNl" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/JavaProjects/tmk_typing/src/main/resources/images",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\JavaProjects\tmk_typing\src\main\resources\images" />
+      <recent name="D:\JavaProjects\tmk_typing\src\main\resources\fonts" />
+      <recent name="D:\JavaProjects\tmk_typing\src\main\resources\assets" />
+      <recent name="D:\JavaProjects\tmk_typing\src\main\java\it\saimao\tmk_typing" />
+      <recent name="D:\JavaProjects\tmk_typing\src\main\resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="it.saimao.tmk_typing.utils" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="TMK Typing" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="it.saimao.tmk_typing.Main" />
+      <module name="tmk_typing" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="" />
+      <created>1688780697826</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1688780697826</updated>
+      <workItem from="1688780698857" duration="6186000" />
+      <workItem from="1688786945858" duration="8071000" />
+      <workItem from="1688817614788" duration="14154000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'Myanmar Taungthu';
+    src: url('../fonts/myanmar_taung_thu.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Pyidaungsu';
+    src: url('../fonts/pyidaungsu.ttf');
+}
+
+
+.root {
+    -fx-background-color: #333333;
+}
+
+.text, .text-field {
+    -fx-font-family: 'Pyidaungsu';
+    -fx-font-size: 16;
+}
+.key {
+    -fx-border-color: #fff;
+    -fx-border-width: 1;
+    -fx-text-fill: #fff;
+    -fx-background-color: #000;
+}
+
+#view {
+    -fx-background-color: #000;
+    -fx-pref-height: 50;
+    -fx-min-height: 50;
+    -fx-max-height: 50;
+    -fx-font-size: 20;
+    -fx-text-fill: #ffff00;
+}
+
+#practice {
+    -fx-background-color: #fff;
+    -fx-pref-height: 50;
+    -fx-min-height: 50;
+    -fx-max-height: 50;
+    -fx-font-size: 20;
+}
+
+.button {
+    -fx-background-color: #000;
+    -fx-text-fill: #fff;
+}
+
+.combo-box, .combo-box > .text {
+    -fx-background-color: #000;
+    -fx-text-fill: #fff;
+}
+
+
+
+#title {
+    -fx-font-size: 22;
+    -fx-font-family: 'Myanmar Taungthu';
+}
