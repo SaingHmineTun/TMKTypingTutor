@@ -22,9 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class MainController implements Initializable {
 
@@ -81,8 +79,9 @@ public class MainController implements Initializable {
         cbLessons.setItems(FXCollections.observableArrayList(lessonList));
         cbLessons.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             tfView.setText(newValue.getLesson());
-            haha();
-            tfPractice.clear();
+            tfPractice.setText("");
+            tfPractice.requestFocus();
+            haha("", "");
         });
         cbLessons.getSelectionModel().select(0);
 
@@ -106,17 +105,19 @@ public class MainController implements Initializable {
 
     private void initPracticeLessons() {
         lessonList = new ArrayList<>();
-        String is = getClass().getResource("/assets/tai_lessons.csv").getPath();
+        String is = getClass().getResource("/assets/short_lessons.csv").getPath();
         try (BufferedReader br = new BufferedReader(new FileReader(is))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
                 int no = Integer.parseInt(values[0].trim());
                 String title = values[1].trim();
-//                System.out.println(no + " : " + values.length);
+                System.out.println(no + " : " + values.length);
                 String content = values[2].replace("\"", "").trim();
                 lessonList.add(new Lesson(no, title, content));
             }
+            // using short_lessons, we should reverse it before use it
+            Collections.reverse(lessonList);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -125,27 +126,42 @@ public class MainController implements Initializable {
     }
 
     private void initPracticeListener() {
-        haha();
+        haha("", "");
         tfPractice.textProperty().addListener((observable, oldValue, newValue) -> {
-            haha();
+            if (tfPractice.getText().length() > tfView.getText().length()) {
+                tfPractice.setText(oldValue);
+                return;
+            }
+            haha(oldValue, newValue);
         });
     }
 
-    private void haha(){
+    private void haha(String oldValue, String newValue){
         // To be able to type ေ & ႄ first with SIL_Shan Keyman keyboard
         String testText = tfView.getText().replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1031", "\u1031$1$2$3");
         testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1084", "\u1084$1$2$3");
-        int index = 0;
+        String practiceText = tfPractice.getText().replaceAll("\u200B", "");
+        int indexOfPractice = 0;
         if (tfPractice.getText() != null && tfPractice.getText().length() > 0) {
             // When typing ​ေ & ​ႄ with sil_shan, this key always comes and we have to omit it first
             // For the typing tutor to know exactly what key we need to type
-            index = tfPractice.getText().replaceAll("\u200B", "").length();
+            indexOfPractice = practiceText.length();
+            String mustType = testText.substring(indexOfPractice - 1, indexOfPractice);
+            String typing = practiceText.substring(indexOfPractice - 1, indexOfPractice);
+            System.out.println("You must type - " + mustType);
+            System.out.println("You are typing - " + typing);
+            if ((!mustType.equals("‌ေ") || !typing.equals("ေ")) && !mustType.equals(typing)) {
+                tfPractice.setText(tfPractice.getText().substring(0, indexOfPractice - 1));
+                return;
+            }
+
         }
 
+
 //        System.out.println("TEST: " + tfView.getText().length() + " : " + index);
-        if (index < tfView.getText().length()) {
+        if (indexOfPractice < tfView.getText().length()) {
             // Know which value to type next
-            String valueToType = testText.substring(index, index + 1);
+            String valueToType = testText.substring(indexOfPractice, indexOfPractice + 1);
             if (valueToType.equals(" ")) {
                 alsoThisValue("SPACE", 5);
             } else {
