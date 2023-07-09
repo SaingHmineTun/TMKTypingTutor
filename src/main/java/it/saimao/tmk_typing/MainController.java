@@ -2,17 +2,19 @@ package it.saimao.tmk_typing;
 
 import it.saimao.tmk_typing.model.Key;
 import it.saimao.tmk_typing.model.Lesson;
+import it.saimao.tmk_typing.utils.KeyValue;
 import it.saimao.tmk_typing.utils.Perc;
+import it.saimao.tmk_typing.utils.Utils;
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -41,18 +43,31 @@ public class MainController implements Initializable {
     @FXML
     private TextField tfPractice;
 
-    String[] row1Values = {"`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Back"};
-    String[] row1ShiftValues = {"~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "Back"};
-    String[] row2Values = {"Tab", "ၸ", "တ", "ၼ", "မ", "ဢ", "ပ", "ၵ", "င", "ဝ", "ႁ", "[", "]", "\\"};
-    String[] row2ShiftValues = {"Tab", "ꩡ", "ၻ", "ꧣ", "႞", "ြ", "ၿ", "ၷ", "ရ", "သ", "ႀ", "{", "}", "|"};
-    String[] row3Values = {"Caps", "ေ", "ႄ", "ိ", "်", "ွ", "ႉ", "ႇ", "ု", "ူ", "ႈ", "'", "Enter"};
-    String[] row3ShiftValues = {"Caps", "ဵ", "ႅ", "ီ", "ႂ်", "ႂ", "့", "ႆ", "”", "ႊ", "း", "“", "Enter"};
-    String[] row4Values = {"Shift", "ၽ", "ထ", "ၶ", "လ", "ယ", "ၺ", "ၢ", ",", ".", "/", "Shift"};
-    String[] row4ShiftValues = {"Shift", "ၾ", "ꩪ", "ꧠ", "ꩮ", "ျ", "႟", "ႃ", "၊", "။", "?", "Shift"};
+//    private final String[] row1Values = {"`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Back"};
+//    private final String[] row1ShiftValues = {"~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "Back"};
+//    private final String[] row2Values = {"Tab", "ၸ", "တ", "ၼ", "မ", "ဢ", "ပ", "ၵ", "င", "ဝ", "ႁ", "[", "]", "\\"};
+//    private final String[] row2ShiftValues = {"Tab", "ꩡ", "ၻ", "ꧣ", "႞", "ြ", "ၿ", "ၷ", "ရ", "သ", "ႀ", "{", "}", "|"};
+//    private final String[] row3Values = {"Caps", "ေ", "ႄ", "ိ", "်", "ွ", "ႉ", "ႇ", "ု", "ူ", "ႈ", "'", "Enter"};
+//    private final String[] row3ShiftValues = {"Caps", "ဵ", "ႅ", "ီ", "ႂ်", "ႂ", "့", "ႆ", "”", "ႊ", "း", "“", "Enter"};
+//    private final String[] row4Values = {"Shift", "ၽ", "ထ", "ၶ", "လ", "ယ", "ၺ", "ၢ", ",", ".", "/", "Shift"};
+//    private final String[] row4ShiftValues = {"Shift", "ၾ", "ꩪ", "ꧠ", "ꩮ", "ျ", "႟", "ႃ", "၊", "။", "?", "Shift"};
+//    private final String[] row5Values = {"Ctrl", "Win", "Alt", "Space", "Alt", "Win", "Menu", "Ctrl"};
+//    private final String[] row5ShiftValues = {"Ctrl", "Win", "Alt", "Space", "Alt", "Win", "Menu", "Ctrl"};
 
-    String[][] allValues = {row1Values, row1ShiftValues, row2Values, row2ShiftValues, row3Values, row3ShiftValues, row4Values, row4ShiftValues, {}, {}};
+    //    private final String[][] allValues = {
+//            KeyValue.Companion.getRow1Values().values().toArray(new String[0]),
+//            KeyValue.Companion.getRow1ShiftValues().values().toArray(new String[0]),
+//            KeyValue.Companion.getRow2Values().values().toArray(new String[0]),
+//            KeyValue.Companion.getRow2ShiftValues().values().toArray(new String[0]),
+//            KeyValue.Companion.getRow3Values().values().toArray(new String[0]),
+//            KeyValue.Companion.getRow3ShiftValues().values().toArray(new String[0]),
+//            KeyValue.Companion.getRow4Values().values().toArray(new String[0]),
+//            KeyValue.Companion.getRow4ShiftValues().values().toArray(new String[0]),
+//            KeyValue.Companion.getRow5Values().values().toArray(new String[0]),
+//            KeyValue.Companion.getRow5ShiftValues().values().toArray(new String[0])};
+    ArrayList<Map<String, String>> allValues = KeyValue.Companion.getAllValuesList();
 
-    List<Lesson> lessonList;
+    private List<Lesson> lessonList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -81,7 +96,7 @@ public class MainController implements Initializable {
             tfView.setText(newValue.getLesson());
             tfPractice.setText("");
             tfPractice.requestFocus();
-            haha("", "");
+            haha();
         });
         cbLessons.getSelectionModel().select(0);
 
@@ -126,83 +141,162 @@ public class MainController implements Initializable {
     }
 
     private void initPracticeListener() {
-        haha("", "");
+        haha();
+        tfPractice.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.BACK_SPACE) {
+                    event.consume();
+                }
+            }
+        });
+
+        tfPractice.addEventHandler(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                System.out.println("KEY TYPE EVENT");
+                if (event.getCharacter().equals("\u200B")) {
+                    event.consume();;
+                }
+            }
+        });
+
         tfPractice.textProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Text you typed in textProperty() - " + tfPractice.getText());
+            if (swap) {
+                swap = false;
+                return;
+            }
             if (tfPractice.getText().length() > tfView.getText().length()) {
                 tfPractice.setText(oldValue);
                 return;
             }
-            haha(oldValue, newValue);
+            if (tfPractice.getText().endsWith("\u200b")) {
+                System.out.println("200b gone!");
+                tfPractice.setText(oldValue);
+                return;
+            }
+            haha();
         });
     }
 
-    private void haha(String oldValue, String newValue){
+
+    private boolean mustSwap;
+    private boolean swap;
+    private boolean stop;
+
+    private void haha() {
         // To be able to type ေ & ႄ first with SIL_Shan Keyman keyboard
         String testText = tfView.getText().replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1031", "\u1031$1$2$3");
         testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1084", "\u1084$1$2$3");
-        String practiceText = tfPractice.getText().replaceAll("\u200B", "");
+
+        String practiceText = tfPractice.getText();
         int indexOfPractice = 0;
+        String typing;
         if (tfPractice.getText() != null && tfPractice.getText().length() > 0) {
             // When typing ​ေ & ​ႄ with sil_shan, this key always comes and we have to omit it first
             // For the typing tutor to know exactly what key we need to type
             indexOfPractice = practiceText.length();
             String mustType = testText.substring(indexOfPractice - 1, indexOfPractice);
-            String typing = practiceText.substring(indexOfPractice - 1, indexOfPractice);
-            System.out.println("You must type - " + mustType);
-            System.out.println("You are typing - " + typing);
-            if ((!mustType.equals("‌ေ") || !typing.equals("ေ")) && !mustType.equals(typing)) {
-                tfPractice.setText(tfPractice.getText().substring(0, indexOfPractice - 1));
+            typing = practiceText.substring(indexOfPractice - 1, indexOfPractice);
+            if (Utils.isEnglishConsonant(typing)) {
+                String shanChar = Utils.convertToShanChar(typing);
+                if (mustType.equals(shanChar)) {
+                    tfPractice.setText(practiceText.substring(0, indexOfPractice - 1) + shanChar);
+                } else {
+                    tfPractice.setText(practiceText.substring(0, indexOfPractice - 1));
+                    stop = true;
+                }
                 return;
+            } else {
+                if (practiceText.contains("\u200b")) {
+                    tfPractice.setText(practiceText.replaceAll("\u200b", ""));
+                    return;
+                } else if (!mustType.equals(typing)) {
+                    tfPractice.setText(tfPractice.getText().substring(0, indexOfPractice - 1));
+                    stop = true;
+                    return;
+                }
             }
-
+            System.out.println("Swap? - " + swap);
+            System.out.println("TEXT - " + practiceText);
+            System.out.println("LENGTH _ " + practiceText.length());
+            if (practiceText.length() >= 2) {
+                System.out.println("TEXT BEFORE ASAI - " + practiceText.substring(indexOfPractice - 2, indexOfPractice));
+                String beforeTyping = practiceText.substring(indexOfPractice - 2, indexOfPractice - 1);
+                System.out.println("Before Typing is - " + beforeTyping);
+                if (beforeTyping.equals("ေ") || beforeTyping.equals("ႄ")) {
+                    if (mustSwap) {
+                        swap = true;
+                        mustSwap = false;
+                        tfPractice.setText(tfPractice.getText(0, indexOfPractice - 2) + typing + beforeTyping);
+                    }
+                }
+            }
+            if (typing.equals("ေ") || typing.equals("ႄ")) {
+                mustSwap = true;
+            }
         }
 
 
-//        System.out.println("TEST: " + tfView.getText().length() + " : " + index);
+//        if (practiceText.length() >= 2) {
+//            typing = practiceText.substring(indexOfPractice - 1, indexOfPractice);
+//            String beforeTyping = practiceText.substring(indexOfPractice - 2, indexOfPractice - 1);
+//            System.out.println("Before typing - " + beforeTyping);
+//            if (beforeTyping.equals("ေ") || beforeTyping.equals("ႄ")) {
+//                tfPractice.setText(practiceText.substring(0, indexOfPractice - 1) + typing + beforeTyping);
+//                return;
+//            }
+//        }
+
+
         if (indexOfPractice < tfView.getText().length()) {
             // Know which value to type next
             String valueToType = testText.substring(indexOfPractice, indexOfPractice + 1);
             if (valueToType.equals(" ")) {
-                alsoThisValue("SPACE", 5);
+                highlightThisValue("SPACE", 5);
             } else {
-                for (int x = 0; x < allValues.length; x++) {
-                    String[] row = allValues[x];
-                    for (int y = 0; y < row.length; y++) {
-                        String val = row[y];
-//                        System.out.println(valueToType + " : " + val + (valueToType.equals(val)));
-                        if (valueToType.equals(val)) {
-                            typeThisValue(x, y);
-                            if (x % 2 == 1) {
-                                alsoThisValue("SHIFT", y);
+                for (int x = 0; x < allValues.size(); x++) {
+                    Map<String, String> row = allValues.get(x);
+                    if (row.containsValue(valueToType)) {
+                        List<String> values = row.values().stream().toList();
+                        for (int y = 0; y < values.size(); y++) {
+                            String val = values.get(y);
+                            if (valueToType.equals(val)) {
+                                typeThisValue(x, y);
+                                if (x % 2 == 1) {
+                                    highlightThisValue("SHIFT", y);
+                                }
+                                break;
                             }
-                            break;
                         }
+                        break;
                     }
                 }
             }
         }
     }
 
-    private void alsoThisValue(String key, int col) {
+    private void highlightThisValue(String key, int col) {
         if (toTypeSecNode != null) {
             toTypeSecNode.setStyle("-fx-background-color: #000");
         }
         switch (key) {
-            case "SHIFT":
+            case "SHIFT" -> {
                 if (col > 5) {
                     // Enable Left Shift
                     toTypeSecNode = row4.getChildren().get(0);
                 } else {
                     // Enable Right Shift
-                    toTypeSecNode = row4.getChildren().get(row4.getChildren().size()-1);
+                    toTypeSecNode = row4.getChildren().get(row4.getChildren().size() - 1);
                 }
-                break;
-            case "SPACE":
+            }
+            case "SPACE" -> {
                 if (toTypeNode != null) {
                     toTypeNode.setStyle("-fx-background-color: #000;");
                 }
                 toTypeSecNode = row5.getChildren().get(3);
-                break;
+            }
         }
 
         if (toTypeSecNode != null)

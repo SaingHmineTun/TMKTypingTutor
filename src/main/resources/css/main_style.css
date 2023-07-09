@@ -3,18 +3,12 @@
     src: url('../fonts/myanmar_taung_thu.ttf');
 }
 
-@font-face {
-    -fx-font-family: 'Pyidaungsu';
-    src: url('../fonts/pyidaungsu.ttf');
-}
-
-
 .root {
     -fx-background-color: #333333;
 }
 
 .text, .text-field {
-    -fx-font-family: 'Pyidaungsu';
+    -fx-font-family: 'Myanmar Taungthu';
     -fx-font-size: 16;
 }
 .key {
