@@ -80,6 +80,7 @@ public class MainController implements Initializable {
         initPracticeLessons();
         initViewValues();
         initPracticeListener();
+        tfPractice.requestFocus();
     }
 
     private void initTopBar() {
@@ -140,6 +141,9 @@ public class MainController implements Initializable {
         }
     }
 
+    private boolean consumeCharacter;
+    private boolean typingWithEnglish;
+
     private void initPracticeListener() {
         haha();
         tfPractice.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
@@ -155,7 +159,11 @@ public class MainController implements Initializable {
             @Override
             public void handle(KeyEvent event) {
                 System.out.println("KEY TYPE EVENT");
-                if (event.getCharacter().equals("\u200B")) {
+                System.out.println("Character - " + event.getCharacter());
+                if (event.getCharacter().equals("\u200B") || (!typingWithEnglish && consumeCharacter)) {
+                    consumeCharacter = false;
+                    // TODO - Because in Tai Typing, ေ is sometimes auto-typing!
+                    typingWithEnglish = false;
                     event.consume();;
                 }
             }
@@ -163,8 +171,15 @@ public class MainController implements Initializable {
 
         tfPractice.textProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("Text you typed in textProperty() - " + tfPractice.getText());
+            System.out.println("SWAP - " + swap);
             if (swap) {
                 swap = false;
+                // For unknown reason, ေ is typing again when all the job is finished!
+                consumeCharacter = true;
+                return;
+            }
+            if (stop) {
+                stop = false;
                 return;
             }
             if (tfPractice.getText().length() > tfView.getText().length()) {
@@ -200,12 +215,13 @@ public class MainController implements Initializable {
             String mustType = testText.substring(indexOfPractice - 1, indexOfPractice);
             typing = practiceText.substring(indexOfPractice - 1, indexOfPractice);
             if (Utils.isEnglishConsonant(typing)) {
+                typingWithEnglish = true;
                 String shanChar = Utils.convertToShanChar(typing);
                 if (mustType.equals(shanChar)) {
                     tfPractice.setText(practiceText.substring(0, indexOfPractice - 1) + shanChar);
                 } else {
-                    tfPractice.setText(practiceText.substring(0, indexOfPractice - 1));
                     stop = true;
+                    tfPractice.setText(practiceText.substring(0, indexOfPractice - 1));
                 }
                 return;
             } else {
@@ -213,8 +229,8 @@ public class MainController implements Initializable {
                     tfPractice.setText(practiceText.replaceAll("\u200b", ""));
                     return;
                 } else if (!mustType.equals(typing)) {
-                    tfPractice.setText(tfPractice.getText().substring(0, indexOfPractice - 1));
                     stop = true;
+                    tfPractice.setText(tfPractice.getText().substring(0, indexOfPractice - 1));
                     return;
                 }
             }
@@ -229,7 +245,10 @@ public class MainController implements Initializable {
                     if (mustSwap) {
                         swap = true;
                         mustSwap = false;
-                        tfPractice.setText(tfPractice.getText(0, indexOfPractice - 2) + typing + beforeTyping);
+                        String newText = tfPractice.getText(0, indexOfPractice - 2) + typing + beforeTyping;
+                        System.out.println("New Text - " + newText);
+                        System.out.println("################################");
+                        tfPractice.setText(newText);
                     }
                 }
             }

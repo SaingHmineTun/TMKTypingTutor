@@ -4,15 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Solved : When all the lesson texts are typed, stop the typing!&#10;Solved : Except asai &amp; esai, when you type a character that is not similar to the what you have to type, do not type in the textbox.&#10;Added : Small Test Texts are added! Will make it as easy mode later on!">
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/utils/KeyValue.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/utils/Utils.java" afterDir="false" />
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Added - Ability to type with English keyboard!&#10;Issue - In English, when Typing s or a that are no match with the toTypeWord, some characters are deleted unexpectedly!&#10;Issue - Using shn_sil keyboard to type is sill not working properly when typing ေ &amp; ႄ">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/utils/KeyValue.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/utils/KeyValue.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/main_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/main_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fonts/pyidaungsu.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +43,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -54,6 +57,9 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
     "vue.rearranger.settings.migration": "true"
   }
@@ -93,7 +99,8 @@
       <workItem from="1688834498196" duration="688000" />
       <workItem from="1688868690160" duration="3939000" />
       <workItem from="1688872679730" duration="1216000" />
-      <workItem from="1688891285460" duration="22373000" />
+      <workItem from="1688891285460" duration="22555000" />
+      <workItem from="1688958426057" duration="8343000" />
     </task>
     <task id="LOCAL-00001" summary="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!">
       <option name="closed" value="true" />
@@ -111,7 +118,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688873570663</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added - Ability to type with English keyboard!&#10;Issue - In English, when Typing s or a that are no match with the toTypeWord, some characters are deleted unexpectedly!&#10;Issue - Using shn_sil keyboard to type is sill not working properly when typing ေ &amp; ႄ">
+      <option name="closed" value="true" />
+      <created>1688924255958</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1688924255958</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,7 +135,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!" />
     <MESSAGE value="Solved : When all the lesson texts are typed, stop the typing!&#10;Solved : Except asai &amp; esai, when you type a character that is not similar to the what you have to type, do not type in the textbox.&#10;Added : Small Test Texts are added! Will make it as easy mode later on!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Solved : When all the lesson texts are typed, stop the typing!&#10;Solved : Except asai &amp; esai, when you type a character that is not similar to the what you have to type, do not type in the textbox.&#10;Added : Small Test Texts are added! Will make it as easy mode later on!" />
+    <MESSAGE value="Added - Ability to type with English keyboard!&#10;Issue - In English, when Typing s or a that are no match with the toTypeWord, some characters are deleted unexpectedly!&#10;Issue - Using shn_sil keyboard to type is sill not working properly when typing ေ &amp; ႄ" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added - Ability to type with English keyboard!&#10;Issue - In English, when Typing s or a that are no match with the toTypeWord, some characters are deleted unexpectedly!&#10;Issue - Using shn_sil keyboard to type is sill not working properly when typing ေ &amp; ႄ" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -136,13 +152,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/MainController.java</url>
-          <line>241</line>
+          <line>260</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/MainController.java</url>
-          <line>227</line>
+          <line>243</line>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/MainController.java</url>
+          <line>172</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

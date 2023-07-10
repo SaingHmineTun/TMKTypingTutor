@@ -24,7 +24,7 @@
     -fx-min-height: 50;
     -fx-max-height: 50;
     -fx-font-size: 20;
-    -fx-text-fill: #ffff00;
+    -fx-text-fill: #e0e023;
 }
 
 #practice {
@@ -38,11 +38,44 @@
 .button {
     -fx-background-color: #000;
     -fx-text-fill: #fff;
+    -fx-border-color: #FFF;
 }
 
-.combo-box, .combo-box > .text {
+.combo-box .text-field {
+
+    -fx-border-color: null;
+}
+
+.combo-box {
+    -fx-background-color: black;
+    -fx-border-color: white;
+}
+
+.combo-box .cell {
+    -fx-text-fill: #FFF;
+    -fx-alignment: center;
+}
+
+.combo-box-popup .list-view {
     -fx-background-color: #000;
-    -fx-text-fill: #fff;
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: #000;
+    -fx-text-fill: #DDD;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #333;
+}
+
+.combo-box-popup .list-view .list-cell:selected {
+    -fx-text-fill: #e0e023;
+    -fx-font-weight: bold;
+}
+.combo-box .arrow-button {
+    -fx-padding: 0;
+    -fx-opacity: 0;
 }
 
 
