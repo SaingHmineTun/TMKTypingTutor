@@ -3,7 +3,7 @@ package it.saimao.tmk_typing.utils
 class KeyValue {
 
     companion object {
-        private val row1Values = mutableMapOf(
+        private val row1Values = linkedMapOf(
             "`" to "`",
             "1" to "1",
             "2" to "2",
@@ -19,7 +19,7 @@ class KeyValue {
             "=" to "=",
             "Back" to "Back"
         )
-        private val row1ShiftValues = mutableMapOf(
+        private val row1ShiftValues = linkedMapOf(
             "~" to "~",
             "!" to "!",
             "@" to "@",
@@ -35,7 +35,7 @@ class KeyValue {
             "+" to "+",
             "Back" to "Back"
         )
-        private val row2Values = mutableMapOf(
+        private val row2Values = linkedMapOf(
             "Tab" to "Tab",
             "q" to "ၸ",
             "w" to "တ",
@@ -52,7 +52,7 @@ class KeyValue {
             "\\" to "\\"
         )
 
-        private val row2ShiftValues = mutableMapOf(
+        private val row2ShiftValues = linkedMapOf(
             "Tab" to "Tab",
             "Q" to "ꩡ",
             "W" to "ၻ",
@@ -68,7 +68,7 @@ class KeyValue {
             "}" to "}",
             "|" to "|"
         )
-        private val row3Values = mutableMapOf(
+        private val row3Values = linkedMapOf(
             "Caps" to "Caps",
             "a" to "ေ",
             "s" to "ႄ",
@@ -83,7 +83,7 @@ class KeyValue {
             "'" to "'",
             "Enter" to "Enter"
         )
-        private val row3ShiftValues = mutableMapOf(
+        private val row3ShiftValues = linkedMapOf(
             "Caps" to "Caps",
             "A" to "ဵ",
             "S" to "ႅ",
@@ -98,8 +98,8 @@ class KeyValue {
             "\"" to "“",
             "Enter" to "Enter"
         )
-        private val row4Values = mutableMapOf(
-            "Shift" to "Shift",
+        private val row4Values = linkedMapOf(
+            "Shift1" to "Shift",
             "z" to "ၽ",
             "x" to "ထ",
             "c" to "ၶ",
@@ -110,10 +110,10 @@ class KeyValue {
             "," to ",",
             "." to ".",
             "/" to "/",
-            "Shift" to "Shift"
+            "Shift2" to "Shift"
         )
-        private val row4ShiftValues = mutableMapOf(
-            "Shift" to "Shift",
+        private val row4ShiftValues = linkedMapOf(
+            "Shift1" to "Shift",
             "Z" to "ၾ",
             "X" to "ꩪ",
             "C" to "ꧠ",
@@ -124,27 +124,27 @@ class KeyValue {
             "<" to "၊",
             ">" to "။",
             "?" to "?",
-            "Shift" to "Shift"
+            "Shift2" to "Shift"
         )
-        private val row5Values = mutableMapOf(
-            "Ctrl" to "Ctrl",
-            "Win" to "Win",
-            "Alt" to "Alt",
+        private val row5Values = linkedMapOf(
+            "Ctrl1" to "Ctrl",
+            "Win1" to "Win",
+            "Alt1" to "Alt",
             "Space" to "Space",
-            "Alt" to "Alt",
-            "Win" to "Win",
+            "Alt2" to "Alt",
+            "Win2" to "Win",
             "Menu" to "Menu",
-            "Ctrl" to "Ctrl"
+            "Ctrl2" to "Ctrl"
         )
-        private val row5ShiftValues = mutableMapOf(
-            "Ctrl" to "Ctrl",
-            "Win" to "Win",
-            "Alt" to "Alt",
+        private val row5ShiftValues = linkedMapOf(
+            "Ctrl1" to "Ctrl",
+            "Win1" to "Win",
+            "Alt1" to "Alt",
             "Space" to "Space",
-            "Alt" to "Alt",
-            "Win" to "Win",
+            "Alt2" to "Alt",
+            "Win2" to "Win",
             "Menu" to "Menu",
-            "Ctrl" to "Ctrl"
+            "Ctrl2" to "Ctrl"
         )
 
         val allValuesList = arrayListOf(

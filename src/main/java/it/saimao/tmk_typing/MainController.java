@@ -24,24 +24,33 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class MainController implements Initializable {
-
-    // TOP BAR
     @FXML
     private ImageView ivClose;
     @FXML
     private Button btNext, btPrev;
     @FXML
     private ComboBox<Lesson> cbLessons;
-
+    @FXML
+    private ComboBox<String> cbMode;
     @FXML
     private HBox row1, row2, row3, row4, row5;
     @FXML
     private TextField tfView;
     @FXML
     private TextField tfPractice;
+    @FXML
+    private Label lbWPM;
+    @FXML
+    private Label lbACCU;
+    @FXML
+    private Label lbAWPM;
+    @FXML
+    private Label lbMIST;
+    private final String[] modes = {"ၵၢၼ်ၽိုၵ်းဢွၼ်ႇ", "ၵၢၼ်ၽိုၵ်းလူင်"};
 
 //    private final String[] row1Values = {"`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Back"};
 //    private final String[] row1ShiftValues = {"~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "Back"};
@@ -65,21 +74,31 @@ public class MainController implements Initializable {
 //            KeyValue.Companion.getRow4ShiftValues().values().toArray(new String[0]),
 //            KeyValue.Companion.getRow5Values().values().toArray(new String[0]),
 //            KeyValue.Companion.getRow5ShiftValues().values().toArray(new String[0])};
-    ArrayList<Map<String, String>> allValues = KeyValue.Companion.getAllValuesList();
 
+    private Node toTypeNode;
+    private Node toTypeSecNode;
+    private final ArrayList<LinkedHashMap<String, String>> allValues = KeyValue.Companion.getAllValuesList();
+
+    // Prevent ‌ေ & ႄ to auto enter in shn_sil keyboard
+    private boolean consumeShanCharacter;
+    private boolean typingWithEnglish;
+    private boolean mustSwap;
+    private boolean swap;
+    private boolean stop;
     private List<Lesson> lessonList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initRow1();
-        initRow2();
-        initRow3();
-        initRow4();
-        initRow5();
+//        initRow1();
+//        initRow2();
+//        initRow3();
+//        initRow4();
+//        initRow5();
+        createKeyBoard();
         initTopBar();
         initPracticeLessons();
-        initViewValues();
         initPracticeListener();
+        initViewValues();
         tfPractice.requestFocus();
     }
 
@@ -91,13 +110,56 @@ public class MainController implements Initializable {
         });
     }
 
+    private void initPracticeLessons() {
+        lessonList = new ArrayList<>();
+
+        cbMode.setItems(FXCollections.observableArrayList(modes));
+        cbMode.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+//            System.out.println("MODE SELECTION PROPERTY");
+            changeLessons(newValue.intValue());
+            tfPractice.clear();
+        });
+        cbMode.getSelectionModel().select(0);
+    }
+
+    private void changeLessons(int i) {
+        lessonList.clear();
+        String is;
+        if (i == 0) {
+            is = getClass().getResource("/assets/short_lessons.csv").getPath();
+        } else {
+            is = getClass().getResource("/assets/tai_lessons.csv").getPath();
+        }
+        try (BufferedReader br = new BufferedReader(new FileReader(is))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                int no = Integer.parseInt(values[0].trim());
+                String title = values[1].trim();
+//                System.out.println(no + " : " + values.length);
+                String content = values[2].replace("\"", "").trim();
+                lessonList.add(new Lesson(no, title, content));
+            }
+            if (i == 0)
+                Collections.reverse(lessonList);
+            int selectedIndex = cbLessons.getSelectionModel().getSelectedIndex();
+            cbLessons.setItems(FXCollections.observableArrayList(lessonList));
+            cbLessons.getSelectionModel().select(selectedIndex);
+            // using short_lessons, we should reverse it before use it
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void initViewValues() {
-        cbLessons.setItems(FXCollections.observableArrayList(lessonList));
         cbLessons.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            tfView.setText(newValue.getLesson());
-            tfPractice.setText("");
-            tfPractice.requestFocus();
-            haha();
+            if (newValue != null) {
+                tfView.setText(newValue.getLesson());
+                resetAndFocusOnPracticeField();
+                doHeavyJob();
+            }
         });
         cbLessons.getSelectionModel().select(0);
 
@@ -119,33 +181,22 @@ public class MainController implements Initializable {
 
     }
 
-    private void initPracticeLessons() {
-        lessonList = new ArrayList<>();
-        String is = getClass().getResource("/assets/short_lessons.csv").getPath();
-        try (BufferedReader br = new BufferedReader(new FileReader(is))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] values = line.split(",");
-                int no = Integer.parseInt(values[0].trim());
-                String title = values[1].trim();
-                System.out.println(no + " : " + values.length);
-                String content = values[2].replace("\"", "").trim();
-                lessonList.add(new Lesson(no, title, content));
-            }
-            // using short_lessons, we should reverse it before use it
-            Collections.reverse(lessonList);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    private void resetAndFocusOnPracticeField() {
+
+        tfPractice.setText("");
+        tfPractice.requestFocus();
+        lbWPM.setText("0");
+        lbAWPM.setText("0");
+        lbACCU.setText("0%");
+        lbMIST.setText("0");
     }
 
-    private boolean consumeCharacter;
-    private boolean typingWithEnglish;
+    private long startTime;
+    private int misTyped;
+    private boolean end;
 
     private void initPracticeListener() {
-        haha();
+        doHeavyJob();
         tfPractice.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -155,27 +206,38 @@ public class MainController implements Initializable {
             }
         });
 
-        tfPractice.addEventHandler(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                System.out.println("KEY TYPE EVENT");
-                System.out.println("Character - " + event.getCharacter());
-                if (event.getCharacter().equals("\u200B") || (!typingWithEnglish && consumeCharacter)) {
-                    consumeCharacter = false;
-                    // TODO - Because in Tai Typing, ေ is sometimes auto-typing!
-                    typingWithEnglish = false;
-                    event.consume();;
-                }
+        tfPractice.addEventHandler(KeyEvent.KEY_TYPED, event -> {
+//            System.out.println("KEY TYPE EVENT");
+            System.out.println("Character - " + event.getCharacter());
+            if (event.getCharacter().equals("\u200B") || (!typingWithEnglish && consumeShanCharacter)) {
+                consumeShanCharacter = false;
+                // TODO - Because in Tai Typing, ေ is sometimes auto-typing!
+                typingWithEnglish = false;
+                event.consume();
             }
         });
 
         tfPractice.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Text you typed in textProperty() - " + tfPractice.getText());
-            System.out.println("SWAP - " + swap);
+//            System.out.println("Text you typed in textProperty() - " + tfPractice.getText());
+//            System.out.println("SWAP - " + swap);
+
+            if (newValue.length() == tfView.getText().length()) {
+                // TODO - Lessons end here!
+                end = true;
+            }
+
+            if (newValue.length() == 1) {
+                startTime = System.currentTimeMillis();
+                misTyped = 0;
+                end = false;
+            }
+
+            calculateOutcome();
+
             if (swap) {
                 swap = false;
                 // For unknown reason, ေ is typing again when all the job is finished!
-                consumeCharacter = true;
+                consumeShanCharacter = true;
                 return;
             }
             if (stop) {
@@ -187,20 +249,15 @@ public class MainController implements Initializable {
                 return;
             }
             if (tfPractice.getText().endsWith("\u200b")) {
-                System.out.println("200b gone!");
+//                System.out.println("200b gone!");
                 tfPractice.setText(oldValue);
                 return;
             }
-            haha();
+            doHeavyJob();
         });
     }
 
-
-    private boolean mustSwap;
-    private boolean swap;
-    private boolean stop;
-
-    private void haha() {
+    private void doHeavyJob() {
         // To be able to type ေ & ႄ first with SIL_Shan Keyman keyboard
         String testText = tfView.getText().replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1031", "\u1031$1$2$3");
         testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1084", "\u1084$1$2$3");
@@ -220,34 +277,34 @@ public class MainController implements Initializable {
                 if (mustType.equals(shanChar)) {
                     tfPractice.setText(practiceText.substring(0, indexOfPractice - 1) + shanChar);
                 } else {
+                    misTyped++;
                     stop = true;
                     tfPractice.setText(practiceText.substring(0, indexOfPractice - 1));
                 }
                 return;
             } else {
-                if (practiceText.contains("\u200b")) {
-                    tfPractice.setText(practiceText.replaceAll("\u200b", ""));
-                    return;
-                } else if (!mustType.equals(typing)) {
+                if (!mustType.equals(typing)) {
+                    misTyped++;
                     stop = true;
                     tfPractice.setText(tfPractice.getText().substring(0, indexOfPractice - 1));
                     return;
                 }
             }
-            System.out.println("Swap? - " + swap);
-            System.out.println("TEXT - " + practiceText);
-            System.out.println("LENGTH _ " + practiceText.length());
+
+//            System.out.println("Swap? - " + swap);
+//            System.out.println("TEXT - " + practiceText);
+//            System.out.println("LENGTH _ " + practiceText.length());
             if (practiceText.length() >= 2) {
-                System.out.println("TEXT BEFORE ASAI - " + practiceText.substring(indexOfPractice - 2, indexOfPractice));
+//                System.out.println("TEXT BEFORE ASAI - " + practiceText.substring(indexOfPractice - 2, indexOfPractice));
                 String beforeTyping = practiceText.substring(indexOfPractice - 2, indexOfPractice - 1);
-                System.out.println("Before Typing is - " + beforeTyping);
+//                System.out.println("Before Typing is - " + beforeTyping);
                 if (beforeTyping.equals("ေ") || beforeTyping.equals("ႄ")) {
                     if (mustSwap) {
                         swap = true;
                         mustSwap = false;
                         String newText = tfPractice.getText(0, indexOfPractice - 2) + typing + beforeTyping;
-                        System.out.println("New Text - " + newText);
-                        System.out.println("################################");
+//                        System.out.println("New Text - " + newText);
+//                        System.out.println("################################");
                         tfPractice.setText(newText);
                     }
                 }
@@ -322,9 +379,6 @@ public class MainController implements Initializable {
             toTypeSecNode.setStyle("-fx-background-color: #013098");
     }
 
-    private Node toTypeNode;
-    private Node toTypeSecNode;
-
     private void typeThisValue(int x, int y) {
         if (toTypeNode != null) {
             toTypeNode.setStyle("-fx-background-color: #000;");
@@ -339,7 +393,7 @@ public class MainController implements Initializable {
             case 6, 7 -> toTypeNode = row4.getChildren().get(y);
         }
         if (toTypeNode != null)
-            toTypeNode.setStyle("-fx-background-color: #013098");
+            toTypeNode.setStyle("-fx-background-color: #006dff");
 
     }
 
@@ -410,7 +464,6 @@ public class MainController implements Initializable {
         row4.getChildren().add(createKeyWithCustomWidth(new Key("", "Shift", "", ""), Perc.p12w()));
     }
 
-
     private void initRow5() {
         row5.getChildren().add(createKeyWithCustomWidth(new Key("", "Ctrl", "", ""), Perc.p8w()));
         row5.getChildren().add(createKey(new Key("", "Win", "", "")));
@@ -421,6 +474,63 @@ public class MainController implements Initializable {
         row5.getChildren().add(createKey(new Key("", "Menu", "", "")));
         row5.getChildren().add(createKeyWithCustomWidth(new Key("", "Ctrl", "", ""), Perc.p8w()));
     }
+
+    private void createKeyBoard() {
+        for (int i = 0; i < allValues.size(); i += 2) {
+            // u
+            Iterator<String> engVal = allValues.get(i).keySet().iterator();
+            // ၵ
+            Iterator<String> taiVal = allValues.get(i).values().iterator();
+            // U
+            Iterator<String> engShiftVal = allValues.get(i + 1).keySet().iterator();
+            // ၷ
+            Iterator<String> taiShiftVal = allValues.get(i + 1).values().iterator();
+            while (engVal.hasNext() && taiVal.hasNext() && engShiftVal.hasNext() && taiShiftVal.hasNext()) {
+
+                HBox row = null;
+                switch (i) {
+                    case 0 -> row = row1;
+                    case 2 -> row = row2;
+                    case 4 -> row = row3;
+                    case 6 -> row = row4;
+                    case 8 -> row = row5;
+                }
+                if (row != null) {
+                    String engShift = engShiftVal.next();
+                    String eng = engVal.next();
+                    String taiShift = taiShiftVal.next();
+                    String tai = taiVal.next();
+                    if (eng.equalsIgnoreCase("Back"))
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), Perc.p10w()));
+                    else if (eng.equalsIgnoreCase("Tab"))
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), Perc.p8w()));
+                    else if (eng.equalsIgnoreCase("\\"))
+                        row.getChildren().add(createKeyWithCustomWidth(new Key(engShift, eng, taiShift, tai), Perc.p7w()));
+                    else if (eng.equalsIgnoreCase("Caps"))
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), Perc.p10w()));
+                    else if (eng.equalsIgnoreCase("Enter"))
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), Perc.p10w()));
+                    else if (eng.equalsIgnoreCase("Shift1") || eng.equalsIgnoreCase("Shift2"))
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), Perc.p12_5w()));
+                    else if (eng.equalsIgnoreCase("Ctrl1") || eng.equalsIgnoreCase("Ctrl2"))
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), Perc.p8w()));
+                    else if (eng.equalsIgnoreCase("Alt1") || eng.equalsIgnoreCase("Alt2"))
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), Perc.p7w()));
+                    else if (eng.equalsIgnoreCase("Space"))
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), Perc.p30w()));
+
+                    else if (eng.equalsIgnoreCase("Win1") || eng.equalsIgnoreCase("Win2") || eng.equalsIgnoreCase("Menu"))
+                        row.getChildren().add(createKey(new Key("", tai, "", "")));
+                    else if (eng.equals(tai) && engShift.equals(taiShift))
+                        row.getChildren().add(createKey(new Key(engShift, eng, "", "")));
+                    else
+                        row.getChildren().add(createKey(new Key(engShift, eng, taiShift, tai)));
+                }
+            }
+
+        }
+    }
+
 
     // Create a keyboard key with 5% width!
     private VBox createKey(Key key) {
@@ -466,4 +576,40 @@ public class MainController implements Initializable {
         return vBox;
 
     }
+
+    private void calculateOutcome() {
+        if (tfPractice.getText().length() > 1 && !end) {
+            int wpm = calculateWPM();
+            double accuracy = calculateACCU();
+            calculateAWPM(wpm, accuracy);
+        }
+
+    }
+
+    private void calculateAWPM(int wpm, double accuracy) {
+        int avgWPM = (int) Math.round(wpm * accuracy);
+        lbAWPM.setText(String.valueOf(avgWPM));
+    }
+
+
+    private double calculateACCU() {
+        double accuracy = (double) (tfPractice.getText().length() - misTyped) / tfPractice.getText().length();
+        DecimalFormat format = new DecimalFormat("#0.00");
+        lbMIST.setText(String.valueOf(misTyped));
+        lbACCU.setText(format.format(accuracy * 100) + "%");
+        return accuracy;
+    }
+
+
+    private int calculateWPM() {
+        // Calculate Interim WPM
+        long elapsedTime = System.currentTimeMillis() - startTime;
+        int characterCount = tfPractice.getText().length();
+//            int wordCount = characterCount / 5; // Assuming an average word length of 5
+        double minutes = (double) elapsedTime / 6000;
+        int interimWPM = (int) (characterCount / minutes);
+        lbWPM.setText(String.valueOf(interimWPM));
+        return interimWPM;
+    }
+
 }

@@ -7,16 +7,32 @@
     -fx-background-color: #333333;
 }
 
-.text, .text-field {
+.text, .text-field{
     -fx-font-family: 'Myanmar Taungthu';
     -fx-font-size: 16;
 }
+
+.label {
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+}
+
+
 .key {
     -fx-border-color: #fff;
     -fx-border-width: 1;
     -fx-text-fill: #fff;
     -fx-background-color: #000;
 }
+
+.outcome {
+    -fx-text-fill: #e0e023;
+}
+
+.outcome#lbMIST {
+    -fx-text-fill: #fa5b3d;
+}
+
 
 #view {
     -fx-background-color: #000;
@@ -38,7 +54,13 @@
 .button {
     -fx-background-color: #000;
     -fx-text-fill: #fff;
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
     -fx-border-color: #FFF;
+}
+
+.button:hover {
+    -fx-background-color: #333;
 }
 
 .combo-box .text-field {

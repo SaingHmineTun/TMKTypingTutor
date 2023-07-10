@@ -43,6 +43,10 @@ public abstract class Perc {
 
     }
 
+    public static double p12_5w() {
+        return (gd.getDisplayMode().getWidth() * 12.5) / 100.0;
+    }
+
     public static double p13w() {
 
         return (gd.getDisplayMode().getWidth() * 13.0) / 100.0;

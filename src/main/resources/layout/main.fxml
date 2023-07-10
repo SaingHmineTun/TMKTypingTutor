@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/main_style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing.MainController">
    <top>
 
@@ -30,13 +36,34 @@
       </HBox>
    </top>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+      <VBox prefHeight="285.0" prefWidth="716.0" spacing="15.0">
          <children>
             <HBox alignment="CENTER_RIGHT" minHeight="50.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btPrev" maxHeight="1.7976931348623157E308" maxWidth="60.0" mnemonicParsing="false" prefWidth="60.0" text="Prev" />
-                  <ComboBox fx:id="cbLessons" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="Hello" HBox.hgrow="NEVER" />
-                  <Button fx:id="btNext" maxHeight="1.7976931348623157E308" maxWidth="60.0" mnemonicParsing="false" prefWidth="60.0" text="Next" />
+                  <VBox HBox.hgrow="ALWAYS">
+                     <children>
+                        <ComboBox fx:id="cbMode" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="MODE" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+                  <Button fx:id="btPrev" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="Prev">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/prev.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <ComboBox fx:id="cbLessons" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="Lesson" HBox.hgrow="NEVER" />
+                  <Button fx:id="btNext" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="Next">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/next.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </HBox>
             <TextField id="view" fx:id="tfView" editable="false" focusTraversable="false" layoutX="10.0" layoutY="26.0" text="ၵဝႃႈၵႆႇ ၵွပ်ႈတႆႇ မႆႉၼိူဝ်ၵွၼ်း။ ၶဝႃႈၶႆႇ မႄႈမၼ်း တႆႇမႃးငွမ်း။" />
@@ -56,4 +83,34 @@
          </padding>
       </VBox>
    </center>
+   <bottom>
+      <HBox prefHeight="75.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox maxWidth="1.7976931348623157E308" prefHeight="100.0" spacing="15.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="WORD PER MINUTE" HBox.hgrow="ALWAYS" />
+                  <Label fx:id="lbWPM" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" prefWidth="50.0" styleClass="outcome" text="0" textFill="WHITE" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="100.0" spacing="15.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="ACCURACY" HBox.hgrow="ALWAYS" />
+                  <Label fx:id="lbACCU" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="50.0" styleClass="outcome" text="0%" textFill="WHITE" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox layoutX="206.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="100.0" spacing="15.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="MISTYPE" HBox.hgrow="ALWAYS" />
+                  <Label fx:id="lbMIST" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="50.0" styleClass="outcome" text="0" textFill="WHITE" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox layoutX="210.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="100.0" spacing="15.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" text="AVERAGE WORD PER MINUTE" HBox.hgrow="ALWAYS" />
+                  <Label fx:id="lbAWPM" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="50.0" styleClass="outcome" text="0" textFill="WHITE" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>
