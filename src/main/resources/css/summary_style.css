@@ -1,0 +1,47 @@
+@font-face {
+    font-family: 'VistolSans-Black';
+    src: url('../fonts/vistol_sans_black.otf');
+}
+
+
+.root {
+    -fx-background-color: #341616;
+}
+
+.label, .text{
+    -fx-font-family: 'VistolSans-Black';
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+}
+.button {
+    /*-fx-font-family: 'Laguna Creek Demo';*/
+    -fx-background-color: #000;
+    -fx-text-fill: #fff;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-border-color: #FFF;
+}
+
+.button#sClose {
+    -fx-background-color: #6c1313;
+}
+
+.button:hover {
+    -fx-background-color: #222;
+}
+
+
+.button#sClose:hover {
+    -fx-background-color: #981515;
+}
+
+
+.button:pressed {
+    -fx-background-color: #333;
+}
+
+
+.button#sClose:pressed {
+    -fx-background-color: #6c1313;
+}
+

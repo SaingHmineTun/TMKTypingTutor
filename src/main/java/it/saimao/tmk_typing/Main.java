@@ -1,9 +1,12 @@
 package it.saimao.tmk_typing;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -27,8 +30,11 @@ public class Main extends Application {
         }
         Scene scene = new Scene(parent);
         primaryStage.setScene(scene);
-        primaryStage.setMaximized(true);
+        primaryStage.getIcons().add(new Image(getClass().getResource("/images/app_icon.png").toExternalForm()));
         primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.setMaximized(true);
         primaryStage.show();
+
+
     }
 }

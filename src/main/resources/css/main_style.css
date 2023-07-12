@@ -3,11 +3,16 @@
     src: url('../fonts/myanmar_taung_thu.ttf');
 }
 
-.root {
-    -fx-background-color: #333333;
+@font-face {
+    font-family: 'VistolSans-Black';
+    src: url('../fonts/vistol_sans_black.otf');
 }
 
-.text, .text-field{
+.root {
+    -fx-background-color: #222;
+}
+
+.text, .text-field {
     -fx-font-family: 'Myanmar Taungthu';
     -fx-font-size: 16;
 }
@@ -17,16 +22,27 @@
     -fx-font-size: 14;
 }
 
+#vbClose:hover {
+    -fx-background-color: #a21010;
+}
+
+#vbClose:pressed {
+    -fx-background-color: #a2101077;
+}
+
 
 .key {
     -fx-border-color: #fff;
     -fx-border-width: 1;
     -fx-text-fill: #fff;
     -fx-background-color: #000;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
 }
 
 .outcome {
     -fx-text-fill: #e0e023;
+    -fx-font-size: 25;
 }
 
 .outcome#lbMIST {
@@ -36,19 +52,22 @@
 
 #view {
     -fx-background-color: #000;
-    -fx-pref-height: 50;
-    -fx-min-height: 50;
-    -fx-max-height: 50;
-    -fx-font-size: 20;
+    /*-fx-pref-height: 50;*/
+    /*-fx-min-height: 50;*/
+    /*-fx-max-height: 50;*/
+    -fx-border-color: white;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    /*-fx-font-size: 20;*/
     -fx-text-fill: #e0e023;
 }
 
 #practice {
     -fx-background-color: #fff;
-    -fx-pref-height: 50;
-    -fx-min-height: 50;
-    -fx-max-height: 50;
-    -fx-font-size: 20;
+    /*-fx-pref-height: 50;*/
+    /*-fx-min-height: 50;*/
+    /*-fx-max-height: 50;*/
+    /*-fx-font-size: 20;*/
 }
 
 .button {
@@ -60,18 +79,40 @@
 }
 
 .button:hover {
-    -fx-background-color: #333;
+    -fx-background-color: #111;
 }
+
+
+.button:pressed {
+    -fx-background-color: #222;
+}
+
 
 .combo-box .text-field {
 
     -fx-border-color: null;
 }
 
+.combo-box .text {
+
+    -fx-font-size: 20;
+}
+
 .combo-box {
     -fx-background-color: black;
     -fx-border-color: white;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
 }
+
+.combo-box:hover {
+    -fx-background-color: #111;
+}
+
+.combo-box:pressed {
+    -fx-background-color: #222;
+}
+
 
 .combo-box .cell {
     -fx-text-fill: #FFF;
@@ -80,6 +121,7 @@
 
 .combo-box-popup .list-view {
     -fx-background-color: #000;
+    -fx-border-color: white;
 }
 
 .combo-box-popup .list-view .list-cell {
@@ -95,14 +137,24 @@
     -fx-text-fill: #e0e023;
     -fx-font-weight: bold;
 }
+
 .combo-box .arrow-button {
     -fx-padding: 0;
     -fx-opacity: 0;
 }
 
+/*.combo-box .scroll-bar {*/
+/*    -fx-opacity: 0;*/
+/*}*/
+
+.combo-box .scroll-bar {
+    -fx-background-color: #111;
+}
 
 
 #title {
-    -fx-font-size: 22;
-    -fx-font-family: 'Myanmar Taungthu';
+    -fx-background-color: #341616;
+    -fx-font-size: 24;
+    -fx-font-family: 'VistolSans-Black';
 }
+

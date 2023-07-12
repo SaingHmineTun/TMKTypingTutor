@@ -10,28 +10,42 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.util.*;
 
 public class MainController implements Initializable {
     @FXML
-    private ImageView ivClose;
+    private VBox vbClose;
     @FXML
-    private Button btNext, btPrev;
+    private ImageView imgClose;
+    @FXML
+    private VBox tLogo;
+    @FXML
+    private ImageView imgLogo;
+    @FXML
+    private Label tLabel;
+    @FXML
+    Button btNext, btPrev;
     @FXML
     private ComboBox<Lesson> cbLessons;
     @FXML
@@ -45,39 +59,29 @@ public class MainController implements Initializable {
     @FXML
     private Label lbWPM;
     @FXML
+    private Label lblWPM;
+    @FXML
     private Label lbACCU;
+    @FXML
+    private Label lblACCU;
     @FXML
     private Label lbAWPM;
     @FXML
+    private Label lblAWPM;
+    @FXML
     private Label lbMIST;
+    @FXML
+    private Label lblMIST;
+    @FXML
+    private VBox vbKeyboardView;
+    @FXML
+    private HBox hbSelection;
+    private Window primaryWindow;
     private final String[] modes = {"ၵၢၼ်ၽိုၵ်းဢွၼ်ႇ", "ၵၢၼ်ၽိုၵ်းလူင်"};
-
-//    private final String[] row1Values = {"`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Back"};
-//    private final String[] row1ShiftValues = {"~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "Back"};
-//    private final String[] row2Values = {"Tab", "ၸ", "တ", "ၼ", "မ", "ဢ", "ပ", "ၵ", "င", "ဝ", "ႁ", "[", "]", "\\"};
-//    private final String[] row2ShiftValues = {"Tab", "ꩡ", "ၻ", "ꧣ", "႞", "ြ", "ၿ", "ၷ", "ရ", "သ", "ႀ", "{", "}", "|"};
-//    private final String[] row3Values = {"Caps", "ေ", "ႄ", "ိ", "်", "ွ", "ႉ", "ႇ", "ု", "ူ", "ႈ", "'", "Enter"};
-//    private final String[] row3ShiftValues = {"Caps", "ဵ", "ႅ", "ီ", "ႂ်", "ႂ", "့", "ႆ", "”", "ႊ", "း", "“", "Enter"};
-//    private final String[] row4Values = {"Shift", "ၽ", "ထ", "ၶ", "လ", "ယ", "ၺ", "ၢ", ",", ".", "/", "Shift"};
-//    private final String[] row4ShiftValues = {"Shift", "ၾ", "ꩪ", "ꧠ", "ꩮ", "ျ", "႟", "ႃ", "၊", "။", "?", "Shift"};
-//    private final String[] row5Values = {"Ctrl", "Win", "Alt", "Space", "Alt", "Win", "Menu", "Ctrl"};
-//    private final String[] row5ShiftValues = {"Ctrl", "Win", "Alt", "Space", "Alt", "Win", "Menu", "Ctrl"};
-
-    //    private final String[][] allValues = {
-//            KeyValue.Companion.getRow1Values().values().toArray(new String[0]),
-//            KeyValue.Companion.getRow1ShiftValues().values().toArray(new String[0]),
-//            KeyValue.Companion.getRow2Values().values().toArray(new String[0]),
-//            KeyValue.Companion.getRow2ShiftValues().values().toArray(new String[0]),
-//            KeyValue.Companion.getRow3Values().values().toArray(new String[0]),
-//            KeyValue.Companion.getRow3ShiftValues().values().toArray(new String[0]),
-//            KeyValue.Companion.getRow4Values().values().toArray(new String[0]),
-//            KeyValue.Companion.getRow4ShiftValues().values().toArray(new String[0]),
-//            KeyValue.Companion.getRow5Values().values().toArray(new String[0]),
-//            KeyValue.Companion.getRow5ShiftValues().values().toArray(new String[0])};
 
     private Node toTypeNode;
     private Node toTypeSecNode;
-    private final ArrayList<LinkedHashMap<String, String>> allValues = KeyValue.Companion.getAllValuesList();
+    private final List<Map<String, String>> allValues = KeyValue.getAllValuesList();
 
     // Prevent ‌ေ & ႄ to auto enter in shn_sil keyboard
     private boolean consumeShanCharacter;
@@ -86,24 +90,68 @@ public class MainController implements Initializable {
     private boolean swap;
     private boolean stop;
     private List<Lesson> lessonList;
+    private Summary summary;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        initRow1();
-//        initRow2();
-//        initRow3();
-//        initRow4();
-//        initRow5();
-        createKeyBoard();
         initTopBar();
+        createKeyBoard();
         initPracticeLessons();
         initPracticeListener();
         initViewValues();
+        initSummarDialog();
+        relayoutForVariousResolution();
         tfPractice.requestFocus();
+//        primaryWindow = btNext.getScene().getWindow();
+//        btPrev.getScene().getRoot().setEffect(new BoxBlur(10, 10, 3));
+
+    }
+
+    private void relayoutForVariousResolution() {
+
+        tLogo.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
+        imgLogo.setFitHeight(Perc.getDynamicPixel(40));
+        imgLogo.setFitWidth(Perc.getDynamicPixel(40));
+        tLabel.setPrefHeight(Perc.getDynamicPixel(50));
+        tLabel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(30));
+        vbClose.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
+        imgClose.setFitHeight(Perc.getDynamicPixel(20));
+        imgClose.setFitWidth(Perc.getDynamicPixel(20));
+
+
+        cbLessons.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
+        cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(17) + "; -fx-font-family: 'Myanmar Taungthu'");
+        cbMode.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
+        cbMode.setStyle("-fx-font-size: " + Perc.getDynamicPixel(17) + "; -fx-font-family: 'Myanmar Taungthu'");
+        btNext.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
+        btPrev.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
+
+
+        tfView.setPrefHeight(Perc.getDynamicPixel(55));
+        tfPractice.setPrefHeight(Perc.getDynamicPixel(55));
+        tfView.setStyle("-fx-font-size: " + Perc.getDynamicPixel(23));
+        tfPractice.setStyle("-fx-font-size: " + Perc.getDynamicPixel(23));
+
+        vbKeyboardView.setPadding(new Insets(Perc.p5h(), Perc.p12_5w(), Perc.p5h(), Perc.p12_5w()));
+        vbKeyboardView.setPrefHeight(Perc.p50h());
+
+        lblAWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'VistolSans-Black'");
+        lbAWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'VistolSans-Black'");
+        lblWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'VistolSans-Black'");
+        lbWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'VistolSans-Black'");
+        lblMIST.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'VistolSans-Black'");
+        lbMIST.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'VistolSans-Black'");
+        lblACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'VistolSans-Black'");
+        lbACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'VistolSans-Black'");
+
+    }
+
+    private void initSummarDialog() {
+        summary = new Summary(this);
     }
 
     private void initTopBar() {
-        ivClose.setOnMouseClicked(event -> {
+        vbClose.setOnMouseClicked(event -> {
             Node source = (Node) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
             stage.close();
@@ -124,19 +172,19 @@ public class MainController implements Initializable {
 
     private void changeLessons(int i) {
         lessonList.clear();
-        String is;
+        InputStream is;
         if (i == 0) {
-            is = getClass().getResource("/assets/short_lessons.csv").getPath();
+            is = getClass().getResourceAsStream("/assets/short_lessons.csv");
         } else {
-            is = getClass().getResource("/assets/tai_lessons.csv").getPath();
+            is = getClass().getResourceAsStream("/assets/tai_lessons.csv");
         }
-        try (BufferedReader br = new BufferedReader(new FileReader(is))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
                 int no = Integer.parseInt(values[0].trim());
                 String title = values[1].trim();
-//                System.out.println(no + " : " + values.length);
+//                System.out.println(title + " : " + values.length);
                 String content = values[2].replace("\"", "").trim();
                 lessonList.add(new Lesson(no, title, content));
             }
@@ -165,18 +213,12 @@ public class MainController implements Initializable {
 
         // NEXT & PREVIOUS
         btNext.setOnAction(event -> {
-            int currentIndex = cbLessons.getSelectionModel().getSelectedIndex();
-            if (currentIndex != lessonList.size() - 1) {
-                cbLessons.getSelectionModel().selectNext();
-            }
+            nextLesson();
         });
 
         // NEXT & PREVIOUS
         btPrev.setOnAction(event -> {
-            int currentIndex = cbLessons.getSelectionModel().getSelectedIndex();
-            if (currentIndex != 0) {
-                cbLessons.getSelectionModel().selectPrevious();
-            }
+            prevLesson();
         });
 
     }
@@ -208,7 +250,7 @@ public class MainController implements Initializable {
 
         tfPractice.addEventHandler(KeyEvent.KEY_TYPED, event -> {
 //            System.out.println("KEY TYPE EVENT");
-            System.out.println("Character - " + event.getCharacter());
+//            System.out.println("Character - " + event.getCharacter());
             if (event.getCharacter().equals("\u200B") || (!typingWithEnglish && consumeShanCharacter)) {
                 consumeShanCharacter = false;
                 // TODO - Because in Tai Typing, ေ is sometimes auto-typing!
@@ -220,11 +262,6 @@ public class MainController implements Initializable {
         tfPractice.textProperty().addListener((observable, oldValue, newValue) -> {
 //            System.out.println("Text you typed in textProperty() - " + tfPractice.getText());
 //            System.out.println("SWAP - " + swap);
-
-            if (newValue.length() == tfView.getText().length()) {
-                // TODO - Lessons end here!
-                end = true;
-            }
 
             if (newValue.length() == 1) {
                 startTime = System.currentTimeMillis();
@@ -272,6 +309,11 @@ public class MainController implements Initializable {
             String mustType = testText.substring(indexOfPractice - 1, indexOfPractice);
             typing = practiceText.substring(indexOfPractice - 1, indexOfPractice);
             if (Utils.isEnglishConsonant(typing)) {
+                if (mustType.equals("ႂ")) {
+                    String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
+                    if (afterTyping.equals("်"))
+                        mustType = "ႂ်";
+                }
                 typingWithEnglish = true;
                 String shanChar = Utils.convertToShanChar(typing);
                 if (mustType.equals(shanChar)) {
@@ -290,21 +332,13 @@ public class MainController implements Initializable {
                     return;
                 }
             }
-
-//            System.out.println("Swap? - " + swap);
-//            System.out.println("TEXT - " + practiceText);
-//            System.out.println("LENGTH _ " + practiceText.length());
             if (practiceText.length() >= 2) {
-//                System.out.println("TEXT BEFORE ASAI - " + practiceText.substring(indexOfPractice - 2, indexOfPractice));
                 String beforeTyping = practiceText.substring(indexOfPractice - 2, indexOfPractice - 1);
-//                System.out.println("Before Typing is - " + beforeTyping);
                 if (beforeTyping.equals("ေ") || beforeTyping.equals("ႄ")) {
                     if (mustSwap) {
                         swap = true;
                         mustSwap = false;
                         String newText = tfPractice.getText(0, indexOfPractice - 2) + typing + beforeTyping;
-//                        System.out.println("New Text - " + newText);
-//                        System.out.println("################################");
                         tfPractice.setText(newText);
                     }
                 }
@@ -312,25 +346,26 @@ public class MainController implements Initializable {
             if (typing.equals("ေ") || typing.equals("ႄ")) {
                 mustSwap = true;
             }
+
+            if (practiceText.length() == tfView.getText().length()) {
+                end = true;
+                clearToTypeValues();
+                summary.showDialog(wpm, accuracy, misTyped, awpm);
+                return;
+            }
+
         }
-
-
-//        if (practiceText.length() >= 2) {
-//            typing = practiceText.substring(indexOfPractice - 1, indexOfPractice);
-//            String beforeTyping = practiceText.substring(indexOfPractice - 2, indexOfPractice - 1);
-//            System.out.println("Before typing - " + beforeTyping);
-//            if (beforeTyping.equals("ေ") || beforeTyping.equals("ႄ")) {
-//                tfPractice.setText(practiceText.substring(0, indexOfPractice - 1) + typing + beforeTyping);
-//                return;
-//            }
-//        }
-
 
         if (indexOfPractice < tfView.getText().length()) {
             // Know which value to type next
             String valueToType = testText.substring(indexOfPractice, indexOfPractice + 1);
+            if (valueToType.equals("ႂ")) {
+                String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
+                if (afterTyping.equals("်"))
+                    valueToType = "ႂ်";
+            }
             if (valueToType.equals(" ")) {
-                highlightThisValue("SPACE", 5);
+                highlightThisValue("SPACE", 0, 5);
             } else {
                 for (int x = 0; x < allValues.size(); x++) {
                     Map<String, String> row = allValues.get(x);
@@ -341,7 +376,7 @@ public class MainController implements Initializable {
                             if (valueToType.equals(val)) {
                                 typeThisValue(x, y);
                                 if (x % 2 == 1) {
-                                    highlightThisValue("SHIFT", y);
+                                    highlightThisValue("SHIFT", x, y);
                                 }
                                 break;
                             }
@@ -353,13 +388,24 @@ public class MainController implements Initializable {
         }
     }
 
-    private void highlightThisValue(String key, int col) {
+    private void clearToTypeValues() {
+        toTypeNode.setStyle("-fx-background-color: #000");
+        toTypeSecNode.setStyle("-fx-background-color: #000;");
+    }
+
+    private void highlightThisValue(String key, int row, int col) {
         if (toTypeSecNode != null) {
             toTypeSecNode.setStyle("-fx-background-color: #000");
         }
         switch (key) {
             case "SHIFT" -> {
-                if (col > 5) {
+                // Calculate which shift key to press!
+                int determination = 5;
+                //                    case 0,1 -> determination = 5;
+                //                    case 2,3 -> determination = 5;
+                //                    case 4,5 -> determination = 5;
+                //                    case 6,7 -> determination = 5;
+                if (col > determination) {
                     // Enable Left Shift
                     toTypeSecNode = row4.getChildren().get(0);
                 } else {
@@ -376,7 +422,7 @@ public class MainController implements Initializable {
         }
 
         if (toTypeSecNode != null)
-            toTypeSecNode.setStyle("-fx-background-color: #013098");
+            toTypeSecNode.setStyle("-fx-background-color: #006dff");
     }
 
     private void typeThisValue(int x, int y) {
@@ -412,7 +458,7 @@ public class MainController implements Initializable {
         row1.getChildren().add(createKey(new Key(")", "0", "", "")));
         row1.getChildren().add(createKey(new Key("_", "-", "", "")));
         row1.getChildren().add(createKey(new Key("+", "=", "", "")));
-        row1.getChildren().add(createKeyWithCustomWidth(new Key("", "Back", "", ""), Perc.p10w()));
+        row1.getChildren().add(createKeyWithCustomWidth(new Key("", "Back", "", ""), 2));
     }
 
 
@@ -475,7 +521,8 @@ public class MainController implements Initializable {
         row5.getChildren().add(createKeyWithCustomWidth(new Key("", "Ctrl", "", ""), Perc.p8w()));
     }
 
-    private void createKeyBoard() {
+    protected void createKeyBoard() {
+
         for (int i = 0; i < allValues.size(); i += 2) {
             // u
             Iterator<String> engVal = allValues.get(i).keySet().iterator();
@@ -501,26 +548,25 @@ public class MainController implements Initializable {
                     String taiShift = taiShiftVal.next();
                     String tai = taiVal.next();
                     if (eng.equalsIgnoreCase("Back"))
-                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), Perc.p10w()));
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 8 * 0.02));
                     else if (eng.equalsIgnoreCase("Tab"))
-                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), Perc.p8w()));
-                    else if (eng.equalsIgnoreCase("\\"))
-                        row.getChildren().add(createKeyWithCustomWidth(new Key(engShift, eng, taiShift, tai), Perc.p7w()));
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 7 * 0.02));
+//                    else if (eng.equalsIgnoreCase("\\"))
+//                        row.getChildren().add(createKeyWithCustomWidth(new Key(engShift, eng, taiShift, tai), 2 * 0.02));
                     else if (eng.equalsIgnoreCase("Caps"))
-                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), Perc.p10w()));
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 8 * 0.02));
                     else if (eng.equalsIgnoreCase("Enter"))
-                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), Perc.p10w()));
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 8 * 0.02));
                     else if (eng.equalsIgnoreCase("Shift1") || eng.equalsIgnoreCase("Shift2"))
-                        row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), Perc.p12_5w()));
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), 10.5 * 0.02));
                     else if (eng.equalsIgnoreCase("Ctrl1") || eng.equalsIgnoreCase("Ctrl2"))
-                        row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), Perc.p8w()));
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), 6 * 0.02));
                     else if (eng.equalsIgnoreCase("Alt1") || eng.equalsIgnoreCase("Alt2"))
-                        row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), Perc.p7w()));
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), 2 * 0.02));
                     else if (eng.equalsIgnoreCase("Space"))
-                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), Perc.p30w()));
-
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 35 * 0.02));
                     else if (eng.equalsIgnoreCase("Win1") || eng.equalsIgnoreCase("Win2") || eng.equalsIgnoreCase("Menu"))
-                        row.getChildren().add(createKey(new Key("", tai, "", "")));
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), 1 * 0.02));
                     else if (eng.equals(tai) && engShift.equals(taiShift))
                         row.getChildren().add(createKey(new Key(engShift, eng, "", "")));
                     else
@@ -542,16 +588,32 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        vBox.setPrefSize(Perc.p5w(), Perc.p10h());
+
+        setCharacterOnButton(vBox, key, "Myanmar Taungthu", 16);
+//        vBox.setPrefSize(Perc.p5w(), Perc.p10h());
+//        VBox.setVgrow(vBox, Priority.ALWAYS);
+//        HBox.setHgrow(vBox, Priority.ALWAYS);
+
+        return vBox;
+
+    }
+
+    private void setCharacterOnButton(VBox vBox, Key key, String fontFamily, double fontSize) {
         Label charTaiShift = (Label) ((HBox) vBox.getChildren().get(0)).getChildren().get(0);
         charTaiShift.setText(key.getTaiShift());
+        charTaiShift.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
+
         Label charEngShift = (Label) ((HBox) vBox.getChildren().get(0)).getChildren().get(1);
         charEngShift.setText(key.getEngShift());
+        charEngShift.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
+
         Label charTai = (Label) ((HBox) vBox.getChildren().get(1)).getChildren().get(0);
         charTai.setText(key.getTai());
+        charTai.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
+
         Label charEng = (Label) ((HBox) vBox.getChildren().get(1)).getChildren().get(1);
         charEng.setText(key.getEng());
-        return vBox;
+        charEng.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
 
     }
 
@@ -564,31 +626,41 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        vBox.setPrefSize(width, Perc.p10h());
-        Label charTaiShift = (Label) ((HBox) vBox.getChildren().get(0)).getChildren().get(0);
-        charTaiShift.setText(key.getTaiShift());
-        Label charEngShift = (Label) ((HBox) vBox.getChildren().get(0)).getChildren().get(1);
-        charEngShift.setText(key.getEngShift());
-        Label charTai = (Label) ((HBox) vBox.getChildren().get(1)).getChildren().get(0);
-        charTai.setText(key.getTai());
-        Label charEng = (Label) ((HBox) vBox.getChildren().get(1)).getChildren().get(1);
-        charEng.setText(key.getEng());
+//        VBox.setVgrow(vBox, Priority.ALWAYS);
+//        HBox.setHgrow(vBox, Priority.ALWAYS);
+//        System.out.println("Pref Width : " + vBox.getPrefWidth());
+//        System.out.println("To add width : " + (vBox.getPrefWidth() * width));
+        vBox.setPrefWidth(vBox.getPrefWidth() + (vBox.getPrefWidth() * width));
+//        Label charTaiShift = (Label) ((HBox) vBox.getChildren().get(0)).getChildren().get(0);
+//        charTaiShift.setText(key.getTaiShift());
+//        Label charEngShift = (Label) ((HBox) vBox.getChildren().get(0)).getChildren().get(1);
+//        charEngShift.setText(key.getEngShift());
+//        Label charTai = (Label) ((HBox) vBox.getChildren().get(1)).getChildren().get(0);
+//        charTai.setText(key.getTai());
+//        Label charEng = (Label) ((HBox) vBox.getChildren().get(1)).getChildren().get(1);
+//        charEng.setText(key.getEng());
+        setCharacterOnButton(vBox, key, "VistolSans-Black", 18);
         return vBox;
 
     }
 
+    private int wpm;
+    private double accuracy;
+    private int awpm;
+
     private void calculateOutcome() {
         if (tfPractice.getText().length() > 1 && !end) {
-            int wpm = calculateWPM();
-            double accuracy = calculateACCU();
-            calculateAWPM(wpm, accuracy);
+            wpm = calculateWPM();
+            accuracy = calculateACCU();
+            awpm = calculateAWPM(wpm, accuracy);
         }
 
     }
 
-    private void calculateAWPM(int wpm, double accuracy) {
+    private int calculateAWPM(int wpm, double accuracy) {
         int avgWPM = (int) Math.round(wpm * accuracy);
         lbAWPM.setText(String.valueOf(avgWPM));
+        return avgWPM;
     }
 
 
@@ -610,6 +682,44 @@ public class MainController implements Initializable {
         int interimWPM = (int) (characterCount / minutes);
         lbWPM.setText(String.valueOf(interimWPM));
         return interimWPM;
+    }
+
+    public void clearBlur() {
+        btPrev.getScene().getRoot().setEffect(null);
+    }
+
+    public boolean nextLesson() {
+        int currentIndex = cbLessons.getSelectionModel().getSelectedIndex();
+        if (currentIndex != lessonList.size() - 1) {
+            cbLessons.getSelectionModel().selectNext();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean prevLesson() {
+        int currentIndex = cbLessons.getSelectionModel().getSelectedIndex();
+        if (currentIndex != 0) {
+            cbLessons.getSelectionModel().selectPrevious();
+            return true;
+        }
+        return false;
+    }
+
+    public void blurScreen() {
+        GaussianBlur blur = new GaussianBlur();
+        blur.setRadius(20);
+        btPrev.getScene().getRoot().setEffect(blur);
+
+    }
+
+    protected void whatIsKeyWidth() {
+        VBox key1 = (VBox) row1.getChildren().get(0);
+        System.out.println("Key1 width is - " + key1.getWidth());
+
+        VBox key2 = (VBox) row1.getChildren().get(1);
+        System.out.println("Key2 width is - " + key2.getBoundsInParent().getWidth());
+
     }
 
 }

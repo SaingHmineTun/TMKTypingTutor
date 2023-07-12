@@ -6,6 +6,10 @@ public abstract class Perc {
 
     static GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 
+    public static double getDynamicPixel(double px) {
+        return px * (gd.getDisplayMode().getWidth() / 1366.0);
+    }
+
     public static double p5w() {
 
         return (gd.getDisplayMode().getWidth() * 5.0) / 100.0;

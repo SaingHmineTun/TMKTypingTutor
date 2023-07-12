@@ -23,7 +23,7 @@ public class Utils {
 //            }
 //        }
 //        return null;
-        Map<String, String> map = KeyValue.Companion.getAllValuesMap();
+        Map<String, String> map = KeyValue.getAllValuesMap();
         return map.getOrDefault(character, null);
     }
 
