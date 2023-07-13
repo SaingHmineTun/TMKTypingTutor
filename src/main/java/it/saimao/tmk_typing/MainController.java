@@ -7,7 +7,6 @@ import it.saimao.tmk_typing.utils.Perc;
 import it.saimao.tmk_typing.utils.Utils;
 import it.saimao.tmk_typing.utils.Yunghkio_KeyMap;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,7 +48,7 @@ public class MainController implements Initializable {
     @FXML
     private ComboBox<Lesson> cbLessons;
     @FXML
-    private ComboBox<String> cbMode;
+    private ComboBox<String> cbLevel;
     @FXML
     private ComboBox<String> cbKeyboard;
     @FXML
@@ -118,8 +117,8 @@ public class MainController implements Initializable {
             }
             resetKeyboard();
             createKeyBoard();
-            doHeavyJob();
             reqFocusOnPracticeField();
+            doHeavyJob();
         });
         cbKeyboard.getSelectionModel().select(0);
     }
@@ -143,10 +142,10 @@ public class MainController implements Initializable {
         imgClose.setFitWidth(Perc.getDynamicPixel(20));
 
 
-        cbLessons.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
-        cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'Myanmar Taungthu'");
-        cbMode.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
-        cbMode.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'Myanmar Taungthu'");
+        cbLessons.setPrefSize(Perc.getDynamicPixel(280), Perc.getDynamicPixel(50));
+        cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(19) + "; -fx-font-family: 'Myanmar Taungthu'");
+        cbLevel.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
+        cbLevel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'Myanmar Taungthu'");
         cbKeyboard.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
         cbKeyboard.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-weight: bold; -fx-font-family: 'Myanmar Taungthu'");
 
@@ -188,13 +187,13 @@ public class MainController implements Initializable {
     private void initPracticeLessons() {
         lessonList = new ArrayList<>();
 
-        cbMode.getItems().addAll("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3");
-        cbMode.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+        cbLevel.getItems().addAll("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3");
+        cbLevel.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
 //            System.out.println("MODE SELECTION PROPERTY");
             changeLessons(newValue.intValue());
             tfPractice.clear();
         });
-        cbMode.getSelectionModel().select(0);
+        cbLevel.getSelectionModel().select(0);
     }
 
     private void changeLessons(int i) {
@@ -202,10 +201,10 @@ public class MainController implements Initializable {
         InputStream is;
         if (i == 0) {
             is = getClass().getResourceAsStream("/assets/lesson_1.csv");
-        } else if (i == 1){
-            is = getClass().getResourceAsStream("/assets/short_lessons.csv");
+        } else if (i == 1) {
+            is = getClass().getResourceAsStream("/assets/lesson_2.csv");
         } else {
-            is  = getClass().getResourceAsStream("/assets/tai_lessons.csv");
+            is = getClass().getResourceAsStream("/assets/lesson_3.csv");
         }
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
             String line;
@@ -222,8 +221,8 @@ public class MainController implements Initializable {
                 Collections.reverse(lessonList);
             int selectedIndex = cbLessons.getSelectionModel().getSelectedIndex();
             cbLessons.setItems(FXCollections.observableArrayList(lessonList));
-            if (i == 0 &&  selectedIndex > cbLessons.getItems().size() - 1) {
-                cbLessons.getSelectionModel().select(cbLessons.getItems().size() - 1);
+            if (i == 0 && selectedIndex > cbLessons.getItems().size() - 1) {
+                cbLessons.getSelectionModel().selectLast();
             } else {
                 cbLessons.getSelectionModel().select(selectedIndex);
             }
@@ -237,16 +236,20 @@ public class MainController implements Initializable {
     private void initViewValues() {
         cbLessons.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                if (cbMode.getSelectionModel().getSelectedIndex() == 0) {
-                    // Show test text ramdomly
+                if (cbLevel.getSelectionModel().getSelectedIndex() == 0) {
                     List<String> lessons = new ArrayList<>(Arrays.stream(newValue.getLesson().split(" ")).toList());
+//                    List<String> lessonsCopy = new ArrayList<>(Arrays.stream(newValue.getLesson().split(" ")).toList());
+//                    lessons.addAll(lessonsCopy);
+                    if (cbLessons.getSelectionModel().getSelectedIndex() != 0)
+                        lessons = replace_A_WithOtherCharacters(lessons);
+                    // Show test text ramdomly
                     Collections.shuffle(lessons);
-                    tfView.setText(Arrays.toString(lessons.toArray()).replaceAll("\\[", "").replaceAll("]", "").replaceAll(",", ""));
+                    tfView.setText(Arrays.toString(lessons.toArray()).replaceAll("[\\[\\],]", ""));
                 } else {
                     tfView.setText(newValue.getLesson());
                 }
-                doHeavyJob();
                 resetAndFocusOnPracticeField();
+                doHeavyJob();
             }
         });
         cbLessons.getSelectionModel().select(0);
@@ -261,6 +264,16 @@ public class MainController implements Initializable {
             prevLesson();
         });
 
+    }
+
+    private List<String> replace_A_WithOtherCharacters(List<String> lessons) {
+        List<String> newList = new LinkedList<>();
+        String[] characters = cbLessons.getItems().get(0).getLesson().split(" ");
+        for (String lesson : lessons) {
+            String newValue = lesson.replaceAll("ဢ", characters[new Random().nextInt(characters.length)]);
+            newList.add(newValue);
+        }
+        return newList;
     }
 
     private void resetAndFocusOnPracticeField() {
@@ -292,7 +305,7 @@ public class MainController implements Initializable {
 
         tfPractice.addEventHandler(KeyEvent.KEY_TYPED, event -> {
 //            System.out.println("KEY TYPE EVENT");
-            System.out.println("Character - " + event.getCharacter());
+//            System.out.println("Character - " + event.getCharacter());
             if (event.getCharacter().equals("\u200B") || (!typingWithEnglish && consumeShanCharacter)) {
                 consumeShanCharacter = false;
                 // TODO - Because in Tai Typing, ေ is sometimes auto-typing!
@@ -393,7 +406,8 @@ public class MainController implements Initializable {
             if (practiceText.length() == tfView.getText().length()) {
                 end = true;
                 clearToTypeValues();
-                summary.showDialog(wpm, accuracy, misTyped, awpm);
+                String title = cbLevel.getValue() + " : " + cbLessons.getValue().getTitle();
+                summary.showDialog(title, wpm, accuracy, misTyped, awpm);
                 return;
             }
 
@@ -438,7 +452,7 @@ public class MainController implements Initializable {
         } else {
             shanChar = Yunghkio_KeyMap.getAllValuesMap().getOrDefault(character, "");
         }
-            return shanChar;
+        return shanChar;
 
     }
 
@@ -652,6 +666,10 @@ public class MainController implements Initializable {
         if (currentIndex != lessonList.size() - 1) {
             cbLessons.getSelectionModel().selectNext();
             return true;
+        } else if (cbLevel.getSelectionModel().getSelectedIndex() < cbLevel.getItems().size() - 1) {
+            cbLevel.getSelectionModel().selectNext();
+            cbLessons.getSelectionModel().selectFirst();
+            return true;
         }
         return false;
     }
@@ -661,6 +679,10 @@ public class MainController implements Initializable {
         if (currentIndex != 0) {
             cbLessons.getSelectionModel().selectPrevious();
             return true;
+        } else if (cbLevel.getSelectionModel().getSelectedIndex() != 0) {
+            cbLevel.getSelectionModel().selectPrevious();
+            cbLessons.getSelectionModel().selectLast();
+            return true;
         }
         return false;
     }
@@ -669,15 +691,6 @@ public class MainController implements Initializable {
         GaussianBlur blur = new GaussianBlur();
         blur.setRadius(20);
         btPrev.getScene().getRoot().setEffect(blur);
-
-    }
-
-    protected void whatIsKeyWidth() {
-        VBox key1 = (VBox) row1.getChildren().get(0);
-        System.out.println("Key1 width is - " + key1.getWidth());
-
-        VBox key2 = (VBox) row1.getChildren().get(1);
-        System.out.println("Key2 width is - " + key2.getBoundsInParent().getWidth());
 
     }
 

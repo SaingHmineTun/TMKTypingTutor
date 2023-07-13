@@ -15,8 +15,8 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 
 public class Summary {
-    private int wpm, mistype, awpm;
-    private double accuracy;
+    @FXML
+    private Label sTitle;
     @FXML
     private Label sACCU;
 
@@ -39,8 +39,11 @@ public class Summary {
     @FXML
     private Label sWPM;
 
-    private Stage stage;
-    private MainController mainController;
+    private final Stage stage;
+    private final MainController mainController;
+    private int wpm, mistype, awpm;
+    private double accuracy;
+    private String title;
 
     public Summary(MainController mainController) {
         this.mainController = mainController;
@@ -62,8 +65,9 @@ public class Summary {
         stage.initModality(Modality.APPLICATION_MODAL);
 
     }
-    public void showDialog(int wpm, double accuracy, int mistype, int awpm) {
+    public void showDialog(String title, int wpm, double accuracy, int mistype, int awpm) {
         mainController.blurScreen();
+        this.title = title;
         this.wpm = wpm;
         this.awpm = awpm;
         this.accuracy = accuracy;
@@ -84,9 +88,9 @@ public class Summary {
             }
         });
         sRetry.setOnAction(actionEvent -> {
-            mainController.clearBlur();
             mainController.retryLesson();
             stage.close();
+            mainController.clearBlur();
         });
         sPrev.setOnAction(event -> {
             if (mainController.prevLesson()) {
@@ -97,9 +101,11 @@ public class Summary {
     }
 
     private void showSummary() {
+        sTitle.setText(title);
         sWPM.setText(String.valueOf(wpm));
         sACCU.setText(new DecimalFormat("#0.00").format(accuracy * 100) + "%");
         sMIST.setText(String.valueOf(mistype));
         sAWPM.setText(String.valueOf(awpm));
+        sNext.requestFocus();
     }
 }

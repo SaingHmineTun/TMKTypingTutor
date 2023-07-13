@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 'VistolSans-Black';
-    src: url('../fonts/vistol_sans_black.otf');
+    font-family: 'A J Kunheing 6';
+    src: url('../fonts/aj_kunheing6.ttf');
 }
 
 
@@ -9,8 +9,8 @@
 }
 
 .label, .text{
-    -fx-font-family: 'VistolSans-Black';
-    -fx-font-size: 16;
+    -fx-font-family: 'A J Kunheing 6';
+    -fx-font-size: 18;
     -fx-text-fill: white;
 }
 .button {
@@ -26,7 +26,7 @@
     -fx-background-color: #6c1313;
 }
 
-.button:hover {
+.button:hover, .button:focused {
     -fx-background-color: #222;
 }
 
@@ -40,8 +40,12 @@
     -fx-background-color: #333;
 }
 
-
 .button#sClose:pressed {
     -fx-background-color: #6c1313;
+}
+
+#title .text {
+    -fx-font-family: 'A J Kunheing 6';
+    -fx-font-size: 27;
 }
 

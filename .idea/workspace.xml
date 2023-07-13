@@ -9,18 +9,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="2.3 version. Almost finished! 95% DONE!!!">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/utils/Yunghkio_KeyMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/lesson_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/retry.png" afterDir="false" />
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Added - Support Yunghkio Keyboard Layout!&#10;Added - Retry option in Summary Dialog!">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/lesson_2.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/lesson_3.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/aj_kunheing6.ttf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/Summary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/Summary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/model/Lesson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/model/Lesson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/utils/KeyValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/utils/SIL_KeyMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/utils/Yunghkio_KeyMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/utils/Yunghkio_KeyMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/lesson_1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/lesson_1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/short_lessons.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/tai_lessons.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/main_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/main_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/summary_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/summary_style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/layout/summary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/summary.fxml" afterDir="false" />
     </list>
@@ -62,7 +64,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/JavaProjects/tmk_typing/src/main/resources/images",
+    "last_opened_file_path": "D:/JavaProjects/tmk_typing/src/main/resources/fonts",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -78,11 +80,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\JavaProjects\tmk_typing\src\main\resources\images" />
+      <recent name="D:\JavaProjects\tmk_typing\src\main\resources\fonts" />
       <recent name="D:\JavaProjects\tmk_typing\src\main\resources\assets" />
+      <recent name="D:\JavaProjects\tmk_typing\src\main\resources\images" />
       <recent name="D:\JavaProjects\tmk_typing\out\artifacts\tmk_typing_jar" />
       <recent name="D:\JavaProjects\tmk_typing\src\main\java\it\saimao\tmk_typing\utils" />
-      <recent name="D:\JavaProjects\tmk_typing\src\main\java" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="it.saimao.tmk_typing.utils" />
@@ -127,7 +129,8 @@
       <workItem from="1689149373297" duration="7925000" />
       <workItem from="1689172614016" duration="10834000" />
       <workItem from="1689218356591" duration="5405000" />
-      <workItem from="1689236937963" duration="5279000" />
+      <workItem from="1689236937963" duration="5435000" />
+      <workItem from="1689248297120" duration="11776000" />
     </task>
     <task id="LOCAL-00001" summary="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!">
       <option name="closed" value="true" />
@@ -177,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689186519095</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added - Support Yunghkio Keyboard Layout!&#10;Added - Retry option in Summary Dialog!">
+      <option name="closed" value="true" />
+      <created>1689246338580</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1689246338580</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -190,15 +201,21 @@
     <MESSAGE value="Fix - Error typing with Shan Keyboard!&#10;Modified - Combobox Style" />
     <MESSAGE value="Added - Dynamic Keyboard Creation approach. This is to be able to adapt to other language!&#10;Added - WPM, AWPM, ACCURACY, MISTYPE labels!&#10;Added - MODE (EASY, INTERMEDIATE)&#10;Modified - Next &amp; Previous buttons!" />
     <MESSAGE value="2.3 version. Almost finished! 95% DONE!!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.3 version. Almost finished! 95% DONE!!!" />
+    <MESSAGE value="Added - Support Yunghkio Keyboard Layout!&#10;Added - Retry option in Summary Dialog!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added - Support Yunghkio Keyboard Layout!&#10;Added - Retry option in Summary Dialog!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/MainController.java</url>
-          <line>352</line>
+          <line>365</line>
           <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing/MainController.java</url>
+          <line>237</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
