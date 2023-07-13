@@ -119,6 +119,10 @@
     -fx-alignment: center;
 }
 
+.combo-box#lessons .cell {
+    -fx-alignment: left;
+}
+
 .combo-box-popup .list-view {
     -fx-background-color: #000;
     -fx-border-color: white;

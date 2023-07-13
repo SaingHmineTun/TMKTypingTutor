@@ -49,7 +49,7 @@
                <children>
                   <VBox HBox.hgrow="ALWAYS">
                      <children>
-                        <ComboBox fx:id="cbMode" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="MODE" VBox.vgrow="ALWAYS">
+                        <ComboBox fx:id="cbKeyboard" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="KEYBOARD" VBox.vgrow="ALWAYS">
                            <effect>
                               <Lighting>
                                  <bumpInput>
@@ -59,9 +59,22 @@
                                     <Light.Distant />
                                  </light>
                               </Lighting>
-                           </effect></ComboBox>
+                           </effect>
+                        </ComboBox>
                      </children>
                   </VBox>
+                  <ComboBox fx:id="cbMode" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="MODE" HBox.hgrow="NEVER">
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect>
+                  </ComboBox>
                   <Button fx:id="btPrev" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="Prev">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -81,7 +94,7 @@
                         </Lighting>
                      </effect>
                   </Button>
-                  <ComboBox fx:id="cbLessons" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="Lesson" HBox.hgrow="NEVER">
+                  <ComboBox id="lessons" fx:id="cbLessons" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="LESSONS" HBox.hgrow="NEVER">
                      <effect>
                         <Lighting>
                            <bumpInput>

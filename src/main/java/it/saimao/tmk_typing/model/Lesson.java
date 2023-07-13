@@ -38,6 +38,6 @@ public class Lesson {
 
     @Override
     public String toString() {
-        return "ၵၢၼ်သွၼ် (" + no + ") - " + title;
+        return "(" + no + ") - " + title;
     }
 }

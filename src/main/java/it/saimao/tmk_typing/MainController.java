@@ -2,10 +2,12 @@ package it.saimao.tmk_typing;
 
 import it.saimao.tmk_typing.model.Key;
 import it.saimao.tmk_typing.model.Lesson;
-import it.saimao.tmk_typing.utils.KeyValue;
+import it.saimao.tmk_typing.utils.SIL_KeyMap;
 import it.saimao.tmk_typing.utils.Perc;
 import it.saimao.tmk_typing.utils.Utils;
+import it.saimao.tmk_typing.utils.Yunghkio_KeyMap;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,9 +23,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -51,6 +51,8 @@ public class MainController implements Initializable {
     @FXML
     private ComboBox<String> cbMode;
     @FXML
+    private ComboBox<String> cbKeyboard;
+    @FXML
     private HBox row1, row2, row3, row4, row5;
     @FXML
     private TextField tfView;
@@ -77,11 +79,10 @@ public class MainController implements Initializable {
     @FXML
     private HBox hbSelection;
     private Window primaryWindow;
-    private final String[] modes = {"ၵၢၼ်ၽိုၵ်းဢွၼ်ႇ", "ၵၢၼ်ၽိုၵ်းလူင်"};
 
     private Node toTypeNode;
     private Node toTypeSecNode;
-    private final List<Map<String, String>> allValues = KeyValue.getAllValuesList();
+    private List<Map<String, String>> allValues;
 
     // Prevent ‌ေ & ႄ to auto enter in shn_sil keyboard
     private boolean consumeShanCharacter;
@@ -95,15 +96,38 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initTopBar();
-        createKeyBoard();
+        initKeyboard();
         initPracticeLessons();
         initPracticeListener();
         initViewValues();
         initSummarDialog();
         relayoutForVariousResolution();
-        tfPractice.requestFocus();
+        reqFocusOnPracticeField();
 //        primaryWindow = btNext.getScene().getWindow();
 //        btPrev.getScene().getRoot().setEffect(new BoxBlur(10, 10, 3));
+
+    }
+
+    private void initKeyboard() {
+        cbKeyboard.getItems().addAll("လွၵ်းမိုဝ်း SIL", "လွၵ်းမိုဝ်းယုင်းၶဵဝ်");
+        cbKeyboard.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue.intValue() == 0) {
+                allValues = SIL_KeyMap.getAllValuesList();
+            } else {
+                allValues = Yunghkio_KeyMap.getAllValuesList();
+            }
+            resetKeyboard();
+            createKeyBoard();
+            doHeavyJob();
+            reqFocusOnPracticeField();
+        });
+        cbKeyboard.getSelectionModel().select(0);
+    }
+
+    private void resetKeyboard() {
+        for (Node hBox : vbKeyboardView.getChildren()) {
+            ((HBox) hBox).getChildren().clear();
+        }
 
     }
 
@@ -120,9 +144,12 @@ public class MainController implements Initializable {
 
 
         cbLessons.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
-        cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(17) + "; -fx-font-family: 'Myanmar Taungthu'");
+        cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'Myanmar Taungthu'");
         cbMode.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
-        cbMode.setStyle("-fx-font-size: " + Perc.getDynamicPixel(17) + "; -fx-font-family: 'Myanmar Taungthu'");
+        cbMode.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'Myanmar Taungthu'");
+        cbKeyboard.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
+        cbKeyboard.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-weight: bold; -fx-font-family: 'Myanmar Taungthu'");
+
         btNext.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
         btPrev.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
 
@@ -161,7 +188,7 @@ public class MainController implements Initializable {
     private void initPracticeLessons() {
         lessonList = new ArrayList<>();
 
-        cbMode.setItems(FXCollections.observableArrayList(modes));
+        cbMode.getItems().addAll("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3");
         cbMode.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
 //            System.out.println("MODE SELECTION PROPERTY");
             changeLessons(newValue.intValue());
@@ -174,9 +201,11 @@ public class MainController implements Initializable {
         lessonList.clear();
         InputStream is;
         if (i == 0) {
+            is = getClass().getResourceAsStream("/assets/lesson_1.csv");
+        } else if (i == 1){
             is = getClass().getResourceAsStream("/assets/short_lessons.csv");
         } else {
-            is = getClass().getResourceAsStream("/assets/tai_lessons.csv");
+            is  = getClass().getResourceAsStream("/assets/tai_lessons.csv");
         }
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
             String line;
@@ -188,12 +217,16 @@ public class MainController implements Initializable {
                 String content = values[2].replace("\"", "").trim();
                 lessonList.add(new Lesson(no, title, content));
             }
-            if (i == 0)
+            if (i == 1)
+                // using short_lessons, we should reverse it before use it
                 Collections.reverse(lessonList);
             int selectedIndex = cbLessons.getSelectionModel().getSelectedIndex();
             cbLessons.setItems(FXCollections.observableArrayList(lessonList));
-            cbLessons.getSelectionModel().select(selectedIndex);
-            // using short_lessons, we should reverse it before use it
+            if (i == 0 &&  selectedIndex > cbLessons.getItems().size() - 1) {
+                cbLessons.getSelectionModel().select(cbLessons.getItems().size() - 1);
+            } else {
+                cbLessons.getSelectionModel().select(selectedIndex);
+            }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -204,9 +237,16 @@ public class MainController implements Initializable {
     private void initViewValues() {
         cbLessons.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                tfView.setText(newValue.getLesson());
-                resetAndFocusOnPracticeField();
+                if (cbMode.getSelectionModel().getSelectedIndex() == 0) {
+                    // Show test text ramdomly
+                    List<String> lessons = new ArrayList<>(Arrays.stream(newValue.getLesson().split(" ")).toList());
+                    Collections.shuffle(lessons);
+                    tfView.setText(Arrays.toString(lessons.toArray()).replaceAll("\\[", "").replaceAll("]", "").replaceAll(",", ""));
+                } else {
+                    tfView.setText(newValue.getLesson());
+                }
                 doHeavyJob();
+                resetAndFocusOnPracticeField();
             }
         });
         cbLessons.getSelectionModel().select(0);
@@ -225,8 +265,8 @@ public class MainController implements Initializable {
 
     private void resetAndFocusOnPracticeField() {
 
-        tfPractice.setText("");
-        tfPractice.requestFocus();
+        tfPractice.clear();
+        reqFocusOnPracticeField();
         lbWPM.setText("0");
         lbAWPM.setText("0");
         lbACCU.setText("0%");
@@ -238,7 +278,9 @@ public class MainController implements Initializable {
     private boolean end;
 
     private void initPracticeListener() {
-        doHeavyJob();
+        tfPractice.setOnMouseClicked(mouseEvent -> {
+            tfPractice.end();
+        });
         tfPractice.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -250,7 +292,7 @@ public class MainController implements Initializable {
 
         tfPractice.addEventHandler(KeyEvent.KEY_TYPED, event -> {
 //            System.out.println("KEY TYPE EVENT");
-//            System.out.println("Character - " + event.getCharacter());
+            System.out.println("Character - " + event.getCharacter());
             if (event.getCharacter().equals("\u200B") || (!typingWithEnglish && consumeShanCharacter)) {
                 consumeShanCharacter = false;
                 // TODO - Because in Tai Typing, ေ is sometimes auto-typing!
@@ -315,7 +357,8 @@ public class MainController implements Initializable {
                         mustType = "ႂ်";
                 }
                 typingWithEnglish = true;
-                String shanChar = Utils.convertToShanChar(typing);
+                // TODO - Need to decide what keyboard to use
+                String shanChar = convertToShanChar(typing);
                 if (mustType.equals(shanChar)) {
                     tfPractice.setText(practiceText.substring(0, indexOfPractice - 1) + shanChar);
                 } else {
@@ -388,6 +431,17 @@ public class MainController implements Initializable {
         }
     }
 
+    private String convertToShanChar(String character) {
+        String shanChar;
+        if (cbKeyboard.getSelectionModel().getSelectedIndex() == 0) {
+            shanChar = SIL_KeyMap.getAllValuesMap().getOrDefault(character, "");
+        } else {
+            shanChar = Yunghkio_KeyMap.getAllValuesMap().getOrDefault(character, "");
+        }
+            return shanChar;
+
+    }
+
     private void clearToTypeValues() {
         toTypeNode.setStyle("-fx-background-color: #000");
         toTypeSecNode.setStyle("-fx-background-color: #000;");
@@ -441,84 +495,6 @@ public class MainController implements Initializable {
         if (toTypeNode != null)
             toTypeNode.setStyle("-fx-background-color: #006dff");
 
-    }
-
-    // Total keyboard width - 75%
-    private void initRow1() {
-        row1.getChildren().add(createKey(new Key("~", "`", "", "")));
-        row1.getChildren().add(createKey(new Key("!", "1", "", "")));
-        row1.getChildren().add(createKey(new Key("@", "2", "", "")));
-        row1.getChildren().add(createKey(new Key("#", "3", "", "")));
-        row1.getChildren().add(createKey(new Key("$", "4", "", "")));
-        row1.getChildren().add(createKey(new Key("%", "5", "", "")));
-        row1.getChildren().add(createKey(new Key("^", "6", "", "")));
-        row1.getChildren().add(createKey(new Key("&", "7", "", "")));
-        row1.getChildren().add(createKey(new Key("*", "8", "", "")));
-        row1.getChildren().add(createKey(new Key("(", "9", "", "")));
-        row1.getChildren().add(createKey(new Key(")", "0", "", "")));
-        row1.getChildren().add(createKey(new Key("_", "-", "", "")));
-        row1.getChildren().add(createKey(new Key("+", "=", "", "")));
-        row1.getChildren().add(createKeyWithCustomWidth(new Key("", "Back", "", ""), 2));
-    }
-
-
-    private void initRow2() {
-        row2.getChildren().add(createKeyWithCustomWidth(new Key("", "Tab", "", ""), Perc.p8w()));
-        row2.getChildren().add(createKey(new Key("", "Q", "ꩡ", "ၸ")));
-        row2.getChildren().add(createKey(new Key("", "W", "ၻ", "တ")));
-        row2.getChildren().add(createKey(new Key("", "E", "ꧣ", "ၼ")));
-        row2.getChildren().add(createKey(new Key("", "R", "႞", "မ")));
-        row2.getChildren().add(createKey(new Key("", "T", "ြ", "ဢ")));
-        row2.getChildren().add(createKey(new Key("", "Y", "ၿ", "ပ")));
-        row2.getChildren().add(createKey(new Key("", "U", "ၷ", "ၵ")));
-        row2.getChildren().add(createKey(new Key("", "I", "ရ", "င")));
-        row2.getChildren().add(createKey(new Key("", "O", "သ", "ဝ")));
-        row2.getChildren().add(createKey(new Key("", "P", "ႀ", "ႁ")));
-        row2.getChildren().add(createKey(new Key("{", "{", "[", "[")));
-        row2.getChildren().add(createKey(new Key("}", "}", "]", "]")));
-        row2.getChildren().add(createKeyWithCustomWidth(new Key("|", "|", "\\", "\\"), Perc.p7w()));
-    }
-
-    private void initRow3() {
-        row3.getChildren().add(createKeyWithCustomWidth(new Key("", "Caps", "", ""), Perc.p10w()));
-        row3.getChildren().add(createKey(new Key("", "A", "ဵ", "​ေ")));
-        row3.getChildren().add(createKey(new Key("", "S", "ႅ", "​ႄ")));
-        row3.getChildren().add(createKey(new Key("", "D", "ီ", "ိ")));
-        row3.getChildren().add(createKey(new Key("", "F", "ႂ်", "်")));
-        row3.getChildren().add(createKey(new Key("", "G", "ႂ", "ွ")));
-        row3.getChildren().add(createKey(new Key("", "H", "့", "ႉ")));
-        row3.getChildren().add(createKey(new Key("", "J", "ႆ", "ႇ")));
-        row3.getChildren().add(createKey(new Key("", "K", "”", "ု")));
-        row3.getChildren().add(createKey(new Key("", "L", "ႊ", "ူ")));
-        row3.getChildren().add(createKey(new Key(";", ":", "း", "ႈ")));
-        row3.getChildren().add(createKey(new Key("\"", "'", "“", "'")));
-        row3.getChildren().add(createKeyWithCustomWidth(new Key("", "Enter", "", ""), Perc.p10w()));
-    }
-
-    private void initRow4() {
-        row4.getChildren().add(createKeyWithCustomWidth(new Key("", "Shift", "", ""), Perc.p13w()));
-        row4.getChildren().add(createKey(new Key("", "Z", "ၾ", "ၽ")));
-        row4.getChildren().add(createKey(new Key("", "X", "ꩪ", "ထ")));
-        row4.getChildren().add(createKey(new Key("", "C", "ꧠ", "ၶ")));
-        row4.getChildren().add(createKey(new Key("", "V", "ꩮ", "လ")));
-        row4.getChildren().add(createKey(new Key("", "B", "ျ", "ယ")));
-        row4.getChildren().add(createKey(new Key("", "N", "႟", "ၺ")));
-        row4.getChildren().add(createKey(new Key("", "M", "ႃ", "ၢ")));
-        row4.getChildren().add(createKey(new Key(",", "<", "၊", ",")));
-        row4.getChildren().add(createKey(new Key(">", ".", "။", ".")));
-        row4.getChildren().add(createKey(new Key("?", "/", "?", "/")));
-        row4.getChildren().add(createKeyWithCustomWidth(new Key("", "Shift", "", ""), Perc.p12w()));
-    }
-
-    private void initRow5() {
-        row5.getChildren().add(createKeyWithCustomWidth(new Key("", "Ctrl", "", ""), Perc.p8w()));
-        row5.getChildren().add(createKey(new Key("", "Win", "", "")));
-        row5.getChildren().add(createKeyWithCustomWidth(new Key("", "Alt", "", ""), Perc.p7w()));
-        row5.getChildren().add(createKeyWithCustomWidth(new Key("", "Space", "", ""), Perc.p30w()));
-        row5.getChildren().add(createKeyWithCustomWidth(new Key("", "Alt", "", ""), Perc.p7w()));
-        row5.getChildren().add(createKey(new Key("", "Win", "", "")));
-        row5.getChildren().add(createKey(new Key("", "Menu", "", "")));
-        row5.getChildren().add(createKeyWithCustomWidth(new Key("", "Ctrl", "", ""), Perc.p8w()));
     }
 
     protected void createKeyBoard() {
@@ -590,10 +566,6 @@ public class MainController implements Initializable {
         }
 
         setCharacterOnButton(vBox, key, "Myanmar Taungthu", 16);
-//        vBox.setPrefSize(Perc.p5w(), Perc.p10h());
-//        VBox.setVgrow(vBox, Priority.ALWAYS);
-//        HBox.setHgrow(vBox, Priority.ALWAYS);
-
         return vBox;
 
     }
@@ -626,19 +598,7 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-//        VBox.setVgrow(vBox, Priority.ALWAYS);
-//        HBox.setHgrow(vBox, Priority.ALWAYS);
-//        System.out.println("Pref Width : " + vBox.getPrefWidth());
-//        System.out.println("To add width : " + (vBox.getPrefWidth() * width));
         vBox.setPrefWidth(vBox.getPrefWidth() + (vBox.getPrefWidth() * width));
-//        Label charTaiShift = (Label) ((HBox) vBox.getChildren().get(0)).getChildren().get(0);
-//        charTaiShift.setText(key.getTaiShift());
-//        Label charEngShift = (Label) ((HBox) vBox.getChildren().get(0)).getChildren().get(1);
-//        charEngShift.setText(key.getEngShift());
-//        Label charTai = (Label) ((HBox) vBox.getChildren().get(1)).getChildren().get(0);
-//        charTai.setText(key.getTai());
-//        Label charEng = (Label) ((HBox) vBox.getChildren().get(1)).getChildren().get(1);
-//        charEng.setText(key.getEng());
         setCharacterOnButton(vBox, key, "VistolSans-Black", 18);
         return vBox;
 
@@ -654,7 +614,6 @@ public class MainController implements Initializable {
             accuracy = calculateACCU();
             awpm = calculateAWPM(wpm, accuracy);
         }
-
     }
 
     private int calculateAWPM(int wpm, double accuracy) {
@@ -722,4 +681,16 @@ public class MainController implements Initializable {
 
     }
 
+    public void reqFocusOnPracticeField() {
+        tfPractice.requestFocus();
+        tfPractice.end();
+
+    }
+
+    public void retryLesson() {
+//        resetAndFocusOnPracticeField();
+        Lesson selectedLesson = cbLessons.getSelectionModel().getSelectedItem();
+        cbLessons.getSelectionModel().clearSelection();
+        cbLessons.getSelectionModel().select(selectedLesson);
+    }
 }

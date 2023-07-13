@@ -15,16 +15,6 @@ public class Utils {
         return false;
     }
 
-    public static String convertToShanChar(String character) {
-//        Map<String, String> map = KeyValue.Companion.getAllValuesMap();
-//        for (Map.Entry<String, String> entry: map.entrySet()) {
-//            if (entry.getValue().equals(character)) {
-//                return entry.getKey();
-//            }
-//        }
-//        return null;
-        Map<String, String> map = KeyValue.getAllValuesMap();
-        return map.getOrDefault(character, null);
-    }
+
 
 }

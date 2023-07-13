@@ -28,6 +28,10 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        MainController mainController = loader.getController();
+        primaryStage.setOnShown(windowEvent -> {
+            mainController.reqFocusOnPracticeField();
+        });
         Scene scene = new Scene(parent);
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image(getClass().getResource("/images/app_icon.png").toExternalForm()));

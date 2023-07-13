@@ -2,7 +2,7 @@ package it.saimao.tmk_typing.utils;
 
 import java.util.*;
 
-public class KeyValue {
+public class SIL_KeyMap {
     private static Map<String, String> row1Values;
     private static Map<String, String> row1ShiftValues;
     private static Map<String, String> row2Values;

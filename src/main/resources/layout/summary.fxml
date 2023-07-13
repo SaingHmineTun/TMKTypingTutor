@@ -113,6 +113,25 @@
                         </Lighting>
                      </effect>
                   </Button>
+                  <Button fx:id="sRetry" layoutX="88.0" layoutY="10.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="RETRY">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/retry.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect>
+                  </Button>
                   <Button fx:id="sNext" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="NEXT">
                       <graphic>
                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">

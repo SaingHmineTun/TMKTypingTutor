@@ -35,6 +35,8 @@ public class Summary {
     @FXML
     private Button sPrev;
     @FXML
+    private Button sRetry;
+    @FXML
     private Label sWPM;
 
     private Stage stage;
@@ -80,6 +82,11 @@ public class Summary {
                 stage.close();
                 mainController.clearBlur();
             }
+        });
+        sRetry.setOnAction(actionEvent -> {
+            mainController.clearBlur();
+            mainController.retryLesson();
+            stage.close();
         });
         sPrev.setOnAction(event -> {
             if (mainController.prevLesson()) {
