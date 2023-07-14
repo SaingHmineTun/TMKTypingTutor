@@ -1,4 +1,4 @@
-package it.saimao.tmk_typing.node;
+package it.saimao.tmk_typing_tutor.node;
 
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;

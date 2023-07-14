@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
@@ -71,11 +72,11 @@
 
           </center>
    <bottom>
-      <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                <children>
-                  <Button fx:id="sClose" graphicTextGap="8.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="CLOSE">
+                  <Button fx:id="sClose" graphicTextGap="8.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" text="CLOSE">
                       <graphic>
                           <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                               <image>
@@ -95,7 +96,7 @@
             </HBox>
             <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="30.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Button fx:id="sPrev" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="PREV">
+                  <Button fx:id="sPrev" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" text="PREV">
                       <graphic>
                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                               <image>
@@ -111,7 +112,7 @@
                         </Lighting>
                      </effect>
                   </Button>
-                  <Button fx:id="sRetry" layoutX="88.0" layoutY="10.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="RETRY">
+                  <Button fx:id="sRetry" layoutX="88.0" layoutY="10.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" text="RETRY">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -124,10 +125,13 @@
                            <bumpInput>
                               <Shadow />
                            </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
                         </Lighting>
                      </effect>
                   </Button>
-                  <Button fx:id="sNext" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="NEXT">
+                  <Button fx:id="sNext" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" text="NEXT">
                       <graphic>
                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                               <image>

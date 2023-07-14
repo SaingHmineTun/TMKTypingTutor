@@ -1,8 +1,6 @@
-package it.saimao.tmk_typing;
+package it.saimao.tmk_typing_tutor;
 
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

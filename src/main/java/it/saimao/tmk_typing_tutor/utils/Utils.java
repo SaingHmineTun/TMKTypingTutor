@@ -1,6 +1,4 @@
-package it.saimao.tmk_typing.utils;
-
-import java.util.Map;
+package it.saimao.tmk_typing_tutor.utils;
 
 public class Utils {
     public static boolean isEnglishConsonant(String value) {

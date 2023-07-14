@@ -1,4 +1,4 @@
-package it.saimao.tmk_typing.model;
+package it.saimao.tmk_typing_tutor.model;
 
 public class Lesson {
     private int no;

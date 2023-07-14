@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: it.saimao.tmk_typing.Main
+Main-Class: it.saimao.tmk_typing_tutor.Main
 

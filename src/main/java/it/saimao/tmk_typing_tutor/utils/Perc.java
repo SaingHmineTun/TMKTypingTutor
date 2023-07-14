@@ -1,4 +1,4 @@
-package it.saimao.tmk_typing.utils;
+package it.saimao.tmk_typing_tutor.utils;
 
 import java.awt.*;
 

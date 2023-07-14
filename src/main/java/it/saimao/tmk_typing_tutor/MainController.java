@@ -1,11 +1,11 @@
-package it.saimao.tmk_typing;
+package it.saimao.tmk_typing_tutor;
 
-import it.saimao.tmk_typing.model.Key;
-import it.saimao.tmk_typing.model.Lesson;
-import it.saimao.tmk_typing.utils.SIL_KeyMap;
-import it.saimao.tmk_typing.utils.Perc;
-import it.saimao.tmk_typing.utils.Utils;
-import it.saimao.tmk_typing.utils.Yunghkio_KeyMap;
+import it.saimao.tmk_typing_tutor.model.Key;
+import it.saimao.tmk_typing_tutor.model.Lesson;
+import it.saimao.tmk_typing_tutor.utils.SIL_KeyMap;
+import it.saimao.tmk_typing_tutor.utils.Perc;
+import it.saimao.tmk_typing_tutor.utils.Utils;
+import it.saimao.tmk_typing_tutor.utils.Yunghkio_KeyMap;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -238,10 +238,12 @@ public class MainController implements Initializable {
             if (newValue != null) {
                 if (cbLevel.getSelectionModel().getSelectedIndex() == 0) {
                     List<String> lessons = new ArrayList<>(Arrays.stream(newValue.getLesson().split(" ")).toList());
-//                    List<String> lessonsCopy = new ArrayList<>(Arrays.stream(newValue.getLesson().split(" ")).toList());
-//                    lessons.addAll(lessonsCopy);
                     if (cbLessons.getSelectionModel().getSelectedIndex() != 0)
                         lessons = replace_A_WithOtherCharacters(lessons);
+                    else {
+                        List<String> lessonsCopy = new ArrayList<>(Arrays.stream(newValue.getLesson().split(" ")).toList());
+                        lessons.addAll(lessonsCopy);
+                    }
                     // Show test text ramdomly
                     Collections.shuffle(lessons);
                     tfView.setText(Arrays.toString(lessons.toArray()).replaceAll("[\\[\\],]", ""));
@@ -541,8 +543,6 @@ public class MainController implements Initializable {
                         row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 8 * 0.02));
                     else if (eng.equalsIgnoreCase("Tab"))
                         row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 7 * 0.02));
-//                    else if (eng.equalsIgnoreCase("\\"))
-//                        row.getChildren().add(createKeyWithCustomWidth(new Key(engShift, eng, taiShift, tai), 2 * 0.02));
                     else if (eng.equalsIgnoreCase("Caps"))
                         row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 8 * 0.02));
                     else if (eng.equalsIgnoreCase("Enter"))
