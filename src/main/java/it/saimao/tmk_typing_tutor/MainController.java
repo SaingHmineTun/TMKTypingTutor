@@ -2,10 +2,7 @@ package it.saimao.tmk_typing_tutor;
 
 import it.saimao.tmk_typing_tutor.model.Key;
 import it.saimao.tmk_typing_tutor.model.Lesson;
-import it.saimao.tmk_typing_tutor.utils.SIL_KeyMap;
-import it.saimao.tmk_typing_tutor.utils.Perc;
-import it.saimao.tmk_typing_tutor.utils.Utils;
-import it.saimao.tmk_typing_tutor.utils.Yunghkio_KeyMap;
+import it.saimao.tmk_typing_tutor.utils.*;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -108,12 +105,16 @@ public class MainController implements Initializable {
     }
 
     private void initKeyboard() {
-        cbKeyboard.getItems().addAll("လွၵ်းမိုဝ်း SIL", "လွၵ်းမိုဝ်းယုင်းၶဵဝ်");
+        cbKeyboard.getItems().addAll("လွၵ်းမိုဝ်း SIL", "လွၵ်းမိုဝ်းယုင်းၶဵဝ်", "လွၵ်းမိုဝ်းပၢင်လူင်", "လွၵ်းမိုဝ်းၼမ်ႉၶူင်း");
         cbKeyboard.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue.intValue() == 0) {
                 allValues = SIL_KeyMap.getAllValuesList();
-            } else {
+            } else if (newValue.intValue() == 1) {
                 allValues = Yunghkio_KeyMap.getAllValuesList();
+            } else if (newValue.intValue() == 2) {
+                allValues = Panglong_KeyMap.getAllValuesList();
+            } else {
+                allValues = NamKhone_KeyMap.getAllValuesList();
             }
             resetKeyboard();
             createKeyBoard();
@@ -353,8 +354,12 @@ public class MainController implements Initializable {
 
     private void doHeavyJob() {
         // To be able to type ေ & ႄ first with SIL_Shan Keyman keyboard
-        String testText = tfView.getText().replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1031", "\u1031$1$2$3");
-        testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1084", "\u1084$1$2$3");
+        int keyboard = cbKeyboard.getSelectionModel().getSelectedIndex();
+        String testText = tfView.getText();
+        if (keyboard != 3) {
+            testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1031", "\u1031$1$2$3");
+            testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1084", "\u1084$1$2$3");
+        }
 
         String practiceText = tfPractice.getText();
         int indexOfPractice = 0;
@@ -366,6 +371,121 @@ public class MainController implements Initializable {
             String mustType = testText.substring(indexOfPractice - 1, indexOfPractice);
             typing = practiceText.substring(indexOfPractice - 1, indexOfPractice);
             if (Utils.isEnglishConsonant(typing)) {
+//                if (mustType.equals("ႂ")) {
+//                    String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
+//                    if (afterTyping.equals("်"))
+//                        mustType = "ႂ်";
+//                }
+                // Config for Namkhone Keyboard
+                if (keyboard == 3) {
+                    // Show  ိံ  key
+                    if (mustType.equals("ိ")) {
+                        String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
+                        if (afterTyping.equals("ံ")) {
+                            mustType = "ိံ";
+                        }
+                    }
+                    // Show  ျွ  key
+                    if (mustType.equals("ျ")) {
+                        String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
+                        if (afterTyping.equals("ွ")) {
+                            mustType = "ျွ";
+                        }
+                    }
+
+
+                    // Show ို key
+                    if (mustType.equals("ြ")) {
+                        try {
+                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
+                            if (afterTyping.equals("ႃ")) {
+                                mustType = "ြႃ";
+                            }
+                        } catch (Exception ignored) {
+                        }
+                    }
+
+                    // Show ႁႂ် key
+                    if (mustType.equals("ႁ")) {
+                        try {
+                            String afterTyping2 = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
+                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
+                            if (afterTyping.equals("ႂ") && afterTyping2.equals("်")) {
+                                mustType = "ႁႂ်";
+                            }
+                        } catch (Exception ignored) {
+                        }
+                    }
+
+                    // Show  ၢႆ  key
+                    if (mustType.equals("ၢ")) {
+                        try {
+                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
+                            if (afterTyping.equals("ႆ")) {
+                                mustType = "ၢႆ";
+                            }
+                        } catch (Exception ignored) {
+                        }
+                    }
+
+                    // Show ေႃ key
+                    if (mustType.equals("ေ")) {
+                        try {
+                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
+                            if (afterTyping.equals("ႃ")) {
+                                mustType = "ေႃ";
+                            }
+                        } catch (Exception ignored) {
+                        }
+                    }
+
+                    // Show ို key
+                    if (mustType.equals("ိ")) {
+                        try {
+                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
+                            if (afterTyping.equals("ု")) {
+                                mustType = "ို";
+                            }
+                        } catch (Exception ignored) {
+                        }
+                    }
+
+                    // Show ိူ key
+                    if (mustType.equals("ိ")) {
+                        try {
+                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
+                            if (afterTyping.equals("ူ")) {
+                                mustType = "ိူ";
+                            }
+                        } catch (Exception ignored) {
+                        }
+                    }
+
+                    // Show ိူ key
+                    if (mustType.equals("ိ")) {
+                        try {
+                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
+                            if (afterTyping.equals("ူ")) {
+                                mustType = "ိူ";
+                            }
+                        } catch (Exception ignored) {
+                        }
+                    }
+                    // Show ႁူ  ႁွ key
+                    if (mustType.equals("ႁ")) {
+                        try {
+                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
+                            if (afterTyping.equals("ူ")) {
+                                mustType = "ႁူ";
+                            } else if (afterTyping.equals("ွ")) {
+                                mustType = "ႁွ";
+                            }
+                        } catch (Exception ignored) {
+                        }
+                    }
+
+                }
+
                 if (mustType.equals("ႂ")) {
                     String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
                     if (afterTyping.equals("်"))
@@ -390,7 +510,7 @@ public class MainController implements Initializable {
                     return;
                 }
             }
-            if (practiceText.length() >= 2) {
+            if (practiceText.length() >= 2 && keyboard != 3) {
                 String beforeTyping = practiceText.substring(indexOfPractice - 2, indexOfPractice - 1);
                 if (beforeTyping.equals("ေ") || beforeTyping.equals("ႄ")) {
                     if (mustSwap) {
@@ -401,7 +521,7 @@ public class MainController implements Initializable {
                     }
                 }
             }
-            if (typing.equals("ေ") || typing.equals("ႄ")) {
+            if ((typing.equals("ေ") || typing.equals("ႄ")) && keyboard != 3) {
                 mustSwap = true;
             }
 
@@ -418,11 +538,123 @@ public class MainController implements Initializable {
         if (indexOfPractice < tfView.getText().length()) {
             // Know which value to type next
             String valueToType = testText.substring(indexOfPractice, indexOfPractice + 1);
+            if (keyboard == 3) {
+                // Show  ိံ  key
+                if (valueToType.equals("ိ")) {
+                    String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
+                    if (afterTyping.equals("ံ")) {
+                        valueToType = "ိံ";
+                    }
+                }
+                // Show  ျွ  key
+                if (valueToType.equals("ျ")) {
+                    String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
+                    if (afterTyping.equals("ွ")) {
+                        valueToType = "ျွ";
+                    }
+                }
+
+                // Show ို key
+                if (valueToType.equals("ြ")) {
+                    try {
+                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
+                        if (afterTyping.equals("ႃ")) {
+                            valueToType = "ြႃ";
+                        }
+                    } catch (Exception ignored) {
+                    }
+                }
+
+                // Show ႁႂ် key
+                if (valueToType.equals("ႁ")) {
+                    try {
+                        String afterTyping2 = testText.substring(indexOfPractice + 2, indexOfPractice + 3);
+                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
+                        if (afterTyping.equals("ႂ") && afterTyping2.equals("်")) {
+                            valueToType = "ႁႂ်";
+                        }
+                    } catch (Exception ignored) {
+                    }
+                }
+
+                // Show  ၢႆ  key
+                if (valueToType.equals("ၢ")) {
+                    try {
+                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
+                        if (afterTyping.equals("ႆ")) {
+                            valueToType = "ၢႆ";
+                        }
+                    } catch (Exception ignored) {
+                    }
+                }
+
+                // Show ေႃ key
+                if (valueToType.equals("ေ")) {
+                    try {
+                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
+                        if (afterTyping.equals("ႃ")) {
+                            valueToType = "ေႃ";
+                        }
+                    } catch (Exception ignored) {
+                    }
+                }
+
+                // Show ို key
+                if (valueToType.equals("ိ")) {
+                    try {
+                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
+                        if (afterTyping.equals("ု")) {
+                            valueToType = "ို";
+                        }
+                    } catch (Exception ignored) {
+                    }
+                }
+
+
+
+                // Show ိူ key
+                if (valueToType.equals("ိ")) {
+                    try {
+                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
+                        if (afterTyping.equals("ူ")) {
+                            valueToType = "ိူ";
+                        }
+                    } catch (Exception ignored) {
+                    }
+                }
+
+                // Show ိူ key
+                if (valueToType.equals("ိ")) {
+                    try {
+                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
+                        if (afterTyping.equals("ူ")) {
+                            valueToType = "ိူ";
+                        }
+                    } catch (Exception ignored) {
+                    }
+                }
+                // Show ႁူ  ႁွ key
+                if (valueToType.equals("ႁ")) {
+                    try {
+                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
+                        if (afterTyping.equals("ူ")) {
+                            valueToType = "ႁူ";
+                        } else if (afterTyping.equals("ွ")) {
+                            valueToType = "ႁွ";
+                        }
+                    } catch (Exception ignored) {
+                    }
+                }
+
+            }
+            // Show  ႂ်  key
             if (valueToType.equals("ႂ")) {
                 String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
                 if (afterTyping.equals("်"))
                     valueToType = "ႂ်";
             }
+
+
             if (valueToType.equals(" ")) {
                 highlightThisValue("SPACE", 0, 5);
             } else {
@@ -449,10 +681,15 @@ public class MainController implements Initializable {
 
     private String convertToShanChar(String character) {
         String shanChar;
-        if (cbKeyboard.getSelectionModel().getSelectedIndex() == 0) {
+        int keyboard = cbKeyboard.getSelectionModel().getSelectedIndex();
+        if (keyboard == 0) {
             shanChar = SIL_KeyMap.getAllValuesMap().getOrDefault(character, "");
-        } else {
+        } else if (keyboard == 1) {
             shanChar = Yunghkio_KeyMap.getAllValuesMap().getOrDefault(character, "");
+        } else if (keyboard == 2) {
+            shanChar = Panglong_KeyMap.getAllValuesMap().getOrDefault(character, "");
+        } else {
+            shanChar = NamKhone_KeyMap.getAllValuesMap().getOrDefault(character, "");
         }
         return shanChar;
 
@@ -560,7 +797,7 @@ public class MainController implements Initializable {
                     else if (eng.equals(tai) && engShift.equals(taiShift))
                         row.getChildren().add(createKey(new Key(engShift, eng, "", "")));
                     else
-                        row.getChildren().add(createKey(new Key(engShift, eng, taiShift, tai)));
+                        row.getChildren().add(createKey(new Key(engShift, "", taiShift, tai)));
                 }
             }
 

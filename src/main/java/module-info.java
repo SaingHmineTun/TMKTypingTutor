@@ -9,7 +9,5 @@ module it.saimao.hminepos {
     opens it.saimao.tmk_typing_tutor.model to javafx.fxml;
     exports it.saimao.tmk_typing_tutor.utils;
     opens it.saimao.tmk_typing_tutor.utils to javafx.fxml;
-    exports it.saimao.tmk_typing_tutor.node;
-    opens it.saimao.tmk_typing_tutor.node to javafx.fxml;
 
 }
