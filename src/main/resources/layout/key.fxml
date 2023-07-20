@@ -53,7 +53,7 @@
       </HBox>
    </children>
    <effect>
-      <Lighting>
+      <Lighting specularExponent="30.0">
          <bumpInput>
             <Shadow blurType="GAUSSIAN" height="20.0" radius="9.5" width="20.0" />
          </bumpInput>

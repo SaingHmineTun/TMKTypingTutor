@@ -143,12 +143,12 @@ public class MainController implements Initializable {
         imgClose.setFitWidth(Perc.getDynamicPixel(20));
 
 
-        cbLessons.setPrefSize(Perc.getDynamicPixel(280), Perc.getDynamicPixel(50));
-        cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(19) + "; -fx-font-family: 'Myanmar Taungthu'");
+        cbLessons.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
+        cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'NamKhoneUnicode'");
         cbLevel.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
-        cbLevel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'Myanmar Taungthu'");
+        cbLevel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'NamKhoneUnicode';");
         cbKeyboard.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
-        cbKeyboard.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-weight: bold; -fx-font-family: 'Myanmar Taungthu'");
+        cbKeyboard.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'NamKhoneUnicode'");
 
         btNext.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
         btPrev.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
@@ -156,10 +156,10 @@ public class MainController implements Initializable {
 
         tfView.setPrefHeight(Perc.getDynamicPixel(55));
         tfPractice.setPrefHeight(Perc.getDynamicPixel(55));
-        tfView.setStyle("-fx-font-size: " + Perc.getDynamicPixel(23));
-        tfPractice.setStyle("-fx-font-size: " + Perc.getDynamicPixel(23));
+        tfView.setStyle("-fx-font-size: " + Perc.getDynamicPixel(24));
+        tfPractice.setStyle("-fx-font-size: " + Perc.getDynamicPixel(24));
 
-        vbKeyboardView.setPadding(new Insets(Perc.p5h(), Perc.p12_5w(), Perc.p5h(), Perc.p12_5w()));
+        vbKeyboardView.setPadding(new Insets(Perc.p5h(), Perc.p10w(), Perc.p5h(), Perc.p10w()));
         vbKeyboardView.setPrefHeight(Perc.p50h());
 
         lblAWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'VistolSans-Black'");
@@ -797,7 +797,7 @@ public class MainController implements Initializable {
                     else if (eng.equals(tai) && engShift.equals(taiShift))
                         row.getChildren().add(createKey(new Key(engShift, eng, "", "")));
                     else
-                        row.getChildren().add(createKey(new Key(engShift, "", taiShift, tai)));
+                        row.getChildren().add(createKey(new Key(engShift, eng, taiShift, tai)));
                 }
             }
 
@@ -816,7 +816,7 @@ public class MainController implements Initializable {
             throw new RuntimeException(e);
         }
 
-        setCharacterOnButton(vBox, key, "Myanmar Taungthu", 16);
+        setCharacterOnButton(vBox, key, "NamKhoneUnicode", 16);
         return vBox;
 
     }
@@ -926,7 +926,7 @@ public class MainController implements Initializable {
 
     public void blurScreen() {
         GaussianBlur blur = new GaussianBlur();
-        blur.setRadius(20);
+        blur.setRadius(10);
         btPrev.getScene().getRoot().setEffect(blur);
 
     }

@@ -9,15 +9,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Modified - Double the list of ka, kha, nga to train users!">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/NamKhone_KeyMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/tmk_typing_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/tmk_typing_tutor_jar.xml" afterDir="false" />
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Added - Panlong Keyboard&#10;Added - Namkhone Keyboard">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/NamKhoneUnicode.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/Pyidaungsu_Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/Pyidaungsu_Regular.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/Panglong_KeyMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/Panglong_KeyMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/assets/lesson_1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/lesson_1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/lesson_2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/lesson_2.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/assets/lesson_3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/lesson_3.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/main_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/main_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fonts/myanmar_taung_thu.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/key.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/key.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,14 +62,14 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/JavaProjects/tmk_typing/out/artifacts/tmk_typing_jar",
+    "last_opened_file_path": "D:/JavaProjects/tmk_typing/src/main/resources/fonts",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.lookFeel",
@@ -73,10 +78,10 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\JavaProjects\tmk_typing\src\main\resources\fonts" />
       <recent name="D:\JavaProjects\tmk_typing\out\artifacts\tmk_typing_jar" />
       <recent name="D:\JavaProjects\tmk_typing\out\artifacts\tmk_typing_tutor_jar" />
       <recent name="D:\JavaProjects\tmk_typing\src\main\resources\assets" />
-      <recent name="D:\JavaProjects\tmk_typing\src\main\resources\fonts" />
       <recent name="D:\JavaProjects\tmk_typing\src\main\resources\images" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
@@ -126,7 +131,8 @@
       <workItem from="1689236937963" duration="5435000" />
       <workItem from="1689248297120" duration="13921000" />
       <workItem from="1689305453912" duration="5098000" />
-      <workItem from="1689600629249" duration="8852000" />
+      <workItem from="1689600629249" duration="9071000" />
+      <workItem from="1689859237865" duration="5367000" />
     </task>
     <task id="LOCAL-00001" summary="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!">
       <option name="closed" value="true" />
@@ -200,7 +206,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689306545107</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added - Panlong Keyboard&#10;Added - Namkhone Keyboard">
+      <option name="closed" value="true" />
+      <created>1689610021254</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1689610021254</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,7 +230,8 @@
     <MESSAGE value="Added - Support Yunghkio Keyboard Layout!&#10;Added - Retry option in Summary Dialog!" />
     <MESSAGE value="Modified - Show Lesson title in Summary Dialog!" />
     <MESSAGE value="Modified - Double the list of ka, kha, nga to train users!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modified - Double the list of ka, kha, nga to train users!" />
+    <MESSAGE value="Added - Panlong Keyboard&#10;Added - Namkhone Keyboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added - Panlong Keyboard&#10;Added - Namkhone Keyboard" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

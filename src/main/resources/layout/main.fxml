@@ -63,7 +63,7 @@
                         </ComboBox>
                      </children>
                   </VBox>
-                  <ComboBox fx:id="cbLevel" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="MODE" HBox.hgrow="NEVER">
+                  <ComboBox fx:id="cbLevel" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="MODE" HBox.hgrow="ALWAYS">
                      <effect>
                         <Lighting>
                            <bumpInput>
@@ -94,7 +94,7 @@
                         </Lighting>
                      </effect>
                   </Button>
-                  <ComboBox id="lessons" fx:id="cbLessons" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="LESSONS" HBox.hgrow="NEVER">
+                  <ComboBox id="lessons" fx:id="cbLessons" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="LESSONS" HBox.hgrow="ALWAYS">
                      <effect>
                         <Lighting>
                            <bumpInput>

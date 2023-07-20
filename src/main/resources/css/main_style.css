@@ -4,8 +4,8 @@
 }
 
 @font-face {
-    font-family: 'Myanmar Taungthu';
-    src: url('../fonts/myanmar_taung_thu.ttf');
+    font-family: 'NamKhoneUnicode';
+    src: url('../fonts/NamKhoneUnicode.ttf');
 }
 
 .root {
@@ -13,7 +13,7 @@
 }
 
 .text, .text-field {
-    -fx-font-family: 'Myanmar Taungthu';
+    -fx-font-family: 'NamKhoneUnicode';
     -fx-font-size: 16;
 }
 
