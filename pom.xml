@@ -6,7 +6,7 @@
 
     <groupId>it.saimao</groupId>
     <artifactId>tmk_typing_tutor</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <name>TMK Typing Tutor</name>
 
     <properties>

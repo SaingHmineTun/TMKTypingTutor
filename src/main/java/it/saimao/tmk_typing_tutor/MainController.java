@@ -360,6 +360,8 @@ public class MainController implements Initializable {
 //            System.out.println("Text you typed in textProperty() - " + tfPractice.getText());
 //            System.out.println("SWAP - " + swap);
 
+            if (newValue == null) return;
+
             if (newValue.length() == 1) {
                 startTime = System.currentTimeMillis();
                 misTyped = 0;
@@ -393,6 +395,7 @@ public class MainController implements Initializable {
 
 
     private void tutorTyping() {
+        System.out.println("TUtor Typing!");
         // To be able to type ေ & ႄ first with SIL_Shan Keyman keyboard
         int keyboard = cbKeyboard.getSelectionModel().getSelectedIndex();
         String testText = tfView.getText();
@@ -953,7 +956,6 @@ public class MainController implements Initializable {
 
     public boolean prevLesson() {
         int currentIndex = cbLessons.getSelectionModel().getSelectedIndex();
-        System.out.println("Lesson Index - " + currentIndex);
         if (currentIndex != 0) {
             cbLessons.getSelectionModel().selectPrevious();
             return true;
