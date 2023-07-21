@@ -87,41 +87,41 @@ public class MainController implements Initializable {
     private boolean swap;
     private boolean stop;
     private List<Lesson> lessonList;
+    private List<String> levelList;
     private Summary summary;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initTopBar();
-        initKeyboard();
-        initPracticeLessons();
+        initComboBoxItems();
         initPracticeListener();
-        initViewValues();
         initSummarDialog();
         relayoutForVariousResolution();
         reqFocusOnPracticeField();
+        cbKeyboard.getSelectionModel().selectFirst();
 //        primaryWindow = btNext.getScene().getWindow();
 //        btPrev.getScene().getRoot().setEffect(new BoxBlur(10, 10, 3));
 
     }
+    private void resetLevels(int keyboard) {
 
-    private void initKeyboard() {
-        cbKeyboard.getItems().addAll("လွၵ်းမိုဝ်း SIL", "လွၵ်းမိုဝ်းယုင်းၶဵဝ်", "လွၵ်းမိုဝ်းပၢင်လူင်", "လွၵ်းမိုဝ်းၼမ်ႉၶူင်း");
-        cbKeyboard.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (newValue.intValue() == 0) {
-                allValues = SIL_KeyMap.getAllValuesList();
-            } else if (newValue.intValue() == 1) {
-                allValues = Yunghkio_KeyMap.getAllValuesList();
-            } else if (newValue.intValue() == 2) {
-                allValues = Panglong_KeyMap.getAllValuesList();
-            } else {
-                allValues = NamKhone_KeyMap.getAllValuesList();
-            }
-            resetKeyboard();
-            createKeyBoard();
-            reqFocusOnPracticeField();
-            doHeavyJob();
-        });
-        cbKeyboard.getSelectionModel().select(0);
+        levelList.clear();
+//        cbLevel.getItems().clear();
+        if (keyboard == 3)
+            levelList.addAll(Arrays.asList("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3", "ၵၢၼ်ၽိုၵ်း 4").stream().toList());
+//            cbLevel.getItems().setAll(FXCollections.observableArrayList());
+        else {
+            levelList.addAll(Arrays.asList("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3").stream().toList());
+        }
+        int seletedIndex = cbLevel.getSelectionModel().getSelectedIndex();
+        cbLevel.getItems().setAll(FXCollections.observableArrayList(levelList));
+        if (seletedIndex < 0) {
+            cbLevel.getSelectionModel().selectFirst();
+        } else if (seletedIndex > cbLevel.getItems().size() - 1) {
+            cbLevel.getSelectionModel().selectLast();
+        } else {
+            cbLevel.getSelectionModel().select(seletedIndex);
+        }
     }
 
     private void resetKeyboard() {
@@ -185,56 +185,46 @@ public class MainController implements Initializable {
         });
     }
 
-    private void initPracticeLessons() {
-        lessonList = new ArrayList<>();
+    private void initComboBoxItems() {
 
-        cbLevel.getItems().addAll("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3");
+        /************ START KEYBOARD **************/
+
+        levelList = new ArrayList<>();
+
+        cbKeyboard.getItems().setAll("လွၵ်းမိုဝ်း SIL", "လွၵ်းမိုဝ်းယုင်းၶဵဝ်", "လွၵ်းမိုဝ်းပၢင်လူင်", "လွၵ်းမိုဝ်းၼမ်ႉၶူင်း");
+        cbKeyboard.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue.intValue() == 0) {
+                allValues = SIL_KeyMap.getAllValuesList();
+            } else if (newValue.intValue() == 1) {
+                allValues = Yunghkio_KeyMap.getAllValuesList();
+            } else if (newValue.intValue() == 2) {
+                allValues = Panglong_KeyMap.getAllValuesList();
+            } else {
+                allValues = NamKhone_KeyMap.getAllValuesList();
+            }
+            resetKeyboard();
+            createKeyBoard();
+            reqFocusOnPracticeField();
+            resetLevels(newValue.intValue());
+//            tutorTyping();
+        });
+
+        /************* END KEYBOARD ***********/
+
+
+        /*********** START LEVEL ************/
+        lessonList = new ArrayList<>();
+        // Level Items are added according to Keyboard Selection!
         cbLevel.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
 //            System.out.println("MODE SELECTION PROPERTY");
             changeLessons(newValue.intValue());
             tfPractice.clear();
         });
-        cbLevel.getSelectionModel().select(0);
-    }
 
-    private void changeLessons(int i) {
-        lessonList.clear();
-        InputStream is;
-        if (i == 0) {
-            is = getClass().getResourceAsStream("/assets/lesson_1.csv");
-        } else if (i == 1) {
-            is = getClass().getResourceAsStream("/assets/lesson_2.csv");
-        } else {
-            is = getClass().getResourceAsStream("/assets/lesson_3.csv");
-        }
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] values = line.split(",");
-                int no = Integer.parseInt(values[0].trim());
-                String title = values[1].trim();
-//                System.out.println(title + " : " + values.length);
-                String content = values[2].replace("\"", "").trim();
-                lessonList.add(new Lesson(no, title, content));
-            }
-            if (i == 1)
-                // using short_lessons, we should reverse it before use it
-                Collections.reverse(lessonList);
-            int selectedIndex = cbLessons.getSelectionModel().getSelectedIndex();
-            cbLessons.setItems(FXCollections.observableArrayList(lessonList));
-            if (i == 0 && selectedIndex > cbLessons.getItems().size() - 1) {
-                cbLessons.getSelectionModel().selectLast();
-            } else {
-                cbLessons.getSelectionModel().select(selectedIndex);
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+        /************* END LEVEL **************/
 
-    private void initViewValues() {
+        /*********** START LESSONS *************/
+        // cbLessons items are added when change in cbLevel occurs!
         cbLessons.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 if (cbLevel.getSelectionModel().getSelectedIndex() == 0) {
@@ -252,10 +242,9 @@ public class MainController implements Initializable {
                     tfView.setText(newValue.getLesson());
                 }
                 resetAndFocusOnPracticeField();
-                doHeavyJob();
+                tutorTyping();
             }
         });
-        cbLessons.getSelectionModel().select(0);
 
         // NEXT & PREVIOUS
         btNext.setOnAction(event -> {
@@ -266,6 +255,56 @@ public class MainController implements Initializable {
         btPrev.setOnAction(event -> {
             prevLesson();
         });
+
+        /************ END LESSONS *************/
+
+    }
+
+    private void changeLessons(int i) {
+        lessonList.clear();
+        InputStream is;
+        if (i == 0) {
+            is = getClass().getResourceAsStream("/assets/lesson_1.csv");
+        } else if (i == 1) {
+            is = getClass().getResourceAsStream("/assets/lesson_2.csv");
+        } else if (i == 2) {
+            is = getClass().getResourceAsStream("/assets/lesson_3.csv");
+        } else {
+            is = getClass().getResourceAsStream("/assets/lesson_4.csv");
+        }
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                // ZWNBSP ERROR
+                line = line.replaceAll("\\uFEFF", "");
+                String[] values = line.split(",");
+                int no = Integer.parseInt(values[0].trim());
+                String title = values[1].trim();
+//                System.out.println(title + " : " + values.length);
+                String content = values[2].replace("\"", "").trim();
+                lessonList.add(new Lesson(no, title, content));
+            }
+            if (i == 1)
+                // using short_lessons, we should reverse it before use it
+                Collections.reverse(lessonList);
+            int selectedIndex = cbLessons.getSelectionModel().getSelectedIndex();
+            cbLessons.setItems(FXCollections.observableArrayList(lessonList));
+            if (selectedIndex < 0) {
+                cbLessons.getSelectionModel().selectFirst();
+            } else if (i == 0 && selectedIndex > cbLessons.getItems().size() - 1) {
+                cbLessons.getSelectionModel().selectLast();
+            } else {
+                cbLessons.getSelectionModel().select(selectedIndex);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void initViewValues() {
+
 
     }
 
@@ -348,11 +387,12 @@ public class MainController implements Initializable {
                 tfPractice.setText(oldValue);
                 return;
             }
-            doHeavyJob();
+            tutorTyping();
         });
     }
 
-    private void doHeavyJob() {
+
+    private void tutorTyping() {
         // To be able to type ေ & ႄ first with SIL_Shan Keyman keyboard
         int keyboard = cbKeyboard.getSelectionModel().getSelectedIndex();
         String testText = tfView.getText();
@@ -370,12 +410,7 @@ public class MainController implements Initializable {
             indexOfPractice = practiceText.length();
             String mustType = testText.substring(indexOfPractice - 1, indexOfPractice);
             typing = practiceText.substring(indexOfPractice - 1, indexOfPractice);
-            if (Utils.isEnglishConsonant(typing)) {
-//                if (mustType.equals("ႂ")) {
-//                    String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
-//                    if (afterTyping.equals("်"))
-//                        mustType = "ႂ်";
-//                }
+            if (Utils.isEnglishCharacter(typing) && !isConverted) {
                 // Config for Namkhone Keyboard
                 if (keyboard == 3) {
                     // Show  ိံ  key
@@ -494,7 +529,9 @@ public class MainController implements Initializable {
                 typingWithEnglish = true;
                 // TODO - Need to decide what keyboard to use
                 String shanChar = convertToShanChar(typing);
+                tfPractice.setText(null);
                 if (mustType.equals(shanChar)) {
+                    isConverted = true;
                     tfPractice.setText(practiceText.substring(0, indexOfPractice - 1) + shanChar);
                 } else {
                     misTyped++;
@@ -502,7 +539,9 @@ public class MainController implements Initializable {
                     tfPractice.setText(practiceText.substring(0, indexOfPractice - 1));
                 }
                 return;
+
             } else {
+                isConverted = false;
                 if (!mustType.equals(typing)) {
                     misTyped++;
                     stop = true;
@@ -611,7 +650,6 @@ public class MainController implements Initializable {
                 }
 
 
-
                 // Show ိူ key
                 if (valueToType.equals("ိ")) {
                     try {
@@ -678,6 +716,8 @@ public class MainController implements Initializable {
             }
         }
     }
+
+    private boolean isConverted;
 
     private String convertToShanChar(String character) {
         String shanChar;
@@ -913,6 +953,7 @@ public class MainController implements Initializable {
 
     public boolean prevLesson() {
         int currentIndex = cbLessons.getSelectionModel().getSelectedIndex();
+        System.out.println("Lesson Index - " + currentIndex);
         if (currentIndex != 0) {
             cbLessons.getSelectionModel().selectPrevious();
             return true;

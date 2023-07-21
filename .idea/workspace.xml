@@ -10,19 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Added - Panlong Keyboard&#10;Added - Namkhone Keyboard">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/NamKhoneUnicode.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/Pyidaungsu_Bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/Pyidaungsu_Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/lesson_4.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/assets/lesson_1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/lesson_1.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/assets/lesson_2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/lesson_2.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/assets/lesson_3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/lesson_3.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/main_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/main_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fonts/myanmar_taung_thu.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/key.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/key.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +57,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/JavaProjects/tmk_typing/src/main/resources/fonts",
+    "last_opened_file_path": "D:/IntelliJ_Projects/TMKTypingTutor/src/main/resources/assets",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -78,11 +73,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\IntelliJ_Projects\TMKTypingTutor\src\main\resources\assets" />
       <recent name="D:\JavaProjects\tmk_typing\src\main\resources\fonts" />
       <recent name="D:\JavaProjects\tmk_typing\out\artifacts\tmk_typing_jar" />
       <recent name="D:\JavaProjects\tmk_typing\out\artifacts\tmk_typing_tutor_jar" />
       <recent name="D:\JavaProjects\tmk_typing\src\main\resources\assets" />
-      <recent name="D:\JavaProjects\tmk_typing\src\main\resources\images" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="it.saimao.tmk_typing.utils" />
@@ -133,6 +128,7 @@
       <workItem from="1689305453912" duration="5098000" />
       <workItem from="1689600629249" duration="9071000" />
       <workItem from="1689859237865" duration="5367000" />
+      <workItem from="1689902618213" duration="12561000" />
     </task>
     <task id="LOCAL-00001" summary="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!">
       <option name="closed" value="true" />
@@ -236,15 +232,37 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java</url>
-          <line>372</line>
-          <option name="timeStamp" value="8" />
+          <line>262</line>
+          <properties class="it.saimao.tmk_typing_tutor.MainController" method="changeLessons">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java</url>
+          <line>105</line>
+          <properties class="it.saimao.tmk_typing_tutor.MainController" method="resetLevels">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java</url>
+          <line>394</line>
+          <properties class="it.saimao.tmk_typing_tutor.MainController" method="tutorTyping">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java</url>
-          <line>238</line>
-          <option name="timeStamp" value="9" />
+          <line>396</line>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
