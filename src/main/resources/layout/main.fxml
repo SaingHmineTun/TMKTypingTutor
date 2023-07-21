@@ -18,21 +18,34 @@
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="800.0" stylesheets="@../css/main_style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.MainController">
    <top>
 
-      <HBox id="title" alignment="CENTER" minHeight="35.0" style="-fx-background-color: #341616;">
+      <HBox id="title" alignment="CENTER" minHeight="35.0" prefHeight="35.0" style="-fx-background-color: #341616;">
          <children>
-            <VBox fx:id="tLogo" alignment="CENTER" prefHeight="50.0" prefWidth="50.0">
+            <VBox fx:id="tLogo" alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="50.0">
                <children>
-                  <ImageView fx:id="imgLogo" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgLogo" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/app_icon_128.png" />
                      </image></ImageView>
                </children>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
             </VBox>
-            <Label id="title" fx:id="tLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" style="-fx-font-size: 26;" text="TMK Typing Tutor" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <VBox fx:id="tLogo1" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="35.0" prefWidth="50.0" />
+            <Label id="title" fx:id="tLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" style="-fx-font-size: 22;" text="TMK Typing Tutor" textFill="WHITE" HBox.hgrow="ALWAYS">
             </Label>
-            <VBox id="vbClose" fx:id="vbClose" alignment="CENTER" prefHeight="50.0" prefWidth="50.0">
+            <VBox id="vbMinimize" fx:id="vbMinimize" alignment="CENTER" layoutX="760.0" layoutY="10.0" prefHeight="35.0" prefWidth="50.0">
                <children>
-                  <ImageView fx:id="imgClose" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgMinimize" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/minimize.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+            <VBox id="vbClose" fx:id="vbClose" alignment="CENTER" prefHeight="35.0" prefWidth="50.0">
+               <children>
+                  <ImageView fx:id="imgClose" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/delete.png" />
                      </image>

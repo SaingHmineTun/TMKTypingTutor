@@ -30,6 +30,14 @@
     -fx-background-color: #a2101077;
 }
 
+#vbMinimize:hover {
+    -fx-background-color: #2251a6;
+}
+
+#vbMinimize:pressed {
+    -fx-background-color: rgb(23, 58, 173);
+}
+
 
 .key {
     -fx-border-color: #fff;

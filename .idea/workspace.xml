@@ -9,9 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Speial Error - Cannot type keys!">
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Added - Panlong Keyboard&#10;Added - Namkhone Keyboard">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/main_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/main_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,7 +231,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java</url>
-          <line>262</line>
+          <line>275</line>
           <properties class="it.saimao.tmk_typing_tutor.MainController" method="changeLessons">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -237,7 +240,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java</url>
-          <line>105</line>
+          <line>109</line>
           <properties class="it.saimao.tmk_typing_tutor.MainController" method="resetLevels">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -246,7 +249,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java</url>
-          <line>396</line>
+          <line>409</line>
           <properties class="it.saimao.tmk_typing_tutor.MainController" method="tutorTyping">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -255,7 +258,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java</url>
-          <line>399</line>
+          <line>412</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>

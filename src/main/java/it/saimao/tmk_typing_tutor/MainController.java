@@ -33,7 +33,11 @@ public class MainController implements Initializable {
     @FXML
     private VBox vbClose;
     @FXML
+    private VBox vbMinimize;
+    @FXML
     private ImageView imgClose;
+    @FXML
+    private ImageView imgMinimize;
     @FXML
     private VBox tLogo;
     @FXML
@@ -133,14 +137,17 @@ public class MainController implements Initializable {
 
     private void relayoutForVariousResolution() {
 
-        tLogo.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
-        imgLogo.setFitHeight(Perc.getDynamicPixel(40));
-        imgLogo.setFitWidth(Perc.getDynamicPixel(40));
-        tLabel.setPrefHeight(Perc.getDynamicPixel(50));
-        tLabel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(30));
-        vbClose.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
-        imgClose.setFitHeight(Perc.getDynamicPixel(20));
-        imgClose.setFitWidth(Perc.getDynamicPixel(20));
+        tLogo.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(35));
+        imgLogo.setFitHeight(Perc.getDynamicPixel(25));
+        imgLogo.setFitWidth(Perc.getDynamicPixel(25));
+        tLabel.setPrefHeight(Perc.getDynamicPixel(35));
+        tLabel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(22));
+        vbClose.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(35));
+        imgClose.setFitHeight(Perc.getDynamicPixel(15));
+        imgClose.setFitWidth(Perc.getDynamicPixel(15));
+        vbMinimize.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(35));
+        imgMinimize.setFitHeight(Perc.getDynamicPixel(15));
+        imgMinimize.setFitWidth(Perc.getDynamicPixel(15));
 
 
         cbLessons.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
@@ -182,6 +189,12 @@ public class MainController implements Initializable {
             Node source = (Node) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
             stage.close();
+        });
+        vbMinimize.setOnMouseClicked(mouseEvent -> {
+
+            Node source = (Node) mouseEvent.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.setIconified(true);
         });
     }
 
@@ -395,7 +408,6 @@ public class MainController implements Initializable {
 
 
     private void tutorTyping() {
-        System.out.println("TUtor Typing!");
         // To be able to type ေ & ႄ first with SIL_Shan Keyman keyboard
         int keyboard = cbKeyboard.getSelectionModel().getSelectedIndex();
         String testText = tfView.getText();
