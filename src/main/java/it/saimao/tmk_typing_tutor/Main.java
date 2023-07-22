@@ -2,9 +2,11 @@ package it.saimao.tmk_typing_tutor;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -27,16 +29,12 @@ public class Main extends Application {
             e.printStackTrace();
         }
         MainController mainController = loader.getController();
-        primaryStage.setOnShown(windowEvent -> {
-            mainController.reqFocusOnPracticeField();
-        });
-        Scene scene = new Scene(parent);
+        primaryStage.setOnShown(windowEvent -> mainController.reqFocusOnPracticeField());
+        Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+        Scene scene = new Scene(parent, screen.getWidth(), screen.getHeight());
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image(getClass().getResource("/images/app_icon.png").toExternalForm()));
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.setMaximized(true);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
-
-
     }
 }
