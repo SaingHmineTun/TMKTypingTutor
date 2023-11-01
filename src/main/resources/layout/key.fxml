@@ -13,7 +13,7 @@
    <children>
       <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label fx:id="charTaiShift" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="်" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Label fx:id="charTaiShift" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="key-label" text="်" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="16.0" />
                </font>
@@ -21,7 +21,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="charEngShift" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Q" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Label fx:id="charEngShift" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="key-label" text="Q" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="16.0" />
                </font>
@@ -33,7 +33,7 @@
       </HBox>
       <HBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label fx:id="charTai" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="ၸ" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Label fx:id="charTai" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="key-label" text="ၸ" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="16.0" />
                </font>
@@ -41,7 +41,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="charEng" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="q" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Label fx:id="charEng" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="key-label" text="q" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="16.0" />
                </font>
@@ -53,7 +53,7 @@
       </HBox>
    </children>
    <effect>
-      <Lighting specularExponent="30.0">
+      <Lighting diffuseConstant="1.2" specularExponent="30.0">
          <bumpInput>
             <Shadow blurType="GAUSSIAN" height="20.0" radius="9.5" width="20.0" />
          </bumpInput>

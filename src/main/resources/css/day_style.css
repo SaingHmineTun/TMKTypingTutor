@@ -9,7 +9,7 @@
 }
 
 .root {
-    -fx-background-color: #222;
+    -fx-background-color: #fff;
 }
 
 .text, .text-field {
@@ -40,16 +40,16 @@
 
 
 .key {
-    -fx-border-color: #fff;
+    -fx-border-color: #000;
     -fx-border-width: 1;
-    -fx-text-fill: #fff;
-    -fx-background-color: #000;
+    -fx-text-fill: #000;
+    -fx-background-color: #fff;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
 
 .outcome {
-    -fx-text-fill: #e0e023;
+    -fx-text-fill: #123;
     -fx-font-size: 25;
 }
 
@@ -59,19 +59,19 @@
 
 
 #view {
-    -fx-background-color: #000;
+    -fx-background-color: #fff;
     /*-fx-pref-height: 50;*/
     /*-fx-min-height: 50;*/
     /*-fx-max-height: 50;*/
-    -fx-border-color: white;
+    -fx-border-color: #000;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
     /*-fx-font-size: 20;*/
-    -fx-text-fill: #e0e023;
+    -fx-text-fill: #000;
 }
 
 #practice {
-    -fx-background-color: #fff;
+    -fx-background-color: #abc;
     /*-fx-pref-height: 50;*/
     /*-fx-min-height: 50;*/
     /*-fx-max-height: 50;*/
@@ -79,20 +79,20 @@
 }
 
 .button {
-    -fx-background-color: #000;
-    -fx-text-fill: #fff;
+    -fx-background-color: #FFF;
+    -fx-text-fill: #000;
     -fx-border-radius: 50;
     -fx-background-radius: 50;
-    -fx-border-color: #FFF;
+    -fx-border-color: #000;
 }
 
 .button:hover {
-    -fx-background-color: #111;
+    -fx-background-color: #FFF;
 }
 
 
 .button:pressed {
-    -fx-background-color: #222;
+    -fx-background-color: #DDD;
 }
 
 
@@ -107,23 +107,23 @@
 }
 
 .combo-box {
-    -fx-background-color: black;
-    -fx-border-color: white;
+    -fx-background-color: #fff;
+    -fx-border-color: #000;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
 
 .combo-box:hover {
-    -fx-background-color: #111;
+    -fx-background-color: #aaa;
 }
 
 .combo-box:pressed {
-    -fx-background-color: #222;
+    -fx-background-color: #999;
 }
 
 
 .combo-box .cell {
-    -fx-text-fill: #FFF;
+    -fx-text-fill: #000;
     -fx-alignment: center;
 }
 
@@ -165,23 +165,19 @@
 
 
 #title {
-    -fx-background-color: #341616;
+    -fx-background-color: #123;
     -fx-font-size: 24;
     -fx-font-family: 'VistolSans-Black';
 }
 
-
 .key-label {
-    -fx-text-fill: #fff;
+    -fx-text-fill: #333333;
 }
 
 #key-node-to-type {
-    -fx-background-color: #006dff
+    -fx-background-color: #48fadf;
 }
-
 
 #key-node-default {
-
-    -fx-background-color: #000;
+    -fx-background-color: #fff;
 }
-

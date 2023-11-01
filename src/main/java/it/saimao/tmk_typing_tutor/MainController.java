@@ -78,6 +78,8 @@ public class MainController implements Initializable {
     private VBox vbKeyboardView;
     @FXML
     private HBox hbSelection;
+    @FXML
+    private HBox titleBar;
     private Window primaryWindow;
 
     private Node toTypeNode;
@@ -161,12 +163,12 @@ public class MainController implements Initializable {
         btPrev.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
 
 
-        tfView.setPrefHeight(Perc.getDynamicPixel(55));
-        tfPractice.setPrefHeight(Perc.getDynamicPixel(55));
-        tfView.setStyle("-fx-font-size: " + Perc.getDynamicPixel(24));
-        tfPractice.setStyle("-fx-font-size: " + Perc.getDynamicPixel(24));
+        tfView.setPrefHeight(Perc.getDynamicPixel(50));
+        tfPractice.setPrefHeight(Perc.getDynamicPixel(50));
+        tfView.setStyle("-fx-font-size: " + Perc.getDynamicPixel(22));
+        tfPractice.setStyle("-fx-font-size: " + Perc.getDynamicPixel(22));
 
-        vbKeyboardView.setPadding(new Insets(Perc.p5h(), Perc.p10w(), Perc.p5h(), Perc.p10w()));
+        vbKeyboardView.setPadding(new Insets(Perc.p1_5h(), Perc.p5w(), Perc.p1_5h(), Perc.p5w()));
         vbKeyboardView.setPrefHeight(Perc.p50h());
 
         lblAWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'VistolSans-Black'");
@@ -185,6 +187,7 @@ public class MainController implements Initializable {
     }
 
     private void initTopBar() {
+        titleBar.setPrefHeight(Perc.p7h());
         vbClose.setOnMouseClicked(event -> {
             Node source = (Node) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
@@ -314,11 +317,6 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private void initViewValues() {
-
-
     }
 
     private List<String> replace_A_WithOtherCharacters(List<String> lessons) {
@@ -751,13 +749,16 @@ public class MainController implements Initializable {
     }
 
     private void clearToTypeValues() {
-        toTypeNode.setStyle("-fx-background-color: #000");
-        toTypeSecNode.setStyle("-fx-background-color: #000;");
+//        toTypeNode.setStyle("-fx-background-color: #000");
+//        toTypeSecNode.setStyle("-fx-background-color: #000;");
+        toTypeNode.setId("key-node-default");
+        toTypeSecNode.setId("key-node-default");
     }
 
     private void highlightThisValue(String key, int row, int col) {
         if (toTypeSecNode != null) {
-            toTypeSecNode.setStyle("-fx-background-color: #000");
+//            toTypeSecNode.setStyle("-fx-background-color: #000");
+            toTypeSecNode.setId("key-node-default");
         }
         switch (key) {
             case "SHIFT" -> {
@@ -777,22 +778,25 @@ public class MainController implements Initializable {
             }
             case "SPACE" -> {
                 if (toTypeNode != null) {
-                    toTypeNode.setStyle("-fx-background-color: #000;");
+//                    toTypeNode.setStyle("-fx-background-color: #000;");
+                    toTypeNode.setId("key-node-default");
                 }
                 toTypeSecNode = row5.getChildren().get(3);
             }
         }
 
         if (toTypeSecNode != null)
-            toTypeSecNode.setStyle("-fx-background-color: #006dff");
+            toTypeSecNode.setId("key-node-to-type");
     }
 
     private void typeThisValue(int x, int y) {
         if (toTypeNode != null) {
-            toTypeNode.setStyle("-fx-background-color: #000;");
+//            toTypeNode.setStyle("-fx-background-color: #000;");
+            toTypeSecNode.setId("key-node-default");
         }
         if (toTypeSecNode != null) {
-            toTypeSecNode.setStyle("-fx-background-color: #000");
+//            toTypeSecNode.setStyle("-fx-background-color: #000");
+            toTypeSecNode.setId("key-node-default");
         }
         switch (x) {
             case 0, 1 -> toTypeNode = row1.getChildren().get(y);
@@ -800,8 +804,10 @@ public class MainController implements Initializable {
             case 4, 5 -> toTypeNode = row3.getChildren().get(y);
             case 6, 7 -> toTypeNode = row4.getChildren().get(y);
         }
-        if (toTypeNode != null)
-            toTypeNode.setStyle("-fx-background-color: #006dff");
+        if (toTypeNode != null) {
+//            toTypeNode.setStyle("-fx-background-color: #006dff");
+            toTypeNode.setId("key-node-to-type");
+        }
 
     }
 
@@ -846,9 +852,9 @@ public class MainController implements Initializable {
                     else if (eng.equalsIgnoreCase("Alt1") || eng.equalsIgnoreCase("Alt2"))
                         row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), 2 * 0.02));
                     else if (eng.equalsIgnoreCase("Space"))
-                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 35 * 0.02));
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 70 * 0.02));
                     else if (eng.equalsIgnoreCase("Win1") || eng.equalsIgnoreCase("Win2") || eng.equalsIgnoreCase("Menu"))
-                        row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), 1 * 0.02));
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), 2 * 0.02));
                     else if (eng.equals(tai) && engShift.equals(taiShift))
                         row.getChildren().add(createKey(new Key(engShift, eng, "", "")));
                     else
