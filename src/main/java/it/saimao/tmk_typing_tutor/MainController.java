@@ -15,6 +15,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -34,6 +35,10 @@ public class MainController implements Initializable {
     private VBox vbClose;
     @FXML
     private VBox vbMinimize;
+    @FXML
+    private VBox vbTheme;
+    @FXML
+    private ImageView ivTheme;
     @FXML
     private ImageView imgClose;
     @FXML
@@ -92,6 +97,7 @@ public class MainController implements Initializable {
     private boolean mustSwap;
     private boolean swap;
     private boolean stop;
+    private boolean lightTheme = true;
     private List<Lesson> lessonList;
     private List<String> levelList;
     private Summary summary;
@@ -186,8 +192,10 @@ public class MainController implements Initializable {
         summary = new Summary(this);
     }
 
+
+
     private void initTopBar() {
-        titleBar.setPrefHeight(Perc.p7h());
+        titleBar.setPrefHeight(Perc.p6h());
         vbClose.setOnMouseClicked(event -> {
             Node source = (Node) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
@@ -198,6 +206,22 @@ public class MainController implements Initializable {
             Node source = (Node) mouseEvent.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
             stage.setIconified(true);
+        });
+        vbTheme.setOnMouseClicked(mouseEvent -> {
+            if (lightTheme) {
+                ivTheme.setImage(new Image(getClass().getResource("/images/noon.png").toExternalForm()));
+                lightTheme = false;
+                // TODO: Change to dark theme
+                Node source = (Node) mouseEvent.getSource();
+                Stage stage = (Stage) source.getScene().getWindow();
+                stage.getScene().getStylesheets().clear();
+
+            } else {
+
+                ivTheme.setImage(new Image(getClass().getResource("/images/midnight.png").toExternalForm()));
+                lightTheme = true;
+                // Change to light theme
+            }
         });
     }
 

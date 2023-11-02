@@ -10,6 +10,12 @@
 
 .root {
     -fx-background-color: #222;
+    -fx-key-color: #000;
+    -fx-outcome-color: #e0e023;
+    -fx-outcome-miscolor: #fa5b3d;
+    -fx-title-color: #006dff;
+    -fx-to-type-node-color: #006dff;
+    -fx-text-color: #fff;
 }
 
 .text, .text-field {
@@ -18,7 +24,7 @@
 }
 
 .label {
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-text-color;
     -fx-font-size: 14;
 }
 
@@ -43,18 +49,18 @@
     -fx-border-color: #fff;
     -fx-border-width: 1;
     -fx-text-fill: #fff;
-    -fx-background-color: #000;
+    -fx-background-color: -fx-key-color;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
 
 .outcome {
-    -fx-text-fill: #e0e023;
+    -fx-text-fill: -fx-outcome-color;
     -fx-font-size: 25;
 }
 
 .outcome#lbMIST {
-    -fx-text-fill: #fa5b3d;
+    -fx-text-fill: -fx-outcome-miscolor;
 }
 
 
@@ -67,7 +73,7 @@
     -fx-border-radius: 5;
     -fx-background-radius: 5;
     /*-fx-font-size: 20;*/
-    -fx-text-fill: #e0e023;
+    -fx-text-fill: -fx-outcome-color;
 }
 
 #practice {
@@ -79,7 +85,7 @@
 }
 
 .button {
-    -fx-background-color: #000;
+    -fx-background-color: -fx-key-color;
     -fx-text-fill: #fff;
     -fx-border-radius: 50;
     -fx-background-radius: 50;
@@ -107,7 +113,7 @@
 }
 
 .combo-box {
-    -fx-background-color: black;
+    -fx-background-color: -fx-key-color;
     -fx-border-color: white;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
@@ -132,12 +138,12 @@
 }
 
 .combo-box-popup .list-view {
-    -fx-background-color: #000;
+    -fx-background-color: -fx-key-color;
     -fx-border-color: white;
 }
 
 .combo-box-popup .list-view .list-cell {
-    -fx-background-color: #000;
+    -fx-background-color: -fx-key-color;
     -fx-text-fill: #DDD;
 }
 
@@ -146,7 +152,7 @@
 }
 
 .combo-box-popup .list-view .list-cell:selected {
-    -fx-text-fill: #e0e023;
+    -fx-text-fill: -fx-outcome-color;
     -fx-font-weight: bold;
 }
 
@@ -165,7 +171,7 @@
 
 
 #title {
-    -fx-background-color: #341616;
+    -fx-background-color: -fx-title-color;
     -fx-font-size: 24;
     -fx-font-family: 'VistolSans-Black';
 }
@@ -176,12 +182,12 @@
 }
 
 #key-node-to-type {
-    -fx-background-color: #006dff
+    -fx-background-color: -fx-to-type-node-color;
 }
 
 
 #key-node-default {
 
-    -fx-background-color: #000;
+    -fx-background-color: -fx-key-color;
 }
 

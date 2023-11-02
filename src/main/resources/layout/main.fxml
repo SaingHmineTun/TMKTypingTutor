@@ -15,14 +15,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="800.0" stylesheets="@../css/main_style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.MainController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="800.0" stylesheets="@../css/day_style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.MainController">
    <top>
 
       <HBox id="title" fx:id="titleBar" alignment="CENTER" minHeight="35.0" prefHeight="35.0">
          <children>
-            <VBox fx:id="tLogo" alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="50.0">
+            <VBox fx:id="tLogo" alignment="CENTER" prefHeight="35.0" prefWidth="50.0">
                <children>
-                  <ImageView fx:id="imgLogo" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgLogo" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/app_icon_128.png" />
                      </image></ImageView>
@@ -31,7 +31,14 @@
                   <Insets left="5.0" />
                </padding>
             </VBox>
-            <VBox fx:id="tLogo1" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="35.0" prefWidth="50.0" />
+            <VBox fx:id="vbTheme" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="35.0" prefWidth="50.0">
+               <children>
+                  <ImageView fx:id="ivTheme" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/midnight.png" />
+                     </image>
+                  </ImageView>
+               </children></VBox>
             <Label id="title" fx:id="tLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" style="-fx-font-size: 22;" text="TMK Typing Tutor" textFill="WHITE" HBox.hgrow="ALWAYS">
             </Label>
             <VBox id="vbMinimize" fx:id="vbMinimize" alignment="CENTER" layoutX="760.0" layoutY="10.0" prefHeight="35.0" prefWidth="50.0">

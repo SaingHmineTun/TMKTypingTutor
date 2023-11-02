@@ -176,6 +176,12 @@ public abstract class Perc {
         return (gd.getDisplayMode().getHeight() * 5.0) / 100.0;
 
     }
+    public static double p6h() {
+
+        return (gd.getDisplayMode().getHeight() * 6.0) / 100.0;
+
+    }
+
 
 
     public static double p7h() {
