@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -31,6 +32,9 @@ import java.text.DecimalFormat;
 import java.util.*;
 
 public class MainController implements Initializable {
+    @FXML
+    private BorderPane root;
+    private VBox key;
     @FXML
     private VBox vbClose;
     @FXML
@@ -97,7 +101,7 @@ public class MainController implements Initializable {
     private boolean mustSwap;
     private boolean swap;
     private boolean stop;
-    private boolean lightTheme = true;
+    private boolean lightTheme = false;
     private List<Lesson> lessonList;
     private List<String> levelList;
     private Summary summary;
@@ -209,18 +213,24 @@ public class MainController implements Initializable {
         });
         vbTheme.setOnMouseClicked(mouseEvent -> {
             if (lightTheme) {
-                ivTheme.setImage(new Image(getClass().getResource("/images/noon.png").toExternalForm()));
+                ivTheme.setImage(new Image(getClass().getResource("/images/day.png").toExternalForm()));
                 lightTheme = false;
                 // TODO: Change to dark theme
-                Node source = (Node) mouseEvent.getSource();
-                Stage stage = (Stage) source.getScene().getWindow();
-                stage.getScene().getStylesheets().clear();
+                root.getScene().getRoot().getStylesheets().clear();
+                root.getScene().getRoot().getStylesheets().add(getClass().getResource("/css/main_style.css").toExternalForm());
+                key.getScene().getStylesheets().clear();
+                key.getScene().getStylesheets().add(getClass().getResource("/css/main_style.css").toExternalForm());
 
             } else {
 
-                ivTheme.setImage(new Image(getClass().getResource("/images/midnight.png").toExternalForm()));
+                ivTheme.setImage(new Image(getClass().getResource("/images/night.png").toExternalForm()));
                 lightTheme = true;
                 // Change to light theme
+                root.getScene().getRoot().getStylesheets().clear();
+                root.getScene().getRoot().getStylesheets().add(getClass().getResource("/css/day_style.css").toExternalForm());
+                key.getScene().getStylesheets().clear();
+                key.getScene().getStylesheets().add(getClass().getResource("/css/day_style.css").toExternalForm());
+
             }
         });
     }
@@ -893,16 +903,15 @@ public class MainController implements Initializable {
     // Create a keyboard key with 5% width!
     private VBox createKey(Key key) {
 
-        VBox vBox;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/key.fxml"));
         try {
-            vBox = fxmlLoader.load();
+            this.key = fxmlLoader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        setCharacterOnButton(vBox, key, "NamKhoneUnicode", 16);
-        return vBox;
+        setCharacterOnButton(this.key, key, "NamKhoneUnicode", 16);
+        return this.key;
 
     }
 

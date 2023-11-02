@@ -11,10 +11,10 @@
 .root {
     -fx-background-color: #222;
     -fx-key-color: #000;
-    -fx-outcome-color: #e0e023;
-    -fx-outcome-miscolor: #fa5b3d;
-    -fx-title-color: #006dff;
-    -fx-to-type-node-color: #006dff;
+    -fx-outcome-color: #9a6aff;
+    -fx-outcome-miscolor: #d23417;
+    -fx-title-color: #9a6aff;
+    -fx-to-type-node-color: #9a6aff;
     -fx-text-color: #fff;
 }
 
@@ -29,19 +29,19 @@
 }
 
 #vbClose:hover {
-    -fx-background-color: #a21010;
+    -fx-background-color: -fx-outcome-miscolor;
 }
 
 #vbClose:pressed {
-    -fx-background-color: #a2101077;
+    -fx-background-color: rgb(197, 29, 29);
 }
 
-#vbMinimize:hover {
-    -fx-background-color: #2251a6;
+#vbMinimize:hover, #vbTheme:hover {
+    -fx-background-color: #7e44f8;
 }
 
-#vbMinimize:pressed {
-    -fx-background-color: rgb(23, 58, 173);
+#vbMinimize:pressed, #vbTheme:pressed {
+    -fx-background-color: #651ffa;
 }
 
 
