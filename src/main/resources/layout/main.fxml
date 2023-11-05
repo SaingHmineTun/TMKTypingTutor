@@ -97,7 +97,7 @@
                   </ComboBox>
                   <Button fx:id="btPrev" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="Prev">
                      <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="ivPrev" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/prev.png" />
                            </image>
@@ -127,7 +127,7 @@
                      </effect></ComboBox>
                   <Button fx:id="btNext" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="Next">
                      <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="ivNext" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/next.png" />
                            </image>

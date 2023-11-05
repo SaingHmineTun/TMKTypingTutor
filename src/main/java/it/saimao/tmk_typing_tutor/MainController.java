@@ -89,6 +89,11 @@ public class MainController implements Initializable {
     private HBox hbSelection;
     @FXML
     private HBox titleBar;
+    @FXML
+    private ImageView ivNext;
+    @FXML
+    private ImageView ivPrev;
+
     private Window primaryWindow;
 
     private Node toTypeNode;
@@ -221,6 +226,9 @@ public class MainController implements Initializable {
                 key.getScene().getStylesheets().clear();
                 key.getScene().getStylesheets().add(getClass().getResource("/css/main_style.css").toExternalForm());
 
+                ivNext.setImage(new Image(getClass().getResource("/images/next.png").toExternalForm()));
+                ivPrev.setImage(new Image(getClass().getResource("/images/prev.png").toExternalForm()));
+
             } else {
 
                 ivTheme.setImage(new Image(getClass().getResource("/images/night.png").toExternalForm()));
@@ -230,6 +238,9 @@ public class MainController implements Initializable {
                 root.getScene().getRoot().getStylesheets().add(getClass().getResource("/css/day_style.css").toExternalForm());
                 key.getScene().getStylesheets().clear();
                 key.getScene().getStylesheets().add(getClass().getResource("/css/day_style.css").toExternalForm());
+
+                ivNext.setImage(new Image(getClass().getResource("/images/next_dark.png").toExternalForm()));
+                ivPrev.setImage(new Image(getClass().getResource("/images/prev_dark.png").toExternalForm()));
 
             }
         });
@@ -826,7 +837,7 @@ public class MainController implements Initializable {
     private void typeThisValue(int x, int y) {
         if (toTypeNode != null) {
 //            toTypeNode.setStyle("-fx-background-color: #000;");
-            toTypeSecNode.setId("key-node-default");
+            toTypeNode.setId("key-node-default");
         }
         if (toTypeSecNode != null) {
 //            toTypeSecNode.setStyle("-fx-background-color: #000");

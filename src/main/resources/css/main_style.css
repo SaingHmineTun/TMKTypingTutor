@@ -73,11 +73,11 @@
     -fx-border-radius: 5;
     -fx-background-radius: 5;
     /*-fx-font-size: 20;*/
-    -fx-text-fill: -fx-outcome-color;
+    -fx-text-fill: -fx-text-color;
 }
 
 #practice {
-    -fx-background-color: #fff;
+    -fx-background-color: #fffb;
     /*-fx-pref-height: 50;*/
     /*-fx-min-height: 50;*/
     /*-fx-max-height: 50;*/
