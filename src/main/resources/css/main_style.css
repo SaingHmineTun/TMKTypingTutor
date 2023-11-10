@@ -134,7 +134,7 @@
 }
 
 .combo-box#lessons .cell {
-    -fx-alignment: left;
+    -fx-alignment: center-left;
 }
 
 .combo-box-popup .list-view {

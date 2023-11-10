@@ -9,17 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Added Change Theme function!">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/next_dark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/prev_dark.png" afterDir="false" />
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="&#10;Re-implement Light and Dark theme">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/day_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/day_style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/main_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/main_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/day.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/day.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/night.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/night.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,6 +147,8 @@
       <workItem from="1699025828972" duration="1780000" />
       <workItem from="1699029430243" duration="311000" />
       <workItem from="1699106045107" duration="630000" />
+      <workItem from="1699174978437" duration="1304000" />
+      <workItem from="1699583820301" duration="467000" />
     </task>
     <task id="LOCAL-00001" summary="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!">
       <option name="closed" value="true" />
@@ -283,7 +278,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698935019943</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="&#10;Re-implement Light and Dark theme">
+      <option name="closed" value="true" />
+      <created>1699175150061</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1699175150061</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -306,7 +309,8 @@
     <MESSAGE value="Added Light Theme!" />
     <MESSAGE value="Changed Light Theme.&#10;Plan to add &quot;change theme&quot; option" />
     <MESSAGE value="Added Change Theme function!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Change Theme function!" />
+    <MESSAGE value="&#10;Re-implement Light and Dark theme" />
+    <option name="LAST_COMMIT_MESSAGE" value="&#10;Re-implement Light and Dark theme" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
