@@ -9,17 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Added Minimize icon!">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/burma_lessons.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/burma_lessons_1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/AyarJuno.ttf" afterDir="false" />
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/NamKhone_KeyMap.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/Panglong_KeyMap.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/SIL_KeyMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/Burma_KeyMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/Yunghkio_KeyMap.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/summary_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/summary_style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,7 +222,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689931446800</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Added Minimize icon!">
+      <option name="closed" value="true" />
+      <created>1703564604273</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1703564604273</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,7 +248,8 @@
     <MESSAGE value="Modified - Double the list of ka, kha, nga to train users!" />
     <MESSAGE value="Added - Panlong Keyboard&#10;Added - Namkhone Keyboard" />
     <MESSAGE value="Added - Minimize Option" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added - Minimize Option" />
+    <MESSAGE value="Added Minimize icon!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Minimize icon!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
