@@ -4,8 +4,8 @@
 }
 
 @font-face {
-    font-family: 'NamKhoneUnicode';
-    src: url('../fonts/NamKhoneUnicode.ttf');
+    font-family: 'Pyidaungsu';
+    src: url('../fonts/pyidaungsu.ttf');
 }
 
 .root {
@@ -19,7 +19,7 @@
 }
 
 .text, .text-field {
-    -fx-font-family: 'NamKhoneUnicode';
+    -fx-font-family: 'Pyidaungsu';
     -fx-font-size: 16;
 }
 

@@ -10,7 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/pyidaungsu.ttf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/day_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/day_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/main_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/main_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fonts/NamKhoneUnicode.ttf" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +234,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703564604273</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Added Namkhone font!">
+      <option name="closed" value="true" />
+      <created>1703565555922</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1703565555922</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,7 +261,8 @@
     <MESSAGE value="Added - Panlong Keyboard&#10;Added - Namkhone Keyboard" />
     <MESSAGE value="Added - Minimize Option" />
     <MESSAGE value="Added Minimize icon!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Minimize icon!" />
+    <MESSAGE value="Added Namkhone font!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Namkhone font!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
