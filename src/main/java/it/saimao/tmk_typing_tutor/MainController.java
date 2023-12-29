@@ -121,20 +121,13 @@ public class MainController implements Initializable {
         relayoutForVariousResolution();
         reqFocusOnPracticeField();
         cbKeyboard.getSelectionModel().selectFirst();
-//        primaryWindow = btNext.getScene().getWindow();
-//        btPrev.getScene().getRoot().setEffect(new BoxBlur(10, 10, 3));
 
     }
     private void resetLevels(int keyboard) {
 
         levelList.clear();
-//        cbLevel.getItems().clear();
-//        if (keyboard == 3)
-//            levelList.addAll(Arrays.asList("သင်ခန်းစာ ၁", "သင်ခန်းစာ ၂", "သင်ခန်းစာ ၃", "သင်ခန်းစာ ၄").stream().toList());
-////            cbLevel.getItems().setAll(FXCollections.observableArrayList());
-//        else {
             levelList.addAll(Stream.of("သင်ခန်းစာ ၁", "သင်ခန်းစာ ၂").toList());
-//        }
+
         int selectedIndex = cbLevel.getSelectionModel().getSelectedIndex();
         cbLevel.getItems().setAll(FXCollections.observableArrayList(levelList));
         if (selectedIndex < 0) {
@@ -150,7 +143,6 @@ public class MainController implements Initializable {
         for (Node hBox : vbKeyboardView.getChildren()) {
             ((HBox) hBox).getChildren().clear();
         }
-
     }
 
     private void relayoutForVariousResolution() {
@@ -1004,7 +996,6 @@ public class MainController implements Initializable {
         // Calculate Interim WPM
         long elapsedTime = System.currentTimeMillis() - startTime;
         int characterCount = tfPractice.getText().length();
-//            int wordCount = characterCount / 5; // Assuming an average word length of 5
         double minutes = (double) elapsedTime / 6000;
         int interimWPM = (int) (characterCount / minutes);
         lbWPM.setText(String.valueOf(interimWPM));
@@ -1055,7 +1046,6 @@ public class MainController implements Initializable {
     }
 
     public void retryLesson() {
-//        resetAndFocusOnPracticeField();
         Lesson selectedLesson = cbLessons.getSelectionModel().getSelectedItem();
         cbLessons.getSelectionModel().clearSelection();
         cbLessons.getSelectionModel().select(selectedLesson);
