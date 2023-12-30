@@ -981,8 +981,6 @@ public class MainController implements Initializable {
         lbAWPM.setText(String.valueOf(avgWPM));
         return avgWPM;
     }
-
-
     private double calculateACCU() {
         double accuracy = (double) (tfPractice.getText().length() - misTyped) / tfPractice.getText().length();
         DecimalFormat format = new DecimalFormat("#0.00");
