@@ -126,7 +126,7 @@ public class MainController implements Initializable {
     private void resetLevels(int keyboard) {
 
         levelList.clear();
-            levelList.addAll(Stream.of("သင်ခန်းစာ ၁", "သင်ခန်းစာ ၂").toList());
+            levelList.addAll(Stream.of("သင်ခန်းစာ ၁", "သင်ခန်းစာ ၂", "သင်ခန်းစာ ၃").toList());
 
         int selectedIndex = cbLevel.getSelectionModel().getSelectedIndex();
         cbLevel.getItems().setAll(FXCollections.observableArrayList(levelList));
@@ -322,20 +322,21 @@ public class MainController implements Initializable {
         if (i == 0) {
             is = getClass().getResourceAsStream("/assets/burma_lessons.csv");
         }
-//        else if (i == 1) {
-//            is = getClass().getResourceAsStream("/assets/burma_lessons.csv");
-//        }
+        else if (i == 1) {
+            is = getClass().getResourceAsStream("/assets/burma_lessons_1.csv");
+        }
 //        else if (i == 2) {
 //            is = getClass().getResourceAsStream("/assets/burma_lessons.csv");
 //        }
         else {
-            is = getClass().getResourceAsStream("/assets/burma_lessons_1.csv");
+            is = getClass().getResourceAsStream("/assets/burma_lessons_2.csv");
         }
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
                 // ZWNBSP ERROR
                 line = line.replaceAll("\\uFEFF", "");
+                line = line.replaceAll("\"", "");
                 String[] values = line.split(",");
                 int no = Integer.parseInt(values[0].trim());
                 String title = values[1].trim();
