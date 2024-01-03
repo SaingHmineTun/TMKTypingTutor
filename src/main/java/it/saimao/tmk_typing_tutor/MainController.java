@@ -127,7 +127,7 @@ public class MainController implements Initializable {
         initSummaryDialog();
         relayoutForVariousResolution();
         reqFocusOnPracticeField();
-        cbLanguage.getSelectionModel().selectFirst();
+        cbLanguage.getSelectionModel().select(1);
 
     }
 
@@ -264,15 +264,18 @@ public class MainController implements Initializable {
     private void initComboBoxItems() {
 
         /************ START LANGUAGE **************/
+        List<String> keyboardList = new ArrayList<>();
         cbLanguage.getItems().setAll("Burma", "Shan");
         cbLanguage.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+            if (!keyboardList.isEmpty()) keyboardList.clear();
             if (newValue.intValue() == 0) {
                 // Burma Language chosen
-                cbKeyboard.getItems().setAll("Myanmar3 SIL");
-            } else if (newValue.intValue() == 1) {
+                keyboardList.addAll(FXCollections.observableArrayList("Myanmar3 SIL"));
+            } else  {
                 // Shan Language chosen
-                cbKeyboard.getItems().setAll("Shan SIL", "လွၵ်းမိုဝ်းယုင်းၶဵဝ်", "လွၵ်းမိုဝ်းပၢင်လူင်", "လွၵ်းမိုဝ်းၼမ်ႉၶူင်း");
+                keyboardList.addAll(FXCollections.observableArrayList("Shan SIL", "လွၵ်းမိုဝ်းယုင်းၶဵဝ်", "လွၵ်းမိုဝ်းပၢင်လူင်", "လွၵ်းမိုဝ်းၼမ်ႉၶူင်း"));
             }
+            cbKeyboard.getItems().setAll(keyboardList);
             cbKeyboard.getSelectionModel().selectFirst();
         });
 
@@ -285,7 +288,6 @@ public class MainController implements Initializable {
 
         cbKeyboard.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue, newValue) -> {
             if (cbLanguage.getSelectionModel().getSelectedIndex() == 0) {
-
                 // For Burma keyboard
                 if (newValue.intValue() == 0) {
                     allValues = Burma_KeyMap.getAllValuesList();
@@ -325,20 +327,23 @@ public class MainController implements Initializable {
         // cbLessons items are added when change in cbLevel occurs!
         cbLessons.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-//                if (cbLevel.getSelectionModel().getSelectedIndex() == 0) {
-//                    List<String> lessons = new ArrayList<>(Arrays.stream(newValue.getLesson().split(" ")).toList());
-//                    if (cbLessons.getSelectionModel().getSelectedIndex() != 0)
-//                        lessons = replace_A_WithOtherCharacters(lessons);
-//                    else {
-//                        List<String> lessonsCopy = new ArrayList<>(Arrays.stream(newValue.getLesson().split(" ")).toList());
-//                        lessons.addAll(lessonsCopy);
-//                    }
-//                    // Show test text ramdomly
-//                    Collections.shuffle(lessons);
-//                    tfView.setText(Arrays.toString(lessons.toArray()).replaceAll("[\\[\\],]", ""));
-//                } else {
-                tfView.setText(newValue.getLesson());
-//                }
+                /*
+                In Shan, lesson1 is shown randomly!
+                 */
+                if (cbLanguage.getSelectionModel().getSelectedIndex() == 1 && cbLevel.getSelectionModel().getSelectedIndex() == 0) {
+                    List<String> lessons = new ArrayList<>(Arrays.stream(newValue.getLesson().split(" ")).toList());
+                    if (cbLessons.getSelectionModel().getSelectedIndex() != 0)
+                        lessons = replace_A_WithOtherCharacters(lessons);
+                    else {
+                        List<String> lessonsCopy = new ArrayList<>(Arrays.stream(newValue.getLesson().split(" ")).toList());
+                        lessons.addAll(lessonsCopy);
+                    }
+                    // Show test text ramdomly
+                    Collections.shuffle(lessons);
+                    tfView.setText(Arrays.toString(lessons.toArray()).replaceAll("[\\[\\],]", ""));
+                } else {
+                    tfView.setText(newValue.getLesson());
+                }
                 resetAndFocusOnPracticeField();
                 tutorTyping();
             }
@@ -400,9 +405,6 @@ public class MainController implements Initializable {
                 String content = values[2].replace("\"", "").trim();
                 lessonList.add(new Lesson(no, title, content));
             }
-//            if (i == 1)
-            // using short_lessons, we should reverse it before use it
-//                Collections.reverse(lessonList);
             int selectedIndex = cbLessons.getSelectionModel().getSelectedIndex();
             cbLessons.setItems(FXCollections.observableArrayList(lessonList));
             if (selectedIndex < 0) {
@@ -447,18 +449,13 @@ public class MainController implements Initializable {
         tfPractice.setOnMouseClicked(mouseEvent -> {
             tfPractice.end();
         });
-        tfPractice.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode() == KeyCode.BACK_SPACE) {
-                    event.consume();
-                }
+        tfPractice.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.BACK_SPACE) {
+                event.consume();
             }
         });
 
         tfPractice.addEventHandler(KeyEvent.KEY_TYPED, event -> {
-//            System.out.println("KEY TYPE EVENT");
-//            System.out.println("Character - " + event.getCharacter());
             if (event.getCharacter().equals("\u200B") || (!typingWithEnglish && consumeShanCharacter)) {
                 consumeShanCharacter = false;
                 // TODO - Because in Tai Typing, ေ is sometimes auto-typing!
