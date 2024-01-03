@@ -1,12 +1,4 @@
-@font-face {
-    font-family: 'VistolSans-Black';
-    src: url('../fonts/vistol_sans_black.otf');
-}
-
-@font-face {
-    font-family: 'Pyidaungsu';
-    src: url('../fonts/pyidaungsu.ttf');
-}
+@import 'style.css'
 
 .root {
     -fx-background-color: #ccc;

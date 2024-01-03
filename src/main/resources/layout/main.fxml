@@ -67,7 +67,7 @@
          <children>
             <HBox fx:id="hbSelection" alignment="CENTER_RIGHT" minHeight="50.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <ComboBox fx:id="cbLanguage" layoutX="224.0" layoutY="10.0" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="Language">
+                  <ComboBox fx:id="cbLanguage" layoutX="224.0" layoutY="10.0" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="LANGUAGE">
                      <effect>
                         <Lighting diffuseConstant="1.2">
                            <bumpInput>
@@ -78,6 +78,9 @@
                            </light>
                         </Lighting>
                      </effect>
+                     <HBox.margin>
+                        <Insets right="40.0" />
+                     </HBox.margin>
                   </ComboBox>
                   <VBox HBox.hgrow="ALWAYS">
                      <children>
@@ -95,7 +98,7 @@
                         </ComboBox>
                      </children>
                   </VBox>
-                  <ComboBox fx:id="cbLevel" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="Level" HBox.hgrow="ALWAYS">
+                  <ComboBox fx:id="cbLevel" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="LEVEL" HBox.hgrow="ALWAYS">
                      <effect>
                         <Lighting diffuseConstant="1.2">
                            <bumpInput>

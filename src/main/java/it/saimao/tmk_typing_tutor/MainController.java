@@ -4,6 +4,10 @@ import it.saimao.tmk_typing_tutor.model.Key;
 import it.saimao.tmk_typing_tutor.model.Lesson;
 import it.saimao.tmk_typing_tutor.utils.*;
 import it.saimao.tmk_typing_tutor.utils.burma.Burma_KeyMap;
+import it.saimao.tmk_typing_tutor.utils.shan.NamKhone_KeyMap;
+import it.saimao.tmk_typing_tutor.utils.shan.Panglong_KeyMap;
+import it.saimao.tmk_typing_tutor.utils.shan.SIL_KeyMap;
+import it.saimao.tmk_typing_tutor.utils.shan.Yunghkio_KeyMap;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -123,14 +127,29 @@ public class MainController implements Initializable {
         initSummaryDialog();
         relayoutForVariousResolution();
         reqFocusOnPracticeField();
-        cbKeyboard.getSelectionModel().selectFirst();
+        cbLanguage.getSelectionModel().selectFirst();
 
     }
 
     private void resetLevels(int keyboard) {
 
         levelList.clear();
-        levelList.addAll(Stream.of("သင်ခန်းစာ ၁", "သင်ခန်းစာ ၂", "သင်ခန်းစာ ၃").toList());
+        if (cbLanguage.getSelectionModel().getSelectedIndex() == 0) {
+            /*
+            For Burma keyboard, we have 3 levels of lessons!
+             */
+            levelList.addAll(Stream.of("သင်ခန်းစာ ၁", "သင်ခန်းစာ ၂", "သင်ခန်းစာ ၃").toList());
+        } else if (cbLanguage.getSelectionModel().getSelectedIndex() == 1) {
+            /*
+            In Shan Keyboard, we mostly have 3 levels of lessons!
+            But in Namkhone keyboard, we have 4. We added Pali lessons there!
+             */
+            if (keyboard == 3) {
+                levelList.addAll(Stream.of("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3", "ၵၢၼ်ၽိုၵ်း  4").toList());
+            } else {
+                levelList.addAll(Stream.of("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3").toList());
+            }
+        }
 
         int selectedIndex = cbLevel.getSelectionModel().getSelectedIndex();
         cbLevel.getItems().setAll(FXCollections.observableArrayList(levelList));
@@ -246,6 +265,16 @@ public class MainController implements Initializable {
 
         /************ START LANGUAGE **************/
         cbLanguage.getItems().setAll("Burma", "Shan");
+        cbLanguage.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.intValue() == 0) {
+                // Burma Language chosen
+                cbKeyboard.getItems().setAll("Myanmar3 SIL");
+            } else if (newValue.intValue() == 1) {
+                // Shan Language chosen
+                cbKeyboard.getItems().setAll("Shan SIL", "လွၵ်းမိုဝ်းယုင်းၶဵဝ်", "လွၵ်းမိုဝ်းပၢင်လူင်", "လွၵ်းမိုဝ်းၼမ်ႉၶူင်း");
+            }
+            cbKeyboard.getSelectionModel().selectFirst();
+        });
 
         /************ END LANGUAGE ****************/
 
@@ -254,11 +283,24 @@ public class MainController implements Initializable {
 
         levelList = new ArrayList<>();
 
-//        cbKeyboard.getItems().setAll("Myanmar3 SIL", "လွၵ်းမိုဝ်းယုင်းၶဵဝ်", "လွၵ်းမိုဝ်းပၢင်လူင်", "လွၵ်းမိုဝ်းၼမ်ႉၶူင်း");
-        cbKeyboard.getItems().setAll("Myanmar3 SIL");
         cbKeyboard.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (newValue.intValue() == 0) {
-                allValues = Burma_KeyMap.getAllValuesList();
+            if (cbLanguage.getSelectionModel().getSelectedIndex() == 0) {
+
+                // For Burma keyboard
+                if (newValue.intValue() == 0) {
+                    allValues = Burma_KeyMap.getAllValuesList();
+                }
+            } else if (cbLanguage.getSelectionModel().getSelectedIndex() == 1) {
+                // For Shan Keyboard
+                if (newValue.intValue() == 0) {
+                    allValues = SIL_KeyMap.getAllValuesList();
+                } else if (newValue.intValue() == 1) {
+                    allValues = Yunghkio_KeyMap.getAllValuesList();
+                } else if (newValue.intValue() == 2) {
+                    allValues = Panglong_KeyMap.getAllValuesList();
+                } else {
+                    allValues = NamKhone_KeyMap.getAllValuesList();
+                }
             }
             resetKeyboard();
             createKeyBoard();
@@ -320,16 +362,31 @@ public class MainController implements Initializable {
     private void changeLessons(int i) {
         lessonList.clear();
         InputStream is;
-        if (i == 0) {
-            is = getClass().getResourceAsStream("/assets/burma_lessons/burma_lessons.csv");
-        } else if (i == 1) {
-            is = getClass().getResourceAsStream("/assets/burma_lessons/burma_lessons_1.csv");
-        }
-//        else if (i == 2) {
-//            is = getClass().getResourceAsStream("/assets/burma_lessons.csv");
-//        }
-        else {
-            is = getClass().getResourceAsStream("/assets/burma_lessons/burma_lessons_2.csv");
+        if (cbLanguage.getSelectionModel().getSelectedIndex() == 0) {
+            /*
+            Loading burma lessons
+             */
+            if (i == 0) {
+                is = getClass().getResourceAsStream("/assets/burma_lessons/burma_lessons.csv");
+            } else if (i == 1) {
+                is = getClass().getResourceAsStream("/assets/burma_lessons/burma_lessons_1.csv");
+            } else {
+                is = getClass().getResourceAsStream("/assets/burma_lessons/burma_lessons_2.csv");
+            }
+        } else {
+            /*
+            Loading Shan lessons
+             */
+            if (i == 0) {
+                is = getClass().getResourceAsStream("/assets/shan_lessons/lesson_1.csv");
+            } else if (i == 1) {
+                is = getClass().getResourceAsStream("/assets/shan_lessons/lesson_2.csv");
+            } else if (i == 2) {
+                is = getClass().getResourceAsStream("/assets/shan_lessons/lesson_3.csv");
+            } else {
+                // Loading Shan Pali lesson
+                is = getClass().getResourceAsStream("/assets/shan_lessons/lesson_4.csv");
+            }
         }
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
             String line;
@@ -340,7 +397,6 @@ public class MainController implements Initializable {
                 String[] values = line.split(",");
                 int no = Integer.parseInt(values[0].trim());
                 String title = values[1].trim();
-//                System.out.println(title + " : " + values.length);
                 String content = values[2].replace("\"", "").trim();
                 lessonList.add(new Lesson(no, title, content));
             }
