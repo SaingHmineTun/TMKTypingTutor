@@ -3,6 +3,7 @@ package it.saimao.tmk_typing_tutor;
 import it.saimao.tmk_typing_tutor.model.Key;
 import it.saimao.tmk_typing_tutor.model.Lesson;
 import it.saimao.tmk_typing_tutor.utils.*;
+import it.saimao.tmk_typing_tutor.utils.burma.Burma_KeyMap;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -246,6 +247,8 @@ public class MainController implements Initializable {
         /************ START LANGUAGE **************/
         cbLanguage.getItems().setAll("Burma", "Shan");
 
+        /************ END LANGUAGE ****************/
+
 
         /************ START KEYBOARD **************/
 
@@ -318,15 +321,15 @@ public class MainController implements Initializable {
         lessonList.clear();
         InputStream is;
         if (i == 0) {
-            is = getClass().getResourceAsStream("/assets/burma_lessons.csv");
+            is = getClass().getResourceAsStream("/assets/burma_lessons/burma_lessons.csv");
         } else if (i == 1) {
-            is = getClass().getResourceAsStream("/assets/burma_lessons_1.csv");
+            is = getClass().getResourceAsStream("/assets/burma_lessons/burma_lessons_1.csv");
         }
 //        else if (i == 2) {
 //            is = getClass().getResourceAsStream("/assets/burma_lessons.csv");
 //        }
         else {
-            is = getClass().getResourceAsStream("/assets/burma_lessons_2.csv");
+            is = getClass().getResourceAsStream("/assets/burma_lessons/burma_lessons_2.csv");
         }
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
             String line;
