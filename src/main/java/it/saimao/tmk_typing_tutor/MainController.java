@@ -63,6 +63,8 @@ public class MainController implements Initializable {
     @FXML
     private ComboBox<String> cbKeyboard;
     @FXML
+    private ComboBox<String> cbLanguage;
+    @FXML
     private HBox row1, row2, row3, row4, row5;
     @FXML
     private TextField tfView;
@@ -241,6 +243,11 @@ public class MainController implements Initializable {
 
     private void initComboBoxItems() {
 
+
+        /************ START LANGUAGE **************/
+        cbLanguage.getItems().setAll("Burma", "Shan");
+
+
         /************ START KEYBOARD **************/
 
         levelList = new ArrayList<>();
@@ -251,18 +258,10 @@ public class MainController implements Initializable {
             if (newValue.intValue() == 0) {
                 allValues = Burma_KeyMap.getAllValuesList();
             }
-//            else if (newValue.intValue() == 1) {
-//                allValues = Yunghkio_KeyMap.getAllValuesList();
-//            } else if (newValue.intValue() == 2) {
-//                allValues = Panglong_KeyMap.getAllValuesList();
-//            } else {
-//                allValues = NamKhone_KeyMap.getAllValuesList();
-//            }
             resetKeyboard();
             createKeyBoard();
             reqFocusOnPracticeField();
             resetLevels(newValue.intValue());
-//            tutorTyping();
         });
 
         /************* END KEYBOARD ***********/

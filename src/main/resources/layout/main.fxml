@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 
-<BorderPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="800.0" stylesheets="@../css/main_style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.MainController">
+<BorderPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="800.0" stylesheets="@../css/main_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.MainController">
    <top>
 
       <HBox id="title" fx:id="titleBar" alignment="CENTER" minHeight="35.0" prefHeight="35.0">
@@ -67,6 +67,18 @@
          <children>
             <HBox fx:id="hbSelection" alignment="CENTER_RIGHT" minHeight="50.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
+                  <ComboBox fx:id="cbLanguage" layoutX="224.0" layoutY="10.0" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="Language">
+                     <effect>
+                        <Lighting diffuseConstant="1.2">
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect>
+                  </ComboBox>
                   <VBox HBox.hgrow="ALWAYS">
                      <children>
                         <ComboBox fx:id="cbKeyboard" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="KEYBOARD" VBox.vgrow="ALWAYS">
@@ -83,7 +95,7 @@
                         </ComboBox>
                      </children>
                   </VBox>
-                  <ComboBox fx:id="cbLevel" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="MODE" HBox.hgrow="ALWAYS">
+                  <ComboBox fx:id="cbLevel" maxHeight="1.7976931348623157E308" prefWidth="200.0" promptText="Level" HBox.hgrow="ALWAYS">
                      <effect>
                         <Lighting diffuseConstant="1.2">
                            <bumpInput>
