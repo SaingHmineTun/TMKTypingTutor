@@ -116,19 +116,20 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initTopBar();
+        initTitleBar();
         initComboBoxItems();
         initPracticeListener();
-        initSummarDialog();
+        initSummaryDialog();
         relayoutForVariousResolution();
         reqFocusOnPracticeField();
         cbKeyboard.getSelectionModel().selectFirst();
 
     }
+
     private void resetLevels(int keyboard) {
 
         levelList.clear();
-            levelList.addAll(Stream.of("သင်ခန်းစာ ၁", "သင်ခန်းစာ ၂", "သင်ခန်းစာ ၃").toList());
+        levelList.addAll(Stream.of("သင်ခန်းစာ ၁", "သင်ခန်းစာ ၂", "သင်ခန်းစာ ၃").toList());
 
         int selectedIndex = cbLevel.getSelectionModel().getSelectedIndex();
         cbLevel.getItems().setAll(FXCollections.observableArrayList(levelList));
@@ -192,13 +193,12 @@ public class MainController implements Initializable {
 
     }
 
-    private void initSummarDialog() {
+    private void initSummaryDialog() {
         summary = new Summary(this);
     }
 
 
-
-    private void initTopBar() {
+    private void initTitleBar() {
         titleBar.setPrefHeight(Perc.p6h());
         vbClose.setOnMouseClicked(event -> {
             Node source = (Node) event.getSource();
@@ -243,7 +243,6 @@ public class MainController implements Initializable {
 
     private void initComboBoxItems() {
 
-
         /************ START LANGUAGE **************/
         cbLanguage.getItems().setAll("Burma", "Shan");
 
@@ -271,7 +270,6 @@ public class MainController implements Initializable {
         lessonList = new ArrayList<>();
         // Level Items are added according to Keyboard Selection!
         cbLevel.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
-//            System.out.println("MODE SELECTION PROPERTY");
             changeLessons(newValue.intValue());
             tfPractice.clear();
         });
@@ -294,12 +292,14 @@ public class MainController implements Initializable {
 //                    Collections.shuffle(lessons);
 //                    tfView.setText(Arrays.toString(lessons.toArray()).replaceAll("[\\[\\],]", ""));
 //                } else {
-                    tfView.setText(newValue.getLesson());
+                tfView.setText(newValue.getLesson());
 //                }
                 resetAndFocusOnPracticeField();
                 tutorTyping();
             }
         });
+
+        /************ END LESSONS *************/
 
         // NEXT & PREVIOUS
         btNext.setOnAction(event -> {
@@ -311,7 +311,6 @@ public class MainController implements Initializable {
             prevLesson();
         });
 
-        /************ END LESSONS *************/
 
     }
 
@@ -320,8 +319,7 @@ public class MainController implements Initializable {
         InputStream is;
         if (i == 0) {
             is = getClass().getResourceAsStream("/assets/burma_lessons.csv");
-        }
-        else if (i == 1) {
+        } else if (i == 1) {
             is = getClass().getResourceAsStream("/assets/burma_lessons_1.csv");
         }
 //        else if (i == 2) {
@@ -344,7 +342,7 @@ public class MainController implements Initializable {
                 lessonList.add(new Lesson(no, title, content));
             }
 //            if (i == 1)
-                // using short_lessons, we should reverse it before use it
+            // using short_lessons, we should reverse it before use it
 //                Collections.reverse(lessonList);
             int selectedIndex = cbLessons.getSelectionModel().getSelectedIndex();
             cbLessons.setItems(FXCollections.observableArrayList(lessonList));
@@ -784,7 +782,7 @@ public class MainController implements Initializable {
         String shanChar;
         int keyboard = cbKeyboard.getSelectionModel().getSelectedIndex();
 //        if (keyboard == 0) {
-            shanChar = Burma_KeyMap.getAllValuesMap().getOrDefault(character, "");
+        shanChar = Burma_KeyMap.getAllValuesMap().getOrDefault(character, "");
 //        }
 //        else if (keyboard == 1) {
 //            shanChar = Yunghkio_KeyMap.getAllValuesMap().getOrDefault(character, "");
@@ -981,6 +979,7 @@ public class MainController implements Initializable {
         lbAWPM.setText(String.valueOf(avgWPM));
         return avgWPM;
     }
+
     private double calculateACCU() {
         double accuracy = (double) (tfPractice.getText().length() - misTyped) / tfPractice.getText().length();
         DecimalFormat format = new DecimalFormat("#0.00");
