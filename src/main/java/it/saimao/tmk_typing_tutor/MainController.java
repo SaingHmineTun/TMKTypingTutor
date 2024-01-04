@@ -510,7 +510,7 @@ public class MainController implements Initializable {
         String practiceText = tfPractice.getText();
         int indexOfPractice = 0;
         String typing;
-        if (tfPractice.getText() != null && tfPractice.getText().length() > 0) {
+        if (tfPractice.getText() != null && !tfPractice.getText().isEmpty()) {
             // When typing ​ေ & ​ႄ with sil_shan, this key always comes and we have to omit it first
             // For the typing tutor to know exactly what key we need to type
             indexOfPractice = practiceText.length();
