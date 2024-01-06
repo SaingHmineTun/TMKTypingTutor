@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'A J Kunheing 6';
+    src: url('../fonts/aj_kunheing6.ttf');
+}
+
+@font-face {
+    font-family: 'Allessa Personal Use';
+    src: url('../fonts/AllessaPersonalUse.ttf');
+}
+
+@font-face {
+    fon-family: 'Old London';
+    src: url('../fonts/old_london.ttf');
+}
+
+.root {
+    -fx-background-color: white;
+    -fx-font-family: 'Old London';
+
+}
+
+
+.fs-title {
+    -fx-font-size: 100px;
+}
+
+.fs-certify {
+    -fx-font-size: 25px;
+}
+
+.fs-name {
+    -fx-font-size: 40px;
+}
+
+.label, .text{
+    -fx-text-fill: black;
+}
+
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox stylesheets="@../css/certificate_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" spacing="30.0" style="-fx-border-color: yellow; -fx-border-width: 10;" stylesheets="@../css/certificate_style.css">
+         <children>
+            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="fs-title" text="Certificate of completion" VBox.vgrow="ALWAYS" />
+            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="fs-certify" text="This is to certify that" />
+            <Label alignment="CENTER" layoutX="10.0" layoutY="194.0" maxWidth="1.7976931348623157E308" styleClass="fs-name" text="Nang Kham Hom" />
+            <Label alignment="CENTER" layoutX="10.0" layoutY="194.0" maxWidth="1.7976931348623157E308" styleClass="fs-certify" text="has successfully completed he course of" />
+            <Label alignment="CENTER" layoutX="10.0" layoutY="279.0" maxWidth="1.7976931348623157E308" styleClass="fs-name" text="Shan Typing Tutorial" />
+            <Label alignment="CENTER" layoutX="10.0" layoutY="420.0" maxWidth="1.7976931348623157E308" styleClass="fs-certify" text="awarded on this 3rd day of January in the year 2024" />
+            <VBox alignment="CENTER" prefWidth="100.0" spacing="10.0">
+               <children>
+                  <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Signature.png" />
+                     </image>
+                  </ImageView>
+                  <Label styleClass="fs-certify" text="Sai Mao" />
+                  <Label styleClass="fs-certify" text="Co-founder of TMK Group" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+   </padding>
+</VBox>

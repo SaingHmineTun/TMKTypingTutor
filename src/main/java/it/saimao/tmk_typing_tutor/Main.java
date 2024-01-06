@@ -1,5 +1,6 @@
 package it.saimao.tmk_typing_tutor;
 
+import it.saimao.tmk_typing_tutor.controller.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;

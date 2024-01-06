@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 
-<BorderPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="800.0" stylesheets="@../css/main_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.MainController">
+<BorderPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="800.0" stylesheets="@../css/main_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.controller.MainController">
    <top>
 
       <HBox id="title" fx:id="titleBar" alignment="CENTER" minHeight="35.0" prefHeight="35.0">
@@ -79,7 +79,7 @@
                         </Lighting>
                      </effect>
                      <HBox.margin>
-                        <Insets right="40.0" />
+                        <Insets />
                      </HBox.margin>
                   </ComboBox>
                   <VBox HBox.hgrow="ALWAYS">

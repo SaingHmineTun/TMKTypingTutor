@@ -1,5 +1,6 @@
-package it.saimao.tmk_typing_tutor;
+package it.saimao.tmk_typing_tutor.controller;
 
+import it.saimao.tmk_typing_tutor.controller.SummaryController;
 import it.saimao.tmk_typing_tutor.model.Key;
 import it.saimao.tmk_typing_tutor.model.Lesson;
 import it.saimao.tmk_typing_tutor.utils.*;
@@ -9,7 +10,6 @@ import it.saimao.tmk_typing_tutor.utils.shan.Panglong_KeyMap;
 import it.saimao.tmk_typing_tutor.utils.shan.SIL_KeyMap;
 import it.saimao.tmk_typing_tutor.utils.shan.Yunghkio_KeyMap;
 import javafx.collections.FXCollections;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -117,7 +117,7 @@ public class MainController implements Initializable {
     private boolean lightTheme = false;
     private List<Lesson> lessonList;
     private List<String> levelList;
-    private Summary summary;
+    private SummaryController summary;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -127,7 +127,7 @@ public class MainController implements Initializable {
         initSummaryDialog();
         relayoutForVariousResolution();
         reqFocusOnPracticeField();
-        cbLanguage.getSelectionModel().select(1);
+        cbLanguage.getSelectionModel().selectFirst();
 
     }
 
@@ -214,7 +214,7 @@ public class MainController implements Initializable {
     }
 
     private void initSummaryDialog() {
-        summary = new Summary(this);
+        summary = new SummaryController(this);
     }
 
 
@@ -264,19 +264,26 @@ public class MainController implements Initializable {
     private void initComboBoxItems() {
 
         /************ START LANGUAGE **************/
-        List<String> keyboardList = new ArrayList<>();
         cbLanguage.getItems().setAll("Burma", "Shan");
+
+
+        List<String> keyboardList = new ArrayList<>();
         cbLanguage.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
-            if (!keyboardList.isEmpty()) keyboardList.clear();
+            keyboardList.clear();
             if (newValue.intValue() == 0) {
                 // Burma Language chosen
-                keyboardList.addAll(FXCollections.observableArrayList("Myanmar3 SIL"));
-            } else  {
+                keyboardList.add("SIL");
+            } else {
                 // Shan Language chosen
-                keyboardList.addAll(FXCollections.observableArrayList("Shan SIL", "လွၵ်းမိုဝ်းယုင်းၶဵဝ်", "လွၵ်းမိုဝ်းပၢင်လူင်", "လွၵ်းမိုဝ်းၼမ်ႉၶူင်း"));
+                keyboardList.addAll(List.of("SIL", "လွၵ်းမိုဝ်းယုင်းၶဵဝ်", "လွၵ်းမိုဝ်းပၢင်လူင်", "လွၵ်းမိုဝ်းၼမ်ႉၶူင်း"));
+                /*
+                Problem here is that when I am not setting SIL to both Burma and Shan keyboard combo-box,
+                cbKeyboard's selection event is not triggered!
+                 */
             }
-            cbKeyboard.getItems().setAll(keyboardList);
+            cbKeyboard.getItems().setAll(FXCollections.observableArrayList(keyboardList));
             cbKeyboard.getSelectionModel().selectFirst();
+
         });
 
         /************ END LANGUAGE ****************/

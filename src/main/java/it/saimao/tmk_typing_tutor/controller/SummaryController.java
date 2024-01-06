@@ -1,4 +1,4 @@
-package it.saimao.tmk_typing_tutor;
+package it.saimao.tmk_typing_tutor.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
-public class Summary {
+public class SummaryController {
     @FXML
     private Label sTitle;
     @FXML
@@ -44,7 +44,7 @@ public class Summary {
     private double accuracy;
     private String title;
 
-    public Summary(MainController mainController) {
+    public SummaryController(MainController mainController) {
         this.mainController = mainController;
 
 
