@@ -9,13 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="&#10;Re-implement Light and Dark theme">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/error.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Added: Play Error Sounds when a type is wrong!">
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +158,7 @@
       <workItem from="1699106045107" duration="630000" />
       <workItem from="1699174978437" duration="1304000" />
       <workItem from="1699583820301" duration="467000" />
-      <workItem from="1712922289824" duration="1685000" />
+      <workItem from="1712922289824" duration="2045000" />
     </task>
     <task id="LOCAL-00001" summary="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!">
       <option name="closed" value="true" />
@@ -301,7 +296,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699175150061</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Added: Play Error Sounds when a type is wrong!">
+      <option name="closed" value="true" />
+      <created>1712924192582</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1712924192582</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -325,14 +328,15 @@
     <MESSAGE value="Changed Light Theme.&#10;Plan to add &quot;change theme&quot; option" />
     <MESSAGE value="Added Change Theme function!" />
     <MESSAGE value="&#10;Re-implement Light and Dark theme" />
-    <option name="LAST_COMMIT_MESSAGE" value="&#10;Re-implement Light and Dark theme" />
+    <MESSAGE value="Added: Play Error Sounds when a type is wrong!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added: Play Error Sounds when a type is wrong!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java</url>
-          <line>136</line>
+          <line>128</line>
           <properties class="it.saimao.tmk_typing_tutor.MainController" method="resetLevels">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -341,7 +345,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java</url>
-          <line>462</line>
+          <line>454</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
