@@ -2,6 +2,7 @@ module it.saimao.hminepos {
     requires java.desktop;
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.media;
 
     exports it.saimao.tmk_typing_tutor;
     opens it.saimao.tmk_typing_tutor to javafx.fxml;

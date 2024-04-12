@@ -22,6 +22,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -54,7 +56,7 @@ public class MainController implements Initializable {
     @FXML
     private Label tLabel;
     @FXML
-    Button btNext, btPrev;
+    private Button btNext, btPrev;
     @FXML
     private ComboBox<Lesson> cbLessons;
     @FXML
@@ -120,17 +122,15 @@ public class MainController implements Initializable {
         relayoutForVariousResolution();
         reqFocusOnPracticeField();
         cbKeyboard.getSelectionModel().selectFirst();
-//        primaryWindow = btNext.getScene().getWindow();
-//        btPrev.getScene().getRoot().setEffect(new BoxBlur(10, 10, 3));
 
     }
+
+
     private void resetLevels(int keyboard) {
 
         levelList.clear();
-//        cbLevel.getItems().clear();
         if (keyboard == 3)
             levelList.addAll(Arrays.asList("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3", "ၵၢၼ်ၽိုၵ်း 4").stream().toList());
-//            cbLevel.getItems().setAll(FXCollections.observableArrayList());
         else {
             levelList.addAll(Arrays.asList("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3").stream().toList());
         }
@@ -406,7 +406,6 @@ public class MainController implements Initializable {
 //            System.out.println("Character - " + event.getCharacter());
             if (event.getCharacter().equals("\u200B") || (!typingWithEnglish && consumeShanCharacter)) {
                 consumeShanCharacter = false;
-                // TODO - Because in Tai Typing, ေ is sometimes auto-typing!
                 typingWithEnglish = false;
                 event.consume();
             }
@@ -595,6 +594,7 @@ public class MainController implements Initializable {
                     misTyped++;
                     stop = true;
                     tfPractice.setText(practiceText.substring(0, indexOfPractice - 1));
+                    playMistypedSound();
                 }
                 return;
 
@@ -604,6 +604,7 @@ public class MainController implements Initializable {
                     misTyped++;
                     stop = true;
                     tfPractice.setText(tfPractice.getText().substring(0, indexOfPractice - 1));
+                    playMistypedSound();
                     return;
                 }
             }
@@ -775,6 +776,12 @@ public class MainController implements Initializable {
         }
     }
 
+    private void playMistypedSound() {
+        var soundURL = getClass().getResource("/audio/error.mp3");
+        var errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
+        errorPlayer.play();
+    }
+
     private boolean isConverted;
 
     private String convertToShanChar(String character) {
@@ -850,7 +857,6 @@ public class MainController implements Initializable {
             case 6, 7 -> toTypeNode = row4.getChildren().get(y);
         }
         if (toTypeNode != null) {
-//            toTypeNode.setStyle("-fx-background-color: #006dff");
             toTypeNode.setId("key-node-to-type");
         }
 
