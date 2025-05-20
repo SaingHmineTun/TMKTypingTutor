@@ -6,7 +6,8 @@ import it.saimao.tmk_typing_tutor.key_map.SIL_KeyMap;
 import it.saimao.tmk_typing_tutor.key_map.Yunghkio_KeyMap;
 import it.saimao.tmk_typing_tutor.model.Key;
 import it.saimao.tmk_typing_tutor.model.Lesson;
-import it.saimao.tmk_typing_tutor.utils.*;
+import it.saimao.tmk_typing_tutor.utils.Perc;
+import it.saimao.tmk_typing_tutor.utils.Utils;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -122,8 +123,8 @@ public class MainController implements Initializable {
         initTopBar();
         initComboBoxItems();
         initPracticeListener();
-        initSummarDialog();
-        relayoutForVariousResolution();
+        initSummaryDialog();
+        adjustForVariousResolution();
         reqFocusOnPracticeField();
         cbKeyboard.getSelectionModel().selectFirst();
 
@@ -156,7 +157,7 @@ public class MainController implements Initializable {
 
     }
 
-    private void relayoutForVariousResolution() {
+    private void adjustForVariousResolution() {
 
         tLogo.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(35));
         imgLogo.setFitHeight(Perc.getDynamicPixel(25));
@@ -172,11 +173,11 @@ public class MainController implements Initializable {
 
 
         cbLessons.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
-        cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'NamKhoneUnicode'");
+        cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'NamKhoneUnicode'");
         cbLevel.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
-        cbLevel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'NamKhoneUnicode';");
+        cbLevel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'NamKhoneUnicode';");
         cbKeyboard.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
-        cbKeyboard.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'NamKhoneUnicode'");
+        cbKeyboard.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'NamKhoneUnicode'");
 
         btNext.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
         btPrev.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
@@ -184,31 +185,30 @@ public class MainController implements Initializable {
 
         tfView.setPrefHeight(Perc.getDynamicPixel(50));
         tfPractice.setPrefHeight(Perc.getDynamicPixel(50));
-        tfView.setStyle("-fx-font-size: " + Perc.getDynamicPixel(22));
-        tfPractice.setStyle("-fx-font-size: " + Perc.getDynamicPixel(22));
+        tfView.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20));
+        tfPractice.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20));
 
         vbKeyboardView.setPadding(new Insets(Perc.p1_5h(), Perc.p5w(), Perc.p1_5h(), Perc.p5w()));
         vbKeyboardView.setPrefHeight(Perc.p50h());
 
-        lblAWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'VistolSans-Black'");
-        lbAWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'VistolSans-Black'");
-        lblWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'VistolSans-Black'");
-        lbWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'VistolSans-Black'");
-        lblMIST.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'VistolSans-Black'");
-        lbMIST.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'VistolSans-Black'");
-        lblACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'VistolSans-Black'");
-        lbACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20) + "; -fx-font-family: 'VistolSans-Black'");
+        lblAWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
+        lbAWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
+        lblWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
+        lbWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
+        lblMIST.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
+        lbMIST.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
+        lblACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
+        lbACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
 
     }
 
-    private void initSummarDialog() {
+    private void initSummaryDialog() {
         summary = new Summary(this);
     }
 
 
-
     private void initTopBar() {
-        titleBar.setPrefHeight(Perc.p6h());
+        titleBar.setPrefHeight(Perc.getDynamicPixel(40));
         vbClose.setOnMouseClicked(event -> {
             Node source = (Node) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
@@ -222,9 +222,9 @@ public class MainController implements Initializable {
         });
         vbTheme.setOnMouseClicked(mouseEvent -> {
             if (lightTheme) {
+                // Change to dark theme
                 ivTheme.setImage(new Image(getClass().getResource("/images/day.png").toExternalForm()));
                 lightTheme = false;
-                // TODO: Change to dark theme
                 root.getScene().getRoot().getStylesheets().clear();
                 root.getScene().getRoot().getStylesheets().add(getClass().getResource("/css/main_style.css").toExternalForm());
                 key.getScene().getStylesheets().clear();
@@ -235,9 +235,9 @@ public class MainController implements Initializable {
 
             } else {
 
+                // Change to light theme
                 ivTheme.setImage(new Image(getClass().getResource("/images/night.png").toExternalForm()));
                 lightTheme = true;
-                // Change to light theme
                 root.getScene().getRoot().getStylesheets().clear();
                 root.getScene().getRoot().getStylesheets().add(getClass().getResource("/css/day_style.css").toExternalForm());
                 key.getScene().getStylesheets().clear();
@@ -256,7 +256,7 @@ public class MainController implements Initializable {
 
         levelList = new ArrayList<>();
 
-        cbKeyboard.getItems().setAll("လွၵ်းမိုဝ်း SIL", "လွၵ်းမိုဝ်းယုင်းၶဵဝ်", "လွၵ်းမိုဝ်းပၢင်လူင်", "လွၵ်းမိုဝ်းၼမ်ႉၶူင်း");
+        cbKeyboard.getItems().setAll("လွၵ်းမိုဝ်း လၵ်းၸဵင်", "လွၵ်းမိုဝ်း ယုင်းၶဵဝ်", "လွၵ်းမိုဝ်း ပၢင်လူင်", "လွၵ်းမိုဝ်း ၼမ်ႉၶူင်း");
         cbKeyboard.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue.intValue() == 0) {
                 allValues = SIL_KeyMap.getAllValuesList();

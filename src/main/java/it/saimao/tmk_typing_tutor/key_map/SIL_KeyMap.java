@@ -120,7 +120,7 @@ public class SIL_KeyMap {
         row3ShiftValues.put("D", "ီ");
         row3ShiftValues.put("F", "ႂ်");
         row3ShiftValues.put("G", "ႂ");
-        row3ShiftValues.put("H", "့");
+        row3ShiftValues.put("H", "ံ");
         row3ShiftValues.put("J", "ႆ");
         row3ShiftValues.put("K", "”");
         row3ShiftValues.put("L", "ႊ");

@@ -27,15 +27,16 @@ public class NamKhone_KeyMap {
     }
 
     public static List<Map<String, String>> allValuesList;
-    static  {
+
+    static {
         initValues();
     }
 
     private static void initValues() {
         // Row 1
         row1Values = new LinkedHashMap<>();
-        row1Values.put("`" , "?");
-        row1Values.put("1" , "႑");
+        row1Values.put("`", "?");
+        row1Values.put("1", "႑");
         row1Values.put("2", "႒");
         row1Values.put("3", "႓");
         row1Values.put("4", "႔");
