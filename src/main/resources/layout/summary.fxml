@@ -100,7 +100,7 @@
                       <graphic>
                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                               <image>
-                                  <Image url="@../images/prev.png" />
+                                  <Image url="@../images/prev_white.png" />
                               </image>
                           </ImageView>
                       </graphic>
@@ -135,7 +135,7 @@
                       <graphic>
                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                               <image>
-                                  <Image url="@../images/next.png" />
+                                  <Image url="@../images/next_white.png" />
                               </image>
                           </ImageView>
                       </graphic>

@@ -9,13 +9,13 @@
 }
 
 .root {
-    -fx-background-color: #ccc;
-    -fx-key-color: #fff;
-    -fx-outcome-color: #123;
-    -fx-outcome-miscolor: #54070f;
-    -fx-title-color: #396fad;
-    -fx-to-type-node-color: #48fadf;
-    -fx-text-color: #123;
+    -fx-background-color: #2b0000;
+    -fx-key-color: #b71c1c;
+    -fx-outcome-color: #ff8a80;
+    -fx-outcome-miscolor: #ff1744;
+    -fx-title-color: #c62828;
+    -fx-to-type-node-color: #ff5252;
+    -fx-text-color: #ffeaea;
 }
 
 .text, .text-field {
@@ -33,19 +33,19 @@
 }
 
 #vbClose:pressed {
-    -fx-background-color: #a2101077;
+    -fx-background-color: #d50000;
 }
 
 #vbMinimize:hover, #vbTheme:hover {
-    -fx-background-color: #1b497a;
+    -fx-background-color: #880e4f;
 }
 
 #vbMinimize:pressed, #vbTheme:pressed {
-    -fx-background-color: #1364b9;
+    -fx-background-color: #ad1457;
 }
 
 .key {
-    -fx-border-color: #fff;
+    -fx-border-color: #ffeaea;
     -fx-border-width: 1;
     -fx-text-fill: -fx-text-color;
     -fx-background-color: -fx-key-color;
@@ -62,24 +62,16 @@
     -fx-text-fill: -fx-outcome-miscolor;
 }
 
-
 #view {
-    /*-fx-pref-height: 50;*/
-    /*-fx-min-height: 50;*/
-    /*-fx-max-height: 50;*/
     -fx-border-color: -fx-text-color;
-    -fx-text-fill: -fx-text-color;
+    -fx-text-fill: -fx-outcome-color;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
-    /*-fx-font-size: 20;*/
 }
 
 #practice {
-    -fx-background-color: #fff;
-    /*-fx-pref-height: 50;*/
-    /*-fx-min-height: 50;*/
-    /*-fx-max-height: 50;*/
-    /*-fx-font-size: 20;*/
+    -fx-background-color: #4a0000;
+    -fx-text-fill: -fx-text-color;
 }
 
 .button {
@@ -87,21 +79,18 @@
     -fx-text-fill: -fx-text-color;
     -fx-border-radius: 50;
     -fx-background-radius: 50;
-    -fx-border-color: #FFF;
+    -fx-border-color: #ffeaea;
 }
 
 .button:hover {
-    -fx-background-color: #DDD;
+    -fx-background-color: #e53935;
 }
-
 
 .button:pressed {
-    -fx-background-color: #AAA;
+    -fx-background-color: #b71c1c;
 }
 
-
 .combo-box .text-field {
-
     -fx-border-color: null;
 }
 
@@ -111,19 +100,18 @@
 
 .combo-box {
     -fx-background-color: -fx-key-color;
-    -fx-border-color: white;
+    -fx-border-color: #ffeaea;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
 
 .combo-box:hover {
-    -fx-background-color: #DDD;
+    -fx-background-color: #ef5350;
 }
 
 .combo-box:pressed {
-    -fx-background-color: #AAA;
+    -fx-background-color: #c62828;
 }
-
 
 .combo-box .cell {
     -fx-text-fill: -fx-text-color;
@@ -131,12 +119,12 @@
 }
 
 .combo-box#lessons .cell {
-    -fx-alignment: left;
+    -fx-alignment: center_left;
 }
 
 .combo-box-popup .list-view {
     -fx-background-color: -fx-key-color;
-    -fx-border-color: white;
+    -fx-border-color: #ffeaea;
 }
 
 .combo-box-popup .list-view .list-cell {
@@ -145,7 +133,7 @@
 }
 
 .combo-box-popup .list-view .list-cell:hover {
-    -fx-background-color: #DDD;
+    -fx-background-color: #ef5350;
 }
 
 .combo-box-popup .list-view .list-cell:selected {
@@ -158,22 +146,16 @@
     -fx-opacity: 0;
 }
 
-/*.combo-box .scroll-bar {*/
-/*    -fx-opacity: 0;*/
-/*}*/
-
 .combo-box .scroll-bar {
-    -fx-background-color: #DDD;
+    -fx-background-color: #880e4f;
 }
-
 
 #title {
     -fx-background-color: -fx-title-color;
-    -fx-text-fill: -fx-key-color;
+    -fx-text-fill: -fx-text-color;
     -fx-font-size: 24;
     -fx-font-family: 'VistolSans-Black';
 }
-
 
 .key-label {
     -fx-text-fill: -fx-text-color;
@@ -183,9 +165,6 @@
     -fx-background-color: -fx-to-type-node-color;
 }
 
-
 #key-node-default {
-
     -fx-background-color: -fx-key-color;
 }
-

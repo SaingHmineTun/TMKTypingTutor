@@ -1,0 +1,173 @@
+@font-face {
+    font-family: 'VistolSans-Black';
+    src: url('../fonts/vistol_sans_black.otf');
+}
+
+@font-face {
+    font-family: 'NamKhoneUnicode';
+    src: url('../fonts/NamKhoneUnicode.ttf');
+}
+
+.root {
+    -fx-background-color: #fff8e1;           /* soft golden background */
+    -fx-key-color: #fbc02d;                  /* golden yellow for keys */
+    -fx-outcome-color: #795548;              /* dark brown for outcome text */
+    -fx-outcome-miscolor: #c62828;           /* red for mistakes */
+    -fx-title-color: #fdd835;                /* brighter gold for title bar */
+    -fx-to-type-node-color: #fff176;         /* light yellow highlight */
+    -fx-text-color: #5d4037;                 /* coffee brown text */
+}
+
+.text, .text-field {
+    -fx-font-family: 'NamKhoneUnicode';
+    -fx-font-size: 16;
+}
+
+.label {
+    -fx-text-fill: -fx-text-color;
+    -fx-font-size: 14;
+}
+
+#vbClose:hover {
+    -fx-background-color: -fx-outcome-miscolor;
+}
+
+#vbClose:pressed {
+    -fx-background-color: #c6282877;
+}
+
+#vbMinimize:hover, #vbTheme:hover {
+    -fx-background-color: #fbc02d;
+}
+
+#vbMinimize:pressed, #vbTheme:pressed {
+    -fx-background-color: #f9a825;
+}
+
+.key {
+    -fx-border-color: #fff;
+    -fx-border-width: 1;
+    -fx-text-fill: -fx-text-color;
+    -fx-background-color: -fx-key-color;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.outcome {
+    -fx-text-fill: -fx-outcome-color;
+    -fx-font-size: 25;
+}
+
+.outcome#lbMIST {
+    -fx-text-fill: -fx-outcome-miscolor;
+}
+
+#view {
+    -fx-border-color: -fx-text-color;
+    -fx-text-fill: -fx-text-color;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+#practice {
+    -fx-background-color: #fffde7; /* pale golden yellow */
+    -fx-text-fill: -fx-text-color;
+    -fx-border-color: -fx-text-color;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.button {
+    -fx-background-color: -fx-key-color;
+    -fx-text-fill: -fx-text-color;
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+    -fx-border-color: #FFF;
+}
+
+.button:hover {
+    -fx-background-color: #ffe082;
+}
+
+.button:pressed {
+    -fx-background-color: #ffca28;
+}
+
+.combo-box .text-field {
+    -fx-border-color: null;
+}
+
+.combo-box .text {
+    -fx-font-size: 20;
+}
+
+.combo-box {
+    -fx-background-color: -fx-key-color;
+    -fx-border-color: white;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.combo-box:hover {
+    -fx-background-color: #ffe082;
+}
+
+.combo-box:pressed {
+    -fx-background-color: #ffca28;
+}
+
+.combo-box .cell {
+    -fx-text-fill: -fx-text-color;
+    -fx-alignment: center;
+}
+
+.combo-box#lessons .cell {
+    -fx-alignment: center_left;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: -fx-key-color;
+    -fx-border-color: white;
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: -fx-key-color;
+    -fx-text-fill: -fx-text-color;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #ffe082;
+}
+
+.combo-box-popup .list-view .list-cell:selected {
+    -fx-text-fill: -fx-outcome-color;
+    -fx-font-weight: bold;
+}
+
+.combo-box .arrow-button {
+    -fx-padding: 0;
+    -fx-opacity: 0;
+}
+
+.combo-box .scroll-bar {
+    -fx-background-color: #ffe082;
+}
+
+#title {
+    -fx-background-color: -fx-title-color;
+    -fx-text-fill: -fx-text-color;
+    -fx-font-size: 24;
+    -fx-font-family: 'VistolSans-Black';
+}
+
+.key-label {
+    -fx-text-fill: -fx-text-color;
+}
+
+#key-node-to-type {
+    -fx-background-color: -fx-to-type-node-color;
+}
+
+#key-node-default {
+    -fx-background-color: -fx-key-color;
+}

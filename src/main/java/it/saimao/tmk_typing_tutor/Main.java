@@ -15,6 +15,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     public static void main(String[] args) {
+        System.setProperty("prism.allowhidpi", "true");
         launch(args);
     }
 

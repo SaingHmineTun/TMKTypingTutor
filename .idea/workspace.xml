@@ -9,12 +9,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Released: Version 1.3">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="ၽိူမ်ႉသႂ်ႇထႅမ် ၸမ်ႈၼိူဝ် တီႈ လွၵ်းမိုဝ်း လၵ်းၸဵင်">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/Theme.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/UserSetting.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/crimson_red_theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/frost_theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/golden_theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/green_theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/midnight_theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/monochrome_theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/neon_theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/ocean_theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/pastel_theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/pinky_theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/sunset_theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/using_font.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/key_map/NamKhone_KeyMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/key_map/NamKhone_KeyMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/key_map/SIL_KeyMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/key_map/SIL_KeyMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/Perc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/Perc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/day_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/light_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/main_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/dark_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/next.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/next_white.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/prev.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/prev_white.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/summary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/summary.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,11 +49,17 @@
         <option value="Kotlin Class" />
         <option value="CSS File" />
         <option value="FxmlFile" />
+        <option value="Record" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="shan-standard-keyboard" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -73,8 +100,9 @@
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/JavaProjects/TMKTypingTutor/src/main/resources/fonts",
+    "last_opened_file_path": "D:/JavaProjects/TMKTypingTutor/src/main/resources",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -90,11 +118,14 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\JavaProjects\TMKTypingTutor\src\main\resources" />
+      <recent name="D:\JavaProjects\TMKTypingTutor\src\main\resources\css" />
       <recent name="D:\JavaProjects\TMKTypingTutor\src\main\resources\fonts" />
       <recent name="C:\AndroiodProjects\TMKTypingTutor\src\main\resources\audio" />
       <recent name="D:\JavaProjects\tmk_typing\src\main\resources\images" />
-      <recent name="D:\JavaProjects\tmk_typing\src\main\resources\css" />
-      <recent name="D:\JavaProjects\tmk_typing\src\main\resources\fonts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\JavaProjects\TMKTypingTutor\src\main\resources" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="it.saimao.tmk_typing.utils" />
@@ -323,7 +354,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712924414898</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="ၽိူမ်ႉသႂ်ႇထႅမ် ၸမ်ႈၼိူဝ် တီႈ လွၵ်းမိုဝ်း လၵ်းၸဵင်">
+      <option name="closed" value="true" />
+      <created>1747708936965</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1747708936965</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -349,14 +388,15 @@
     <MESSAGE value="&#10;Re-implement Light and Dark theme" />
     <MESSAGE value="Added: Play Error Sounds when a type is wrong!" />
     <MESSAGE value="Released: Version 1.3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Released: Version 1.3" />
+    <MESSAGE value="ၽိူမ်ႉသႂ်ႇထႅမ် ၸမ်ႈၼိူဝ် တီႈ လွၵ်းမိုဝ်း လၵ်းၸဵင်" />
+    <option name="LAST_COMMIT_MESSAGE" value="ၽိူမ်ႉသႂ်ႇထႅမ် ၸမ်ႈၼိူဝ် တီႈ လွၵ်းမိုဝ်း လၵ်းၸဵင်" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java</url>
-          <line>458</line>
+          <line>498</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>

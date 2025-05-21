@@ -1,0 +1,202 @@
+@font-face {
+    font-family: 'VistolSans-Black';
+    src: url('../fonts/vistol_sans_black.otf');
+}
+
+@font-face {
+    font-family: 'NamKhoneUnicode';
+    src: url('../fonts/NamKhoneUnicode.ttf');
+}
+
+.root {
+    -fx-background-color: #0f0f17; /* Dark almost black */
+    -fx-key-color: #1f1f2e; /* Dark navy keys */
+    -fx-outcome-color: #ff00ff; /* Neon pink */
+    -fx-outcome-miscolor: #ff0033; /* Bright red */
+    -fx-title-color: #00ffff; /* Neon cyan */
+    -fx-to-type-node-color: #ff0099; /* Hot pink */
+    -fx-text-color: #eeeeff; /* Soft white */
+}
+
+.text, .text-field {
+    -fx-font-family: 'NamKhoneUnicode';
+    -fx-font-size: 16;
+    -fx-text-fill: -fx-text-color;
+}
+
+.label {
+    -fx-text-fill: -fx-text-color;
+    -fx-font-size: 14;
+}
+
+#vbClose:hover {
+    -fx-background-color: -fx-outcome-miscolor;
+}
+
+#vbClose:pressed {
+    -fx-background-color: #cc0022;
+}
+
+#vbMinimize:hover, #vbTheme:hover {
+    -fx-background-color: #0099ff;
+}
+
+#vbMinimize:pressed, #vbTheme:pressed {
+    -fx-background-color: #0066cc;
+}
+
+.key {
+    -fx-border-color: #ff00ff;
+    -fx-border-width: 1.5;
+    -fx-text-fill: -fx-text-color;
+    -fx-background-color: -fx-key-color;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0, 0, 0);
+}
+
+.outcome {
+    -fx-text-fill: -fx-outcome-color;
+    -fx-font-size: 25;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, #ff00ff, 15, 0, 0, 0);
+}
+
+.outcome#lbMIST {
+    -fx-text-fill: -fx-outcome-miscolor;
+    -fx-effect: dropshadow(gaussian, #ff0033, 15, 0, 0, 0);
+}
+
+#view {
+    -fx-border-color: #00ffff;
+    -fx-border-radius: 6;
+    -fx-text-fill: -fx-text-color;
+    -fx-background-radius: 6;
+    -fx-background-color: #1a1a2e;
+}
+
+#practice {
+    -fx-border-color: #00ffff;
+    -fx-border-radius: 6;
+    -fx-background-color: #111122;
+}
+
+.button {
+    -fx-background-color: #ff00ff;
+    -fx-text-fill: #111111;
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+    -fx-border-color: #ff00ff;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0, 0, 0);
+}
+
+.button:hover {
+    -fx-background-color: #ff33ff;
+}
+
+.button:pressed {
+    -fx-background-color: #cc00cc;
+}
+
+.combo-box .text-field {
+    -fx-border-color: null;
+    -fx-text-fill: -fx-text-color;
+}
+
+.combo-box .text {
+    -fx-font-size: 20;
+    -fx-text-fill: -fx-text-color;
+}
+
+.combo-box {
+    -fx-background-color: #1f1f2e;
+    -fx-border-color: #00ffff;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-effect: dropshadow(gaussian, #00ffff, 10, 0, 0, 0);
+}
+
+.combo-box:hover {
+    -fx-background-color: #2a2a4a;
+}
+
+.combo-box:pressed {
+    -fx-background-color: #161632;
+}
+
+.combo-box .cell {
+    -fx-text-fill: -fx-text-color;
+    -fx-alignment: center;
+}
+
+.combo-box#lessons .cell {
+    -fx-alignment: center-left;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #1f1f2e;
+    -fx-border-color: #00ffff;
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: #1f1f2e;
+    -fx-text-fill: -fx-text-color;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #00ffff;
+    -fx-text-fill: #111111;
+}
+
+.combo-box-popup .list-view .list-cell:selected {
+    -fx-text-fill: #111111;
+    -fx-font-weight: bold;
+    -fx-background-color: #ff00ff;
+}
+
+.combo-box .arrow-button {
+    -fx-padding: 0;
+    -fx-opacity: 0;
+}
+
+.combo-box .scroll-bar {
+    -fx-background-color: #333366;
+}
+
+#title {
+    -fx-background-color: -fx-title-color;
+    -fx-text-fill: #111111;
+    -fx-font-size: 24;
+    -fx-font-family: 'VistolSans-Black';
+    -fx-effect: dropshadow(gaussian, #00ffff, 20, 0, 0, 0);
+}
+
+.key {
+    -fx-border-color: #ff00ff;
+    -fx-border-width: 1;
+    -fx-text-fill: -fx-text-color;
+    -fx-background-color: -fx-key-color;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-effect: dropshadow(gaussian, #ff00ff, 5, 0, 0, 0);
+    -fx-font-size: 14;
+    -fx-pref-height: 75;
+    -fx-min-height: 60;
+    -fx-max-height: 80;
+}
+
+.key-label {
+    -fx-text-fill: -fx-text-color;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, #ff00ff, 5, 0, 0, 0);
+}
+
+#key-node-to-type {
+    -fx-background-color: -fx-to-type-node-color;
+    -fx-effect: innershadow(two-pass-box, #ff00ff, 10, 0, 0, 0);
+}
+
+#key-node-default {
+    -fx-background-color: -fx-key-color;
+}

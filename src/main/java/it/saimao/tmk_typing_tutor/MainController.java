@@ -6,8 +6,11 @@ import it.saimao.tmk_typing_tutor.key_map.SIL_KeyMap;
 import it.saimao.tmk_typing_tutor.key_map.Yunghkio_KeyMap;
 import it.saimao.tmk_typing_tutor.model.Key;
 import it.saimao.tmk_typing_tutor.model.Lesson;
+import it.saimao.tmk_typing_tutor.model.Theme;
 import it.saimao.tmk_typing_tutor.utils.Perc;
+import it.saimao.tmk_typing_tutor.utils.UserSetting;
 import it.saimao.tmk_typing_tutor.utils.Utils;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,10 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -31,6 +31,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.util.Callback;
 
 import java.io.*;
 import java.net.URL;
@@ -47,10 +48,6 @@ public class MainController implements Initializable {
     @FXML
     private VBox vbMinimize;
     @FXML
-    private VBox vbTheme;
-    @FXML
-    private ImageView ivTheme;
-    @FXML
     private ImageView imgClose;
     @FXML
     private ImageView imgMinimize;
@@ -66,6 +63,8 @@ public class MainController implements Initializable {
     private ComboBox<Lesson> cbLessons;
     @FXML
     private ComboBox<String> cbLevel;
+    @FXML
+    private ComboBox<Theme> cbTheme;
     @FXML
     private ComboBox<String> cbKeyboard;
     @FXML
@@ -113,7 +112,6 @@ public class MainController implements Initializable {
     private boolean mustSwap;
     private boolean swap;
     private boolean stop;
-    private boolean lightTheme = false;
     private List<Lesson> lessonList;
     private List<String> levelList;
     private Summary summary;
@@ -126,8 +124,13 @@ public class MainController implements Initializable {
         initSummaryDialog();
         adjustForVariousResolution();
         reqFocusOnPracticeField();
-        cbKeyboard.getSelectionModel().selectFirst();
+        cbKeyboard.getSelectionModel().select(UserSetting.loadKeyboard());
+        Platform.runLater(this::loadUi);
 
+    }
+
+    private void loadUi() {
+        cbTheme.getSelectionModel().select(UserSetting.loadTheme());
     }
 
 
@@ -174,8 +177,10 @@ public class MainController implements Initializable {
 
         cbLessons.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
         cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'NamKhoneUnicode'");
-        cbLevel.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
+        cbLevel.setPrefSize(Perc.getDynamicPixel(150), Perc.getDynamicPixel(50));
         cbLevel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'NamKhoneUnicode';");
+        cbTheme.setPrefSize(Perc.getDynamicPixel(150), Perc.getDynamicPixel(50));
+        cbTheme.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'NamKhoneUnicode';");
         cbKeyboard.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
         cbKeyboard.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'NamKhoneUnicode'");
 
@@ -220,34 +225,6 @@ public class MainController implements Initializable {
             Stage stage = (Stage) source.getScene().getWindow();
             stage.setIconified(true);
         });
-        vbTheme.setOnMouseClicked(mouseEvent -> {
-            if (lightTheme) {
-                // Change to dark theme
-                ivTheme.setImage(new Image(getClass().getResource("/images/day.png").toExternalForm()));
-                lightTheme = false;
-                root.getScene().getRoot().getStylesheets().clear();
-                root.getScene().getRoot().getStylesheets().add(getClass().getResource("/css/main_style.css").toExternalForm());
-                key.getScene().getStylesheets().clear();
-                key.getScene().getStylesheets().add(getClass().getResource("/css/main_style.css").toExternalForm());
-
-                ivNext.setImage(new Image(getClass().getResource("/images/next.png").toExternalForm()));
-                ivPrev.setImage(new Image(getClass().getResource("/images/prev.png").toExternalForm()));
-
-            } else {
-
-                // Change to light theme
-                ivTheme.setImage(new Image(getClass().getResource("/images/night.png").toExternalForm()));
-                lightTheme = true;
-                root.getScene().getRoot().getStylesheets().clear();
-                root.getScene().getRoot().getStylesheets().add(getClass().getResource("/css/day_style.css").toExternalForm());
-                key.getScene().getStylesheets().clear();
-                key.getScene().getStylesheets().add(getClass().getResource("/css/day_style.css").toExternalForm());
-
-                ivNext.setImage(new Image(getClass().getResource("/images/next_dark.png").toExternalForm()));
-                ivPrev.setImage(new Image(getClass().getResource("/images/prev_dark.png").toExternalForm()));
-
-            }
-        });
     }
 
     private void initComboBoxItems() {
@@ -258,6 +235,7 @@ public class MainController implements Initializable {
 
         cbKeyboard.getItems().setAll("လွၵ်းမိုဝ်း လၵ်းၸဵင်", "လွၵ်းမိုဝ်း ယုင်းၶဵဝ်", "လွၵ်းမိုဝ်း ပၢင်လူင်", "လွၵ်းမိုဝ်း ၼမ်ႉၶူင်း");
         cbKeyboard.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue, newValue) -> {
+            UserSetting.saveKeyboard(newValue.intValue());
             if (newValue.intValue() == 0) {
                 allValues = SIL_KeyMap.getAllValuesList();
             } else if (newValue.intValue() == 1) {
@@ -275,6 +253,68 @@ public class MainController implements Initializable {
         });
 
         /************* END KEYBOARD ***********/
+
+        /************* START THEME ************/
+
+        cbTheme.getItems().addAll(List.of(
+                new Theme("dark_theme", "Dark", "white"),
+                new Theme("light_theme", "Light", "dark"),
+                new Theme("green_theme", "Green", "white"),
+                new Theme("crimson_red_theme", "Red", "white"),
+                new Theme("frost_theme", "Frost", "dark"),
+                new Theme("golden_theme", "Golden", "dark"),
+                new Theme("midnight_theme", "Midnight", "white"),
+                new Theme("monochrome_theme", "Monochrome", "white"),
+                new Theme("ocean_theme", "Ocean", "dark"),
+                new Theme("pastel_theme", "Pastel", "dark"),
+                new Theme("pinky_theme", "Pinky", "dark"),
+                new Theme("sunset_theme", "Sunset", "dark"),
+                new Theme("neon_theme", "Neon", "white")
+        ));
+        cbTheme.setButtonCell(new ListCell<>() {
+            @Override
+            protected void updateItem(Theme item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    setText(item.name().toUpperCase());
+                }
+            }
+        });
+        cbTheme.setCellFactory(new Callback<>() {
+            @Override
+            public ListCell<Theme> call(ListView<Theme> param) {
+                return new ListCell<>() {
+                    @Override
+                    protected void updateItem(Theme item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                            setGraphic(null);
+                        } else {
+                            setText(item.name().toUpperCase());
+                        }
+                    }
+                };
+            }
+        });
+        cbTheme.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                Theme theme = cbTheme.getItems().get(newValue.intValue());
+                UserSetting.saveTheme(newValue.intValue());
+                root.getScene().getRoot().getStylesheets().clear();
+                root.getScene().getRoot().getStylesheets().add(getClass().getResource("/css/" + theme.id() + ".css").toExternalForm());
+                key.getScene().getStylesheets().clear();
+                key.getScene().getStylesheets().add(getClass().getResource("/css/" + theme.id() + ".css").toExternalForm());
+
+                ivNext.setImage(new Image(getClass().getResource("/images/next_" + theme.iconColor() + ".png").toExternalForm()));
+                ivPrev.setImage(new Image(getClass().getResource("/images/prev_" + theme.iconColor() + ".png").toExternalForm()));
+            }
+        });
+
+        /************* END THEME **************/
 
 
         /*********** START LEVEL ************/
