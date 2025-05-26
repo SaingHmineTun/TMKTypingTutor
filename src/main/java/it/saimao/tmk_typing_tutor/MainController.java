@@ -311,6 +311,7 @@ public class MainController implements Initializable {
 
                 ivNext.setImage(new Image(getClass().getResource("/images/next_" + theme.iconColor() + ".png").toExternalForm()));
                 ivPrev.setImage(new Image(getClass().getResource("/images/prev_" + theme.iconColor() + ".png").toExternalForm()));
+                reqFocusOnPracticeField();
             }
         });
 
@@ -433,13 +434,29 @@ public class MainController implements Initializable {
     private boolean end;
 
     private void initPracticeListener() {
+
+
+        // Init Error Player
+        var soundURL = getClass().getResource("/audio/error.mp3");
+        errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
+
         tfPractice.setOnMouseClicked(mouseEvent -> {
             tfPractice.end();
         });
         tfPractice.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                if (event.getCode() == KeyCode.BACK_SPACE) {
+                if (event.getCode() == KeyCode.BACK_SPACE ||
+                        event.getCode() == KeyCode.DELETE ||
+                        event.getCode() == KeyCode.ENTER ||
+                        event.getCode() == KeyCode.ESCAPE ||
+                        event.getCode() == KeyCode.TAB ||
+                        event.getCode() == KeyCode.UP ||
+                        event.getCode() == KeyCode.DOWN ||
+                        event.getCode() == KeyCode.LEFT ||
+                        event.getCode() == KeyCode.RIGHT
+
+                ) {
                     event.consume();
                 }
             }
@@ -505,7 +522,7 @@ public class MainController implements Initializable {
         String practiceText = tfPractice.getText();
         int indexOfPractice = 0;
         String typing;
-        if (tfPractice.getText() != null && tfPractice.getText().length() > 0) {
+        if (tfPractice.getText() != null && !tfPractice.getText().isEmpty()) {
             // When typing ​ေ & ​ႄ with sil_shan, this key always comes and we have to omit it first
             // For the typing tutor to know exactly what key we need to type
             indexOfPractice = practiceText.length();
@@ -820,9 +837,15 @@ public class MainController implements Initializable {
         }
     }
 
+    private MediaPlayer errorPlayer;
+
     private void playMistypedSound() {
-        var soundURL = getClass().getResource("/audio/error.mp3");
-        var errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
+
+        if (errorPlayer == null) {
+            var soundURL = getClass().getResource("/audio/error.mp3");
+            errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
+        }
+        errorPlayer.stop();
         errorPlayer.play();
     }
 
