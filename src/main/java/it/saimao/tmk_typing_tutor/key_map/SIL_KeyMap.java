@@ -113,6 +113,7 @@ public class SIL_KeyMap {
         row3Values.put("'", "'");
         row3Values.put("Enter", "Enter");
 
+        // Row 3 : Shift Values
         row3ShiftValues = new LinkedHashMap<>();
         row3ShiftValues.put("Caps", "Caps");
         row3ShiftValues.put("A", "ဵ");
