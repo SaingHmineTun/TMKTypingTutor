@@ -5,6 +5,8 @@ module it.saimao.tmk_typing_tutor {
     requires javafx.media;
     requires java.prefs;
     requires java.sql;
+    requires org.xerial.sqlitejdbc;
+    requires javafx.graphics;
 
     exports it.saimao.tmk_typing_tutor;
     opens it.saimao.tmk_typing_tutor to javafx.fxml;

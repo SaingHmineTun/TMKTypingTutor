@@ -8,7 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -35,6 +37,7 @@ public class LoginController {
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = (Stage) tfUsername.getScene().getWindow();
                 stage.setScene(scene);
+                stage.setMaximized(true);
             } catch (IOException e) {
                 e.printStackTrace();
             }
