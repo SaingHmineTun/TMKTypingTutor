@@ -463,8 +463,6 @@ public class MainController implements Initializable {
         });
 
         tfPractice.addEventHandler(KeyEvent.KEY_TYPED, event -> {
-//            System.out.println("KEY TYPE EVENT");
-//            System.out.println("Character - " + event.getCharacter());
             if (event.getCharacter().equals("\u200B") || (!typingWithEnglish && consumeShanCharacter)) {
                 consumeShanCharacter = false;
                 typingWithEnglish = false;
@@ -473,9 +471,6 @@ public class MainController implements Initializable {
         });
 
         tfPractice.textProperty().addListener((observable, oldValue, newValue) -> {
-//            System.out.println("Text you typed in textProperty() - " + tfPractice.getText());
-//            System.out.println("SWAP - " + swap);
-
             if (newValue == null) return;
 
             if (newValue.length() == 1) {
