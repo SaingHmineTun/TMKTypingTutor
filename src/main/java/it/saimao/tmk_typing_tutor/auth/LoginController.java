@@ -1,5 +1,6 @@
 package it.saimao.tmk_typing_tutor.auth;
 
+import it.saimao.tmk_typing_tutor.MainController;
 import it.saimao.tmk_typing_tutor.model.User;
 import it.saimao.tmk_typing_tutor.utils.UserService;
 import javafx.fxml.FXML;
@@ -38,6 +39,11 @@ public class LoginController {
                 Stage stage = (Stage) tfUsername.getScene().getWindow();
                 stage.setScene(scene);
                 stage.setMaximized(true);
+
+                // Pass the primary stage to the MainController
+                MainController mainController = fxmlLoader.getController();
+                mainController.setPrimaryStage(stage);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

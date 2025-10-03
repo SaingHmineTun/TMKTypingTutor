@@ -19,7 +19,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -30,7 +29,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.util.Callback;
 
 import java.io.*;
@@ -100,7 +98,7 @@ public class MainController implements Initializable {
     @FXML
     private ImageView ivPrev;
 
-    private Window primaryWindow;
+    private Stage primaryStage;
 
     private Node toTypeNode;
     private Node toTypeSecNode;
@@ -114,19 +112,21 @@ public class MainController implements Initializable {
     private boolean stop;
     private List<Lesson> lessonList;
     private List<String> levelList;
-    private Summary summary;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initTopBar();
         initComboBoxItems();
         initPracticeListener();
-        initSummaryDialog();
         adjustForVariousResolution();
         reqFocusOnPracticeField();
         cbKeyboard.getSelectionModel().select(UserSetting.loadKeyboard());
-        Platform.runLater(this::loadUi);
+    }
 
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+        // Restore Platform.runLater to ensure UI is ready before applying the theme
+        Platform.runLater(this::loadUi);
     }
 
     private void loadUi() {
@@ -206,11 +206,6 @@ public class MainController implements Initializable {
         lbACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
 
     }
-
-    private void initSummaryDialog() {
-        summary = new Summary(this);
-    }
-
 
     private void initTopBar() {
         titleBar.setPrefHeight(Perc.getDynamicPixel(40));
@@ -304,10 +299,14 @@ public class MainController implements Initializable {
             if (newValue != null) {
                 Theme theme = cbTheme.getItems().get(newValue.intValue());
                 UserSetting.saveTheme(newValue.intValue());
-                root.getScene().getRoot().getStylesheets().clear();
-                root.getScene().getRoot().getStylesheets().add(getClass().getResource("/css/" + theme.id() + ".css").toExternalForm());
-                key.getScene().getStylesheets().clear();
-                key.getScene().getStylesheets().add(getClass().getResource("/css/" + theme.id() + ".css").toExternalForm());
+                if (root.getScene() != null) {
+                    root.getScene().getRoot().getStylesheets().clear();
+                    root.getScene().getRoot().getStylesheets().add(getClass().getResource("/css/" + theme.id() + ".css").toExternalForm());
+                }
+                if (key != null && key.getScene() != null) {
+                    key.getScene().getStylesheets().clear();
+                    key.getScene().getStylesheets().add(getClass().getResource("/css/" + theme.id() + ".css").toExternalForm());
+                }
 
                 ivNext.setImage(new Image(getClass().getResource("/images/next_" + theme.iconColor() + ".png").toExternalForm()));
                 ivPrev.setImage(new Image(getClass().getResource("/images/prev_" + theme.iconColor() + ".png").toExternalForm()));
@@ -683,7 +682,8 @@ public class MainController implements Initializable {
                 end = true;
                 clearToTypeValues();
                 String title = cbLevel.getValue() + " : " + cbLessons.getValue().getTitle();
-                summary.showDialog(title, wpm, accuracy, misTyped, awpm);
+                Summary summaryDialog = new Summary(this, primaryStage);
+                summaryDialog.showDialog(title, wpm, accuracy, misTyped, awpm);
                 return;
             }
 
@@ -1067,10 +1067,6 @@ public class MainController implements Initializable {
         return interimWPM;
     }
 
-    public void clearBlur() {
-        btPrev.getScene().getRoot().setEffect(null);
-    }
-
     public boolean nextLesson() {
         int currentIndex = cbLessons.getSelectionModel().getSelectedIndex();
         if (currentIndex != lessonList.size() - 1) {
@@ -1097,13 +1093,6 @@ public class MainController implements Initializable {
         return false;
     }
 
-    public void blurScreen() {
-        GaussianBlur blur = new GaussianBlur();
-        blur.setRadius(10);
-        btPrev.getScene().getRoot().setEffect(blur);
-
-    }
-
     public void reqFocusOnPracticeField() {
         tfPractice.requestFocus();
         tfPractice.end();
@@ -1116,4 +1105,5 @@ public class MainController implements Initializable {
         cbLessons.getSelectionModel().clearSelection();
         cbLessons.getSelectionModel().select(selectedLesson);
     }
+
 }

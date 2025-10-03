@@ -40,15 +40,18 @@ public class Summary {
 
     private final Stage stage;
     private final MainController mainController;
+    private final Stage owner;
     private int wpm, mistype, awpm;
     private double accuracy;
     private String title;
 
-    public Summary(MainController mainController) {
+    public Summary(MainController mainController, Stage owner) {
         this.mainController = mainController;
-
+        this.owner = owner; // Store the owner stage
 
         stage = new Stage();
+        stage.initOwner(owner);
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/summary.fxml"));
         loader.setController(this);
         Parent parent = null;
@@ -65,36 +68,33 @@ public class Summary {
 
     }
     public void showDialog(String title, int wpm, double accuracy, int mistype, int awpm) {
-        mainController.blurScreen();
         this.title = title;
         this.wpm = wpm;
         this.awpm = awpm;
         this.accuracy = accuracy;
         this.mistype = mistype;
+
+        // FINAL THEME FIX: Apply theme just before showing the dialog
+        stage.getScene().getStylesheets().setAll(owner.getScene().getStylesheets());
+
         showSummary();
         stage.show();
     }
 
     private void initAction() {
-        sClose.setOnAction(event -> {
-            stage.close();
-            mainController.clearBlur();
-        });
+        sClose.setOnAction(event -> stage.close());
         sNext.setOnAction(event -> {
             if (mainController.nextLesson()) {
                 stage.close();
-                mainController.clearBlur();
             }
         });
         sRetry.setOnAction(actionEvent -> {
             mainController.retryLesson();
             stage.close();
-            mainController.clearBlur();
         });
         sPrev.setOnAction(event -> {
             if (mainController.prevLesson()) {
                 stage.close();
-                mainController.clearBlur();
             }
         });
     }
