@@ -6,6 +6,7 @@ public class Profile {
     private String levelName;
     private String progress;
     private Button certificateButton;
+    private Button detailsButton; // New button for details
     private int levelIndex;
 
     public Profile(String levelName, String progress) {
@@ -13,6 +14,8 @@ public class Profile {
         this.progress = progress;
         this.certificateButton = new Button("Generate");
         this.certificateButton.setDisable(true); // Disabled by default
+        this.detailsButton = new Button("Details");
+        this.detailsButton.setDisable(true); // Disabled by default
     }
 
     public String getLevelName() {
@@ -37,6 +40,14 @@ public class Profile {
 
     public void setCertificateButton(Button certificateButton) {
         this.certificateButton = certificateButton;
+    }
+
+    public Button getDetailsButton() {
+        return detailsButton;
+    }
+
+    public void setDetailsButton(Button detailsButton) {
+        this.detailsButton = detailsButton;
     }
 
     public int getLevelIndex() {

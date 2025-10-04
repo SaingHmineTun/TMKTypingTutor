@@ -33,6 +33,8 @@ public class ProfileController implements Initializable {
     private TableColumn<Profile, String> tcProgress;
     @FXML
     private TableColumn<Profile, Button> tcCertificate;
+    @FXML
+    private TableColumn<Profile, Button> tcDetails; // New column for details button
     // Password change fields are now in dialog, not directly in profile view
     private PasswordField pfOldPassword;
     private PasswordField pfNewPassword;
@@ -41,29 +43,18 @@ public class ProfileController implements Initializable {
     
     @FXML
     private Button btnChangePasswordTop;
- @FXML
+    @FXML
     private Button btnClose;
 
     private User user;
-    private final int[] lessonsPerLevel = {9, 82, 82, 10}; // Lessons per level (Level 1: 9, Level 2: 82, Level 3: 82,Level 4: 10)
+    private final int[] lessonsPerLevel = {9, 82, 82, 10}; // Lessons per level (Level 1: 9, Level 2: 82, Level 3: 82, Level 4: 10)
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tcLevel.setCellValueFactory(new PropertyValueFactory<>("levelName"));
         tcProgress.setCellValueFactory(new PropertyValueFactory<>("progress"));
         tcCertificate.setCellValueFactory(new PropertyValueFactory<>("certificateButton"));
-        
-        // Add double-clicklistener to view detailed progress
-        tvProgress.setRowFactory(tv -> {
-            TableRow<Profile> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    Profile rowData = row.getItem();
-                    showDetailedProgress(rowData);
-             }
-});
-            return row;
-        });
+        tcDetails.setCellValueFactory(new PropertyValueFactory<>("detailsButton")); // Set up details column
     }
 
     public void initData(User user) {
@@ -73,42 +64,44 @@ public class ProfileController implements Initializable {
 
     private void loadProgress() {
         ObservableList<Profile> profiles = FXCollections.observableArrayList();
-        for (int i = 0; i < 4;i++){ // Assuming 4 levels
+        for (int i = 0; i < 4; i++) { // Assuming 4 levels
             int completed = ProgressService.getCompletedLessonCount(user.getId(), i);
             int total = lessonsPerLevel[i];
             Profile profile = new Profile("Level " + (i + 1), completed + " / " + total);
-            profile.setLevelIndex(i); // Storelevelindexfor later use
+            profile.setLevelIndex(i); // Store level index for later use
+            
             if (completed >= total) {
+                // For completed levels, enable both Generate and Details buttons
                 profile.getCertificateButton().setDisable(false);
+                profile.getCertificateButton().setText("Generate");
                 final int levelIndex = i;
                 profile.getCertificateButton().setOnAction(event -> showCertificate(levelIndex));
+                
+                profile.getDetailsButton().setDisable(false);
+                profile.getDetailsButton().setOnAction(event -> showDetailedProgress(levelIndex));
             } else if (completed > 0) {
-                // Enable certificate button to showdetailed progress even if not completed
-                profile.getCertificateButton().setText("Details");
-                profile.getCertificateButton().setDisable(false); // Enable the button
+                // For partially completed levels, enable only Details button
+                profile.getDetailsButton().setText("Details");
+                profile.getDetailsButton().setDisable(false);
                 final int levelIndex = i;
-                profile.getCertificateButton().setOnAction(event -> showDetailedProgress(levelIndex));
+                profile.getDetailsButton().setOnAction(event -> showDetailedProgress(levelIndex));
             }
-           profiles.add(profile);
-       }
+            profiles.add(profile);
+        }
         tvProgress.setItems(profiles);
     }
 
-    private void showDetailedProgress(Profile profile) {
-        //Implementation removed as it was causing issues
-    }
-    
-private void showDetailedProgress(int levelIndex) {
+    private void showDetailedProgress(int levelIndex) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/lesson_progress.fxml"));
-            Stage stage= new Stage();
+            Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-stage.initOwner(btnClose.getScene().getWindow());
+            stage.initOwner(btnClose.getScene().getWindow());
             Scene scene = new Scene(loader.load());
             
             // Apply the current theme to the lesson progress window
             Theme theme = Theme.fromIndex(user.getTheme());
-            String stylesheet= getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
+            String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
             scene.getStylesheets().add(stylesheet);
 
             stage.setScene(scene);
@@ -117,9 +110,9 @@ stage.initOwner(btnClose.getScene().getWindow());
             controller.initData(user.getId(), levelIndex);
 
             stage.show();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-       }
+        }
     }
 
     @FXML
@@ -133,11 +126,11 @@ stage.initOwner(btnClose.getScene().getWindow());
             dialog.initOwner(btnClose.getScene().getWindow());
             
             // Apply the current theme to the dialog
-            Theme theme =Theme.fromIndex(user.getTheme());
+            Theme theme = Theme.fromIndex(user.getTheme());
             String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
             dialog.getDialogPane().getStylesheets().add(stylesheet);
             
-            //Get controller and pass user reference
+            // Get controller and pass user reference
             ChangePasswordController controller = loader.getController();
             controller.initData(user);
             
@@ -146,59 +139,31 @@ stage.initOwner(btnClose.getScene().getWindow());
             e.printStackTrace();
         }
     }
-    
-    // This methodis now inthe ChangePasswordController
-    /*
-    @FXML
-   private void changePassword() {
-        String oldPassword = pfOldPassword.getText();
-        String newPassword= pfNewPassword.getText();
-        String confirmPassword = pfConfirmPassword.getText();
-
-        if (!user.getPassword().equals(oldPassword)) {
-            lblPasswordStatus.setText("Incorrect oldpassword!");
-            return;
-        }
-        if (!newPassword.equals(confirmPassword)) {
-            lblPasswordStatus.setText("New passwords do not match!");
-            return;
-        }
-        if (newPassword.isEmpty()) {
-            lblPasswordStatus.setText("Password cannot be empty!");
-            return;
-        }
-
-        user.setPassword(newPassword);
-       UserService.updateUser(user);
-        lblPasswordStatus.setText("Passwordchanged successfully!");
-        pfOldPassword.clear();
-        pfNewPassword.clear();
-        pfConfirmPassword.clear();
-    }
-    */
 
     private void showCertificate(int levelIndex) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/certificate.fxml"));
-Stage stage = new Stage();
+            Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(btnClose.getScene().getWindow());
-            Scene scene =new Scene(loader.load());
+            Scene scene = new Scene(loader.load());
 
             // Apply the current theme to the certificate window
             Theme theme = Theme.fromIndex(user.getTheme());
             String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
             scene.getStylesheets().add(stylesheet);
+            // Add certificate specific styles
+            scene.getStylesheets().add(getClass().getResource("/css/certificate_style.css").toExternalForm());
 
             stage.setScene(scene);
 
-           CertificateController controller = loader.getController();
+            CertificateController controller = loader.getController();
             
             // Calculate average WPM for the level
             double averageWpm = LessonProgressService.getAverageWpmForLevel(user.getId(), levelIndex);
             DecimalFormat df = new DecimalFormat("#.##");
             
-            controller.initData(user.getUsername(), "Level " + (levelIndex +1), df.format(averageWpm));
+            controller.initData(user.getUsername(), "Level " + (levelIndex + 1), df.format(averageWpm));
 
             stage.show();
         } catch (IOException e) {
@@ -206,7 +171,7 @@ Stage stage = new Stage();
         }
     }
 
-@FXML
+    @FXML
     private void close() {
         Stage stage = (Stage) btnClose.getScene().getWindow();
         stage.close();

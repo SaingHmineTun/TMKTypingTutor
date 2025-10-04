@@ -20,7 +20,7 @@ public class DatabaseService {
             String dbDir = System.getProperty("user.home") + File.separator + ".tmk_typing_tutor";
             Path dbDirPath = Paths.get(dbDir);
             if (Files.notExists(dbDirPath)) {
-              Files.createDirectories(dbDirPath);
+             Files.createDirectories(dbDirPath);
             }
             String dbPath = dbDir + File.separator + "typing_tutor.db";
             DB_URL = "jdbc:sqlite:" + dbPath;
@@ -29,7 +29,7 @@ public class DatabaseService {
         }
     }
 
-  public static Connection getConnection() throws SQLException {
+ public static Connection getConnection() throws SQLException {
         try {
             Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException e) {
@@ -70,31 +70,33 @@ public class DatabaseService {
                 + " UNIQUE(user_id, level_index, lesson_index)\n"
                 + ");";
 
-        try (Connection conn= getConnection();
+        try (Connection conn=getConnection();
              Statement stmt = conn.createStatement()) {
             stmt.execute(createUserTableSql);
             stmt.execute(createProgressTableSql);
             stmt.execute(createLessonProgressTableSql);
+            System.out.println("Database tables created successfully");
 
             if (!columnExists(conn, "users", "theme")) {
-                stmt.execute("ALTER TABLE users ADD COLUMN theme INTEGER DEFAULT 0");
-}
+                stmt.execute("ALTER TABLEusers ADD COLUMN theme INTEGER DEFAULT 0");
+           }
             if (!columnExists(conn, "users", "lesson")) {
                 stmt.execute("ALTER TABLE users ADD COLUMN lesson INTEGER DEFAULT 0");
             }
             if (!columnExists(conn, "users", "level")) {
                 stmt.execute("ALTER TABLE users ADD COLUMN level INTEGER DEFAULT 0");
             }
-           if (!columnExists(conn, "users", "keyboard")) {
+            if(!columnExists(conn, "users", "keyboard")) {
                 stmt.execute("ALTER TABLE users ADD COLUMN keyboard INTEGER DEFAULT 0");
             }
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error initializing database: " + e.getMessage());
+            e.printStackTrace();
         }
-    }
+   }
 
-    private static boolean columnExists(Connection connection, String tableName, String columnName) throws SQLException {
+   private static boolean columnExists(Connection connection, String tableName, String columnName) throws SQLException {
         ResultSet rs = connection.getMetaData().getColumns(null, null, tableName, columnName);
         return rs.next();
     }

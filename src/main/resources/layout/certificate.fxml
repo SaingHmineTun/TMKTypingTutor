@@ -7,8 +7,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="root" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.CertificateController">
+<BorderPane fx:id="root" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/certificate_style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.CertificateController">
     <center>
         <VBox alignment="CENTER" spacing="20.0">
             <children>
@@ -17,21 +18,59 @@
                         <Image url="@../images/app_icon.png" />
                     </image>
                 </ImageView>
-                <Label style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Certificate of Completion" />
-                <Label text="This is to certify that" />
-                <Label fx:id="lblUsername" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #007bff;" text="[Username]" />
-                <Label text="has successfully completed" />
-                <Label fx:id="lblLevel" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="[Level Name]" />
-                <Label fx:id="lblAwpmLabel" text="with an average WPM of" />
-                <Label fx:id="lblAwpm" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="[AWPM]" />
-                <Label text="in TMK Typing Tutor" />
+                <Label style="-fx-font-size: 36px; -fx-font-weight: bold;" text="CERTIFICATE" textFill="#2c5aa0">
+                    <font>
+                        <Font name="System Bold" size="36.0" />
+                    </font>
+                </Label>
+                <Label style="-fx-font-size: 20px;" text="OF COMPLETION" textFill="#2c5aa0">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+                <VBox alignment="CENTER" spacing="5.0">
+                    <children>
+                        <Label style="-fx-font-size: 18px;" text="This is to certify that" />
+                        <Label fx:id="lblUsername" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #007bff;" text="[Username]">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+                        <Label style="-fx-font-size: 18px;" text="has successfully completed" />
+                        <Label fx:id="lblLevel" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c5aa0;" text="[Level Name]">
+                            <font>
+                                <Font name="System Bold" size="20.0" />
+                            </font>
+                        </Label>
+                        <Label style="-fx-font-size: 18px;" text="with an average typing speed of" />
+                        <Label fx:id="lblAwpm" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #28a745;" text="[AWPM] WPM">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+                <Label style="-fx-font-size: 16px;" text="in TMK Typing Tutor" />
             </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
         </VBox>
     </center>
     <bottom>
-        <VBox alignment="CENTER" prefHeight="80.0">
+        <VBox alignment="CENTER" prefHeight="100.0">
             <children>
-                <Button fx:id="btnClose" mnemonicParsing="false" onAction="#close" text="Close" />
+                <Label style="-fx-font-size: 14px;" text="Date:">
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin>
+                </Label>
+                <Label fx:id="lblDate" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="[Date]">
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                </Label>
+                <Button fx:id="btnClose" mnemonicParsing="false" onAction="#close" prefHeight="40.0" prefWidth="120.0" style="-fx-font-weight: bold;" text="Close" />
             </children>
         </VBox>
     </bottom>

@@ -32,6 +32,8 @@
                         </TableColumn>
                         <TableColumn fx:id="tcCertificate" prefWidth="150.0" text="Certificate">
                         </TableColumn>
+                        <TableColumn fx:id="tcDetails" prefWidth="150.0" text="Details">
+                        </TableColumn>
                     </columns>
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
