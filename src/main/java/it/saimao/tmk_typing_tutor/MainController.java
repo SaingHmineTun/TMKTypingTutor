@@ -63,7 +63,7 @@ public class MainController implements Initializable {
     @FXML
     private ComboBox<String> cbLevel;
     @FXML
-    ComboBox<Theme> cbTheme;
+    private ComboBox<Theme> cbTheme;
     @FXML
     private ComboBox<String> cbKeyboard;
     @FXML
@@ -1125,4 +1125,7 @@ public class MainController implements Initializable {
         cbLessons.getSelectionModel().select(selectedLesson);
     }
 
+    public ComboBox<Theme> getCbTheme() {
+        return cbTheme;
+    }
 }
