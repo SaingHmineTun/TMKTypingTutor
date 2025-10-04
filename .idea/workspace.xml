@@ -9,18 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Change summary's icon colors to match theme color!">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/CertificateController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/ProfileController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/Profile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/ProgressService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/certificate.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/profile.fxml" afterDir="false" />
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Adding user profile and cerficate page.">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/profile.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/Summary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/Summary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/DatabaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/DatabaseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,7 +211,7 @@
       <workItem from="1759542751534" duration="4283000" />
       <workItem from="1759548800806" duration="1879000" />
       <workItem from="1759555222525" duration="1967000" />
-      <workItem from="1759565733584" duration="1517000" />
+      <workItem from="1759565733584" duration="2438000" />
     </task>
     <task id="LOCAL-00001" summary="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!">
       <option name="closed" value="true" />
@@ -453,14 +445,22 @@
       <option name="project" value="LOCAL" />
       <updated>1759566155416</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Adding user profile and cerficate page.">
+      <option name="closed" value="true" />
+      <created>1759567315994</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1759567315994</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!" />
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="false" />
     <MESSAGE value="Solved : When all the lesson texts are typed, stop the typing!&#10;Solved : Except asai &amp; esai, when you type a character that is not similar to the what you have to type, do not type in the textbox.&#10;Added : Small Test Texts are added! Will make it as easy mode later on!" />
     <MESSAGE value="Added - Ability to type with English keyboard!&#10;Issue - In English, when Typing s or a that are no match with the toTypeWord, some characters are deleted unexpectedly!&#10;Issue - Using shn_sil keyboard to type is sill not working properly when typing ေ &amp; ႄ" />
     <MESSAGE value="Fix - Error typing with Shan Keyboard!&#10;Modified - Combobox Style" />
@@ -485,6 +485,7 @@
     <MESSAGE value="Added login and register page." />
     <MESSAGE value="Added selected theme for summary dialog!" />
     <MESSAGE value="Change summary's icon colors to match theme color!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change summary's icon colors to match theme color!" />
+    <MESSAGE value="Adding user profile and cerficate page." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding user profile and cerficate page." />
   </component>
 </project>
