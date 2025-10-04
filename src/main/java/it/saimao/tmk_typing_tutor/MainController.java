@@ -69,7 +69,7 @@ public class MainController implements Initializable {
     @FXML
     private ComboBox<String> cbLevel;
     @FXML
-    ComboBox<Theme> cbTheme;
+    private ComboBox<Theme> cbTheme;
     @FXML
     private ComboBox<String> cbKeyboard;
     @FXML
@@ -458,18 +458,24 @@ public class MainController implements Initializable {
     private void tutorTyping() {
         int keyboard = cbKeyboard.getSelectionModel().getSelectedIndex();
         String testText = tfView.getText();
+        // This is the correct, re-ordered text to be used for comparison
+        String reorderedTestText = testText;
         if (keyboard != 3) {
-            testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1031", "\\u1031$1$2$3");
-            testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1084", "\\u1084$1$2$3");
+            reorderedTestText = reorderedTestText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1031", "\\u1031$1$2$3");
+            reorderedTestText = reorderedTestText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1084", "\\u1084$1$2$3");
         }
+
         String practiceText = tfPractice.getText();
         int indexOfPractice = 0;
         String typing;
         if (tfPractice.getText() != null && !tfPractice.getText().isEmpty()) {
             indexOfPractice = practiceText.length();
-            String mustType = testText.substring(indexOfPractice - 1, indexOfPractice);
+            // Use the reordered text for comparison
+            String mustType = reorderedTestText.substring(indexOfPractice - 1, indexOfPractice);
             typing = practiceText.substring(indexOfPractice - 1, indexOfPractice);
+
             if (Utils.isEnglishCharacter(typing) && !isConverted) {
+                // ... (rest of the English to Shan conversion logic remains the same)
                 if (keyboard == 3) {
                     if (mustType.equals("ိ")) {
                         String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
@@ -568,6 +574,7 @@ public class MainController implements Initializable {
                     playMistypedSound();
                 }
                 return;
+
             } else {
                 isConverted = false;
                 if (!mustType.equals(typing)) {
@@ -578,20 +585,24 @@ public class MainController implements Initializable {
                     return;
                 }
             }
-            if (practiceText.length() >= 2 && keyboard != 3) {
-                String beforeTyping = practiceText.substring(indexOfPractice - 2, indexOfPractice - 1);
-                if (beforeTyping.equals("ေ") || beforeTyping.equals("ႄ")) {
-                    if (mustSwap) {
+
+            // DEFINITIVE FIX for 'ေ' and 'ႄ'
+            if (keyboard != 3) {
+                if (practiceText.length() >= 2) {
+                    String beforeTyping = practiceText.substring(indexOfPractice - 2, indexOfPractice - 1);
+                    if ((beforeTyping.equals("ေ") || beforeTyping.equals("ႄ")) && mustSwap) {
                         swap = true;
                         mustSwap = false;
                         String newText = tfPractice.getText(0, indexOfPractice - 2) + typing + beforeTyping;
                         tfPractice.setText(newText);
                     }
                 }
+                if ((typing.equals("ေ") || typing.equals("ႄ"))) {
+                    mustSwap = true;
+                }
             }
-            if ((typing.equals("ေ") || typing.equals("ႄ")) && keyboard != 3) {
-                mustSwap = true;
-            }
+
+
             if (practiceText.length() == tfView.getText().length()) {
                 end = true;
                 clearToTypeValues();
@@ -604,7 +615,7 @@ public class MainController implements Initializable {
             }
         }
         if (indexOfPractice < tfView.getText().length()) {
-            String valueToType = testText.substring(indexOfPractice, indexOfPractice + 1);
+            String valueToType = reorderedTestText.substring(indexOfPractice, indexOfPractice + 1);
             if (keyboard == 3) {
                 if (valueToType.equals("ိ")) {
                     String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
@@ -989,5 +1000,10 @@ public class MainController implements Initializable {
         Lesson selectedLesson = cbLessons.getSelectionModel().getSelectedItem();
         cbLessons.getSelectionModel().clearSelection();
         cbLessons.getSelectionModel().select(selectedLesson);
+    }
+
+
+    public ComboBox<Theme> getCbTheme() {
+        return cbTheme;
     }
 }
