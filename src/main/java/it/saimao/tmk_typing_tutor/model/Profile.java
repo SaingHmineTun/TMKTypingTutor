@@ -6,6 +6,7 @@ public class Profile {
     private String levelName;
     private String progress;
     private Button certificateButton;
+    private int levelIndex;
 
     public Profile(String levelName, String progress) {
         this.levelName = levelName;
@@ -36,5 +37,13 @@ public class Profile {
 
     public void setCertificateButton(Button certificateButton) {
         this.certificateButton = certificateButton;
+    }
+
+    public int getLevelIndex() {
+        return levelIndex;
+    }
+
+    public void setLevelIndex(int levelIndex) {
+        this.levelIndex = levelIndex;
     }
 }

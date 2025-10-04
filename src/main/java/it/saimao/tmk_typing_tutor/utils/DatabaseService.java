@@ -20,7 +20,7 @@ public class DatabaseService {
             String dbDir = System.getProperty("user.home") + File.separator + ".tmk_typing_tutor";
             Path dbDirPath = Paths.get(dbDir);
             if (Files.notExists(dbDirPath)) {
-                Files.createDirectories(dbDirPath);
+              Files.createDirectories(dbDirPath);
             }
             String dbPath = dbDir + File.separator + "typing_tutor.db";
             DB_URL = "jdbc:sqlite:" + dbPath;
@@ -29,7 +29,7 @@ public class DatabaseService {
         }
     }
 
-    public static Connection getConnection() throws SQLException {
+  public static Connection getConnection() throws SQLException {
         try {
             Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException e) {
@@ -39,7 +39,7 @@ public class DatabaseService {
     }
 
     public static void initializeDatabase() {
-        String createUserTableSql = "CREATE TABLE IF NOT EXISTS users (\n"
+        String createUserTableSql= "CREATE TABLE IF NOT EXISTS users (\n"
                 + " id integer PRIMARY KEY AUTOINCREMENT,\n"
                 + " username text NOT NULL UNIQUE,\n"
                 + " password text NOT NULL,\n"
@@ -57,22 +57,35 @@ public class DatabaseService {
                 + " FOREIGN KEY (user_id) REFERENCES users (id),\n"
                 + " UNIQUE(user_id, level_index, lesson_index)\n"
                 + ");";
+                
+        String createLessonProgressTableSql = "CREATE TABLE IF NOT EXISTS lesson_progress (\n"
+                + " id integer PRIMARY KEY AUTOINCREMENT,\n"
+                + " user_id INTEGER NOT NULL,\n"
+                + " level_index INTEGER NOT NULL,\n"
+                + " lesson_index INTEGER NOT NULL,\n"
+                + " wpm INTEGERNOTNULL,\n"
+                + " accuracy REAL NOT NULL,\n"
+                + " mistakes INTEGER NOT NULL,\n"
+                + " FOREIGN KEY (user_id) REFERENCES users (id),\n"
+                + " UNIQUE(user_id, level_index, lesson_index)\n"
+                + ");";
 
-        try (Connection conn = getConnection();
+        try (Connection conn= getConnection();
              Statement stmt = conn.createStatement()) {
             stmt.execute(createUserTableSql);
             stmt.execute(createProgressTableSql);
+            stmt.execute(createLessonProgressTableSql);
 
             if (!columnExists(conn, "users", "theme")) {
                 stmt.execute("ALTER TABLE users ADD COLUMN theme INTEGER DEFAULT 0");
-            }
+}
             if (!columnExists(conn, "users", "lesson")) {
                 stmt.execute("ALTER TABLE users ADD COLUMN lesson INTEGER DEFAULT 0");
             }
             if (!columnExists(conn, "users", "level")) {
                 stmt.execute("ALTER TABLE users ADD COLUMN level INTEGER DEFAULT 0");
             }
-            if (!columnExists(conn, "users", "keyboard")) {
+           if (!columnExists(conn, "users", "keyboard")) {
                 stmt.execute("ALTER TABLE users ADD COLUMN keyboard INTEGER DEFAULT 0");
             }
 

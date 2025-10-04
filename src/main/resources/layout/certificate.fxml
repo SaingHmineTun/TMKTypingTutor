@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #f0f0f0;" stylesheets="@../css/light_theme.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.CertificateController">
+<BorderPane fx:id="root" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.CertificateController">
     <center>
         <VBox alignment="CENTER" spacing="20.0">
             <children>
@@ -22,6 +22,8 @@
                 <Label fx:id="lblUsername" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #007bff;" text="[Username]" />
                 <Label text="has successfully completed" />
                 <Label fx:id="lblLevel" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="[Level Name]" />
+                <Label fx:id="lblAwpmLabel" text="with an average WPM of" />
+                <Label fx:id="lblAwpm" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="[AWPM]" />
                 <Label text="in TMK Typing Tutor" />
             </children>
         </VBox>

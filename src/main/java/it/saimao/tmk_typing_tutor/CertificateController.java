@@ -12,11 +12,21 @@ public class CertificateController {
     @FXML
     private Label lblLevel;
     @FXML
+    private Label lblAwpm;
+    @FXML
     private Button btnClose;
 
     public void initData(String username, String levelName) {
         lblUsername.setText(username);
         lblLevel.setText(levelName);
+    }
+    
+    public void initData(String username, String levelName, String averageWpm) {
+        lblUsername.setText(username);
+        lblLevel.setText(levelName);
+        if (lblAwpm != null) {
+            lblAwpm.setText(averageWpm);
+        }
     }
 
     @FXML

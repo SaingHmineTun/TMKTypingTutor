@@ -3,6 +3,8 @@ package it.saimao.tmk_typing_tutor;
 import it.saimao.tmk_typing_tutor.model.Profile;
 import it.saimao.tmk_typing_tutor.model.Theme;
 import it.saimao.tmk_typing_tutor.model.User;
+import it.saimao.tmk_typing_tutor.model.LessonProgress;
+import it.saimao.tmk_typing_tutor.utils.LessonProgressService;
 import it.saimao.tmk_typing_tutor.utils.ProgressService;
 import it.saimao.tmk_typing_tutor.utils.UserService;
 import javafx.collections.FXCollections;
@@ -18,6 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 public class ProfileController implements Initializable {
@@ -38,17 +41,29 @@ public class ProfileController implements Initializable {
     
     @FXML
     private Button btnChangePasswordTop;
-    @FXML
+ @FXML
     private Button btnClose;
 
     private User user;
-    private final int[] lessonsPerLevel = {9, 82, 82, 10}; // Lessons per level (Level 1: 9, Level 2: 82, Level 3: 82, Level 4: 10)
+    private final int[] lessonsPerLevel = {9, 82, 82, 10}; // Lessons per level (Level 1: 9, Level 2: 82, Level 3: 82,Level 4: 10)
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tcLevel.setCellValueFactory(new PropertyValueFactory<>("levelName"));
         tcProgress.setCellValueFactory(new PropertyValueFactory<>("progress"));
         tcCertificate.setCellValueFactory(new PropertyValueFactory<>("certificateButton"));
+        
+        // Add double-clicklistener to view detailed progress
+        tvProgress.setRowFactory(tv -> {
+            TableRow<Profile> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Profile rowData = row.getItem();
+                    showDetailedProgress(rowData);
+             }
+});
+            return row;
+        });
     }
 
     public void initData(User user) {
@@ -58,18 +73,53 @@ public class ProfileController implements Initializable {
 
     private void loadProgress() {
         ObservableList<Profile> profiles = FXCollections.observableArrayList();
-        for (int i = 0; i < 4; i++) { // Assuming 4 levels
+        for (int i = 0; i < 4;i++){ // Assuming 4 levels
             int completed = ProgressService.getCompletedLessonCount(user.getId(), i);
             int total = lessonsPerLevel[i];
             Profile profile = new Profile("Level " + (i + 1), completed + " / " + total);
+            profile.setLevelIndex(i); // Storelevelindexfor later use
             if (completed >= total) {
                 profile.getCertificateButton().setDisable(false);
                 final int levelIndex = i;
                 profile.getCertificateButton().setOnAction(event -> showCertificate(levelIndex));
+            } else if (completed > 0) {
+                // Enable certificate button to showdetailed progress even if not completed
+                profile.getCertificateButton().setText("Details");
+                profile.getCertificateButton().setDisable(false); // Enable the button
+                final int levelIndex = i;
+                profile.getCertificateButton().setOnAction(event -> showDetailedProgress(levelIndex));
             }
-            profiles.add(profile);
-        }
+           profiles.add(profile);
+       }
         tvProgress.setItems(profiles);
+    }
+
+    private void showDetailedProgress(Profile profile) {
+        //Implementation removed as it was causing issues
+    }
+    
+private void showDetailedProgress(int levelIndex) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/lesson_progress.fxml"));
+            Stage stage= new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+stage.initOwner(btnClose.getScene().getWindow());
+            Scene scene = new Scene(loader.load());
+            
+            // Apply the current theme to the lesson progress window
+            Theme theme = Theme.fromIndex(user.getTheme());
+            String stylesheet= getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
+            scene.getStylesheets().add(stylesheet);
+
+            stage.setScene(scene);
+
+            LessonProgressController controller = loader.getController();
+            controller.initData(user.getId(), levelIndex);
+
+            stage.show();
+        } catch (IOException e){
+            e.printStackTrace();
+       }
     }
 
     @FXML
@@ -83,11 +133,11 @@ public class ProfileController implements Initializable {
             dialog.initOwner(btnClose.getScene().getWindow());
             
             // Apply the current theme to the dialog
-            Theme theme = Theme.fromIndex(user.getTheme());
+            Theme theme =Theme.fromIndex(user.getTheme());
             String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
             dialog.getDialogPane().getStylesheets().add(stylesheet);
             
-            // Get controller and pass user reference
+            //Get controller and pass user reference
             ChangePasswordController controller = loader.getController();
             controller.initData(user);
             
@@ -97,16 +147,16 @@ public class ProfileController implements Initializable {
         }
     }
     
-    // This method is now in the ChangePasswordController
+    // This methodis now inthe ChangePasswordController
     /*
     @FXML
-    private void changePassword() {
+   private void changePassword() {
         String oldPassword = pfOldPassword.getText();
-        String newPassword = pfNewPassword.getText();
+        String newPassword= pfNewPassword.getText();
         String confirmPassword = pfConfirmPassword.getText();
 
         if (!user.getPassword().equals(oldPassword)) {
-            lblPasswordStatus.setText("Incorrect old password!");
+            lblPasswordStatus.setText("Incorrect oldpassword!");
             return;
         }
         if (!newPassword.equals(confirmPassword)) {
@@ -119,8 +169,8 @@ public class ProfileController implements Initializable {
         }
 
         user.setPassword(newPassword);
-        UserService.updateUser(user);
-        lblPasswordStatus.setText("Password changed successfully!");
+       UserService.updateUser(user);
+        lblPasswordStatus.setText("Passwordchanged successfully!");
         pfOldPassword.clear();
         pfNewPassword.clear();
         pfConfirmPassword.clear();
@@ -130,10 +180,10 @@ public class ProfileController implements Initializable {
     private void showCertificate(int levelIndex) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/certificate.fxml"));
-            Stage stage = new Stage();
+Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(btnClose.getScene().getWindow());
-            Scene scene = new Scene(loader.load());
+            Scene scene =new Scene(loader.load());
 
             // Apply the current theme to the certificate window
             Theme theme = Theme.fromIndex(user.getTheme());
@@ -142,8 +192,13 @@ public class ProfileController implements Initializable {
 
             stage.setScene(scene);
 
-            CertificateController controller = loader.getController();
-            controller.initData(user.getUsername(), "Level " + (levelIndex + 1));
+           CertificateController controller = loader.getController();
+            
+            // Calculate average WPM for the level
+            double averageWpm = LessonProgressService.getAverageWpmForLevel(user.getId(), levelIndex);
+            DecimalFormat df = new DecimalFormat("#.##");
+            
+            controller.initData(user.getUsername(), "Level " + (levelIndex +1), df.format(averageWpm));
 
             stage.show();
         } catch (IOException e) {
@@ -151,7 +206,7 @@ public class ProfileController implements Initializable {
         }
     }
 
-    @FXML
+@FXML
     private void close() {
         Stage stage = (Stage) btnClose.getScene().getWindow();
         stage.close();
