@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -40,7 +41,7 @@ public class DatabaseService {
 
     public static void initializeDatabase() {
         // SQL statement for creating a new table
-        String sql = "CREATE TABLE IF NOT EXISTS users (\n"
+        String createUserTableSql = "CREATE TABLE IF NOT EXISTS users (\n"
                 + " id integer PRIMARY KEY AUTOINCREMENT,\n"
                 + " username text NOT NULL UNIQUE,\n"
                 + " password text NOT NULL\n"
@@ -49,9 +50,29 @@ public class DatabaseService {
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement()) {
             // create a new table
-            stmt.execute(sql);
+            stmt.execute(createUserTableSql);
+
+            // Add columns for user settings if they don't exist
+            if (!columnExists(conn, "users", "theme")) {
+                stmt.execute("ALTER TABLE users ADD COLUMN theme INTEGER DEFAULT 0");
+            }
+            if (!columnExists(conn, "users", "lesson")) {
+                stmt.execute("ALTER TABLE users ADD COLUMN lesson INTEGER DEFAULT 0");
+            }
+            if (!columnExists(conn, "users", "level")) {
+                stmt.execute("ALTER TABLE users ADD COLUMN level INTEGER DEFAULT 0");
+            }
+            if (!columnExists(conn, "users", "keyboard")) {
+                stmt.execute("ALTER TABLE users ADD COLUMN keyboard INTEGER DEFAULT 0");
+            }
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private static boolean columnExists(Connection connection, String tableName, String columnName) throws SQLException {
+        ResultSet rs = connection.getMetaData().getColumns(null, null, tableName, columnName);
+        return rs.next();
     }
 }

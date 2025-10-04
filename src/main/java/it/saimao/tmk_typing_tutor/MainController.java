@@ -7,8 +7,9 @@ import it.saimao.tmk_typing_tutor.key_map.Yunghkio_KeyMap;
 import it.saimao.tmk_typing_tutor.model.Key;
 import it.saimao.tmk_typing_tutor.model.Lesson;
 import it.saimao.tmk_typing_tutor.model.Theme;
+import it.saimao.tmk_typing_tutor.model.User;
 import it.saimao.tmk_typing_tutor.utils.Perc;
-import it.saimao.tmk_typing_tutor.utils.UserSetting;
+import it.saimao.tmk_typing_tutor.utils.UserService;
 import it.saimao.tmk_typing_tutor.utils.Utils;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -99,6 +100,7 @@ public class MainController implements Initializable {
     private ImageView ivPrev;
 
     private Stage primaryStage;
+    private User loggedInUser;
 
     private Node toTypeNode;
     private Node toTypeSecNode;
@@ -120,17 +122,18 @@ public class MainController implements Initializable {
         initPracticeListener();
         adjustForVariousResolution();
         reqFocusOnPracticeField();
-        cbKeyboard.getSelectionModel().select(UserSetting.loadKeyboard());
     }
 
-    public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-        // Restore Platform.runLater to ensure UI is ready before applying the theme
-        Platform.runLater(this::loadUi);
-    }
-
-    private void loadUi() {
-        cbTheme.getSelectionModel().select(UserSetting.loadTheme());
+    public void initData(User user, Stage stage) {
+        this.loggedInUser = user;
+        this.primaryStage = stage;
+        // Apply user settings
+        Platform.runLater(() -> {
+            cbKeyboard.getSelectionModel().select(loggedInUser.getKeyboard());
+            cbTheme.getSelectionModel().select(loggedInUser.getTheme());
+            cbLevel.getSelectionModel().select(loggedInUser.getLevel());
+            cbLessons.getSelectionModel().select(loggedInUser.getLesson());
+        });
     }
 
 
@@ -230,21 +233,25 @@ public class MainController implements Initializable {
 
         cbKeyboard.getItems().setAll("လွၵ်းမိုဝ်း လၵ်းၸဵင်", "လွၵ်းမိုဝ်း ယုင်းၶဵဝ်", "လွၵ်းမိုဝ်း ပၢင်လူင်", "လွၵ်းမိုဝ်း ၼမ်ႉၶူင်း");
         cbKeyboard.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue, newValue) -> {
-            UserSetting.saveKeyboard(newValue.intValue());
-            if (newValue.intValue() == 0) {
-                allValues = SIL_KeyMap.getAllValuesList();
-            } else if (newValue.intValue() == 1) {
-                allValues = Yunghkio_KeyMap.getAllValuesList();
-            } else if (newValue.intValue() == 2) {
-                allValues = Panglong_KeyMap.getAllValuesList();
-            } else {
-                allValues = NamKhone_KeyMap.getAllValuesList();
+            if (newValue != null) {
+                if (loggedInUser != null) {
+                    loggedInUser.setKeyboard(newValue.intValue());
+                    UserService.updateUser(loggedInUser);
+                }
+                if (newValue.intValue() == 0) {
+                    allValues = SIL_KeyMap.getAllValuesList();
+                } else if (newValue.intValue() == 1) {
+                    allValues = Yunghkio_KeyMap.getAllValuesList();
+                } else if (newValue.intValue() == 2) {
+                    allValues = Panglong_KeyMap.getAllValuesList();
+                } else {
+                    allValues = NamKhone_KeyMap.getAllValuesList();
+                }
+                resetKeyboard();
+                createKeyBoard();
+                reqFocusOnPracticeField();
+                resetLevels(newValue.intValue());
             }
-            resetKeyboard();
-            createKeyBoard();
-            reqFocusOnPracticeField();
-            resetLevels(newValue.intValue());
-//            tutorTyping();
         });
 
         /************* END KEYBOARD ***********/
@@ -296,17 +303,16 @@ public class MainController implements Initializable {
             }
         });
         cbTheme.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
+            if (newValue != null && root.getScene() != null) {
                 Theme theme = cbTheme.getItems().get(newValue.intValue());
-                UserSetting.saveTheme(newValue.intValue());
-                if (root.getScene() != null) {
-                    root.getScene().getRoot().getStylesheets().clear();
-                    root.getScene().getRoot().getStylesheets().add(getClass().getResource("/css/" + theme.id() + ".css").toExternalForm());
+                if (loggedInUser != null) {
+                    loggedInUser.setTheme(newValue.intValue());
+                    UserService.updateUser(loggedInUser);
                 }
-                if (key != null && key.getScene() != null) {
-                    key.getScene().getStylesheets().clear();
-                    key.getScene().getStylesheets().add(getClass().getResource("/css/" + theme.id() + ".css").toExternalForm());
-                }
+                // Revert to the original working logic
+                String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
+                root.getStylesheets().clear();
+                root.getStylesheets().add(stylesheet);
 
                 ivNext.setImage(new Image(getClass().getResource("/images/next_" + theme.iconColor() + ".png").toExternalForm()));
                 ivPrev.setImage(new Image(getClass().getResource("/images/prev_" + theme.iconColor() + ".png").toExternalForm()));
@@ -321,9 +327,14 @@ public class MainController implements Initializable {
         lessonList = new ArrayList<>();
         // Level Items are added according to Keyboard Selection!
         cbLevel.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
-//            System.out.println("MODE SELECTION PROPERTY");
-            changeLessons(newValue.intValue());
-            tfPractice.clear();
+            if (newValue != null) {
+                if (loggedInUser != null) {
+                    loggedInUser.setLevel(newValue.intValue());
+                    UserService.updateUser(loggedInUser);
+                }
+                changeLessons(newValue.intValue());
+                tfPractice.clear();
+            }
         });
 
         /************* END LEVEL **************/
@@ -332,6 +343,14 @@ public class MainController implements Initializable {
         // cbLessons items are added when change in cbLevel occurs!
         cbLessons.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
+                if (loggedInUser != null) {
+                    // Check if the index is valid before setting
+                    int lessonIndex = cbLessons.getSelectionModel().getSelectedIndex();
+                    if (lessonIndex != -1) {
+                        loggedInUser.setLesson(lessonIndex);
+                        UserService.updateUser(loggedInUser);
+                    }
+                }
                 if (cbLevel.getSelectionModel().getSelectedIndex() == 0) {
                     List<String> lessons = new ArrayList<>(Arrays.stream(newValue.getLesson().split(" ")).toList());
                     if (cbLessons.getSelectionModel().getSelectedIndex() != 0)

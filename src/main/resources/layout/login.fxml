@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/frost_theme.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.auth.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.auth.LoginController">
    <children>
-      <Label layoutX="192.0" layoutY="67.0" style="-fx-font-size: 25;" text="TMK Typing Tutor">
+      <Label layoutX="239.0" layoutY="25.0" text="TMK Typing Tutor">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="tfUsername" layoutX="203.0" layoutY="129.0" promptText="Username" />
-      <PasswordField fx:id="pfPassword" layoutX="203.0" layoutY="189.0" promptText="Password" />
-      <Button fx:id="btnLogin" layoutX="218.0" layoutY="250.0" mnemonicParsing="false" onAction="#login" text="Login" />
-      <Label fx:id="lbError" layoutX="239.0" layoutY="103.0" text="Label" textFill="RED" visible="false" />
-      <Button fx:id="btnRegister" layoutX="300.0" layoutY="250.0" mnemonicParsing="false" onAction="#showRegister" text="Register" />
+      <ListView fx:id="lvUsers" layoutX="200.0" layoutY="75.0" prefHeight="150.0" prefWidth="200.0" />
+      <PasswordField fx:id="pfPassword" layoutX="226.0" layoutY="240.0" promptText="Password" visible="false" />
+      <Button fx:id="btnLogin" layoutX="235.0" layoutY="290.0" mnemonicParsing="false" onAction="#login" prefWidth="60.0" text="Login" visible="false" />
+      <Label fx:id="lbError" layoutX="239.0" layoutY="50.0" text="Label" textFill="RED" visible="false" />
+      <Button fx:id="btnRegister" layoutX="305.0" layoutY="290.0" mnemonicParsing="false" onAction="#showRegister" prefWidth="70.0" text="Register" />
+      <Label fx:id="lblSelectedUser" alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="50.0" prefWidth="200.0" textAlignment="CENTER" />
    </children>
 </AnchorPane>
