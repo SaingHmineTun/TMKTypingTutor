@@ -51,7 +51,7 @@ public class Summary {
         this.mainController = mainController;
         this.owner = owner; // Store the owner stage
 
-        stage = new Stage();
+        stage =new Stage();
         stage.initOwner(owner);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/summary.fxml"));
@@ -77,16 +77,16 @@ public class Summary {
         this.accuracy = accuracy;
         this.mistype = mistype;
 
-        // Apply the main theme from the owner window
-        stage.getScene().getStylesheets().setAll(owner.getScene().getStylesheets());
-        // Add summary-specific styles on top
+        // Apply summary-specific styles first
         stage.getScene().getStylesheets().add(getClass().getResource("/css/summary_style.css").toExternalForm());
+        // Apply the main theme from the owner window (this will override summary styles where needed)
+        stage.getScene().getStylesheets().addAll(owner.getScene().getStylesheets());
 
-        showSummary();
+showSummary();
         stage.show();
     }
 
-    private void initAction() {
+private void initAction() {
         sClose.setOnAction(event -> stage.close());
         sNext.setOnAction(event -> {
             if (mainController.nextLesson()) {
@@ -97,7 +97,7 @@ public class Summary {
             mainController.retryLesson();
             stage.close();
         });
-        sPrev.setOnAction(event -> {
+        sPrev.setOnAction(event-> {
             if (mainController.prevLesson()) {
                 stage.close();
             }

@@ -1,6 +1,7 @@
 package it.saimao.tmk_typing_tutor;
 
 import it.saimao.tmk_typing_tutor.model.Profile;
+import it.saimao.tmk_typing_tutor.model.Theme;
 import it.saimao.tmk_typing_tutor.model.User;
 import it.saimao.tmk_typing_tutor.utils.ProgressService;
 import it.saimao.tmk_typing_tutor.utils.UserService;
@@ -29,21 +30,19 @@ public class ProfileController implements Initializable {
     private TableColumn<Profile, String> tcProgress;
     @FXML
     private TableColumn<Profile, Button> tcCertificate;
-    @FXML
+    // Password change fields are now in dialog, not directly in profile view
     private PasswordField pfOldPassword;
-    @FXML
     private PasswordField pfNewPassword;
-    @FXML
     private PasswordField pfConfirmPassword;
-    @FXML
-    private Button btnChangePassword;
-    @FXML
     private Label lblPasswordStatus;
+    
+    @FXML
+    private Button btnChangePasswordTop;
     @FXML
     private Button btnClose;
 
     private User user;
-    private final int[] lessonsPerLevel = {15, 10, 10, 10}; // Lessons per level
+    private final int[] lessonsPerLevel = {9, 82, 82, 10}; // Lessons per level (Level 1: 9, Level 2: 82, Level 3: 82, Level 4: 10)
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -74,6 +73,33 @@ public class ProfileController implements Initializable {
     }
 
     @FXML
+    private void showChangePasswordDialog() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/change_password_dialog.fxml"));
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane(loader.load());
+            dialog.setTitle("Change Password");
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner(btnClose.getScene().getWindow());
+            
+            // Apply the current theme to the dialog
+            Theme theme = Theme.fromIndex(user.getTheme());
+            String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
+            dialog.getDialogPane().getStylesheets().add(stylesheet);
+            
+            // Get controller and pass user reference
+            ChangePasswordController controller = loader.getController();
+            controller.initData(user);
+            
+            dialog.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    // This method is now in the ChangePasswordController
+    /*
+    @FXML
     private void changePassword() {
         String oldPassword = pfOldPassword.getText();
         String newPassword = pfNewPassword.getText();
@@ -93,12 +119,13 @@ public class ProfileController implements Initializable {
         }
 
         user.setPassword(newPassword);
-        UserService.updateUser(user); // This needs a method to update password
+        UserService.updateUser(user);
         lblPasswordStatus.setText("Password changed successfully!");
         pfOldPassword.clear();
         pfNewPassword.clear();
         pfConfirmPassword.clear();
     }
+    */
 
     private void showCertificate(int levelIndex) {
         try {
@@ -106,7 +133,14 @@ public class ProfileController implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(btnClose.getScene().getWindow());
-            stage.setScene(new Scene(loader.load()));
+            Scene scene = new Scene(loader.load());
+
+            // Apply the current theme to the certificate window
+            Theme theme = Theme.fromIndex(user.getTheme());
+            String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
+            scene.getStylesheets().add(stylesheet);
+
+            stage.setScene(scene);
 
             CertificateController controller = loader.getController();
             controller.initData(user.getUsername(), "Level " + (levelIndex + 1));

@@ -243,21 +243,7 @@ public class MainController implements Initializable {
             }
         });
 
-        cbTheme.getItems().addAll(List.of(
-                new Theme("dark_theme", "Dark", "white"),
-                new Theme("light_theme", "Light", "dark"),
-                new Theme("green_theme", "Green", "white"),
-                new Theme("crimson_red_theme", "Red", "white"),
-                new Theme("frost_theme", "Frost", "dark"),
-                new Theme("golden_theme", "Golden", "dark"),
-                new Theme("midnight_theme", "Midnight", "white"),
-                new Theme("monochrome_theme", "Monochrome", "white"),
-                new Theme("ocean_theme", "Ocean", "dark"),
-                new Theme("pastel_theme", "Pastel", "dark"),
-                new Theme("pinky_theme", "Pinky", "dark"),
-                new Theme("sunset_theme", "Sunset", "dark"),
-                new Theme("neon_theme", "Neon", "white")
-        ));
+        cbTheme.getItems().addAll(List.of(Theme.values()));
         cbTheme.setButtonCell(new ListCell<>() {
             @Override
             protected void updateItem(Theme item, boolean empty) {
@@ -266,7 +252,7 @@ public class MainController implements Initializable {
                     setText(null);
                     setGraphic(null);
                 } else {
-                    setText(item.name().toUpperCase());
+                    setText(item.displayName().toUpperCase());
                 }
             }
         });
@@ -278,7 +264,7 @@ public class MainController implements Initializable {
                     setText(null);
                     setGraphic(null);
                 } else {
-                    setText(item.name().toUpperCase());
+                    setText(item.displayName().toUpperCase());
                 }
             }
         });
@@ -1061,7 +1047,17 @@ public class MainController implements Initializable {
 
     private void checkLevelCompletion() {
         int levelIndex = cbLevel.getSelectionModel().getSelectedIndex();
-        int totalLessons = cbLessons.getItems().size();
+        int totalLessons;
+
+        // Get the actual number of lessons for this level
+        if (levelIndex == 0) {
+            totalLessons = 9;  // Level 1 has 9 lessons
+        } else if (levelIndex == 1 || levelIndex == 2) {
+            totalLessons = 82; // Level 2 and 3 have 82 lessons each
+        } else {
+            totalLessons = cbLessons.getItems().size(); // For other levels, use actual size
+        }
+
         int completedLessons = ProgressService.getCompletedLessonCount(loggedInUser.getId(), levelIndex);
         if (completedLessons >= totalLessons) {
             showCertificate(levelIndex);
@@ -1074,7 +1070,14 @@ public class MainController implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(primaryStage);
-            stage.setScene(new Scene(loader.load()));
+            Scene scene = new Scene(loader.load());
+            
+            // Apply the current theme to the profile window
+            Theme theme = Theme.fromIndex(loggedInUser.getTheme());
+            String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
+            scene.getStylesheets().add(stylesheet);
+            
+            stage.setScene(scene);
 
             ProfileController controller = loader.getController();
             controller.initData(loggedInUser);
@@ -1091,7 +1094,14 @@ public class MainController implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(primaryStage);
-            stage.setScene(new Scene(loader.load()));
+            Scene scene = new Scene(loader.load());
+
+            // Apply the current theme to the certificate window
+            Theme theme = Theme.fromIndex(loggedInUser.getTheme());
+            String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
+            scene.getStylesheets().add(stylesheet);
+
+            stage.setScene(scene);
 
             CertificateController controller = loader.getController();
             controller.initData(loggedInUser.getUsername(), "Level " + (levelIndex + 1));
