@@ -45,7 +45,7 @@ public class MainController implements Initializable {
     @FXML
     private VBox vbMinimize;
     @FXML
-private VBox vbProfile;
+    private VBox vbProfile;
     @FXML
     private ImageView imgClose;
     @FXML
@@ -103,7 +103,7 @@ private VBox vbProfile;
     private User loggedInUser;
     private boolean isInitializing = false;
 
-   private Node toTypeNode;
+    private Node toTypeNode;
     private Node toTypeSecNode;
     private List<Map<String, String>> allValues;
 
@@ -113,35 +113,35 @@ private VBox vbProfile;
     private boolean swap;
     private boolean stop;
     private List<Lesson> lessonList;
-private List<String> levelList;
+    private List<String> levelList;
 
     //Adda static reference to the main controller for communication
     private static MainController instance;
 
-@Override
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Set the static instance
         instance = this;
-        
+
         initTopBar();
         initComboBoxItems();
         initPracticeListener();
         adjustForVariousResolution();
         reqFocusOnPracticeField();
     }
-    
+
     // Static method to get the main controller instance
     public static MainController getInstance() {
         return instance;
-}
-    
+    }
+
     // Method to navigate to a specific lesson
     public void navigateToLesson(int levelIndex, int lessonIndex) {
         Platform.runLater(() -> {
             try {
                 // Select the level
                 cbLevel.getSelectionModel().select(levelIndex);
-                
+
                 // Wait a bit for the level change to propagate, then select the lesson
                 Platform.runLater(() -> {
                     // Ensure the lessons are loaded
@@ -152,7 +152,7 @@ private List<String> levelList;
             } catch (Exception e) {
                 e.printStackTrace();
             }
-});
+        });
     }
 
     public void initData(User user, Stage stage) {
@@ -163,7 +163,7 @@ private List<String> levelList;
             cbTheme.getSelectionModel().select(loggedInUser.getTheme());
             cbKeyboard.getSelectionModel().select(loggedInUser.getKeyboard());
         });
-   }
+    }
 
 
     private void resetLevels(int keyboard) {
@@ -173,7 +173,7 @@ private List<String> levelList;
         else {
             levelList.addAll(Arrays.asList("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3").stream().toList());
         }
-cbLevel.getItems().setAll(FXCollections.observableArrayList(levelList));
+        cbLevel.getItems().setAll(FXCollections.observableArrayList(levelList));
         if (!isInitializing) {
             cbLevel.getSelectionModel().selectFirst();
         }
@@ -218,7 +218,7 @@ cbLevel.getItems().setAll(FXCollections.observableArrayList(levelList));
         lblAWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lbAWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lblWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
-        lbWPM.setStyle("-fx-font-size: "+ Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
+        lbWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lblMIST.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lbMIST.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lblACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
@@ -228,7 +228,7 @@ cbLevel.getItems().setAll(FXCollections.observableArrayList(levelList));
     private void initTopBar() {
         titleBar.setPrefHeight(Perc.getDynamicPixel(40));
         vbClose.setOnMouseClicked(event -> {
-            Node source= (Node) event.getSource();
+            Node source = (Node) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
             stage.close();
         });
@@ -243,7 +243,7 @@ cbLevel.getItems().setAll(FXCollections.observableArrayList(levelList));
     private void initComboBoxItems() {
         levelList = new ArrayList<>();
         cbKeyboard.getItems().setAll("လွၵ်းမိုဝ်း လၵ်းၸဵင်", "လွၵ်းမိုဝ်း ယုင်းၶဵဝ်", "လွၵ်းမိုဝ်း ပၢင်လူင်", "လွၵ်းမိုဝ်း ၼမ်ႉၶူင်း");
-        cbKeyboard.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue, newValue) ->{
+        cbKeyboard.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue != null) {
                 if (loggedInUser != null && !isInitializing) {
                     loggedInUser.setKeyboard(newValue.intValue());
@@ -251,7 +251,7 @@ cbLevel.getItems().setAll(FXCollections.observableArrayList(levelList));
                 }
                 if (newValue.intValue() == 0) {
                     allValues = SIL_KeyMap.getAllValuesList();
-                }else if (newValue.intValue() == 1) {
+                } else if (newValue.intValue() == 1) {
                     allValues = Yunghkio_KeyMap.getAllValuesList();
                 } else if (newValue.intValue() == 2) {
                     allValues = Panglong_KeyMap.getAllValuesList();
@@ -269,7 +269,7 @@ cbLevel.getItems().setAll(FXCollections.observableArrayList(levelList));
         });
 
         cbTheme.getItems().addAll(List.of(Theme.values()));
-       cbTheme.setButtonCell(new ListCell<>() {
+        cbTheme.setButtonCell(new ListCell<>() {
             @Override
             protected void updateItem(Theme item, boolean empty) {
                 super.updateItem(item, empty);
@@ -288,7 +288,7 @@ cbLevel.getItems().setAll(FXCollections.observableArrayList(levelList));
                 if (empty || item == null) {
                     setText(null);
                     setGraphic(null);
-} else {
+                } else {
                     setText(item.displayName().toUpperCase());
                 }
             }
@@ -309,7 +309,7 @@ cbLevel.getItems().setAll(FXCollections.observableArrayList(levelList));
         });
 
         lessonList = new ArrayList<>();
-        cbLevel.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) ->{
+        cbLevel.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 if (loggedInUser != null && !isInitializing) {
                     loggedInUser.setLevel(newValue.intValue());
@@ -361,20 +361,20 @@ cbLevel.getItems().setAll(FXCollections.observableArrayList(levelList));
         InputStream is;
         if (i == 0) {
             is = getClass().getResourceAsStream("/assets/lesson_1.csv");
-        } else if (i == 1){
+        } else if (i == 1) {
             is = getClass().getResourceAsStream("/assets/lesson_2.csv");
         } else if (i == 2) {
             is = getClass().getResourceAsStream("/assets/lesson_3.csv");
         } else {
             is = getClass().getResourceAsStream("/assets/lesson_4.csv");
         }
-        try(BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
                 line = line.replaceAll("\\uFEFF", "");
                 String[] values = line.split(",");
                 int no = Integer.parseInt(values[0].trim());
-String title = values[1].trim();
+                String title = values[1].trim();
                 String content = values[2].replace("\"", "").trim();
                 lessonList.add(new Lesson(no, title, content));
             }
@@ -391,7 +391,7 @@ String title = values[1].trim();
 
     private List<String> replace_A_WithOtherCharacters(List<String> lessons) {
         List<String> newList = new LinkedList<>();
-       String[] characters = cbLessons.getItems().get(0).getLesson().split(" ");
+        String[] characters = cbLessons.getItems().get(0).getLesson().split(" ");
         for (String lesson : lessons) {
             String newValue = lesson.replaceAll("ဢ", characters[new Random().nextInt(characters.length)]);
             newList.add(newValue);
@@ -432,7 +432,7 @@ String title = values[1].trim();
         });
         tfPractice.addEventHandler(KeyEvent.KEY_TYPED, event -> {
             if (event.getCharacter().equals("\u200B") || (!typingWithEnglish && consumeShanCharacter)) {
-                consumeShanCharacter= false;
+                consumeShanCharacter = false;
                 typingWithEnglish = false;
                 event.consume();
             }
@@ -735,10 +735,9 @@ String title = values[1].trim();
 //    }
 
     private void tutorTyping() {
-        // To be able to type ে&ໄ first with SIL_Shan Keyman keyboard
         int keyboard = cbKeyboard.getSelectionModel().getSelectedIndex();
         String testText = tfView.getText();
-if (keyboard != 3) {
+        if (keyboard != 3) {
             testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1031", "\u1031$1$2$3");
             testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1084", "\u1084$1$2$3");
         }
@@ -751,13 +750,13 @@ if (keyboard != 3) {
             // For the typing tutor to know exactly what key we need to type
             indexOfPractice = practiceText.length();
             String mustType = testText.substring(indexOfPractice - 1, indexOfPractice);
-            typing = practiceText.substring(indexOfPractice- 1, indexOfPractice);
+            typing = practiceText.substring(indexOfPractice - 1, indexOfPractice);
             if (Utils.isEnglishCharacter(typing) && !isConverted) {
                 // Config for Namkhone Keyboard
                 if (keyboard == 3) {
                     // Show  ိံ  key
                     if (mustType.equals("ိ")) {
-                       String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
+                        String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
                         if (afterTyping.equals("ံ")) {
                             mustType = "ိံ";
                         }
@@ -806,7 +805,7 @@ if (keyboard != 3) {
                     }
 
                     // Show ေႃkey
-                    if(mustType.equals("ေ")) {
+                    if (mustType.equals("ေ")) {
                         try {
                             String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
                             if (afterTyping.equals("ႃ")) {
@@ -814,7 +813,7 @@ if (keyboard != 3) {
                             }
                         } catch (Exception ignored) {
                         }
-}
+                    }
 
                     // Show ို key
                     if (mustType.equals("ိ")) {
@@ -841,7 +840,7 @@ if (keyboard != 3) {
                     // Show ိူ key
                     if (mustType.equals("ိ")) {
                         try {
-                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice+ 1);
+                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
                             if (afterTyping.equals("ူ")) {
                                 mustType = "ိူ";
                             }
@@ -904,7 +903,7 @@ if (keyboard != 3) {
                     }
                 }
             }
-if ((typing.equals("ေ") || typing.equals("ႄ")) && keyboard != 3) {
+            if ((typing.equals("ေ") || typing.equals("ႄ")) && keyboard != 3) {
                 mustSwap = true;
             }
 
@@ -927,7 +926,7 @@ if ((typing.equals("ေ") || typing.equals("ႄ")) && keyboard != 3) {
 
         if (indexOfPractice < tfView.getText().length()) {
             // Know whichvalue to type next
-            String valueToType = testText.substring(indexOfPractice, indexOfPractice+ 1);
+            String valueToType = testText.substring(indexOfPractice, indexOfPractice + 1);
             if (keyboard == 3) {
                 // Show  ိံ  key
                 if (valueToType.equals("ိ")) {
@@ -939,7 +938,7 @@ if ((typing.equals("ေ") || typing.equals("ႄ")) && keyboard != 3) {
                 // Show  ျွ key
                 if (valueToType.equals("ျ")) {
                     String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
-                   if (afterTyping.equals("ွ")) {
+                    if (afterTyping.equals("ွ")) {
                         valueToType = "ျွ";
                     }
                 }
@@ -948,7 +947,7 @@ if ((typing.equals("ေ") || typing.equals("ႄ")) && keyboard != 3) {
                 if (valueToType.equals("ြ")) {
                     try {
                         String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
-                        if(afterTyping.equals("ႃ")) {
+                        if (afterTyping.equals("ႃ")) {
                             valueToType = "ြႃ";
                         }
                     } catch (Exception ignored) {
@@ -981,7 +980,7 @@ if ((typing.equals("ေ") || typing.equals("ႄ")) && keyboard != 3) {
                 // Show ေႃ key
                 if (valueToType.equals("ေ")) {
                     try {
-                        String afterTyping = testText.substring(indexOfPractice +1, indexOfPractice + 2);
+                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
                         if (afterTyping.equals("ႃ")) {
                             valueToType = "ေႃ";
                         }
@@ -993,7 +992,7 @@ if ((typing.equals("ေ") || typing.equals("ႄ")) && keyboard != 3) {
                 if (valueToType.equals("ိ")) {
                     try {
                         String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
-                       if (afterTyping.equals("ု")) {
+                        if (afterTyping.equals("ု")) {
                             valueToType = "ို";
                         }
                     } catch (Exception ignored) {
@@ -1004,7 +1003,7 @@ if ((typing.equals("ေ") || typing.equals("ႄ")) && keyboard != 3) {
                 // Show ိူ key
                 if (valueToType.equals("ိ")) {
                     try {
-                        String afterTyping = testText.substring(indexOfPractice+ 1, indexOfPractice + 2);
+                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
                         if (afterTyping.equals("ူ")) {
                             valueToType = "ိူ";
                         }
@@ -1015,7 +1014,7 @@ if ((typing.equals("ေ") || typing.equals("ႄ")) && keyboard != 3) {
                 // Show ိူ key
                 if (valueToType.equals("ိ")) {
                     try {
-                        String afterTyping = testText.substring(indexOfPractice +1, indexOfPractice + 2);
+                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
                         if (afterTyping.equals("ူ")) {
                             valueToType = "ိူ";
                         }
@@ -1037,7 +1036,7 @@ if ((typing.equals("ေ") || typing.equals("ႄ")) && keyboard != 3) {
 
             }
             // Show ႂ်  key
-            if (valueToType.equals("ႂ")){
+            if (valueToType.equals("ႂ")) {
                 String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
                 if (afterTyping.equals("်"))
                     valueToType = "ႂ်";
@@ -1051,13 +1050,13 @@ if ((typing.equals("ေ") || typing.equals("ႄ")) && keyboard != 3) {
                     Map<String, String> row = allValues.get(x);
                     if (row.containsValue(valueToType)) {
                         List<String> values = row.values().stream().toList();
-                       for (int y = 0; y < values.size(); y++) {
+                        for (int y = 0; y < values.size(); y++) {
                             String val = values.get(y);
                             if (valueToType.equals(val)) {
                                 typeThisValue(x, y);
                                 if (x % 2 == 1) {
                                     highlightThisValue("SHIFT", x, y);
-}
+                                }
                                 break;
                             }
                         }
@@ -1084,7 +1083,7 @@ if ((typing.equals("ေ") || typing.equals("ႄ")) && keyboard != 3) {
         System.out.println("Attempting to save lesson progress...");
         LessonProgressService.saveLessonProgress(lessonProgress);
         System.out.println("Lesson progress save attempt completed.");
-}
+    }
 
     private void checkLevelCompletion() {
         int levelIndex = cbLevel.getSelectionModel().getSelectedIndex();
@@ -1112,14 +1111,14 @@ if ((typing.equals("ေ") || typing.equals("ႄ")) && keyboard != 3) {
             stage.initOwner(primaryStage);
             stage.setTitle("User Profile");
             Scene scene = new Scene(loader.load());
-            
+
             // Apply the current theme to the profile window
             Theme theme = Theme.fromIndex(loggedInUser.getTheme());
             String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
             scene.getStylesheets().add(stylesheet);
 
             stage.setScene(scene);
-stage.setOnCloseRequest(event -> stage.close());
+            stage.setOnCloseRequest(event -> stage.close());
 
             ProfileController controller = loader.getController();
             controller.initData(loggedInUser);
@@ -1132,7 +1131,7 @@ stage.setOnCloseRequest(event -> stage.close());
         }
     }
 
-private void showCertificate(int levelIndex) {
+    private void showCertificate(int levelIndex) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/certificate.fxml"));
             Stage stage = new Stage();
@@ -1182,7 +1181,7 @@ private void showCertificate(int levelIndex) {
             shanChar = NamKhone_KeyMap.getAllValuesMap().getOrDefault(character, "");
         }
         return shanChar;
-}
+    }
 
     private void clearToTypeValues() {
         if (toTypeNode != null) toTypeNode.setId("key-node-default");
@@ -1222,7 +1221,7 @@ private void showCertificate(int levelIndex) {
         }
         switch (x) {
             case 0, 1 -> toTypeNode = row1.getChildren().get(y);
-            case 2, 3 ->toTypeNode = row2.getChildren().get(y);
+            case 2, 3 -> toTypeNode = row2.getChildren().get(y);
             case 4, 5 -> toTypeNode = row3.getChildren().get(y);
             case 6, 7 -> toTypeNode = row4.getChildren().get(y);
         }
@@ -1259,7 +1258,7 @@ private void showCertificate(int levelIndex) {
                         row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 8 * 0.02));
                     else if (eng.equalsIgnoreCase("Enter"))
                         row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 8 * 0.02));
-                    else if(eng.equalsIgnoreCase("Shift1") || eng.equalsIgnoreCase("Shift2"))
+                    else if (eng.equalsIgnoreCase("Shift1") || eng.equalsIgnoreCase("Shift2"))
                         row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), 10.5 * 0.02));
                     else if (eng.equalsIgnoreCase("Ctrl1") || eng.equalsIgnoreCase("Ctrl2"))
                         row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), 6 * 0.02));
@@ -1267,12 +1266,12 @@ private void showCertificate(int levelIndex) {
                         row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), 2 * 0.02));
                     else if (eng.equalsIgnoreCase("Space"))
                         row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 70 * 0.02));
-                    else if(eng.equalsIgnoreCase("Win1") || eng.equalsIgnoreCase("Win2") || eng.equalsIgnoreCase("Menu"))
-                    row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), 2 * 0.02));
+                    else if (eng.equalsIgnoreCase("Win1") || eng.equalsIgnoreCase("Win2") || eng.equalsIgnoreCase("Menu"))
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), 2 * 0.02));
                     else if (eng.equals(tai) && engShift.equals(taiShift))
                         row.getChildren().add(createKey(new Key(engShift, eng, "", "")));
                     else
-                        row.getChildren().add(createKey(new Key(engShift,eng, taiShift, tai)));
+                        row.getChildren().add(createKey(new Key(engShift, eng, taiShift, tai)));
                 }
             }
         }
@@ -1284,7 +1283,7 @@ private void showCertificate(int levelIndex) {
         try {
             keyNode = fxmlLoader.load();
         } catch (IOException e) {
-throw new RuntimeException (e);
+            throw new RuntimeException(e);
         }
         setCharacterOnButton(keyNode, key, "NamKhoneUnicode", 16);
         return keyNode;
@@ -1296,11 +1295,11 @@ throw new RuntimeException (e);
         charTaiShift.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
         Label charEngShift = (Label) ((HBox) vBox.getChildren().get(0)).getChildren().get(1);
         charEngShift.setText(key.getEngShift());
-        charEngShift.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family:'" + fontFamily +"';");
+        charEngShift.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family:'" + fontFamily + "';");
         Label charTai = (Label) ((HBox) vBox.getChildren().get(1)).getChildren().get(0);
         charTai.setText(key.getTai());
-        charTai.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily+ "';");
-        Label charEng =(Label) ((HBox) vBox.getChildren().get(1)).getChildren().get(1);
+        charTai.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
+        Label charEng = (Label) ((HBox) vBox.getChildren().get(1)).getChildren().get(1);
         charEng.setText(key.getEng());
         charEng.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
     }
@@ -1322,7 +1321,7 @@ throw new RuntimeException (e);
     private double accuracy;
     private int awpm;
 
-private void calculateOutcome() {
+    private void calculateOutcome() {
         if (tfPractice.getText().length() > 1 && !end) {
             wpm = calculateWPM();
             accuracy = calculateACCU();
@@ -1330,14 +1329,14 @@ private void calculateOutcome() {
         }
     }
 
-    private int calculateAWPM(int wpm,double accuracy) {
+    private int calculateAWPM(int wpm, double accuracy) {
         int avgWPM = (int) Math.round(wpm * accuracy);
         lbAWPM.setText(String.valueOf(avgWPM));
         return avgWPM;
     }
 
     private double calculateACCU() {
-        double accuracy = (double) (tfPractice.getText().length() - misTyped)/ tfPractice.getText().length();
+        double accuracy = (double) (tfPractice.getText().length() - misTyped) / tfPractice.getText().length();
         DecimalFormat format = new DecimalFormat("#0.00");
         lbMIST.setText(String.valueOf(misTyped));
         lbACCU.setText(format.format(accuracy * 100) + "%");
@@ -1345,7 +1344,7 @@ private void calculateOutcome() {
     }
 
     private int calculateWPM() {
-        long elapsedTime= System.currentTimeMillis() - startTime;
+        long elapsedTime = System.currentTimeMillis() - startTime;
         int characterCount = tfPractice.getText().length();
         double minutes = (double) elapsedTime / 60000;
         int interimWPM = (int) (characterCount / minutes);
@@ -1358,7 +1357,7 @@ private void calculateOutcome() {
         if (currentIndex != lessonList.size() - 1) {
             cbLessons.getSelectionModel().selectNext();
             return true;
-        } else if (cbLevel.getSelectionModel().getSelectedIndex() <cbLevel.getItems().size() - 1) {
+        } else if (cbLevel.getSelectionModel().getSelectedIndex() < cbLevel.getItems().size() - 1) {
             cbLevel.getSelectionModel().selectNext();
             cbLessons.getSelectionModel().selectFirst();
             return true;
@@ -1368,7 +1367,7 @@ private void calculateOutcome() {
 
     public boolean prevLesson() {
         int currentIndex = cbLessons.getSelectionModel().getSelectedIndex();
-        if (currentIndex !=0) {
+        if (currentIndex != 0) {
             cbLessons.getSelectionModel().selectPrevious();
             return true;
         } else if (cbLevel.getSelectionModel().getSelectedIndex() != 0) {
