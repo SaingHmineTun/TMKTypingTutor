@@ -1,9 +1,12 @@
-module it.saimao.hminepos {
+module it.saimao.tmk_typing_tutor {
     requires java.desktop;
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.media;
     requires java.prefs;
+    requires java.sql;
+    requires org.xerial.sqlitejdbc;
+    requires javafx.graphics;
 
     exports it.saimao.tmk_typing_tutor;
     opens it.saimao.tmk_typing_tutor to javafx.fxml;
@@ -13,5 +16,7 @@ module it.saimao.hminepos {
     opens it.saimao.tmk_typing_tutor.utils to javafx.fxml;
     exports it.saimao.tmk_typing_tutor.key_map;
     opens it.saimao.tmk_typing_tutor.key_map to javafx.fxml;
+    exports it.saimao.tmk_typing_tutor.auth;
+    opens it.saimao.tmk_typing_tutor.auth to javafx.fxml;
 
 }

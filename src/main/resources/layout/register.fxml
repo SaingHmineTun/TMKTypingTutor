@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/frost_theme.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.auth.RegisterController">
+   <children>
+      <Label layoutX="192.0" layoutY="80.0" style="-fx-font-size: 25;" text="TMK Typing Tutor">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfUsername" layoutX="200.0" layoutY="135.0" promptText="Username" />
+      <PasswordField fx:id="pfPassword" layoutX="200.0" layoutY="190.0" promptText="Password" />
+      <PasswordField fx:id="pfConfirmPassword" layoutX="200.0" layoutY="242.0" promptText="Confirm Password" />
+      <Button fx:id="btnRegister" layoutX="200.0" layoutY="293.0" mnemonicParsing="false" onAction="#register" text="Register" />
+      <Button fx:id="btnLogin" layoutX="289.0" layoutY="293.0" mnemonicParsing="false" onAction="#showLogin" text="Back to Login" />
+   </children>
+</AnchorPane>

@@ -7,3 +7,8 @@
     font-family: 'NamKhoneUnicode';
     src: url('../fonts/NamKhoneUnicode.ttf');
 }
+
+@font-face {
+    font-family: 'A J Kunheing 6';
+    src: url('../fonts/aj_kunheing6.ttf');
+}
