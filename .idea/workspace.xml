@@ -11,9 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Change summary's icon colors to match theme color!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/Summary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/Summary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/summary_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/summary_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/summary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/summary.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/register.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +208,7 @@
       <workItem from="1759487570076" duration="1569000" />
       <workItem from="1759498539826" duration="2000000" />
       <workItem from="1759503334797" duration="4346000" />
-      <workItem from="1759542751534" duration="3885000" />
+      <workItem from="1759542751534" duration="4283000" />
     </task>
     <task id="LOCAL-00001" summary="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!">
       <option name="closed" value="true" />
@@ -427,7 +426,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759545846731</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Change summary's icon colors to match theme color!">
+      <option name="closed" value="true" />
+      <created>1759546667027</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1759546667027</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
