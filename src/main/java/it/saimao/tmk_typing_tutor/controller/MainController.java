@@ -1,4 +1,4 @@
-package it.saimao.tmk_typing_tutor;
+package it.saimao.tmk_typing_tutor.controller;
 
 import it.saimao.tmk_typing_tutor.key_map.NamKhone_KeyMap;
 import it.saimao.tmk_typing_tutor.key_map.Panglong_KeyMap;
@@ -26,7 +26,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -917,8 +916,8 @@ public class MainController implements Initializable {
 
                 checkLevelCompletion();
                 String title = cbLevel.getValue() + " : " + cbLessons.getValue().getTitle();
-                Summary summaryDialog = new Summary(this, primaryStage);
-                summaryDialog.showDialog(title, wpm, accuracy, misTyped, awpm);
+                SummaryController summaryControllerDialog = new SummaryController(this, primaryStage);
+                summaryControllerDialog.showDialog(title, wpm, accuracy, misTyped, awpm);
                 return;
             }
 

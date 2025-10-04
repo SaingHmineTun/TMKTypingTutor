@@ -1,4 +1,4 @@
-package it.saimao.tmk_typing_tutor;
+package it.saimao.tmk_typing_tutor.controller;
 
 import it.saimao.tmk_typing_tutor.model.User;
 import it.saimao.tmk_typing_tutor.utils.UserService;

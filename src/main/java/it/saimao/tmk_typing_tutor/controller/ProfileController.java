@@ -1,12 +1,10 @@
-package it.saimao.tmk_typing_tutor;
+package it.saimao.tmk_typing_tutor.controller;
 
 import it.saimao.tmk_typing_tutor.model.Profile;
 import it.saimao.tmk_typing_tutor.model.Theme;
 import it.saimao.tmk_typing_tutor.model.User;
-import it.saimao.tmk_typing_tutor.model.LessonProgress;
 import it.saimao.tmk_typing_tutor.utils.LessonProgressService;
 import it.saimao.tmk_typing_tutor.utils.ProgressService;
-import it.saimao.tmk_typing_tutor.utils.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,7 +15,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.net.URL;
