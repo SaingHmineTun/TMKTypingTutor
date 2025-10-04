@@ -77,10 +77,10 @@ public class Summary {
         this.accuracy = accuracy;
         this.mistype = mistype;
 
-        // Apply the main theme from the owner window
-        stage.getScene().getStylesheets().setAll(owner.getScene().getStylesheets());
-        // Add summary-specific styles on top
+        // Apply summary-specific styles first
         stage.getScene().getStylesheets().add(getClass().getResource("/css/summary_style.css").toExternalForm());
+        // Apply the main theme from the owner window (this will override summary styles where needed)
+        stage.getScene().getStylesheets().addAll(owner.getScene().getStylesheets());
 
         showSummary();
         stage.show();
@@ -112,7 +112,7 @@ public class Summary {
         sAWPM.setText(String.valueOf(awpm));
         sNext.requestFocus();
 
-        String iconColor = mainController.cbTheme.getSelectionModel().getSelectedItem().iconColor();
+        String iconColor = mainController.getCbTheme().getSelectionModel().getSelectedItem().iconColor();
         // Change icon color for CLOSE, PREV, RETRY, NEXT according to the theme
         sClose.setGraphic(createIcon("close", iconColor));
         sPrev.setGraphic(createIcon("prev", iconColor));

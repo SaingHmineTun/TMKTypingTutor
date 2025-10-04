@@ -5,11 +5,12 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
     <center>
 
-        <HBox prefHeight="400.0" prefWidth="650.0">
+              <HBox prefHeight="400.0" prefWidth="650.0">
             <children>
                 <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" HBox.hgrow="NEVER">
                     <children>
@@ -22,153 +23,147 @@
                 </VBox>
                 <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="200.0" HBox.hgrow="ALWAYS">
                     <children>
-                        <HBox layoutX="40.0" layoutY="70.0" prefHeight="100.0" prefWidth="200.0">
-                            <children>
-                                <Label id="summary-title" fx:id="sTitle" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="ၵၢၼ်ၽိုၵ်း 3 : တူဝ်ၽႅတ်းသဵင်ၶၢတ် - ဢၢတ်" HBox.hgrow="ALWAYS">
-                                </Label>
-                            </children>
-                        </HBox>
+                  <HBox layoutX="40.0" layoutY="70.0" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label id="title" fx:id="sTitle" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="ၵၢၼ်ၽိုၵ်း 3 : တူဝ်ၽႅတ်းသဵင်ၶၢတ် - ဢၢတ်" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <Label maxHeight="1.7976931348623157E308" prefWidth="250.0" text="WORD PER MINUTE" HBox.hgrow="ALWAYS">
-                                </Label>
-                                <Label fx:id="sWPM" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="number" text="22" HBox.hgrow="ALWAYS">
-                                </Label>
+                                <Label maxHeight="1.7976931348623157E308" prefWidth="250.0" text="WORD PER MINUTE" HBox.hgrow="ALWAYS" />
+                                <Label fx:id="sWPM" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="number" text="22" HBox.hgrow="ALWAYS" />
                             </children>
                         </HBox>
                         <HBox layoutX="10.0" layoutY="160.0" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <Label maxHeight="1.7976931348623157E308" prefWidth="250.0" text="ACCURACY PERCENT" HBox.hgrow="ALWAYS">
-                                </Label>
-                                <Label fx:id="sACCU" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="number" text="97%" HBox.hgrow="ALWAYS">
-                                </Label>
+                                <Label maxHeight="1.7976931348623157E308" prefWidth="250.0" text="ACCURACY PERCENT" HBox.hgrow="ALWAYS" />
+                                <Label fx:id="sACCU" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="number" text="97%" HBox.hgrow="ALWAYS" />
                             </children>
                         </HBox>
                         <HBox layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <Label maxHeight="1.7976931348623157E308" prefWidth="250.0" text="MISTYPE CHARACTER(S)" HBox.hgrow="ALWAYS">
-                                </Label>
-                                <Label fx:id="sMIST" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="number" text="3" HBox.hgrow="ALWAYS">
-                                </Label>
+                                <Label maxHeight="1.7976931348623157E308" prefWidth="250.0" text="MISTYPE CHARACTER(S)" HBox.hgrow="ALWAYS" />
+                                <Label fx:id="sMIST" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="number" text="3" HBox.hgrow="ALWAYS" />
                             </children>
                         </HBox>
                         <HBox layoutX="10.0" layoutY="260.0" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <Label maxHeight="1.7976931348623157E308" prefWidth="250.0" text="AVERAGE WORD PER MINUTE" HBox.hgrow="ALWAYS">
-                                </Label>
-                                <Label fx:id="sAWPM" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="number" text="20" HBox.hgrow="ALWAYS">
-                                </Label>
+                                <Label maxHeight="1.7976931348623157E308" prefWidth="250.0" text="AVERAGE WORD PER MINUTE" HBox.hgrow="ALWAYS" />
+                                <Label fx:id="sAWPM" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="number" text="20" HBox.hgrow="ALWAYS" />
                             </children>
                         </HBox>
                     </children>
                     <padding>
                         <Insets bottom="20.0" left="30.0" top="20.0" />
                     </padding>
-                    <HBox.margin>
-                        <Insets />
-                    </HBox.margin>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
                 </VBox>
             </children>
         </HBox>
 
-    </center>
-    <bottom>
-        <HBox alignment="CENTER_LEFT" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <children>
-                <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
-                    <children>
-                        <Button fx:id="sClose" graphicTextGap="8.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="45.0" text="CLOSE">
-                            <graphic>
-                                <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../images/close_white.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                            <effect>
-                                <Lighting>
-                                    <bumpInput>
-                                        <Shadow />
-                                    </bumpInput>
-                                </Lighting>
-                            </effect>
-                        </Button>
-                    </children>
-                </HBox>
-                <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="30.0" HBox.hgrow="ALWAYS">
-                    <children>
-                        <Button fx:id="sPrev" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="45.0" text="PREV">
-                            <graphic>
-                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../images/prev_white.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                            <effect>
-                                <Lighting>
-                                    <bumpInput>
-                                        <Shadow />
-                                    </bumpInput>
-                                </Lighting>
-                            </effect>
-                        </Button>
-                        <Button fx:id="sRetry" layoutX="88.0" layoutY="10.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="45.0" text="RETRY">
-                            <graphic>
-                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../images/retry_white.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                            <effect>
-                                <Lighting>
-                                    <bumpInput>
-                                        <Shadow />
-                                    </bumpInput>
-                                    <light>
-                                        <Light.Distant />
-                                    </light>
-                                </Lighting>
-                            </effect>
-                        </Button>
-                        <Button fx:id="sNext" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="45.0" text="NEXT">
-                            <graphic>
-                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../images/next_white.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                            <effect>
-                                <Lighting>
-                                    <bumpInput>
-                                        <Shadow />
-                                    </bumpInput>
-                                </Lighting>
-                            </effect>
-                        </Button>
-                    </children>
-                    <HBox.margin>
-                        <Insets />
-                    </HBox.margin>
-                </HBox>
-            </children>
-        </HBox>
-    </bottom>
-    <padding>
-        <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
-    </padding>
-    <top>
-        <VBox BorderPane.alignment="CENTER">
-            <children>
-                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-size: 28;" text="Your Summary" VBox.vgrow="ALWAYS">
-
-                </Label>
-            </children>
-        </VBox>
-    </top>
-    <effect>
-        <InnerShadow />
-    </effect>
+          </center>
+   <bottom>
+      <HBox alignment="CENTER_LEFT" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+               <children>
+                  <Button fx:id="sClose" graphicTextGap="8.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" text="CLOSE">
+                      <graphic>
+                          <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                  <Image url="@../images/close_dark.png" />
+                              </image>
+                          </ImageView>
+                      </graphic>
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                        </Lighting>
+                     </effect>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="30.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Button fx:id="sPrev" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" text="PREV">
+                      <graphic>
+                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                  <Image url="@../images/prev_white.png" />
+                              </image>
+                          </ImageView>
+                      </graphic>
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                        </Lighting>
+                     </effect>
+                  </Button>
+                  <Button fx:id="sRetry" layoutX="88.0" layoutY="10.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" text="RETRY">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/retry.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect>
+                  </Button>
+                  <Button fx:id="sNext" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" text="NEXT">
+                      <graphic>
+                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                  <Image url="@../images/next_white.png" />
+                              </image>
+                          </ImageView>
+                      </graphic>
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                        </Lighting>
+                     </effect>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
+   </bottom>
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
+   </padding>
+   <top>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-size: 32;" text="Your Summary" VBox.vgrow="ALWAYS" />
+            <Line endX="675.0" stroke="WHITE" strokeWidth="2.0" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Line>
+         </children>
+      </VBox>
+   </top>
+   <effect>
+      <InnerShadow />
+   </effect>
 </BorderPane>

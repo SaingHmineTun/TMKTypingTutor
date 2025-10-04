@@ -1,20 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/frost_theme.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.auth.LoginController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/light_theme.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.auth.LoginController">
    <children>
-      <Label layoutX="192.0" layoutY="67.0" style="-fx-font-size: 25;" text="TMK Typing Tutor">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="tfUsername" layoutX="203.0" layoutY="129.0" promptText="Username" />
-      <PasswordField fx:id="pfPassword" layoutX="203.0" layoutY="189.0" promptText="Password" />
-      <Button fx:id="btnLogin" layoutX="218.0" layoutY="250.0" mnemonicParsing="false" onAction="#login" text="Login" />
-      <Label fx:id="lbError" layoutX="239.0" layoutY="103.0" text="Label" textFill="RED" visible="false" />
-      <Button fx:id="btnRegister" layoutX="300.0" layoutY="250.0" mnemonicParsing="false" onAction="#showRegister" text="Register" />
+      <VBox alignment="CENTER" layoutX="100.0" layoutY="50.0" prefHeight="400.0" prefWidth="500.0" spacing="20.0">
+         <children>
+            <Label text="TMK Typing Tutor">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            <Label text="Select User">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ListView fx:id="lvUsers" minHeight="200.0" prefHeight="200.0" prefWidth="300.0" styleClass="user-list" />
+            <Label fx:id="lblSelectedUser" alignment="CENTER" contentDisplay="CENTER" prefWidth="300.0" textAlignment="CENTER" />
+            <PasswordField fx:id="pfPassword" prefHeight="40.0" prefWidth="300.0" promptText="Password" visible="false" />
+            <Label fx:id="lbError" textFill="RED" visible="false" wrapText="true" />
+            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="100.0" text="Login" visible="false" />
+            <HBox alignment="CENTER" spacing="20.0">
+               <children>
+                  <Button fx:id="btnRegister" mnemonicParsing="false" onAction="#showRegister" prefHeight="40.0" prefWidth="100.0" text="Register" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
    </children>
 </AnchorPane>

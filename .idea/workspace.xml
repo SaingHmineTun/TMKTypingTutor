@@ -9,10 +9,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Change summary's icon colors to match theme color!">
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Adding user progress for each lesson">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/LessonProgressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/LessonProgressController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/auth/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/auth/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/LessonProgress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/LessonProgress.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/LessonProgressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/LessonProgressService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/light_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/light_theme.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/layout/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/register.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/profile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/profile.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,37 +71,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.TMK Typing.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "accounts",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/JavaProjects/TMKTypingTutor/src/main/resources/images",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.TMK Typing.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;generate-certificate&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/JavaProjects/TMKTypingTutor/src/main/resources/images&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\JavaProjects\TMKTypingTutor\src\main\resources\images" />
@@ -209,6 +218,12 @@
       <workItem from="1759498539826" duration="2000000" />
       <workItem from="1759503334797" duration="4346000" />
       <workItem from="1759542751534" duration="4283000" />
+      <workItem from="1759548800806" duration="1879000" />
+      <workItem from="1759555222525" duration="1967000" />
+      <workItem from="1759565733584" duration="3099000" />
+      <workItem from="1759569990026" duration="3074000" />
+      <workItem from="1759573136218" duration="3147000" />
+      <workItem from="1759576349291" duration="4766000" />
     </task>
     <task id="LOCAL-00001" summary="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!">
       <option name="closed" value="true" />
@@ -434,15 +449,78 @@
       <option name="project" value="LOCAL" />
       <updated>1759546667027</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Change summary's icon colors to match theme color!">
+      <option name="closed" value="true" />
+      <created>1759566155416</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1759566155416</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Adding user profile and cerficate page.">
+      <option name="closed" value="true" />
+      <created>1759567315994</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1759567315994</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Adding user profile and cerficate page.">
+      <option name="closed" value="true" />
+      <created>1759568262717</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1759568262717</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Adding user profile and cerficate page.">
+      <option name="closed" value="true" />
+      <created>1759568840356</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1759568840356</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Adding user profile and cerficate page.">
+      <option name="closed" value="true" />
+      <created>1759569950749</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1759569950749</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Adding user profile and cerficate page.">
+      <option name="closed" value="true" />
+      <created>1759573757305</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1759573757305</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Adding user progress for each lesson">
+      <option name="closed" value="true" />
+      <created>1759575492017</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1759575492017</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Adding user progress for each lesson">
+      <option name="closed" value="true" />
+      <created>1759577923593</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1759577923594</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!" />
-    <MESSAGE value="Solved : When all the lesson texts are typed, stop the typing!&#10;Solved : Except asai &amp; esai, when you type a character that is not similar to the what you have to type, do not type in the textbox.&#10;Added : Small Test Texts are added! Will make it as easy mode later on!" />
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="false" />
     <MESSAGE value="Added - Ability to type with English keyboard!&#10;Issue - In English, when Typing s or a that are no match with the toTypeWord, some characters are deleted unexpectedly!&#10;Issue - Using shn_sil keyboard to type is sill not working properly when typing ေ &amp; ႄ" />
     <MESSAGE value="Fix - Error typing with Shan Keyboard!&#10;Modified - Combobox Style" />
     <MESSAGE value="Added - Dynamic Keyboard Creation approach. This is to be able to adapt to other language!&#10;Added - WPM, AWPM, ACCURACY, MISTYPE labels!&#10;Added - MODE (EASY, INTERMEDIATE)&#10;Modified - Next &amp; Previous buttons!" />
@@ -466,6 +544,8 @@
     <MESSAGE value="Added login and register page." />
     <MESSAGE value="Added selected theme for summary dialog!" />
     <MESSAGE value="Change summary's icon colors to match theme color!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change summary's icon colors to match theme color!" />
+    <MESSAGE value="Adding user profile and cerficate page." />
+    <MESSAGE value="Adding user progress for each lesson" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding user progress for each lesson" />
   </component>
 </project>
