@@ -77,8 +77,10 @@ public class Summary {
         this.accuracy = accuracy;
         this.mistype = mistype;
 
-        // FINAL THEME FIX: Apply theme just before showing the dialog
+        // Apply the main theme from the owner window
         stage.getScene().getStylesheets().setAll(owner.getScene().getStylesheets());
+        // Add summary-specific styles on top
+        stage.getScene().getStylesheets().add(getClass().getResource("/css/summary_style.css").toExternalForm());
 
         showSummary();
         stage.show();
@@ -110,10 +112,17 @@ public class Summary {
         sAWPM.setText(String.valueOf(awpm));
         sNext.requestFocus();
 
+        String iconColor = mainController.cbTheme.getSelectionModel().getSelectedItem().iconColor();
         // Change icon color for CLOSE, PREV, RETRY, NEXT according to the theme
-        sClose.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/close_" + mainController.cbTheme.getSelectionModel().getSelectedItem().iconColor() + ".png"), 20, 20, true, true)));
-        sPrev.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/prev_" + mainController.cbTheme.getSelectionModel().getSelectedItem().iconColor() + ".png"), 20, 20, true, true)));
-        sRetry.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/retry_" + mainController.cbTheme.getSelectionModel().getSelectedItem().iconColor() + ".png"), 20, 20, true, true)));
-        sNext.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/next_" + mainController.cbTheme.getSelectionModel().getSelectedItem().iconColor() + ".png"), 20, 20, true, true)));
+        sClose.setGraphic(createIcon("close", iconColor));
+        sPrev.setGraphic(createIcon("prev", iconColor));
+        sRetry.setGraphic(createIcon("retry", iconColor));
+        sNext.setGraphic(createIcon("next", iconColor));
+    }
+
+    private ImageView createIcon(String iconName, String iconColor) {
+        String imagePath = String.format("/images/%s_%s.png", iconName, iconColor);
+        Image image = new Image(getClass().getResourceAsStream(imagePath), 20, 20, true, true);
+        return new ImageView(image);
     }
 }

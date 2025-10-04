@@ -9,16 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Added selected theme for summary dialog!">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/close_white.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/retry_white.png" afterDir="false" />
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Change summary's icon colors to match theme color!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/Summary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/Summary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/using_font.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/using_font.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/delete.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/close_dark.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/retry.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/retry_dark.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/summary_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/summary_style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/layout/summary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/summary.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -215,7 +209,7 @@
       <workItem from="1759487570076" duration="1569000" />
       <workItem from="1759498539826" duration="2000000" />
       <workItem from="1759503334797" duration="4346000" />
-      <workItem from="1759542751534" duration="2810000" />
+      <workItem from="1759542751534" duration="3885000" />
     </task>
     <task id="LOCAL-00001" summary="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!">
       <option name="closed" value="true" />
@@ -425,7 +419,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759543858927</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Change summary's icon colors to match theme color!">
+      <option name="closed" value="true" />
+      <created>1759545846731</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1759545846731</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -456,6 +458,7 @@
     <MESSAGE value="Trying to add user login and register feature." />
     <MESSAGE value="Added login and register page." />
     <MESSAGE value="Added selected theme for summary dialog!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added selected theme for summary dialog!" />
+    <MESSAGE value="Change summary's icon colors to match theme color!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change summary's icon colors to match theme color!" />
   </component>
 </project>
