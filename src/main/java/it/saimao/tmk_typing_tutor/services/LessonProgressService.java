@@ -1,4 +1,4 @@
-package it.saimao.tmk_typing_tutor.utils;
+package it.saimao.tmk_typing_tutor.services;
 
 import it.saimao.tmk_typing_tutor.model.Lesson;
 import it.saimao.tmk_typing_tutor.model.LessonProgress;

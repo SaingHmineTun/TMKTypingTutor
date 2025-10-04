@@ -2,7 +2,7 @@ package it.saimao.tmk_typing_tutor.auth;
 
 import it.saimao.tmk_typing_tutor.controller.MainController;
 import it.saimao.tmk_typing_tutor.model.User;
-import it.saimao.tmk_typing_tutor.utils.UserService;
+import it.saimao.tmk_typing_tutor.services.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

@@ -1,4 +1,4 @@
-package it.saimao.tmk_typing_tutor.utils;
+package it.saimao.tmk_typing_tutor.services;
 
 import java.io.File;
 import java.io.IOException;

@@ -20,5 +20,7 @@ module it.saimao.tmk_typing_tutor {
     opens it.saimao.tmk_typing_tutor.auth to javafx.fxml;
     exports it.saimao.tmk_typing_tutor.controller;
     opens it.saimao.tmk_typing_tutor.controller to javafx.fxml;
+    exports it.saimao.tmk_typing_tutor.services;
+    opens it.saimao.tmk_typing_tutor.services to javafx.fxml;
 
 }
