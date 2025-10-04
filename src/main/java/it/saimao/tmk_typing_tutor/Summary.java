@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -67,6 +69,7 @@ public class Summary {
         stage.initModality(Modality.APPLICATION_MODAL);
 
     }
+
     public void showDialog(String title, int wpm, double accuracy, int mistype, int awpm) {
         this.title = title;
         this.wpm = wpm;
@@ -106,5 +109,11 @@ public class Summary {
         sMIST.setText(String.valueOf(mistype));
         sAWPM.setText(String.valueOf(awpm));
         sNext.requestFocus();
+
+        // Change icon color for CLOSE, PREV, RETRY, NEXT according to the theme
+        sClose.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/close_" + mainController.cbTheme.getSelectionModel().getSelectedItem().iconColor() + ".png"), 20, 20, true, true)));
+        sPrev.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/prev_" + mainController.cbTheme.getSelectionModel().getSelectedItem().iconColor() + ".png"), 20, 20, true, true)));
+        sRetry.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/retry_" + mainController.cbTheme.getSelectionModel().getSelectedItem().iconColor() + ".png"), 20, 20, true, true)));
+        sNext.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/next_" + mainController.cbTheme.getSelectionModel().getSelectedItem().iconColor() + ".png"), 20, 20, true, true)));
     }
 }

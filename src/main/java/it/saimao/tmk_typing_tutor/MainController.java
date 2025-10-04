@@ -62,7 +62,7 @@ public class MainController implements Initializable {
     @FXML
     private ComboBox<String> cbLevel;
     @FXML
-    private ComboBox<Theme> cbTheme;
+    ComboBox<Theme> cbTheme;
     @FXML
     private ComboBox<String> cbKeyboard;
     @FXML

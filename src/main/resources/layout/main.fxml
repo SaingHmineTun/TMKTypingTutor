@@ -38,7 +38,7 @@
                <children>
                   <ImageView fx:id="imgClose" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/delete.png" />
+                        <Image url="@../images/close_white.png" />
                      </image>
                   </ImageView>
                </children>

@@ -12,14 +12,3 @@
     font-family: 'A J Kunheing 6';
     src: url('../fonts/aj_kunheing6.ttf');
 }
-
-.font-aj {
-    -fx-font-family: 'A J Kunheing 6';
-}
-
-
-
-#summary-title {
-    -fx-font-family: "A J Kunheing 6";
-    -fx-font-size: 32;
-}
