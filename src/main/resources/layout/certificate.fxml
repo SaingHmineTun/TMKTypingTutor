@@ -18,39 +18,39 @@
                         <Image url="@../images/app_icon.png" />
                     </image>
                 </ImageView>
-                <Label style="-fx-font-size: 36px; -fx-font-weight: bold;" text="CERTIFICATE" textFill="#2c5aa0">
+                <Label styleClass="certificate-title" text="CERTIFICATE">
                     <font>
                         <Font name="System Bold" size="36.0" />
                     </font>
                 </Label>
-                <Label style="-fx-font-size: 20px;" text="OF COMPLETION" textFill="#2c5aa0">
+                <Label styleClass="certificate-subtitle" text="OF COMPLETION">
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Label>
                 <VBox alignment="CENTER" spacing="5.0">
                     <children>
-                        <Label style="-fx-font-size: 18px;" text="This is to certify that" />
-                        <Label fx:id="lblUsername" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #007bff;" text="[Username]">
+                        <Label styleClass="certificate-text" text="This is to certify that" />
+                        <Label fx:id="lblUsername" styleClass="certificate-username" text="[Username]">
                             <font>
                                 <Font name="System Bold" size="24.0" />
                             </font>
                         </Label>
-                        <Label style="-fx-font-size: 18px;" text="has successfully completed" />
-                        <Label fx:id="lblLevel" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c5aa0;" text="[Level Name]">
+                        <Label styleClass="certificate-text" text="has successfully completed" />
+                        <Label fx:id="lblLevel" styleClass="certificate-level" text="[Level Name]">
                             <font>
                                 <Font name="System Bold" size="20.0" />
                             </font>
                         </Label>
-                        <Label style="-fx-font-size: 18px;" text="with an average typing speed of" />
-                        <Label fx:id="lblAwpm" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #28a745;" text="[AWPM] WPM">
+                        <Label styleClass="certificate-text" text="with an average typing speed of" />
+                        <Label fx:id="lblAwpm" styleClass="certificate-awpm" text="[AWPM] WPM">
                             <font>
                                 <Font name="System Bold" size="24.0" />
                             </font>
                         </Label>
                     </children>
                 </VBox>
-                <Label style="-fx-font-size: 16px;" text="in TMK Typing Tutor" />
+                <Label styleClass="certificate-text" text="in TMK Typing Tutor" />
             </children>
             <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -60,17 +60,17 @@
     <bottom>
         <VBox alignment="CENTER" prefHeight="100.0">
             <children>
-                <Label style="-fx-font-size: 14px;" text="Date:">
+                <Label styleClass="certificate-date-label" text="Date:">
                     <VBox.margin>
                         <Insets bottom="5.0" />
                     </VBox.margin>
                 </Label>
-                <Label fx:id="lblDate" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="[Date]">
+                <Label fx:id="lblDate" styleClass="certificate-date" text="[Date]">
                     <VBox.margin>
                         <Insets bottom="10.0" />
                     </VBox.margin>
                 </Label>
-                <Button fx:id="btnClose" mnemonicParsing="false" onAction="#close" prefHeight="40.0" prefWidth="120.0" style="-fx-font-weight: bold;" text="Close" />
+                <Button fx:id="btnClose" mnemonicParsing="false" onAction="#close" prefHeight="40.0" prefWidth="120.0" text="Close" />
             </children>
         </VBox>
     </bottom>

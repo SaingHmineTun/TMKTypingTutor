@@ -3,7 +3,7 @@ package it.saimao.tmk_typing_tutor.model;
 public enum Theme {
     DARK("dark_theme", "Dark", "white"),
     LIGHT("light_theme", "Light", "dark"),
-    GREEN("green_theme", "Green", "white"),
+    GREEN("green_theme", "DarkGreen", "white"),
     CRIMSON_RED("crimson_red_theme", "Red", "white"),
     FROST("frost_theme", "Frost", "dark"),
     GOLDEN("golden_theme", "Golden", "dark"),

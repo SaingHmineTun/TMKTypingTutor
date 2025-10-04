@@ -26,14 +26,14 @@ public class ProfileController implements Initializable {
     @FXML
     private TableView<Profile> tvProgress;
     @FXML
-    private TableColumn<Profile, String> tcLevel;
+   private TableColumn<Profile, String> tcLevel;
     @FXML
     private TableColumn<Profile, String> tcProgress;
     @FXML
     private TableColumn<Profile, Button> tcCertificate;
     @FXML
     private TableColumn<Profile, Button> tcDetails; // New column for details button
-    // Password change fields are now in dialog, not directly in profile view
+    // Passwordchange fields are now in dialog, not directly in profile view
     private PasswordField pfOldPassword;
     private PasswordField pfNewPassword;
     private PasswordField pfConfirmPassword;
@@ -72,7 +72,7 @@ public class ProfileController implements Initializable {
         applyTheme();
     }
     
-    // Method to set the main controller reference
+    // Method toset the main controller reference
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
     }
@@ -95,7 +95,7 @@ public class ProfileController implements Initializable {
 
     private void loadProgress() {
         ObservableList<Profile> profiles = FXCollections.observableArrayList();
-        for (int i = 0; i < 4; i++) { // Assuming 4 levels
+        for (int i = 0; i <4; i++) { // Assuming 4 levels
             int completed = ProgressService.getCompletedLessonCount(user.getId(), i);
             int total = lessonsPerLevel[i];
             Profile profile = new Profile("Level " + (i + 1), completed + " / " + total);
@@ -130,7 +130,7 @@ public class ProfileController implements Initializable {
             stage.initOwner(btnClose.getScene().getWindow());
             Scene scene = new Scene(loader.load());
             
-            // Apply the current theme to the lesson progress window
+            // Apply thecurrent theme to the lesson progress window
             Theme theme = Theme.fromIndex(user.getTheme());
             String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
             scene.getStylesheets().add(stylesheet);
@@ -165,7 +165,7 @@ public class ProfileController implements Initializable {
             ChangePasswordController controller = loader.getController();
             controller.initData(user);
             
-            dialog.showAndWait();
+           dialog.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -176,14 +176,11 @@ public class ProfileController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/certificate.fxml"));
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initOwner(btnClose.getScene().getWindow());
+stage.initOwner(btnClose.getScene().getWindow());
             Scene scene = new Scene(loader.load());
 
-            // Apply the current theme to the certificate window
-            Theme theme = Theme.fromIndex(user.getTheme());
-            String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
-            scene.getStylesheets().add(stylesheet);
-            // Add certificate specific styles
+// Onlyapply certificate specific styles, not the user theme
+            scene.getStylesheets().clear();
             scene.getStylesheets().add(getClass().getResource("/css/certificate_style.css").toExternalForm());
 
             stage.setScene(scene);
@@ -191,7 +188,7 @@ public class ProfileController implements Initializable {
             CertificateController controller = loader.getController();
             
             // Calculate average WPM for the level
-            double averageWpm = LessonProgressService.getAverageWpmForLevel(user.getId(), levelIndex);
+           double averageWpm = LessonProgressService.getAverageWpmForLevel(user.getId(), levelIndex);
             DecimalFormat df = new DecimalFormat("#.##");
             
             controller.initData(user.getUsername(), "Level " + (levelIndex + 1), df.format(averageWpm));
