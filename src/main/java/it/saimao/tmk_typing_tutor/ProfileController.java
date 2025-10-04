@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -48,18 +49,51 @@ public class ProfileController implements Initializable {
 
     private User user;
     private final int[] lessonsPerLevel = {9, 82, 82, 10}; // Lessons per level (Level 1: 9, Level 2: 82, Level 3: 82, Level 4: 10)
+    private MainController mainController; // Reference to main controller
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Set styling for the TableView
+        tvProgress.getStyleClass().add("progress-table");
+        
         tcLevel.setCellValueFactory(new PropertyValueFactory<>("levelName"));
         tcProgress.setCellValueFactory(new PropertyValueFactory<>("progress"));
         tcCertificate.setCellValueFactory(new PropertyValueFactory<>("certificateButton"));
         tcDetails.setCellValueFactory(new PropertyValueFactory<>("detailsButton")); // Set up details column
+        
+        // Apply specific styles to columns
+        tcLevel.getStyleClass().add("text-column");
+        tcProgress.getStyleClass().add("text-column");
+        tcCertificate.getStyleClass().add("button-column");
+        tcDetails.getStyleClass().add("button-column");
     }
 
     public void initData(User user) {
         this.user = user;
         loadProgress();
+        // Apply user's selected theme
+        applyTheme();
+    }
+    
+    // Method to set the main controller reference
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
+
+    private void applyTheme() {
+        Theme theme = Theme.fromIndex(user.getTheme());
+        String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
+        
+        // Get the scene and apply theme
+        if (btnClose.getScene() != null) {
+            Scene scene = btnClose.getScene();
+            // Remove the default light theme
+            scene.getStylesheets().clear();
+            // Apply the user's selected theme
+            scene.getStylesheets().add(stylesheet);
+            // Add list styles
+            scene.getStylesheets().add(getClass().getResource("/css/list_styles.css").toExternalForm());
+        }
     }
 
     private void loadProgress() {

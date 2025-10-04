@@ -51,6 +51,32 @@ public class UserService {
         return null;
     }
 
+    public static User getUserById(int userId) {
+        String sql = "SELECT * FROM users WHERE id = ?";
+
+        try (Connection conn = DatabaseService.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return new User(
+                        rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getInt("theme"),
+                        rs.getInt("lesson"),
+                        rs.getInt("level"),
+                        rs.getInt("keyboard")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
     public static List<User> getAllUsers() {
         String sql = "SELECT * FROM users";
         List<User> users = new ArrayList<>();

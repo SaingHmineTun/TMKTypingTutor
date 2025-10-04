@@ -11,9 +11,11 @@ public class LessonProgress {
     private double accuracy;
     private int mistakes;
     private Button retryButton;
+    private String lessonTitle; // Added to store lesson title
 
     public LessonProgress() {
         this.retryButton = new Button("Retry");
+        this.lessonTitle = "";
     }
 
     public LessonProgress(int userId, int levelIndex, int lessonIndex, int wpm, double accuracy, int mistakes) {
@@ -24,6 +26,7 @@ public class LessonProgress {
         this.accuracy = accuracy;
         this.mistakes = mistakes;
         this.retryButton = new Button("Retry");
+        this.lessonTitle = "";
     }
 
     // Getters and setters
@@ -91,6 +94,14 @@ public class LessonProgress {
         this.retryButton = retryButton;
     }
 
+    public String getLessonTitle() {
+        return lessonTitle;
+    }
+
+    public void setLessonTitle(String lessonTitle) {
+        this.lessonTitle = lessonTitle;
+    }
+
     @Override
     public String toString() {
         return "LessonProgress{" +
@@ -101,6 +112,7 @@ public class LessonProgress {
                 ", wpm=" + wpm +
                 ", accuracy=" + accuracy +
                 ", mistakes=" + mistakes +
+                ", lessonTitle='" + lessonTitle + '\'' +
                 '}';
     }
 }

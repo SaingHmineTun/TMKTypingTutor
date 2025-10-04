@@ -19,7 +19,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <ListView fx:id="lvUsers" minHeight="200.0" prefHeight="200.0" prefWidth="300.0" />
+            <ListView fx:id="lvUsers" minHeight="200.0" prefHeight="200.0" prefWidth="300.0" styleClass="user-list" />
             <Label fx:id="lblSelectedUser" alignment="CENTER" contentDisplay="CENTER" prefWidth="300.0" textAlignment="CENTER" />
             <PasswordField fx:id="pfPassword" prefHeight="40.0" prefWidth="300.0" promptText="Password" visible="false" />
             <Label fx:id="lbError" textFill="RED" visible="false" wrapText="true" />
