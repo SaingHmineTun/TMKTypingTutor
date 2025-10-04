@@ -1,0 +1,80 @@
+.root {
+    -fx-background-color: #f8f9fa;
+    -fx-font-family: 'Segoe UI', sans-serif;
+}
+
+#root {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #e3f2fd, #bbdefb);
+    -fx-border-color: #2c5aa0;
+    -fx-border-width: 5;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.label {
+    -fx-font-family: 'Segoe UI', sans-serif;
+}
+
+.label .text {
+    -fx-font-smoothing-type: lcd;
+}
+
+.button {
+    -fx-background-color: #2c5aa0;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+
+.button:hover {
+    -fx-background-color: #1a3d70;
+}
+
+.button:pressed {
+    -fx-background-color: #0d264d;
+}
+
+/* Certificate specific styles */
+.certificate-title {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c5aa0;
+}
+
+.certificate-subtitle {
+    -fx-font-size: 20px;
+    -fx-text-fill: #2c5aa0;
+}
+
+.certificate-text {
+    -fx-font-size: 18px;
+}
+
+.certificate-username {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #007bff;
+}
+
+.certificate-level {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c5aa0;
+}
+
+.certificate-awpm {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #28a745;
+}
+
+.certificate-date-label {
+    -fx-font-size: 14px;
+}
+
+.certificate-date {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}

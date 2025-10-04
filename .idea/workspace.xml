@@ -11,17 +11,14 @@
   <component name="ChangeListManager">
     <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Adding user progress for each lesson">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/LessonProgressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/LessonProgressController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/ProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/auth/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/auth/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/LessonProgress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/LessonProgress.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SummaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SummaryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/Theme.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/Theme.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/LessonProgressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/LessonProgressService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/light_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/light_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/profile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/profile.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/certificate_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/certificate_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/green_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/green_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/certificate.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/certificate.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/summary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/summary.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +55,16 @@
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/SaingHmineTun/TMKTypingTutor.git&quot;,
     &quot;accountId&quot;: &quot;218b4023-0bde-49db-920b-888683dc4056&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;SaingHmineTun&quot;,
+    &quot;repository&quot;: &quot;TMKTypingTutor&quot;
   }
 }</component>
   <component name="MarkdownSettingsMigration">
@@ -224,6 +231,8 @@
       <workItem from="1759569990026" duration="3074000" />
       <workItem from="1759573136218" duration="3147000" />
       <workItem from="1759576349291" duration="4766000" />
+      <workItem from="1759583687314" duration="3976000" />
+      <workItem from="1759587749852" duration="1701000" />
     </task>
     <task id="LOCAL-00001" summary="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!">
       <option name="closed" value="true" />
@@ -513,7 +522,23 @@
       <option name="project" value="LOCAL" />
       <updated>1759577923594</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Adding user progress for each lesson">
+      <option name="closed" value="true" />
+      <created>1759583876173</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1759583876173</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Adding user progress for each lesson">
+      <option name="closed" value="true" />
+      <created>1759584036807</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1759584036807</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

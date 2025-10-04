@@ -1,4 +1,4 @@
-package it.saimao.tmk_typing_tutor;
+package it.saimao.tmk_typing_tutor.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
