@@ -1,12 +1,5 @@
-@font-face {
-    font-family: 'VistolSans-Black';
-    src: url('../fonts/vistol_sans_black.otf');
-}
+@import "using_font.css";
 
-@font-face {
-    font-family: 'NamKhoneUnicode';
-    src: url('../fonts/NamKhoneUnicode.ttf');
-}
 
 .root {
     -fx-background-color: #222;

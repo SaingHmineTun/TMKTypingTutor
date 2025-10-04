@@ -1,12 +1,4 @@
-@font-face {
-    font-family: 'VistolSans-Black';
-    src: url('../fonts/vistol_sans_black.otf');
-}
-
-@font-face {
-    font-family: 'NamKhoneUnicode';
-    src: url('../fonts/NamKhoneUnicode.ttf');
-}
+@import "using_font.css";
 
 .root {
     -fx-background-color: #0f0f17; /* Dark almost black */
