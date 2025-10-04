@@ -25,14 +25,13 @@ public class DatabaseService {
             String dbPath = dbDir + File.separator + "typing_tutor.db";
             DB_URL = "jdbc:sqlite:" + dbPath;
         } catch (IOException e) {
-            // Handle exception, maybe log it or rethrow as a runtime exception
             throw new RuntimeException("Could not initialize database path", e);
         }
     }
 
     public static Connection getConnection() throws SQLException {
         try {
-            Class.forName("org.sqlite.JDBC"); // Explicitly load the SQLite JDBC driver
+            Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException e) {
             throw new SQLException("SQLite JDBC driver not found.", e);
         }
@@ -40,19 +39,30 @@ public class DatabaseService {
     }
 
     public static void initializeDatabase() {
-        // SQL statement for creating a new table
         String createUserTableSql = "CREATE TABLE IF NOT EXISTS users (\n"
                 + " id integer PRIMARY KEY AUTOINCREMENT,\n"
                 + " username text NOT NULL UNIQUE,\n"
-                + " password text NOT NULL\n"
+                + " password text NOT NULL,\n"
+                + " theme INTEGER DEFAULT 0,\n"
+                + " lesson INTEGER DEFAULT 0,\n"
+                + " level INTEGER DEFAULT 0,\n"
+                + " keyboard INTEGER DEFAULT 0\n"
+                + ");";
+
+        String createProgressTableSql = "CREATE TABLE IF NOT EXISTS progress (\n"
+                + " id integer PRIMARY KEY AUTOINCREMENT,\n"
+                + " user_id INTEGER NOT NULL,\n"
+                + " level_index INTEGER NOT NULL,\n"
+                + " lesson_index INTEGER NOT NULL,\n"
+                + " FOREIGN KEY (user_id) REFERENCES users (id),\n"
+                + " UNIQUE(user_id, level_index, lesson_index)\n"
                 + ");";
 
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement()) {
-            // create a new table
             stmt.execute(createUserTableSql);
+            stmt.execute(createProgressTableSql);
 
-            // Add columns for user settings if they don't exist
             if (!columnExists(conn, "users", "theme")) {
                 stmt.execute("ALTER TABLE users ADD COLUMN theme INTEGER DEFAULT 0");
             }

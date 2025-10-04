@@ -9,16 +9,17 @@ import it.saimao.tmk_typing_tutor.model.Lesson;
 import it.saimao.tmk_typing_tutor.model.Theme;
 import it.saimao.tmk_typing_tutor.model.User;
 import it.saimao.tmk_typing_tutor.utils.Perc;
+import it.saimao.tmk_typing_tutor.utils.ProgressService;
 import it.saimao.tmk_typing_tutor.utils.UserService;
 import it.saimao.tmk_typing_tutor.utils.Utils;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -29,10 +30,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
@@ -41,11 +46,12 @@ import java.util.*;
 public class MainController implements Initializable {
     @FXML
     private BorderPane root;
-    private VBox key;
     @FXML
     private VBox vbClose;
     @FXML
     private VBox vbMinimize;
+    @FXML
+    private VBox vbProfile;
     @FXML
     private ImageView imgClose;
     @FXML
@@ -63,7 +69,7 @@ public class MainController implements Initializable {
     @FXML
     private ComboBox<String> cbLevel;
     @FXML
-    private ComboBox<Theme> cbTheme;
+    ComboBox<Theme> cbTheme;
     @FXML
     private ComboBox<String> cbKeyboard;
     @FXML
@@ -101,12 +107,12 @@ public class MainController implements Initializable {
 
     private Stage primaryStage;
     private User loggedInUser;
+    private boolean isInitializing = false;
 
     private Node toTypeNode;
     private Node toTypeSecNode;
     private List<Map<String, String>> allValues;
 
-    // Prevent ‌ေ & ႄ to auto enter in shn_sil keyboard
     private boolean consumeShanCharacter;
     private boolean typingWithEnglish;
     private boolean mustSwap;
@@ -127,44 +133,36 @@ public class MainController implements Initializable {
     public void initData(User user, Stage stage) {
         this.loggedInUser = user;
         this.primaryStage = stage;
-        // Apply user settings
+        isInitializing = true;
         Platform.runLater(() -> {
-            cbKeyboard.getSelectionModel().select(loggedInUser.getKeyboard());
             cbTheme.getSelectionModel().select(loggedInUser.getTheme());
-            cbLevel.getSelectionModel().select(loggedInUser.getLevel());
-            cbLessons.getSelectionModel().select(loggedInUser.getLesson());
+            cbKeyboard.getSelectionModel().select(loggedInUser.getKeyboard());
         });
     }
 
 
     private void resetLevels(int keyboard) {
-
         levelList.clear();
         if (keyboard == 3)
             levelList.addAll(Arrays.asList("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3", "ၵၢၼ်ၽိုၵ်း 4").stream().toList());
         else {
             levelList.addAll(Arrays.asList("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3").stream().toList());
         }
-        int seletedIndex = cbLevel.getSelectionModel().getSelectedIndex();
         cbLevel.getItems().setAll(FXCollections.observableArrayList(levelList));
-        if (seletedIndex < 0) {
+        if (!isInitializing) {
             cbLevel.getSelectionModel().selectFirst();
-        } else if (seletedIndex > cbLevel.getItems().size() - 1) {
-            cbLevel.getSelectionModel().selectLast();
-        } else {
-            cbLevel.getSelectionModel().select(seletedIndex);
         }
     }
 
     private void resetKeyboard() {
-        for (Node hBox : vbKeyboardView.getChildren()) {
-            ((HBox) hBox).getChildren().clear();
-        }
-
+        row1.getChildren().clear();
+        row2.getChildren().clear();
+        row3.getChildren().clear();
+        row4.getChildren().clear();
+        row5.getChildren().clear();
     }
 
     private void adjustForVariousResolution() {
-
         tLogo.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(35));
         imgLogo.setFitHeight(Perc.getDynamicPixel(25));
         imgLogo.setFitWidth(Perc.getDynamicPixel(25));
@@ -176,8 +174,6 @@ public class MainController implements Initializable {
         vbMinimize.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(35));
         imgMinimize.setFitHeight(Perc.getDynamicPixel(15));
         imgMinimize.setFitWidth(Perc.getDynamicPixel(15));
-
-
         cbLessons.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
         cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'NamKhoneUnicode'");
         cbLevel.setPrefSize(Perc.getDynamicPixel(150), Perc.getDynamicPixel(50));
@@ -186,19 +182,14 @@ public class MainController implements Initializable {
         cbTheme.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'NamKhoneUnicode';");
         cbKeyboard.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
         cbKeyboard.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'NamKhoneUnicode'");
-
         btNext.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
         btPrev.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
-
-
         tfView.setPrefHeight(Perc.getDynamicPixel(50));
         tfPractice.setPrefHeight(Perc.getDynamicPixel(50));
         tfView.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20));
         tfPractice.setStyle("-fx-font-size: " + Perc.getDynamicPixel(20));
-
         vbKeyboardView.setPadding(new Insets(Perc.p1_5h(), Perc.p5w(), Perc.p1_5h(), Perc.p5w()));
         vbKeyboardView.setPrefHeight(Perc.p50h());
-
         lblAWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lbAWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lblWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
@@ -207,7 +198,6 @@ public class MainController implements Initializable {
         lbMIST.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lblACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lbACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
-
     }
 
     private void initTopBar() {
@@ -218,23 +208,19 @@ public class MainController implements Initializable {
             stage.close();
         });
         vbMinimize.setOnMouseClicked(mouseEvent -> {
-
             Node source = (Node) mouseEvent.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
             stage.setIconified(true);
         });
+        vbProfile.setOnMouseClicked(event -> showProfile());
     }
 
     private void initComboBoxItems() {
-
-        /************ START KEYBOARD **************/
-
         levelList = new ArrayList<>();
-
         cbKeyboard.getItems().setAll("လွၵ်းမိုဝ်း လၵ်းၸဵင်", "လွၵ်းမိုဝ်း ယုင်းၶဵဝ်", "လွၵ်းမိုဝ်း ပၢင်လူင်", "လွၵ်းမိုဝ်း ၼမ်ႉၶူင်း");
         cbKeyboard.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue != null) {
-                if (loggedInUser != null) {
+                if (loggedInUser != null && !isInitializing) {
                     loggedInUser.setKeyboard(newValue.intValue());
                     UserService.updateUser(loggedInUser);
                 }
@@ -251,12 +237,11 @@ public class MainController implements Initializable {
                 createKeyBoard();
                 reqFocusOnPracticeField();
                 resetLevels(newValue.intValue());
+                if (isInitializing) {
+                    cbLevel.getSelectionModel().select(loggedInUser.getLevel());
+                }
             }
         });
-
-        /************* END KEYBOARD ***********/
-
-        /************* START THEME ************/
 
         cbTheme.getItems().addAll(List.of(
                 new Theme("dark_theme", "Dark", "white"),
@@ -285,66 +270,51 @@ public class MainController implements Initializable {
                 }
             }
         });
-        cbTheme.setCellFactory(new Callback<>() {
+        cbTheme.setCellFactory(param -> new ListCell<>() {
             @Override
-            public ListCell<Theme> call(ListView<Theme> param) {
-                return new ListCell<>() {
-                    @Override
-                    protected void updateItem(Theme item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty || item == null) {
-                            setText(null);
-                            setGraphic(null);
-                        } else {
-                            setText(item.name().toUpperCase());
-                        }
-                    }
-                };
+            protected void updateItem(Theme item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    setText(item.name().toUpperCase());
+                }
             }
         });
         cbTheme.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && root.getScene() != null) {
                 Theme theme = cbTheme.getItems().get(newValue.intValue());
-                if (loggedInUser != null) {
+                if (loggedInUser != null && !isInitializing) {
                     loggedInUser.setTheme(newValue.intValue());
                     UserService.updateUser(loggedInUser);
                 }
-                // Revert to the original working logic
                 String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
-                root.getStylesheets().clear();
-                root.getStylesheets().add(stylesheet);
-
+                root.getStylesheets().setAll(stylesheet);
                 ivNext.setImage(new Image(getClass().getResource("/images/next_" + theme.iconColor() + ".png").toExternalForm()));
                 ivPrev.setImage(new Image(getClass().getResource("/images/prev_" + theme.iconColor() + ".png").toExternalForm()));
                 reqFocusOnPracticeField();
             }
         });
 
-        /************* END THEME **************/
-
-
-        /*********** START LEVEL ************/
         lessonList = new ArrayList<>();
-        // Level Items are added according to Keyboard Selection!
         cbLevel.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                if (loggedInUser != null) {
+                if (loggedInUser != null && !isInitializing) {
                     loggedInUser.setLevel(newValue.intValue());
                     UserService.updateUser(loggedInUser);
                 }
                 changeLessons(newValue.intValue());
                 tfPractice.clear();
+                if (isInitializing) {
+                    cbLessons.getSelectionModel().select(loggedInUser.getLesson());
+                }
             }
         });
 
-        /************* END LEVEL **************/
-
-        /*********** START LESSONS *************/
-        // cbLessons items are added when change in cbLevel occurs!
         cbLessons.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                if (loggedInUser != null) {
-                    // Check if the index is valid before setting
+                if (loggedInUser != null && !isInitializing) {
                     int lessonIndex = cbLessons.getSelectionModel().getSelectedIndex();
                     if (lessonIndex != -1) {
                         loggedInUser.setLesson(lessonIndex);
@@ -352,36 +322,27 @@ public class MainController implements Initializable {
                     }
                 }
                 if (cbLevel.getSelectionModel().getSelectedIndex() == 0) {
-                    List<String> lessons = new ArrayList<>(Arrays.stream(newValue.getLesson().split(" ")).toList());
+                    List<String> lessons = new ArrayList<>(Arrays.asList(newValue.getLesson().split(" ")));
                     if (cbLessons.getSelectionModel().getSelectedIndex() != 0)
                         lessons = replace_A_WithOtherCharacters(lessons);
                     else {
-                        List<String> lessonsCopy = new ArrayList<>(Arrays.stream(newValue.getLesson().split(" ")).toList());
-                        lessons.addAll(lessonsCopy);
+                        lessons.addAll(new ArrayList<>(Arrays.asList(newValue.getLesson().split(" "))));
                     }
-                    // Show test text ramdomly
                     Collections.shuffle(lessons);
-                    tfView.setText(Arrays.toString(lessons.toArray()).replaceAll("[\\[\\],]", ""));
+                    tfView.setText(String.join(" ", lessons));
                 } else {
                     tfView.setText(newValue.getLesson());
                 }
                 resetAndFocusOnPracticeField();
                 tutorTyping();
+                if (isInitializing) {
+                    Platform.runLater(() -> isInitializing = false);
+                }
             }
         });
 
-        // NEXT & PREVIOUS
-        btNext.setOnAction(event -> {
-            nextLesson();
-        });
-
-        // NEXT & PREVIOUS
-        btPrev.setOnAction(event -> {
-            prevLesson();
-        });
-
-        /************ END LESSONS *************/
-
+        btNext.setOnAction(event -> nextLesson());
+        btPrev.setOnAction(event -> prevLesson());
     }
 
     private void changeLessons(int i) {
@@ -399,29 +360,19 @@ public class MainController implements Initializable {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
-                // ZWNBSP ERROR
                 line = line.replaceAll("\\uFEFF", "");
                 String[] values = line.split(",");
                 int no = Integer.parseInt(values[0].trim());
                 String title = values[1].trim();
-//                System.out.println(title + " : " + values.length);
                 String content = values[2].replace("\"", "").trim();
                 lessonList.add(new Lesson(no, title, content));
             }
             if (i == 1)
-                // using short_lessons, we should reverse it before use it
                 Collections.reverse(lessonList);
-            int selectedIndex = cbLessons.getSelectionModel().getSelectedIndex();
             cbLessons.setItems(FXCollections.observableArrayList(lessonList));
-            if (selectedIndex < 0) {
+            if (!isInitializing) {
                 cbLessons.getSelectionModel().selectFirst();
-            } else if (i == 0 && selectedIndex > cbLessons.getItems().size() - 1) {
-                cbLessons.getSelectionModel().selectLast();
-            } else {
-                cbLessons.getSelectionModel().select(selectedIndex);
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -438,7 +389,6 @@ public class MainController implements Initializable {
     }
 
     private void resetAndFocusOnPracticeField() {
-
         tfPractice.clear();
         reqFocusOnPracticeField();
         lbWPM.setText("0");
@@ -452,34 +402,23 @@ public class MainController implements Initializable {
     private boolean end;
 
     private void initPracticeListener() {
-
-
-        // Init Error Player
         var soundURL = getClass().getResource("/audio/error.mp3");
         errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
-
-        tfPractice.setOnMouseClicked(mouseEvent -> {
-            tfPractice.end();
-        });
-        tfPractice.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode() == KeyCode.BACK_SPACE ||
-                        event.getCode() == KeyCode.DELETE ||
-                        event.getCode() == KeyCode.ENTER ||
-                        event.getCode() == KeyCode.ESCAPE ||
-                        event.getCode() == KeyCode.TAB ||
-                        event.getCode() == KeyCode.UP ||
-                        event.getCode() == KeyCode.DOWN ||
-                        event.getCode() == KeyCode.LEFT ||
-                        event.getCode() == KeyCode.RIGHT
-
-                ) {
-                    event.consume();
-                }
+        tfPractice.setOnMouseClicked(mouseEvent -> tfPractice.end());
+        tfPractice.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.BACK_SPACE ||
+                    event.getCode() == KeyCode.DELETE ||
+                    event.getCode() == KeyCode.ENTER ||
+                    event.getCode() == KeyCode.ESCAPE ||
+                    event.getCode() == KeyCode.TAB ||
+                    event.getCode() == KeyCode.UP ||
+                    event.getCode() == KeyCode.DOWN ||
+                    event.getCode() == KeyCode.LEFT ||
+                    event.getCode() == KeyCode.RIGHT
+            ) {
+                event.consume();
             }
         });
-
         tfPractice.addEventHandler(KeyEvent.KEY_TYPED, event -> {
             if (event.getCharacter().equals("\u200B") || (!typingWithEnglish && consumeShanCharacter)) {
                 consumeShanCharacter = false;
@@ -487,21 +426,16 @@ public class MainController implements Initializable {
                 event.consume();
             }
         });
-
         tfPractice.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == null) return;
-
             if (newValue.length() == 1) {
                 startTime = System.currentTimeMillis();
                 misTyped = 0;
                 end = false;
             }
-
             calculateOutcome();
-
             if (swap) {
                 swap = false;
-                // For unknown reason, ေ is typing again when all the job is finished!
                 consumeShanCharacter = true;
                 return;
             }
@@ -514,7 +448,6 @@ public class MainController implements Initializable {
                 return;
             }
             if (tfPractice.getText().endsWith("\u200b")) {
-//                System.out.println("200b gone!");
                 tfPractice.setText(oldValue);
                 return;
             }
@@ -522,45 +455,34 @@ public class MainController implements Initializable {
         });
     }
 
-
     private void tutorTyping() {
-        // To be able to type ေ & ႄ first with SIL_Shan Keyman keyboard
         int keyboard = cbKeyboard.getSelectionModel().getSelectedIndex();
         String testText = tfView.getText();
         if (keyboard != 3) {
-            testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1031", "\u1031$1$2$3");
-            testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1084", "\u1084$1$2$3");
+            testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1031", "\\u1031$1$2$3");
+            testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1084", "\\u1084$1$2$3");
         }
-
         String practiceText = tfPractice.getText();
         int indexOfPractice = 0;
         String typing;
         if (tfPractice.getText() != null && !tfPractice.getText().isEmpty()) {
-            // When typing ​ေ & ​ႄ with sil_shan, this key always comes and we have to omit it first
-            // For the typing tutor to know exactly what key we need to type
             indexOfPractice = practiceText.length();
             String mustType = testText.substring(indexOfPractice - 1, indexOfPractice);
             typing = practiceText.substring(indexOfPractice - 1, indexOfPractice);
             if (Utils.isEnglishCharacter(typing) && !isConverted) {
-                // Config for Namkhone Keyboard
                 if (keyboard == 3) {
-                    // Show  ိံ  key
                     if (mustType.equals("ိ")) {
                         String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
                         if (afterTyping.equals("ံ")) {
                             mustType = "ိံ";
                         }
                     }
-                    // Show  ျွ  key
                     if (mustType.equals("ျ")) {
                         String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
                         if (afterTyping.equals("ွ")) {
                             mustType = "ျွ";
                         }
                     }
-
-
-                    // Show ို key
                     if (mustType.equals("ြ")) {
                         try {
                             String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
@@ -570,8 +492,6 @@ public class MainController implements Initializable {
                         } catch (Exception ignored) {
                         }
                     }
-
-                    // Show ႁႂ် key
                     if (mustType.equals("ႁ")) {
                         try {
                             String afterTyping2 = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
@@ -582,8 +502,6 @@ public class MainController implements Initializable {
                         } catch (Exception ignored) {
                         }
                     }
-
-                    // Show  ၢႆ  key
                     if (mustType.equals("ၢ")) {
                         try {
                             String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
@@ -593,8 +511,6 @@ public class MainController implements Initializable {
                         } catch (Exception ignored) {
                         }
                     }
-
-                    // Show ေႃ key
                     if (mustType.equals("ေ")) {
                         try {
                             String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
@@ -604,8 +520,6 @@ public class MainController implements Initializable {
                         } catch (Exception ignored) {
                         }
                     }
-
-                    // Show ို key
                     if (mustType.equals("ိ")) {
                         try {
                             String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
@@ -615,8 +529,6 @@ public class MainController implements Initializable {
                         } catch (Exception ignored) {
                         }
                     }
-
-                    // Show ိူ key
                     if (mustType.equals("ိ")) {
                         try {
                             String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
@@ -626,18 +538,6 @@ public class MainController implements Initializable {
                         } catch (Exception ignored) {
                         }
                     }
-
-                    // Show ိူ key
-                    if (mustType.equals("ိ")) {
-                        try {
-                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
-                            if (afterTyping.equals("ူ")) {
-                                mustType = "ိူ";
-                            }
-                        } catch (Exception ignored) {
-                        }
-                    }
-                    // Show ႁူ  ႁွ key
                     if (mustType.equals("ႁ")) {
                         try {
                             String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
@@ -649,16 +549,13 @@ public class MainController implements Initializable {
                         } catch (Exception ignored) {
                         }
                     }
-
                 }
-
                 if (mustType.equals("ႂ")) {
                     String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
                     if (afterTyping.equals("်"))
                         mustType = "ႂ်";
                 }
                 typingWithEnglish = true;
-                // TODO - Need to decide what keyboard to use
                 String shanChar = convertToShanChar(typing);
                 tfPractice.setText(null);
                 if (mustType.equals(shanChar)) {
@@ -671,7 +568,6 @@ public class MainController implements Initializable {
                     playMistypedSound();
                 }
                 return;
-
             } else {
                 isConverted = false;
                 if (!mustType.equals(typing)) {
@@ -696,38 +592,32 @@ public class MainController implements Initializable {
             if ((typing.equals("ေ") || typing.equals("ႄ")) && keyboard != 3) {
                 mustSwap = true;
             }
-
             if (practiceText.length() == tfView.getText().length()) {
                 end = true;
                 clearToTypeValues();
+                ProgressService.saveProgress(loggedInUser.getId(), cbLevel.getSelectionModel().getSelectedIndex(), cbLessons.getSelectionModel().getSelectedIndex());
+                checkLevelCompletion();
                 String title = cbLevel.getValue() + " : " + cbLessons.getValue().getTitle();
                 Summary summaryDialog = new Summary(this, primaryStage);
                 summaryDialog.showDialog(title, wpm, accuracy, misTyped, awpm);
                 return;
             }
-
         }
-
         if (indexOfPractice < tfView.getText().length()) {
-            // Know which value to type next
             String valueToType = testText.substring(indexOfPractice, indexOfPractice + 1);
             if (keyboard == 3) {
-                // Show  ိံ  key
                 if (valueToType.equals("ိ")) {
                     String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
                     if (afterTyping.equals("ံ")) {
                         valueToType = "ိံ";
                     }
                 }
-                // Show  ျွ  key
                 if (valueToType.equals("ျ")) {
                     String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
                     if (afterTyping.equals("ွ")) {
                         valueToType = "ျွ";
                     }
                 }
-
-                // Show ို key
                 if (valueToType.equals("ြ")) {
                     try {
                         String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
@@ -737,8 +627,6 @@ public class MainController implements Initializable {
                     } catch (Exception ignored) {
                     }
                 }
-
-                // Show ႁႂ် key
                 if (valueToType.equals("ႁ")) {
                     try {
                         String afterTyping2 = testText.substring(indexOfPractice + 2, indexOfPractice + 3);
@@ -749,8 +637,6 @@ public class MainController implements Initializable {
                     } catch (Exception ignored) {
                     }
                 }
-
-                // Show  ၢႆ  key
                 if (valueToType.equals("ၢ")) {
                     try {
                         String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
@@ -760,8 +646,6 @@ public class MainController implements Initializable {
                     } catch (Exception ignored) {
                     }
                 }
-
-                // Show ေႃ key
                 if (valueToType.equals("ေ")) {
                     try {
                         String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
@@ -771,8 +655,6 @@ public class MainController implements Initializable {
                     } catch (Exception ignored) {
                     }
                 }
-
-                // Show ို key
                 if (valueToType.equals("ိ")) {
                     try {
                         String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
@@ -782,9 +664,6 @@ public class MainController implements Initializable {
                     } catch (Exception ignored) {
                     }
                 }
-
-
-                // Show ိူ key
                 if (valueToType.equals("ိ")) {
                     try {
                         String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
@@ -794,18 +673,6 @@ public class MainController implements Initializable {
                     } catch (Exception ignored) {
                     }
                 }
-
-                // Show ိူ key
-                if (valueToType.equals("ိ")) {
-                    try {
-                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
-                        if (afterTyping.equals("ူ")) {
-                            valueToType = "ိူ";
-                        }
-                    } catch (Exception ignored) {
-                    }
-                }
-                // Show ႁူ  ႁွ key
                 if (valueToType.equals("ႁ")) {
                     try {
                         String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
@@ -817,16 +684,12 @@ public class MainController implements Initializable {
                     } catch (Exception ignored) {
                     }
                 }
-
             }
-            // Show  ႂ်  key
             if (valueToType.equals("ႂ")) {
                 String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
                 if (afterTyping.equals("်"))
                     valueToType = "ႂ်";
             }
-
-
             if (valueToType.equals(" ")) {
                 highlightThisValue("SPACE", 0, 5);
             } else {
@@ -851,10 +714,52 @@ public class MainController implements Initializable {
         }
     }
 
+    private void checkLevelCompletion() {
+        int levelIndex = cbLevel.getSelectionModel().getSelectedIndex();
+        int totalLessons = cbLessons.getItems().size();
+        int completedLessons = ProgressService.getCompletedLessonCount(loggedInUser.getId(), levelIndex);
+        if (completedLessons >= totalLessons) {
+            showCertificate(levelIndex);
+        }
+    }
+
+    private void showProfile() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/profile.fxml"));
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(primaryStage);
+            stage.setScene(new Scene(loader.load()));
+
+            ProfileController controller = loader.getController();
+            controller.initData(loggedInUser);
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showCertificate(int levelIndex) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/certificate.fxml"));
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(primaryStage);
+            stage.setScene(new Scene(loader.load()));
+
+            CertificateController controller = loader.getController();
+            controller.initData(loggedInUser.getUsername(), "Level " + (levelIndex + 1));
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private MediaPlayer errorPlayer;
 
     private void playMistypedSound() {
-
         if (errorPlayer == null) {
             var soundURL = getClass().getResource("/audio/error.mp3");
             errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
@@ -878,57 +783,42 @@ public class MainController implements Initializable {
             shanChar = NamKhone_KeyMap.getAllValuesMap().getOrDefault(character, "");
         }
         return shanChar;
-
     }
 
     private void clearToTypeValues() {
-//        toTypeNode.setStyle("-fx-background-color: #000");
-//        toTypeSecNode.setStyle("-fx-background-color: #000;");
-        toTypeNode.setId("key-node-default");
-        toTypeSecNode.setId("key-node-default");
+        if (toTypeNode != null) toTypeNode.setId("key-node-default");
+        if (toTypeSecNode != null) toTypeSecNode.setId("key-node-default");
     }
 
     private void highlightThisValue(String key, int row, int col) {
         if (toTypeSecNode != null) {
-//            toTypeSecNode.setStyle("-fx-background-color: #000");
             toTypeSecNode.setId("key-node-default");
         }
         switch (key) {
             case "SHIFT" -> {
-                // Calculate which shift key to press!
                 int determination = 5;
-                //                    case 0,1 -> determination = 5;
-                //                    case 2,3 -> determination = 5;
-                //                    case 4,5 -> determination = 5;
-                //                    case 6,7 -> determination = 5;
                 if (col > determination) {
-                    // Enable Left Shift
                     toTypeSecNode = row4.getChildren().get(0);
                 } else {
-                    // Enable Right Shift
                     toTypeSecNode = row4.getChildren().get(row4.getChildren().size() - 1);
                 }
             }
             case "SPACE" -> {
                 if (toTypeNode != null) {
-//                    toTypeNode.setStyle("-fx-background-color: #000;");
                     toTypeNode.setId("key-node-default");
                 }
                 toTypeSecNode = row5.getChildren().get(3);
             }
         }
-
         if (toTypeSecNode != null)
             toTypeSecNode.setId("key-node-to-type");
     }
 
     private void typeThisValue(int x, int y) {
         if (toTypeNode != null) {
-//            toTypeNode.setStyle("-fx-background-color: #000;");
             toTypeNode.setId("key-node-default");
         }
         if (toTypeSecNode != null) {
-//            toTypeSecNode.setStyle("-fx-background-color: #000");
             toTypeSecNode.setId("key-node-default");
         }
         switch (x) {
@@ -940,22 +830,15 @@ public class MainController implements Initializable {
         if (toTypeNode != null) {
             toTypeNode.setId("key-node-to-type");
         }
-
     }
 
     protected void createKeyBoard() {
-
         for (int i = 0; i < allValues.size(); i += 2) {
-            // u
             Iterator<String> engVal = allValues.get(i).keySet().iterator();
-            // ၵ
             Iterator<String> taiVal = allValues.get(i).values().iterator();
-            // U
             Iterator<String> engShiftVal = allValues.get(i + 1).keySet().iterator();
-            // ၷ
             Iterator<String> taiShiftVal = allValues.get(i + 1).values().iterator();
             while (engVal.hasNext() && taiVal.hasNext() && engShiftVal.hasNext() && taiShiftVal.hasNext()) {
-
                 HBox row = null;
                 switch (i) {
                     case 0 -> row = row1;
@@ -993,47 +876,37 @@ public class MainController implements Initializable {
                         row.getChildren().add(createKey(new Key(engShift, eng, taiShift, tai)));
                 }
             }
-
         }
     }
 
-
-    // Create a keyboard key with 5% width!
     private VBox createKey(Key key) {
-
+        VBox keyNode;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/key.fxml"));
         try {
-            this.key = fxmlLoader.load();
+            keyNode = fxmlLoader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        setCharacterOnButton(this.key, key, "NamKhoneUnicode", 16);
-        return this.key;
-
+        setCharacterOnButton(keyNode, key, "NamKhoneUnicode", 16);
+        return keyNode;
     }
 
     private void setCharacterOnButton(VBox vBox, Key key, String fontFamily, double fontSize) {
         Label charTaiShift = (Label) ((HBox) vBox.getChildren().get(0)).getChildren().get(0);
         charTaiShift.setText(key.getTaiShift());
         charTaiShift.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
-
         Label charEngShift = (Label) ((HBox) vBox.getChildren().get(0)).getChildren().get(1);
         charEngShift.setText(key.getEngShift());
         charEngShift.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
-
         Label charTai = (Label) ((HBox) vBox.getChildren().get(1)).getChildren().get(0);
         charTai.setText(key.getTai());
         charTai.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
-
         Label charEng = (Label) ((HBox) vBox.getChildren().get(1)).getChildren().get(1);
         charEng.setText(key.getEng());
         charEng.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
-
     }
 
     private VBox createKeyWithCustomWidth(Key key, double width) {
-
         VBox vBox;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/key.fxml"));
         try {
@@ -1044,7 +917,6 @@ public class MainController implements Initializable {
         vBox.setPrefWidth(vBox.getPrefWidth() + (vBox.getPrefWidth() * width));
         setCharacterOnButton(vBox, key, "VistolSans-Black", 18);
         return vBox;
-
     }
 
     private int wpm;
@@ -1065,7 +937,6 @@ public class MainController implements Initializable {
         return avgWPM;
     }
 
-
     private double calculateACCU() {
         double accuracy = (double) (tfPractice.getText().length() - misTyped) / tfPractice.getText().length();
         DecimalFormat format = new DecimalFormat("#0.00");
@@ -1074,13 +945,10 @@ public class MainController implements Initializable {
         return accuracy;
     }
 
-
     private int calculateWPM() {
-        // Calculate Interim WPM
         long elapsedTime = System.currentTimeMillis() - startTime;
         int characterCount = tfPractice.getText().length();
-//            int wordCount = characterCount / 5; // Assuming an average word length of 5
-        double minutes = (double) elapsedTime / 6000;
+        double minutes = (double) elapsedTime / 60000;
         int interimWPM = (int) (characterCount / minutes);
         lbWPM.setText(String.valueOf(interimWPM));
         return interimWPM;
@@ -1115,17 +983,11 @@ public class MainController implements Initializable {
     public void reqFocusOnPracticeField() {
         tfPractice.requestFocus();
         tfPractice.end();
-
     }
 
     public void retryLesson() {
-//        resetAndFocusOnPracticeField();
         Lesson selectedLesson = cbLessons.getSelectionModel().getSelectedItem();
         cbLessons.getSelectionModel().clearSelection();
         cbLessons.getSelectionModel().select(selectedLesson);
-    }
-
-    public ComboBox<Theme> getCbTheme() {
-        return cbTheme;
     }
 }

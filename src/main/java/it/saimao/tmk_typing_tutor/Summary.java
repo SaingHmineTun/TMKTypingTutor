@@ -112,7 +112,7 @@ public class Summary {
         sAWPM.setText(String.valueOf(awpm));
         sNext.requestFocus();
 
-        String iconColor = mainController.getCbTheme().getSelectionModel().getSelectedItem().iconColor();
+        String iconColor = mainController.cbTheme.getSelectionModel().getSelectedItem().iconColor();
         // Change icon color for CLOSE, PREV, RETRY, NEXT according to the theme
         sClose.setGraphic(createIcon("close", iconColor));
         sPrev.setGraphic(createIcon("prev", iconColor));
