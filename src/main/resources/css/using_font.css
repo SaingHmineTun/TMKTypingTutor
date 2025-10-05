@@ -12,3 +12,8 @@
     font-family: 'A J Kunheing 6';
     src: url('../fonts/aj_kunheing6.ttf');
 }
+
+@font-face {
+    font-family: 'AJ 02 Regular';
+    src: url("../fonts/aj02.ttf");
+}

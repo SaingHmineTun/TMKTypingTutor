@@ -380,8 +380,7 @@ public class MainController implements Initializable {
                 String content = values[2].replace("\"", "").trim();
                 lessonList.add(new Lesson(no, title, content));
             }
-            if (i == 1)
-                Collections.reverse(lessonList);
+            if (i == 1) Collections.reverse(lessonList);
             cbLessons.setItems(FXCollections.observableArrayList(lessonList));
             if (!isInitializing) {
                 cbLessons.getSelectionModel().selectFirst();
@@ -419,16 +418,7 @@ public class MainController implements Initializable {
         errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
         tfPractice.setOnMouseClicked(mouseEvent -> tfPractice.end());
         tfPractice.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getCode() == KeyCode.BACK_SPACE ||
-                    event.getCode() == KeyCode.DELETE ||
-                    event.getCode() == KeyCode.ENTER ||
-                    event.getCode() == KeyCode.ESCAPE ||
-                    event.getCode() == KeyCode.TAB ||
-                    event.getCode() == KeyCode.UP ||
-                    event.getCode() == KeyCode.DOWN ||
-                    event.getCode() == KeyCode.LEFT ||
-                    event.getCode() == KeyCode.RIGHT
-            ) {
+            if (event.getCode() == KeyCode.BACK_SPACE || event.getCode() == KeyCode.DELETE || event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.TAB || event.getCode() == KeyCode.UP || event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.RIGHT) {
                 event.consume();
             }
         });
@@ -866,8 +856,7 @@ public class MainController implements Initializable {
 
                 if (mustType.equals("ႂ")) {
                     String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
-                    if (afterTyping.equals("်"))
-                        mustType = "ႂ်";
+                    if (afterTyping.equals("်")) mustType = "ႂ်";
                 }
                 typingWithEnglish = true;
                 // TODO - Need to decide what keyboard to use
@@ -1040,8 +1029,7 @@ public class MainController implements Initializable {
             // Show ႂ်  key
             if (valueToType.equals("ႂ")) {
                 String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
-                if (afterTyping.equals("်"))
-                    valueToType = "ႂ်";
+                if (afterTyping.equals("်")) valueToType = "ႂ်";
             }
 
 
@@ -1071,15 +1059,7 @@ public class MainController implements Initializable {
 
     private void saveLessonProgress() {
         // Create a lesson progress object with the current stats
-        LessonProgress lessonProgress =
-                new LessonProgress(
-                        loggedInUser.getId(),
-                        cbLevel.getSelectionModel().getSelectedIndex(),
-                        cbLessons.getSelectionModel().getSelectedIndex(),
-                        wpm,
-                        accuracy,
-                        misTyped
-                );
+        LessonProgress lessonProgress = new LessonProgress(loggedInUser.getId(), cbLevel.getSelectionModel().getSelectedIndex(), cbLessons.getSelectionModel().getSelectedIndex(), wpm, accuracy, misTyped);
 
         // Save the lesson progress
         System.out.println("Attempting to save lesson progress...");
@@ -1089,15 +1069,7 @@ public class MainController implements Initializable {
 
     private void checkLevelCompletion() {
         int levelIndex = cbLevel.getSelectionModel().getSelectedIndex();
-        int totalLessons;
-
-        // Get the actual number of lessons for this level
-        if (levelIndex == 0) {
-            totalLessons = 9;  // Level 1 has9 lessons}else if (levelIndex == 1 || levelIndex == 2) {
-            totalLessons = 82; // Level 2 and 3 have 82 lessons each
-        } else {
-            totalLessons = cbLessons.getItems().size(); // For other levels, use actualsize
-        }
+        int totalLessons = cbLessons.getItems().size(); // For other levels, use actualsize
 
         int completedLessons = ProgressService.getCompletedLessonCount(loggedInUser.getId(), levelIndex);
         if (completedLessons >= totalLessons) {
@@ -1210,8 +1182,7 @@ public class MainController implements Initializable {
                 toTypeSecNode = row5.getChildren().get(3);
             }
         }
-        if (toTypeSecNode != null)
-            toTypeSecNode.setId("key-node-to-type");
+        if (toTypeSecNode != null) toTypeSecNode.setId("key-node-to-type");
     }
 
     private void typeThisValue(int x, int y) {
@@ -1272,8 +1243,7 @@ public class MainController implements Initializable {
                         row.getChildren().add(createKeyWithCustomWidth(new Key("", tai, "", ""), 2 * 0.02));
                     else if (eng.equals(tai) && engShift.equals(taiShift))
                         row.getChildren().add(createKey(new Key(engShift, eng, "", "")));
-                    else
-                        row.getChildren().add(createKey(new Key(engShift, eng, taiShift, tai)));
+                    else row.getChildren().add(createKey(new Key(engShift, eng, taiShift, tai)));
                 }
             }
         }
@@ -1349,9 +1319,9 @@ public class MainController implements Initializable {
         long elapsedTime = System.currentTimeMillis() - startTime;
         int characterCount = tfPractice.getText().length();
         double minutes = (double) elapsedTime / 60000;
-        int interimWPM = (int) (characterCount / minutes);
+        var interimWPM = Math.round((characterCount / 5.0) / minutes);
         lbWPM.setText(String.valueOf(interimWPM));
-        return interimWPM;
+        return Math.toIntExact(interimWPM);
     }
 
     public boolean nextLesson() {

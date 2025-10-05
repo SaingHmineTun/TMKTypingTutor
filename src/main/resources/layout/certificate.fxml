@@ -1,56 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="root" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/certificate_style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.controller.CertificateController">
+<BorderPane fx:id="root" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/certificate_style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.controller.CertificateController">
     <center>
-        <VBox alignment="CENTER" spacing="20.0">
+        <VBox alignment="CENTER" styleClass="certificate-pane">
             <children>
-                <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                <Label id="certificate-title" styleClass="certificate-title" text="Certificate Of Completion">
+                </Label>
+                <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../images/app_icon.png" />
                     </image>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
                 </ImageView>
-                <Label styleClass="certificate-title" text="CERTIFICATE">
-                    <font>
-                        <Font name="System Bold" size="36.0" />
-                    </font>
-                </Label>
-                <Label styleClass="certificate-subtitle" text="OF COMPLETION">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Label>
-                <VBox alignment="CENTER" spacing="5.0">
-                    <children>
-                        <Label styleClass="certificate-text" text="This is to certify that" />
-                        <Label fx:id="lblUsername" styleClass="certificate-username" text="[Username]">
-                            <font>
-                                <Font name="System Bold" size="24.0" />
-                            </font>
+                  <Label styleClass="certificate-text" text="This is to certify that" />
+                  <Label fx:id="lblUsername" styleClass="certificate-username" text="Sai Mao">
                         </Label>
-                        <Label styleClass="certificate-text" text="has successfully completed" />
-                        <Label fx:id="lblLevel" styleClass="certificate-level" text="[Level Name]">
-                            <font>
-                                <Font name="System Bold" size="20.0" />
-                            </font>
+                  <Label styleClass="certificate-text" text="has successfully completed" />
+                  <Label fx:id="lblLevel" styleClass="certificate-level" text="Level 1">
                         </Label>
-                        <Label styleClass="certificate-text" text="with an average typing speed of" />
-                        <Label fx:id="lblAwpm" styleClass="certificate-awpm" text="[AWPM] WPM">
-                            <font>
-                                <Font name="System Bold" size="24.0" />
-                            </font>
+                  <Label styleClass="certificate-text" text="of Shan Typing with an average speed of" />
+                  <Label fx:id="lblAwpm" styleClass="certificate-awpm" text="30 AWPM">
                         </Label>
-                    </children>
-                </VBox>
-                <Label styleClass="certificate-text" text="in TMK Typing Tutor" />
+            <HBox alignment="CENTER">
+               <children>
+                      <Label styleClass="certificate-text" text="in TMK Typing Tutor on " />
+                      <Label fx:id="lblDate" maxHeight="1.7976931348623157E308" styleClass="certificate-text" text="Oct 4, 2025" />
+               </children>
+            </HBox>
             </children>
             <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -60,16 +43,6 @@
     <bottom>
         <VBox alignment="CENTER" prefHeight="100.0">
             <children>
-                <Label styleClass="certificate-date-label" text="Date:">
-                    <VBox.margin>
-                        <Insets bottom="5.0" />
-                    </VBox.margin>
-                </Label>
-                <Label fx:id="lblDate" styleClass="certificate-date" text="[Date]">
-                    <VBox.margin>
-                        <Insets bottom="10.0" />
-                    </VBox.margin>
-                </Label>
                 <Button fx:id="btnClose" mnemonicParsing="false" onAction="#close" prefHeight="40.0" prefWidth="120.0" text="Close" />
             </children>
         </VBox>

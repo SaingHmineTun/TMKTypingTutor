@@ -45,7 +45,7 @@ public class ProfileController implements Initializable {
     private Button btnClose;
 
     private User user;
-    private final int[] lessonsPerLevel = {9, 82, 82, 10}; // Lessons per level (Level 1: 9, Level 2: 82, Level 3: 82, Level 4: 10)
+    private final int[] lessonsPerLevel = {9, 82, 82, 130}; // Lessons per level (Level 1: 9, Level 2: 82, Level 3: 82, Level 4: 130)
     private MainController mainController; // Reference to main controller
 
     @Override
