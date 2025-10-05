@@ -122,6 +122,7 @@ public class SettingsController implements Initializable {
         };
 
         new Thread(task).start();
+
     }
 
     public void initData(User user, MainController mainController) {
@@ -174,11 +175,13 @@ public class SettingsController implements Initializable {
         node = tabContent.lookup("#btnChangeDisplayName");
         if (node instanceof Button) {
             btnChangeDisplayName = (Button) node;
+            btnChangeDisplayName.setOnAction(event -> onChangeDisplayName());
         }
 
         node = tabContent.lookup("#btnChangePassword");
         if (node instanceof Button) {
             btnChangePassword = (Button) node;
+            btnChangePassword.setOnAction(event -> onChangePassword());
         }
 
         //Load user profile data
@@ -230,6 +233,7 @@ public class SettingsController implements Initializable {
         node = tabContent.lookup("#btnApplyTheme");
         if (node instanceof Button) {
             btnApplyTheme = (Button) node;
+            btnApplyTheme.setOnAction(event -> onApplyTheme());
         }
 
         // Initialize themes list
@@ -247,6 +251,7 @@ public class SettingsController implements Initializable {
         node = tabContent.lookup("#btnStopMusic");
         if (node instanceof Button) {
             btnStopMusic = (Button) node;
+            btnStopMusic.setOnAction(event -> onStopMusic());
         }
 
 //Initialize music listwithuser-friendly names
@@ -254,17 +259,17 @@ public class SettingsController implements Initializable {
 
         // Mapuser-friendly names to actual file names
         Map<String, String> musicNameToFileMap = new HashMap<>();
-        musicNameToFileMap.put("No Background Music", "");
-        musicNameToFileMap.put("Classroom Timer with Relaxing WAVES Music", "bgsound1.mp3");
-        musicNameToFileMap.put("Soft Peaceful Music Timer", "bgsound2.m4a");
-        musicNameToFileMap.put("Timer with Relaxing Music and Alarm", "bgsound3.m4a");
-        musicNameToFileMap.put("Relaxing Music for Stress Relief", "bgsound4.mp3");
-        musicNameToFileMap.put("Rain and Thunderstorm Sounds", "bgsound5.m4a");
-        musicNameToFileMap.put("Calm NatureSounds", "bgsound6.m4a");
-        musicNameToFileMap.put("Nature Background Sound", "bgsound7.m4a");
-        musicNameToFileMap.put("PeacefulAmbient Stress Relief", "bgsound8.m4a");
-        musicNameToFileMap.put("Nature Sounds for Focus", "bgsound9.mp3");
-        musicNameToFileMap.put("WaterfallRelaxing NatureSounds", "bgsound10.m4a");
+        musicNameToFileMap.put(musicList.get(0), "");
+        musicNameToFileMap.put(musicList.get(1), "bgsound1.mp3");
+        musicNameToFileMap.put(musicList.get(2), "bgsound2.m4a");
+        musicNameToFileMap.put(musicList.get(3), "bgsound3.m4a");
+        musicNameToFileMap.put(musicList.get(4), "bgsound4.mp3");
+        musicNameToFileMap.put(musicList.get(5), "bgsound5.m4a");
+        musicNameToFileMap.put(musicList.get(6), "bgsound6.m4a");
+        musicNameToFileMap.put(musicList.get(7), "bgsound7.m4a");
+        musicNameToFileMap.put(musicList.get(8), "bgsound8.m4a");
+        musicNameToFileMap.put(musicList.get(9), "bgsound9.mp3");
+        musicNameToFileMap.put(musicList.get(10), "bgsound10.m4a");
 
         if (lvMusic != null) {
             lvMusic.setItems(musicList);
