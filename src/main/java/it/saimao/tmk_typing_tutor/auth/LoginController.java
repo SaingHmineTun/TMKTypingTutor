@@ -2,7 +2,7 @@ package it.saimao.tmk_typing_tutor.auth;
 
 import it.saimao.tmk_typing_tutor.controller.MainController;
 import it.saimao.tmk_typing_tutor.model.User;
-import it.saimao.tmk_typing_tutor.utils.UserService;
+import it.saimao.tmk_typing_tutor.services.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,7 +41,7 @@ public class LoginController implements Initializable {
         lvUsers.getItems().setAll(UserService.getAllUsers());
         
         // Customize the appearance of list cells
-        lvUsers.setCellFactory(new Callback<ListView<User>, ListCell<User>>() {
+        lvUsers.setCellFactory(new Callback<>() {
             @Override
             public ListCell<User> call(ListView<User> listView) {
                 return new ListCell<User>() {
@@ -55,16 +55,16 @@ public class LoginController implements Initializable {
                             HBox hbox = new HBox();
                             hbox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
                             hbox.getStyleClass().add("user-list-cell");
-                            
+
                             Label userIcon = new Label("\uD83D\uDC64"); // Unicode user icon
                             userIcon.getStyleClass().add("user-icon");
-                            
+
                             Label usernameLabel = new Label(user.getUsername());
                             usernameLabel.getStyleClass().add("username-label");
-                            
+
                             Region spacer = new Region();
                             HBox.setHgrow(spacer, Priority.ALWAYS);
-                            
+
                             hbox.getChildren().addAll(userIcon, usernameLabel, spacer);
                             setGraphic(hbox);
                         }
@@ -72,6 +72,8 @@ public class LoginController implements Initializable {
                 };
             }
         });
+
+        pfPassword.setOnAction(event -> login());
 
         // Add a listener to handle user selection
         lvUsers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {

@@ -3,8 +3,8 @@ package it.saimao.tmk_typing_tutor.controller;
 import it.saimao.tmk_typing_tutor.model.Profile;
 import it.saimao.tmk_typing_tutor.model.Theme;
 import it.saimao.tmk_typing_tutor.model.User;
-import it.saimao.tmk_typing_tutor.utils.LessonProgressService;
-import it.saimao.tmk_typing_tutor.utils.ProgressService;
+import it.saimao.tmk_typing_tutor.services.LessonProgressService;
+import it.saimao.tmk_typing_tutor.services.ProgressService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -45,7 +45,7 @@ public class ProfileController implements Initializable {
     private Button btnClose;
 
     private User user;
-    private final int[] lessonsPerLevel = {9, 82, 82, 10}; // Lessons per level (Level 1: 9, Level 2: 82, Level 3: 82, Level 4: 10)
+    private final int[] lessonsPerLevel = {9, 82, 82, 130}; // Lessons per level (Level 1: 9, Level 2: 82, Level 3: 82, Level 4: 130)
     private MainController mainController; // Reference to main controller
 
     @Override

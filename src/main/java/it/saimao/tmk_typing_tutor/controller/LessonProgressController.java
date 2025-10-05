@@ -4,8 +4,8 @@ import it.saimao.tmk_typing_tutor.model.Lesson;
 import it.saimao.tmk_typing_tutor.model.LessonProgress;
 import it.saimao.tmk_typing_tutor.model.Theme;
 import it.saimao.tmk_typing_tutor.model.User;
-import it.saimao.tmk_typing_tutor.utils.LessonProgressService;
-import it.saimao.tmk_typing_tutor.utils.UserService;
+import it.saimao.tmk_typing_tutor.services.LessonProgressService;
+import it.saimao.tmk_typing_tutor.services.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.List;
@@ -49,6 +50,23 @@ public class LessonProgressController implements Initializable {
         tcLesson.setCellValueFactory(new PropertyValueFactory<>("lessonTitle")); // Changed to lessonTitle
         tcWPM.setCellValueFactory(new PropertyValueFactory<>("wpm"));
         tcAccuracy.setCellValueFactory(new PropertyValueFactory<>("accuracy"));
+        tcAccuracy.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell<LessonProgress, Double> call(TableColumn<LessonProgress, Double> param) {
+                return new TableCell<>() {
+                    @Override
+                    protected void updateItem(Double item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item == null || empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            setText(Math.round(item * 100) + "%");
+                        }
+                    }
+                };
+            }
+        });
         tcMistakes.setCellValueFactory(new PropertyValueFactory<>("mistakes"));
         tcAction.setCellValueFactory(new PropertyValueFactory<>("retryButton"));
         

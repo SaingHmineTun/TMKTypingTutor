@@ -1,4 +1,4 @@
-package it.saimao.tmk_typing_tutor.utils;
+package it.saimao.tmk_typing_tutor.services;
 
 import it.saimao.tmk_typing_tutor.model.Lesson;
 import it.saimao.tmk_typing_tutor.model.LessonProgress;
@@ -118,7 +118,7 @@ lessonProgress.setLessonIndex(rs.getInt("lesson_index"));
     }
 
     public static double getAverageWpmForLevel(int userId, int levelIndex) {
-        String sql = "SELECT AVG(wpm) as average_wpmFROM lesson_progress WHERE user_id = ? AND level_index = ?";
+        String sql = "SELECT AVG(wpm) as average_wpm FROM lesson_progress WHERE user_id = ? AND level_index = ?";
         double averageWpm = 0.0;
 
         try (Connection conn = DatabaseService.getConnection();
