@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.controller.SettingsController">
+<AnchorPane maxHeight="520.0" maxWidth="670.0" prefHeight="520.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.controller.SettingsController">
     <children>
         <VBox spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -21,10 +18,10 @@
                     </VBox.margin>
                 </Label>
                 
-                <VBox spacing="15.0" style="-fx-background-color: #f8f8f8; -fx-padding: 20; -fx-background-radius: 10;" VBox.vgrow="ALWAYS">
+                <VBox spacing="15.0" style="-fx-padding: 20; -fx-background-radius: 10; -fx-background-color: -fx-key-color;" VBox.vgrow="ALWAYS">
                     <children>
                         <ListView fx:id="lvErrorSounds" VBox.vgrow="ALWAYS" />
-                        <Button fx:id="btnPlayErrorSound" mnemonicParsing="false" onAction="#onPlayErrorSound" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #007acc; -fx-text-fill: white;" text="Play Selected Sound">
+                        <Button fx:id="btnPlayErrorSound" mnemonicParsing="false" onAction="#onPlayErrorSound" prefHeight="40.0" prefWidth="200.0" text="Play Selected Sound">
                             <font>
                                 <Font size="14.0" />
                             </font>

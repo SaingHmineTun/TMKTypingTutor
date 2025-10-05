@@ -163,3 +163,96 @@
 #key-node-default {
     -fx-background-color: -fx-key-color;
 }
+
+/* Improved ListView styling */
+.list-view {
+    -fx-background-color: -fx-key-color;
+    -fx-border-color: derive(-fx-key-color, -20%);
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 4;
+}
+
+.list-view .list-cell {
+    -fx-background-color: -fx-key-color;
+    -fx-text-fill: -fx-text-color;
+    -fx-padding: 12 16 12 16;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+    -fx-alignment: center-left;
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: derive(-fx-key-color, -10%);
+    -fx-cursor: hand;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: -fx-title-color;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.list-view .scroll-bar .thumb {
+    -fx-background-color: derive(-fx-key-color, -30%);
+    -fx-background-insets: 0;
+    -fx-background-radius: 4;
+}
+
+.list-view .scroll-bar .thumb:hover {
+    -fx-background-color: derive(-fx-key-color, -40%);
+}
+
+/* Improved TableView styling */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-border-color: derive(-fx-key-color, -20%);
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-font-family: 'NamKhoneUnicode';
+}
+
+.table-view .table-column {
+    -fx-alignment: CENTER;
+}
+
+.table-view .table-cell {
+    -fx-alignment: CENTER;
+    -fx-padding: 12 10 12 10;
+    -fx-font-size: 15;
+    -fx-text-fill: -fx-text-color;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: -fx-key-color;
+    -fx-border-color: transparent;
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: derive(-fx-key-color, -10%);
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: derive(-fx-title-color, 50%);
+}
+
+.table-view .column-header-background {
+    -fx-background-color: -fx-title-color;
+}
+
+.table-view .column-header-background .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16;
+    -fx-padding: 12 10 12 10;
+    -fx-font-family: 'NamKhoneUnicode';
+}
+
+.table-view .table-column .label {
+    -fx-text-fill: white;
+    -fx-font-family: 'NamKhoneUnicode';
+}
+

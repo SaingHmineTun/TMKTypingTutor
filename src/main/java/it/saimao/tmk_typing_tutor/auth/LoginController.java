@@ -85,6 +85,9 @@ public class LoginController implements Initializable {
                 pfPassword.requestFocus();
             }
         });
+
+        if (!lvUsers.getItems().isEmpty())
+            lvUsers.getSelectionModel().selectFirst();
     }
 
     @FXML

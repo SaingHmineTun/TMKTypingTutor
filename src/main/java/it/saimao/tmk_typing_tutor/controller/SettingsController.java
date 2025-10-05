@@ -111,9 +111,7 @@ public class SettingsController implements Initializable {
                     if (apContent != null) {
                         loadTabContent("/layout/setting_user_profile.fxml");
                         // Highlightthe first button as selected
-                        if (btnUserProfile != null) {
-                            btnUserProfile.setStyle("-fx-background-color: #007acc;-fx-text-fill: white; -fx-border-color: #007acc; -fx-border-radius:5;");
-                        }
+                        updateButtonStyles(btnUserProfile);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -360,6 +358,7 @@ public class SettingsController implements Initializable {
         node = tabContent.lookup("#btnPlayErrorSound");
         if (node instanceof Button) {
             btnPlayErrorSound = (Button) node;
+            btnPlayErrorSound.setOnAction(event -> onPlayErrorSound());
         }
 
         // Initializeerrorsounds list
@@ -400,9 +399,12 @@ public class SettingsController implements Initializable {
             profile.setLevelIndex(i); // Store levelindex for later use
 
             if (completed >= total) {
+
                 //For completed levels, enable bothGenerate and Details buttonsprofile.getCertificateButton().setDisable(false);
                 profile.getCertificateButton().setText("Generate");
                 final int levelIndex = i;
+
+                profile.getCertificateButton().setDisable(false);
                 profile.getCertificateButton().setOnAction(event -> showCertificate(levelIndex));
 
                 profile.getDetailsButton().setDisable(false);
@@ -461,7 +463,8 @@ public class SettingsController implements Initializable {
     private void onThemeTab() throws IOException {
         if (apContent != null) {
             loadTabContent("/layout/setting_theme.fxml");
-            // Update button stylestoshow selectionupdateButtonStyles(btnTheme);
+            // Update button stylestoshow selection
+             updateButtonStyles(btnTheme);
         }
     }
 
@@ -517,13 +520,13 @@ public class SettingsController implements Initializable {
 
         for (Button button : allButtons) {
             if (button != null) {
-                button.setStyle("-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-radius: 5;");
+                button.setStyle("-fx-background-radius: 5; -fx-border-radius: 5;");
             }
         }
 
         // Highlight selected button
         if (selectedButton != null) {
-            selectedButton.setStyle("-fx-background-color: #007acc; -fx-text-fill: white; -fx-border-color: #007acc; -fx-border-radius: 5;");
+            selectedButton.setStyle("-fx-background-color: -fx-to-type-node-color; -fx-background-radius: 5; -fx-border-radius: 5;");
         }
     }
 
@@ -578,7 +581,7 @@ public class SettingsController implements Initializable {
             // Show confirmationshowAlert("Theme updated successfully!", Alert.AlertType.INFORMATION);
         } else {
 
-            showAlert("Please select atheme first!", Alert.AlertType.WARNING);
+            showAlert("Please select a theme first!", Alert.AlertType.WARNING);
         }
     }
 
