@@ -2,11 +2,7 @@ package it.saimao.tmk_typing_tutor.services;
 
 import it.saimao.tmk_typing_tutor.model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +50,7 @@ public class UserService {
     }
 
     public static User getUserById(int userId) {
-        String sql = "SELECT * FROM users WHERE id = ?";
+        String sql = "SELECT* FROM users WHERE id = ?";
 
         try (Connection conn = DatabaseService.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -123,4 +119,19 @@ public class UserService {
             System.out.println(e.getMessage());
         }
     }
+
+    public static void updatePassword(User user) {
+        String sql = "UPDATE users SET password = ? WHERE id = ?";
+
+        try (Connection conn = DatabaseService.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, user.getPassword());
+            pstmt.setInt(2, user.getId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }

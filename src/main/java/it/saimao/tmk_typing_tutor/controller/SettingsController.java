@@ -36,7 +36,7 @@ public class SettingsController implements Initializable {
     // Navigation Buttons
     @FXML
     private Button btnUserProfile;
-@FXML
+    @FXML
     private Button btnUserProgress;
     @FXML
     private Button btnTheme;
@@ -48,7 +48,7 @@ public class SettingsController implements Initializable {
     private Button btnCertificate;
     @FXML
     private Button btnCredits;
-   @FXML
+    @FXML
     private Button btnAbout;
     @FXML
     private Button btnClose;
@@ -60,9 +60,10 @@ public class SettingsController implements Initializable {
     private Label lblUsername;
     private Label lblDisplayName;
     private Button btnChangeDisplayName;
+    private Button btnChangePassword;
 
-    // User Progress Tab
-private TableView<Profile> tvProgress;
+    // UserProgressTab
+    private TableView<Profile> tvProgress;
     private TableColumn<Profile, String> tcLevel;
     private TableColumn<Profile, String> tcProgress;
     private TableColumn<Profile, Button> tcCertificate;
@@ -94,8 +95,8 @@ private TableView<Profile> tvProgress;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-// Initially load the first tab (User Profile) after a short delay
-        // to ensure apContent is properly injected
+// Initially load the first tab (User Profile) after ashort delay
+// to ensure apContent is properly injected
         javafx.concurrent.Task<Void> task = new javafx.concurrent.Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -111,7 +112,7 @@ private TableView<Profile> tvProgress;
                         loadTabContent("/layout/setting_user_profile.fxml");
                         // Highlightthe first button as selected
                         if (btnUserProfile != null) {
-                            btnUserProfile.setStyle("-fx-background-color: #007acc; -fx-text-fill: white; -fx-border-color: #007acc; -fx-border-radius:5;");
+                            btnUserProfile.setStyle("-fx-background-color: #007acc;-fx-text-fill: white; -fx-border-color: #007acc; -fx-border-radius:5;");
                         }
                     }
                 } catch (Exception e) {
@@ -136,7 +137,7 @@ private TableView<Profile> tvProgress;
         AnchorPane tabContent = loader.load();
         apContent.getChildren().add(tabContent);
 
-        // Initialize the contentbased on the tab
+        // Initialize thecontentbased on the tab
         switch (fxmlPath) {
             case "/layout/setting_user_profile.fxml":
                 initUserProfileTab(tabContent);
@@ -166,7 +167,7 @@ private TableView<Profile> tvProgress;
         }
 
         node = tabContent.lookup("#lblDisplayName");
-        if(node instanceof Label) {
+        if (node instanceof Label) {
             lblDisplayName = (Label) node;
         }
 
@@ -175,26 +176,31 @@ private TableView<Profile> tvProgress;
             btnChangeDisplayName = (Button) node;
         }
 
-        // Load user profile data
+        node = tabContent.lookup("#btnChangePassword");
+        if (node instanceof Button) {
+            btnChangePassword = (Button) node;
+        }
+
+        //Load user profile data
         if (lblUsername != null) {
-           lblUsername.setText("Username: " + user.getUsername());
+            lblUsername.setText("Username: " + user.getUsername());
         }
         if (lblDisplayName != null) {
-            lblDisplayName.setText("DisplayName: " + user.getDisplayName());
+            lblDisplayName.setText("Display Name: " + user.getDisplayName());
         }
     }
 
     private void initUserProgressTab(AnchorPane tabContent) {
         Node node = tabContent.lookup("#tvProgress");
-       if (node instanceof TableView) {
+        if (node instanceof TableView) {
             tvProgress = (TableView<Profile>) node;
         }
 
 //Initializetable columns onlyifelements are found
         if (tvProgress != null) {
-            // Get the columns from the table view
+            // Get thecolumns fromthetable view
             if (tvProgress.getColumns().size() >= 4) {
-tcLevel = (TableColumn<Profile, String>) tvProgress.getColumns().get(0);
+                tcLevel = (TableColumn<Profile, String>) tvProgress.getColumns().get(0);
                 tcProgress = (TableColumn<Profile, String>) tvProgress.getColumns().get(1);
                 tcCertificate = (TableColumn<Profile, Button>) tvProgress.getColumns().get(2);
                 tcDetails = (TableColumn<Profile, Button>) tvProgress.getColumns().get(3);
@@ -243,34 +249,22 @@ tcLevel = (TableColumn<Profile, String>) tvProgress.getColumns().get(0);
             btnStopMusic = (Button) node;
         }
 
-        // Initialize music list with user-friendly names
-        ObservableList<String> musicList = FXCollections.observableArrayList(
-                "No Background Music",
-                "Classroom Timer withRelaxing WAVES Music",
-                "Soft Peaceful Music Timer",
-                "Timer with Relaxing Music and Alarm",
-                "Nature Background Sound",
-                "Peaceful Ambient Stress Relief",
-                "CalmNature Sounds",
-                "Rain and Thunderstorm Sounds",
-                "Waterfall Relaxing Nature Sounds",
-                "Relaxing Music for Stress Relief",
-                "Nature Sounds for Focus"
-        );
+//Initialize music listwithuser-friendly names
+        ObservableList<String> musicList = FXCollections.observableArrayList("No Background Music", "Classroom Timer withRelaxing WAVES Music", "Soft Peaceful Music Timer", "Timer with Relaxing Music and Alarm", "NatureBackground Sound", "Peaceful Ambient StressRelief", "CalmNature Sounds", "Rain and Thunderstorm Sounds", "Waterfall Relaxing Nature Sounds", "Relaxing Music for Stress Relief", "Nature Sounds for Focus");
 
-        // Map user-friendly names to actual file names
+        // Mapuser-friendly names to actual file names
         Map<String, String> musicNameToFileMap = new HashMap<>();
-       musicNameToFileMap.put("No Background Music", "");
+        musicNameToFileMap.put("No Background Music", "");
         musicNameToFileMap.put("Classroom Timer with Relaxing WAVES Music", "bgsound1.mp3");
         musicNameToFileMap.put("Soft Peaceful Music Timer", "bgsound2.m4a");
         musicNameToFileMap.put("Timer with Relaxing Music and Alarm", "bgsound3.m4a");
-        musicNameToFileMap.put("Nature Background Sound", "1-MinuteNature Background Sound(M4A_128K).m4a");
-        musicNameToFileMap.put("Peaceful Ambient Stress Relief", "bgsound8.m4a");
-        musicNameToFileMap.put("Calm Nature Sounds", "bgsound6.m4a");
-        musicNameToFileMap.put("Rain and Thunderstorm Sounds", "bgsound5.m4a");
-        musicNameToFileMap.put("Waterfall Relaxing Nature Sounds", "bgsound10.m4a");
         musicNameToFileMap.put("Relaxing Music for Stress Relief", "bgsound4.mp3");
+        musicNameToFileMap.put("Rain and Thunderstorm Sounds", "bgsound5.m4a");
+        musicNameToFileMap.put("Calm NatureSounds", "bgsound6.m4a");
+        musicNameToFileMap.put("Nature Background Sound", "bgsound7.m4a");
+        musicNameToFileMap.put("PeacefulAmbient Stress Relief", "bgsound8.m4a");
         musicNameToFileMap.put("Nature Sounds for Focus", "bgsound9.mp3");
+        musicNameToFileMap.put("WaterfallRelaxing NatureSounds", "bgsound10.m4a");
 
         if (lvMusic != null) {
             lvMusic.setItems(musicList);
@@ -293,10 +287,10 @@ tcLevel = (TableColumn<Profile, String>) tvProgress.getColumns().get(0);
                         Button playButton = new Button("Play");
                         playButton.setOnAction(e -> {
                             String fileName = musicNameToFileMap.get(item);
-                            if (fileName != null && !fileName.isEmpty()){
+                            if (fileName != null && !fileName.isEmpty()) {
                                 playMusicFile(fileName);
                             } else {
-                                // Stop any currently playing music
+                                // Stop any currently playingmusic
                                 if (mediaPlayer != null) {
                                     mediaPlayer.stop();
                                 }
@@ -306,7 +300,7 @@ tcLevel = (TableColumn<Profile, String>) tvProgress.getColumns().get(0);
                                     mainController.stopBackgroundMusic();
                                 }
 
-                                selectedBackgroundMusic =null;
+                                selectedBackgroundMusic = null;
                                 showAlert("Musicstopped", Alert.AlertType.INFORMATION);
                             }
                         });
@@ -316,34 +310,32 @@ tcLevel = (TableColumn<Profile, String>) tvProgress.getColumns().get(0);
                             String fileName = musicNameToFileMap.get(item);
                             if (fileName != null && !fileName.isEmpty()) {
                                 playMusicFile(fileName);
-                               selectedBackgroundMusic = fileName;
+                                selectedBackgroundMusic = fileName;
                                 showAlert("Selected: " + item, Alert.AlertType.INFORMATION);
 
-                                // Also update in main controller
+                                // Alsoupdate in main controller
                                 if (mainController != null) {
                                     mainController.setSelectedBackgroundMusic(fileName);
                                 }
                             } else {
-                                // Stop any currently playing music
-                                if (mediaPlayer!= null) {
+                                // Stop anycurrentlyplaying music
+                                if (mediaPlayer != null) {
                                     mediaPlayer.stop();
                                 }
 
-                                // Also stop in main controller
-                                if (mainController != null) {
-                                    mainController.stopBackgroundMusic();
-                                   mainController.setSelectedBackgroundMusic(null);
-                                }
-
-                                selectedBackgroundMusic = null;
-                                showAlert("No background music selected", Alert.AlertType.INFORMATION);
+                                // Also stop in main controllerif (mainController != null){
+                                mainController.stopBackgroundMusic();
+                                mainController.setSelectedBackgroundMusic(null);
                             }
+
+                            selectedBackgroundMusic = null;
+                            showAlert("No background music selected", Alert.AlertType.INFORMATION);
                         });
 
                         Region spacer = new Region();
                         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-                        HBox hbox = new HBox(nameLabel,spacer, playButton, selectButton);
+                        HBox hbox = new HBox(nameLabel, spacer, playButton, selectButton);
                         hbox.setSpacing(10);
                         hbox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
 
@@ -366,15 +358,7 @@ tcLevel = (TableColumn<Profile, String>) tvProgress.getColumns().get(0);
         }
 
         // Initializeerrorsounds list
-         ObservableList<String> errorSoundsList = FXCollections.observableArrayList(
-                "ErrorSound 1 (error1.mp3)",
-                "Error Sound 2 (error2.mp3)",
-                "Error Sound 3(error3.mp3)",
-                "Error Sound 4 (error4.mp3)",
-                "ErrorSound 5 (error5.mp3)",
-                "Error Sound 6 (error6.mp3)",
-                "Error Sound 7 (error7.mp3)"
-        );
+        ObservableList<String> errorSoundsList = FXCollections.observableArrayList("ErrorSound 1 (error1.mp3)", "Error Sound 2(error2.mp3)", "ErrorSound 3(error3.mp3)", "Error Sound 4(error4.mp3)", "ErrorSound 5 (error5.mp3)", "Error Sound 6 (error6.mp3)", "Error Sound7 (error7.mp3)");
         if (lvErrorSounds != null) {
             lvErrorSounds.setItems(errorSoundsList);
         }
@@ -388,38 +372,37 @@ tcLevel = (TableColumn<Profile, String>) tvProgress.getColumns().get(0);
 
         node = tabContent.lookup("#btnViewCertificate");
         if (node instanceof Button) {
-            btnViewCertificate = (Button)node;
+            btnViewCertificate = (Button) node;
         }
 
-        // Initially disable certificate button
+        // Initially disablecertificate button
         if (btnViewCertificate != null) {
             btnViewCertificate.setDisable(true);
         }
 
-        // Check if user has completed all tests
+        // Check if user hascompleted all tests
         checkCertificateStatus();
     }
 
     private void loadProgress() {
-        if (tvProgress == null || user ==null) return;
+        if (tvProgress == null || user == null) return;
 
         ObservableList<Profile> profiles = FXCollections.observableArrayList();
         for (int i = 0; i < 4; i++) { // Assuming 4 levels
             int completed = ProgressService.getCompletedLessonCount(user.getId(), i);
             int total = lessonsPerLevel[i];
-           Profile profile = new Profile("Level " + (i + 1), completed + " /" + total);
-            profile.setLevelIndex(i); // Store level index for later use
+            Profile profile = new Profile("Level " + (i + 1), completed + " /" + total);
+            profile.setLevelIndex(i); // Store levelindex for later use
 
             if (completed >= total) {
-                // For completed levels, enable both Generate and Details buttons
-                profile.getCertificateButton().setDisable(false);
+                //For completed levels, enable bothGenerate and Details buttonsprofile.getCertificateButton().setDisable(false);
                 profile.getCertificateButton().setText("Generate");
                 final int levelIndex = i;
                 profile.getCertificateButton().setOnAction(event -> showCertificate(levelIndex));
 
                 profile.getDetailsButton().setDisable(false);
                 profile.getDetailsButton().setOnAction(event -> showDetailedProgress(levelIndex));
-           } else if (completed > 0) {
+            } else if (completed > 0) {
                 // For partially completed levels, enable only Detailsbutton
                 profile.getDetailsButton().setText("Details");
                 profile.getDetailsButton().setDisable(false);
@@ -436,7 +419,7 @@ tcLevel = (TableColumn<Profile, String>) tvProgress.getColumns().get(0);
 
         boolean allLevelsCompleted = true;
         for (int i = 0; i < 4; i++) {
-            int completed= ProgressService.getCompletedLessonCount(user.getId(), i);
+            int completed = ProgressService.getCompletedLessonCount(user.getId(), i);
             int total = lessonsPerLevel[i];
             if (completed < total) {
                 allLevelsCompleted = false;
@@ -445,7 +428,7 @@ tcLevel = (TableColumn<Profile, String>) tvProgress.getColumns().get(0);
         }
 
         if (allLevelsCompleted && lblCertificateStatus != null && btnViewCertificate != null) {
-            lblCertificateStatus.setText("Congratulations! You have completed all tests.");
+            lblCertificateStatus.setText("Congratulations! You havecompleted all tests.");
             btnViewCertificate.setDisable(false);
         }
     }
@@ -455,7 +438,7 @@ tcLevel = (TableColumn<Profile, String>) tvProgress.getColumns().get(0);
     private void onUserProfileTab() throws IOException {
         if (apContent != null) {
             loadTabContent("/layout/setting_user_profile.fxml");
-           //Update button styles to show selection
+            //Update button styles to show selection
             updateButtonStyles(btnUserProfile);
         }
     }
@@ -464,8 +447,8 @@ tcLevel = (TableColumn<Profile, String>) tvProgress.getColumns().get(0);
     private void onUserProgressTab() throws IOException {
         if (apContent != null) {
             loadTabContent("/layout/setting_user_progress.fxml");
-            // Update button styles to show selection
-           updateButtonStyles(btnUserProgress);
+            // Update button stylesto show selection
+            updateButtonStyles(btnUserProgress);
         }
     }
 
@@ -473,16 +456,16 @@ tcLevel = (TableColumn<Profile, String>) tvProgress.getColumns().get(0);
     private void onThemeTab() throws IOException {
         if (apContent != null) {
             loadTabContent("/layout/setting_theme.fxml");
-            // Update button stylesto show selection
-            updateButtonStyles(btnTheme);
+            // Update button stylestoshow selectionupdateButtonStyles(btnTheme);
         }
     }
 
-@FXML
+    @FXML
     private void onBackgroundMusicTab() throws IOException {
         if (apContent != null) {
             loadTabContent("/layout/setting_background_music.fxml");
-            // Update button styles to show selectionupdateButtonStyles(btnBackgroundMusic);
+            // Update button styles to show selection
+            updateButtonStyles(btnBackgroundMusic);
         }
     }
 
@@ -497,7 +480,7 @@ tcLevel = (TableColumn<Profile, String>) tvProgress.getColumns().get(0);
 
     @FXML
     private void onCertificateTab() throws IOException {
-       if (apContent != null) {
+        if (apContent != null) {
             loadTabContent("/layout/setting_certificate.fxml");
             // Update button stylesto show selection
             updateButtonStyles(btnCertificate);
@@ -517,29 +500,30 @@ tcLevel = (TableColumn<Profile, String>) tvProgress.getColumns().get(0);
     private void onAboutTab() throws IOException {
         if (apContent != null) {
             loadTabContent("/layout/setting_about.fxml");
-            // Update button styles to show selectionupdateButtonStyles(btnAbout);
+            // Update button styles to show selection
+            updateButtonStyles(btnAbout);
         }
     }
 
-    // Helper method to update button stylesprivate void updateButtonStyles(Button selectedButton) {
-    // Reset allbuttons to default style
-    public void updateButtonStyles(Button selectedButton) {
-        Button[] allButtons = {btnUserProfile, btnUserProgress, btnTheme,btnBackgroundMusic,
-                btnKeyErrorSound, btnCertificate, btnCredits, btnAbout};
+    // Helper method to update button styles
+    private void updateButtonStyles(Button selectedButton) {
+        // Reset all buttons to default style
+        Button[] allButtons = {btnUserProfile, btnUserProgress, btnTheme, btnBackgroundMusic, btnKeyErrorSound, btnCertificate, btnCredits, btnAbout};
 
-        for (
-                Button button : allButtons) {
+        for (Button button : allButtons) {
             if (button != null) {
                 button.setStyle("-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-radius: 5;");
             }
         }
 
-        // Highlight selected buttonif (selectedButton != null) {
-        selectedButton.setStyle("-fx-background-color: #007acc; -fx-text-fill: white; -fx-border-color: #007acc; -fx-border-radius: 5;");
+        // Highlight selected button
+        if (selectedButton != null) {
+            selectedButton.setStyle("-fx-background-color: #007acc; -fx-text-fill: white; -fx-border-color: #007acc; -fx-border-radius: 5;");
+        }
     }
 
     @FXML
-private void onChangeDisplayName() {
+    private void onChangeDisplayName() {
         if (user == null) return;
 
         TextInputDialog dialog = new TextInputDialog(user.getDisplayName());
@@ -547,8 +531,8 @@ private void onChangeDisplayName() {
         dialog.setHeaderText("Enter your new display name:");
         dialog.setContentText("Display Name:");
 
-        // Applytheme to dialog
-        Theme theme= Theme.fromIndex(user.getTheme());
+        // Apply themeto dialog
+        Theme theme = Theme.fromIndex(user.getTheme());
         String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
         dialog.getDialogPane().getStylesheets().add(stylesheet);
 
@@ -567,7 +551,7 @@ private void onChangeDisplayName() {
     }
 
     @FXML
-   private void onApplyTheme() {
+    private void onApplyTheme() {
         if (lvThemes == null) return;
 
         Theme selectedTheme = lvThemes.getSelectionModel().getSelectedItem();
@@ -576,19 +560,19 @@ private void onChangeDisplayName() {
             UserService.updateUser(user);
 
             // Apply theme to mainwindow
-            if (mainController!= null) {
-                // Selectthe theme in main controller which will automatically trigger the listener
+            if (mainController != null) {
+                //Selectthe theme in main controller which will automatically trigger the listener
                 mainController.getCbTheme().getSelectionModel().select(selectedTheme.ordinal());
             }
 
-            // Also apply theme to current settings window
+            // Alsoapply theme to current settings window
             String stylesheet = getClass().getResource("/css/" + selectedTheme.id() + ".css").toExternalForm();
             btnApplyTheme.getScene().getRoot().getStylesheets().clear();
             btnApplyTheme.getScene().getRoot().getStylesheets().add(stylesheet);
 
-            // Show confirmation
-            showAlert("Theme updated successfully!", Alert.AlertType.INFORMATION);
+            // Show confirmationshowAlert("Theme updated successfully!", Alert.AlertType.INFORMATION);
         } else {
+
             showAlert("Please select atheme first!", Alert.AlertType.WARNING);
         }
     }
@@ -603,31 +587,31 @@ private void onChangeDisplayName() {
 
         String selectedMusic = lvMusic.getSelectionModel().getSelectedItem();
         if (selectedMusic != null) {
-            //Map user-friendly names to actual file names
+//Mapuser-friendly names to actual file names
             Map<String, String> musicNameToFileMap = new HashMap<>();
             musicNameToFileMap.put("No Background Music", "");
             musicNameToFileMap.put("Classroom Timer with Relaxing WAVES Music", "bgsound1.mp3");
-           musicNameToFileMap.put("Soft Peaceful Music Timer", "bgsound2.m4a");
+            musicNameToFileMap.put("Soft Peaceful Music Timer", "bgsound2.m4a");
             musicNameToFileMap.put("Timer with Relaxing Music and Alarm", "bgsound3.m4a");
             musicNameToFileMap.put("Nature Background Sound", "1-MinuteNature Background Sound(M4A_128K).m4a");
-           musicNameToFileMap.put("Peaceful Ambient Stress Relief", "bgsound8.m4a");
+            musicNameToFileMap.put("Peaceful AmbientStress Relief", "bgsound8.m4a");
             musicNameToFileMap.put("Calm Nature Sounds", "bgsound6.m4a");
             musicNameToFileMap.put("Rain and Thunderstorm Sounds", "bgsound5.m4a");
-           musicNameToFileMap.put("Waterfall Relaxing Nature Sounds", "bgsound10.m4a");
-            musicNameToFileMap.put("Relaxing Music for Stress Relief", "bgsound4.mp3");
+            musicNameToFileMap.put("Waterfall RelaxingNature Sounds", "bgsound10.m4a");
+            musicNameToFileMap.put("RelaxingMusic for Stress Relief", "bgsound4.mp3");
             musicNameToFileMap.put("Nature Sounds for Focus", "bgsound9.mp3");
 
-           String fileName = musicNameToFileMap.get(selectedMusic);
+            String fileName = musicNameToFileMap.get(selectedMusic);
             if (fileName != null && !fileName.isEmpty()) {
                 playMusicFile(fileName);
                 selectedBackgroundMusic = fileName;
             } else if (fileName != null) {
                 // Handle "No Background Music" case
                 if (mediaPlayer != null) {
-mediaPlayer.stop();
+                    mediaPlayer.stop();
                 }
 
-                // Also stop in main controller
+                // Also stop inmain controller
                 if (mainController != null) {
                     mainController.stopBackgroundMusic();
                 }
@@ -644,11 +628,11 @@ mediaPlayer.stop();
             mediaPlayer.stop();
         }
 
-        // Play the selected music
+        // Play theselected music
         String musicPath = "/audio/" + fileName;
         try {
             URL musicURL = getClass().getResource(musicPath);
-            if (musicURL!= null) {
+            if (musicURL != null) {
                 mediaPlayer = new MediaPlayer(new Media(musicURL.toString()));
                 mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);// Loop indefinitely
                 mediaPlayer.play();
@@ -656,11 +640,11 @@ mediaPlayer.stop();
                 // Also send to main controller to play in background
                 if (mainController != null) {
                     mainController.playBackgroundMusic(fileName);
-               }
+                }
 
                 selectedBackgroundMusic = fileName;
             } else {
-                showAlert("Could not find music file: " + fileName, Alert.AlertType.ERROR);
+                showAlert("Could notfind music file: " + fileName, Alert.AlertType.ERROR);
             }
         } catch (Exception e) {
             showAlert("Error playing music: " + e.getMessage(), Alert.AlertType.ERROR);
@@ -668,7 +652,7 @@ mediaPlayer.stop();
         }
     }
 
-@FXML
+    @FXML
     private void onStopMusic() {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
@@ -680,7 +664,7 @@ mediaPlayer.stop();
             mainController.stopBackgroundMusic();
         }
 
-       selectedBackgroundMusic = null;
+        selectedBackgroundMusic = null;
     }
 
     @FXML
@@ -689,7 +673,7 @@ mediaPlayer.stop();
 
         String selectedSound = lvErrorSounds.getSelectionModel().getSelectedItem();
         if (selectedSound != null) {
-            // Extract the actual filename fromthe display text
+            // Extract the actual filename from the display text
             String[] parts = selectedSound.split("\\(");
 
             if (parts.length > 1) {
@@ -700,14 +684,14 @@ mediaPlayer.stop();
                     errorSoundPlayer.stop();
                 }
 
-               // Play the selected error sound
+                // Play the selected error sound
                 String soundPath = "/audio/" + selectedErrorSound;
                 try {
                     URL soundURL = getClass().getResource(soundPath);
                     if (soundURL != null) {
                         errorSoundPlayer = new MediaPlayer(new Media(soundURL.toString()));
                         errorSoundPlayer.play();
-                        showAlert("Playing error sound:" + selectedSound, Alert.AlertType.INFORMATION);
+                        showAlert("Playing error sound: " + selectedSound, Alert.AlertType.INFORMATION);
                     }
                 } catch (Exception e) {
                     showAlert("Error playing sound: " + e.getMessage(), Alert.AlertType.ERROR);
@@ -718,7 +702,7 @@ mediaPlayer.stop();
         }
     }
 
-public String getSelectedErrorSound() {
+    public String getSelectedErrorSound() {
         return selectedErrorSound;
     }
 
@@ -738,13 +722,13 @@ public String getSelectedErrorSound() {
             if (completed < total) {
                 allLevelsCompleted = false;
                 break;
-}
+            }
         }
 
-        if (allLevelsCompleted){
+        if (allLevelsCompleted) {
             showMainCertificate();
         } else {
-            showAlert("You need to complete all tests to view the certificate!", Alert.AlertType.WARNING);
+            showAlert("You need to complete all tests toview the certificate!", Alert.AlertType.WARNING);
         }
     }
 
@@ -764,11 +748,11 @@ public String getSelectedErrorSound() {
 
             CertificateController controller = loader.getController();
 
-            // Calculate average WPM across all levels
+            // Calculate average WPMacross all levels
             double totalWpm = 0;
             int levelCount = 0;
             for (int i = 0; i < 4; i++) {
-                double avgWpm= LessonProgressService.getAverageWpmForLevel(user.getId(), i);
+                double avgWpm = LessonProgressService.getAverageWpmForLevel(user.getId(), i);
                 if (avgWpm > 0) {
                     totalWpm += avgWpm;
                     levelCount++;
@@ -788,14 +772,14 @@ public String getSelectedErrorSound() {
 
     private void showCertificate(int levelIndex) {
         try {
-           FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/certificate.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/certificate.fxml"));
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(btnClose.getScene().getWindow());
             Scene scene = new Scene(loader.load());
 
             // Apply certificate specific stylesscene.getStylesheets().clear();
-scene.getStylesheets().add(getClass().getResource("/css/certificate_style.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/css/certificate_style.css").toExternalForm());
 
             stage.setScene(scene);
 
@@ -820,7 +804,7 @@ scene.getStylesheets().add(getClass().getResource("/css/certificate_style.css").
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(btnClose.getScene().getWindow());
             Scene scene = new Scene(loader.load());
-// Apply the current theme to thelesson progress window
+// Apply thecurrent theme to thelesson progresswindow
             Theme theme = Theme.fromIndex(user.getTheme());
             String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
             scene.getStylesheets().add(stylesheet);
@@ -841,7 +825,7 @@ scene.getStylesheets().add(getClass().getResource("/css/certificate_style.css").
         if (btnClose != null) {
             Stage stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
-       }
+        }
     }
 
     private void showAlert(String message, Alert.AlertType alertType) {
@@ -852,9 +836,37 @@ scene.getStylesheets().add(getClass().getResource("/css/certificate_style.css").
 
         // Apply theme to alert
         Theme theme = Theme.fromIndex(user.getTheme());
-        String stylesheet= getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
+        String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
         alert.getDialogPane().getStylesheets().add(stylesheet);
 
         alert.showAndWait();
+    }
+
+    @FXML
+    private void onChangePassword() {
+        if (user == null) return;
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/change_password_dialog.fxml"));
+            DialogPane changePasswordDialogPane = loader.load();
+
+            ChangePasswordController controller = loader.getController();
+            controller.initData(user);
+
+            // Apply theme to dialog
+            Theme theme = Theme.fromIndex(user.getTheme());
+            String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
+            changePasswordDialogPane.getStylesheets().add(stylesheet);
+
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane(changePasswordDialogPane);
+            dialog.setTitle("Change Password");
+
+            // Show the dialog and wait for user response
+            dialog.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error opening change password dialog", Alert.AlertType.ERROR);
+        }
     }
 }

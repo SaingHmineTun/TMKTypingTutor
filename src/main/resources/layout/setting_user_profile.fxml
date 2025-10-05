@@ -37,6 +37,11 @@
                                 <Font size="14.0" />
                             </font>
                         </Button>
+                        <Button fx:id="btnChangePassword" mnemonicParsing="false" onAction="#onChangePassword" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #007acc; -fx-text-fill: white;" text="Change Password">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
                         <!-- 添加弹性区域，使内容能够填充整个可用空间 -->
                         <VBox VBox.vgrow="ALWAYS" />
                     </children>

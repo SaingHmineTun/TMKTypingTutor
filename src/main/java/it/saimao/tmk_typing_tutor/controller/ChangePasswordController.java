@@ -16,19 +16,19 @@ public class ChangePasswordController implements Initializable {
 
     @FXML
     private DialogPane changePasswordDialog;
-    
+
     @FXML
     private PasswordField pfOldPassword;
-    
+
     @FXML
     private PasswordField pfNewPassword;
-    
+
     @FXML
     private PasswordField pfConfirmPassword;
-    
+
     @FXML
     private Label lblPasswordStatus;
-    
+
     private User user;
 
     @Override
@@ -40,11 +40,11 @@ public class ChangePasswordController implements Initializable {
             }
         });
     }
-    
+
     public void initData(User user) {
         this.user = user;
     }
-    
+
     private boolean changePassword() {
         String oldPassword = pfOldPassword.getText();
         String newPassword = pfNewPassword.getText();
@@ -64,7 +64,7 @@ public class ChangePasswordController implements Initializable {
         }
 
         user.setPassword(newPassword);
-        UserService.updateUser(user);
+        UserService.updatePassword(user);
         lblPasswordStatus.setText("Password changed successfully!");
         return true;
     }
