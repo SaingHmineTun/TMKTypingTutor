@@ -3,10 +3,6 @@
     src: url('../fonts/vistol_sans_black.otf');
 }
 
-@font-face {
-    font-family: 'NamKhoneUnicode';
-    src: url('../fonts/NamKhoneUnicode.ttf');
-}
 
 @font-face {
     font-family: 'A J Kunheing 6';
@@ -16,4 +12,9 @@
 @font-face {
     font-family: 'AJ 02 Regular';
     src: url("../fonts/aj02.ttf");
+}
+
+@font-face {
+    font-family: 'AJ 00 Regular';
+    src: url("../fonts/aj00_regular.ttf");
 }

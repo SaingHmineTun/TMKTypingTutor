@@ -9,32 +9,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Implemented Save and Print Certificate option.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/Data.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/bgsound2.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/bgsound3.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/bgsound5.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/bgsound6.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/bgsound7.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/bgsound8.mp3" afterDir="false" />
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Play Background Music!">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/aj00_regular.ttf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/auth/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/auth/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SettingsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/services/DatabaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/services/DatabaseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/audio/bgsound10.m4a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/audio/bgsound2.m4a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/audio/bgsound3.m4a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/audio/bgsound5.m4a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/audio/bgsound6.m4a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/audio/bgsound7.m4a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/audio/bgsound8.m4a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/setting_background_music.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_background_music.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/setting_key_error_sound.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_key_error_sound.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/setting_theme.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_theme.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/crimson_red_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/crimson_red_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/dark_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/dark_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/frost_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/frost_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/golden_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/golden_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/green_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/green_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/light_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/light_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/list_styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/list_styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/midnight_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/midnight_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/monochrome_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/monochrome_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/neon_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/neon_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/ocean_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/ocean_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/pastel_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/pastel_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/pinky_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/pinky_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/sunset_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/sunset_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/using_font.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/using_font.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fonts/NamKhoneUnicode.ttf" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +100,6 @@
   &quot;keyToString&quot;: {
     &quot;Application.TMK Typing.executor&quot;: &quot;Run&quot;,
     &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Maven.tmk_typing_tutor [org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile].executor&quot;: &quot;Run&quot;,
     &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
     &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
     &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
@@ -162,14 +155,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
-        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -261,8 +246,6 @@
       <workItem from="1759642375677" duration="2283000" />
       <workItem from="1759645527844" duration="3821000" />
       <workItem from="1759649387767" duration="1097000" />
-      <workItem from="1759668901302" duration="2218000" />
-      <workItem from="1759672818418" duration="4109000" />
     </task>
     <task id="LOCAL-00001" summary="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!">
       <option name="closed" value="true" />
@@ -600,15 +583,7 @@
       <option name="project" value="LOCAL" />
       <updated>1759647625932</updated>
     </task>
-    <task id="LOCAL-00043" summary="Implemented Save and Print Certificate option.">
-      <option name="closed" value="true" />
-      <created>1759667151694</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1759667151694</updated>
-    </task>
-    <option name="localTasksCounter" value="44" />
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -627,6 +602,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="false" />
+    <MESSAGE value="Added - Dynamic Keyboard Creation approach. This is to be able to adapt to other language!&#10;Added - WPM, AWPM, ACCURACY, MISTYPE labels!&#10;Added - MODE (EASY, INTERMEDIATE)&#10;Modified - Next &amp; Previous buttons!" />
     <MESSAGE value="2.3 version. Almost finished! 95% DONE!!!" />
     <MESSAGE value="Added - Support Yunghkio Keyboard Layout!&#10;Added - Retry option in Summary Dialog!" />
     <MESSAGE value="Modified - Show Lesson title in Summary Dialog!" />
@@ -651,8 +627,7 @@
     <MESSAGE value="Adding user progress for each lesson" />
     <MESSAGE value="Clean the project.&#10;Re-design the certificate." />
     <MESSAGE value="Play Background Music!" />
-    <MESSAGE value="Implemented Save and Print Certificate option." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented Save and Print Certificate option." />
+    <option name="LAST_COMMIT_MESSAGE" value="Play Background Music!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -666,10 +641,14 @@
           </properties>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SettingsController.java</url>
-          <line>327</line>
-          <option name="timeStamp" value="4" />
+          <line>504</line>
+          <properties class="it.saimao.tmk_typing_tutor.controller.SettingsController">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

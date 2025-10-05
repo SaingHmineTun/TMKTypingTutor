@@ -226,13 +226,13 @@ public class MainController implements Initializable {
         imgMinimize.setFitHeight(Perc.getDynamicPixel(15));
         imgMinimize.setFitWidth(Perc.getDynamicPixel(15));
         cbLessons.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
-        cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + ";-fx-font-family: 'NamKhoneUnicode'");
+        cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + ";-fx-font-family: 'AJ 00 Regular'");
         cbLevel.setPrefSize(Perc.getDynamicPixel(150), Perc.getDynamicPixel(50));
-        cbLevel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + ";-fx-font-family: 'NamKhoneUnicode';");
+        cbLevel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + ";-fx-font-family: 'AJ 00 Regular';");
         cbTheme.setPrefSize(Perc.getDynamicPixel(150), Perc.getDynamicPixel(50));
-        cbTheme.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'NamKhoneUnicode';");
+        cbTheme.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'AJ 00 Regular';");
         cbKeyboard.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
-        cbKeyboard.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'NamKhoneUnicode'");
+        cbKeyboard.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'AJ 00 Regular'");
         btNext.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
         btPrev.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
         tfView.setPrefHeight(Perc.getDynamicPixel(50));
@@ -1360,7 +1360,7 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        setCharacterOnButton(keyNode, key, "NamKhoneUnicode", 16);
+        setCharacterOnButton(keyNode, key, "AJ 00 Regular", 16);
         return keyNode;
     }
 

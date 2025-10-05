@@ -12,7 +12,7 @@
 }
 
 .text, .text-field {
-    -fx-font-family: 'NamKhoneUnicode';
+    -fx-font-family: 'AJ 00 Regular';
     -fx-font-size: 16;
 }
 
@@ -232,7 +232,7 @@
     -fx-border-width: 1;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
-    -fx-font-family: 'NamKhoneUnicode';
+    -fx-font-family: 'AJ 00 Regular';
 }
 
 .table-view .table-column {
@@ -268,10 +268,10 @@
     -fx-font-weight: bold;
     -fx-font-size: 16;
     -fx-padding: 12 10 12 10;
-    -fx-font-family: 'NamKhoneUnicode';
+    -fx-font-family: 'AJ 00 Regular';
 }
 
 .table-view .table-column .label {
     -fx-text-fill: white;
-    -fx-font-family: 'NamKhoneUnicode';
+    -fx-font-family: 'AJ 00 Regular';
 }
