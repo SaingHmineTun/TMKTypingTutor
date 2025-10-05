@@ -49,7 +49,7 @@ public class MainController implements Initializable {
     private VBox vbMinimize;
     @FXML
     private VBox vbProfile;
-   @FXML
+    @FXML
     private ImageView imgClose;
     @FXML
     private ImageView imgMinimize;
@@ -82,7 +82,7 @@ public class MainController implements Initializable {
     @FXML
     private Label lbACCU;
     @FXML
-   private Label lblACCU;
+    private Label lblACCU;
     @FXML
     private Label lbAWPM;
     @FXML
@@ -94,7 +94,7 @@ public class MainController implements Initializable {
     @FXML
     private VBox vbKeyboardView;
     @FXML
-private HBox hbSelection;
+    private HBox hbSelection;
     @FXML
     private HBox titleBar;
     @FXML
@@ -107,7 +107,7 @@ private HBox hbSelection;
     private boolean isInitializing = false;
 
     private Node toTypeNode;
-   private Node toTypeSecNode;
+    private Node toTypeSecNode;
     private List<Map<String, String>> allValues;
 
     private boolean consumeShanCharacter;
@@ -141,7 +141,7 @@ private HBox hbSelection;
     }
 
     // Method to set settings controller instance
-    public void setSettingsController(SettingsController settingsController){
+    public void setSettingsController(SettingsController settingsController) {
         this.settingsController = settingsController;
     }
 
@@ -154,7 +154,7 @@ private HBox hbSelection;
     public void navigateToLesson(int levelIndex, int lessonIndex) {
         Platform.runLater(() -> {
             try {
-                // Select the level
+// Select the level
                 cbLevel.getSelectionModel().select(levelIndex);
 
                 // Wait a bit for the level change to propagate, then select the lesson
@@ -173,10 +173,21 @@ private HBox hbSelection;
     public void initData(User user, Stage stage) {
         this.loggedInUser = user;
         this.primaryStage = stage;
-        isInitializing =true;
+        isInitializing = true;
         Platform.runLater(() -> {
             cbTheme.getSelectionModel().select(loggedInUser.getTheme());
             cbKeyboard.getSelectionModel().select(loggedInUser.getKeyboard());
+
+            // Play background music if user has selected one (only when not already playing)
+            if (loggedInUser.getBackgroundMusic() > 0) {
+                String backgroundMusicFile = "bgsound" + loggedInUser.getBackgroundMusic() + ".mp3";
+                // Check if mp3 exists, otherwise try m4a
+                var musicURL = getClass().getResource("/audio/" + backgroundMusicFile);
+                if (musicURL == null && backgroundMusicFile.endsWith(".mp3")) {
+                    backgroundMusicFile = "bgsound" + loggedInUser.getBackgroundMusic() + ".m4a";
+                }
+                playBackgroundMusic(backgroundMusicFile);
+            }
         });
     }
 
@@ -184,7 +195,7 @@ private HBox hbSelection;
     private void resetLevels(int keyboard) {
         levelList.clear();
         if (keyboard == 3)
-            levelList.addAll(Arrays.asList("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3","ၵၢၼ်ၽိုၵ်း 4").stream().toList());
+            levelList.addAll(Arrays.asList("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3", "ၵၢၼ်ၽိုၵ်း 4").stream().toList());
         else {
             levelList.addAll(Arrays.asList("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3").stream().toList());
         }
@@ -208,16 +219,16 @@ private HBox hbSelection;
         imgLogo.setFitWidth(Perc.getDynamicPixel(25));
         tLabel.setPrefHeight(Perc.getDynamicPixel(35));
         tLabel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(22));
-        vbClose.setPrefSize(Perc.getDynamicPixel(50),Perc.getDynamicPixel(35));
+        vbClose.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(35));
         imgClose.setFitHeight(Perc.getDynamicPixel(15));
         imgClose.setFitWidth(Perc.getDynamicPixel(15));
         vbMinimize.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(35));
         imgMinimize.setFitHeight(Perc.getDynamicPixel(15));
         imgMinimize.setFitWidth(Perc.getDynamicPixel(15));
         cbLessons.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
-        cbLessons.setStyle("-fx-font-size: "+ Perc.getDynamicPixel(18) + ";-fx-font-family: 'NamKhoneUnicode'");
+        cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + ";-fx-font-family: 'NamKhoneUnicode'");
         cbLevel.setPrefSize(Perc.getDynamicPixel(150), Perc.getDynamicPixel(50));
-        cbLevel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18)+ ";-fx-font-family: 'NamKhoneUnicode';");
+        cbLevel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + ";-fx-font-family: 'NamKhoneUnicode';");
         cbTheme.setPrefSize(Perc.getDynamicPixel(150), Perc.getDynamicPixel(50));
         cbTheme.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'NamKhoneUnicode';");
         cbKeyboard.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
@@ -233,17 +244,17 @@ private HBox hbSelection;
         lblAWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lbAWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lblWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
-lbWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
+        lbWPM.setStyle("-fx-font-size:" + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lblMIST.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
-lbMIST.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
+        lbMIST.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lblACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
-lbACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
+        lbACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
     }
 
     private void initTopBar() {
         titleBar.setPrefHeight(Perc.getDynamicPixel(40));
         vbClose.setOnMouseClicked(event -> {
-           Node source = (Node) event.getSource();
+            Node source = (Node) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
             stage.close();
         });
@@ -266,7 +277,7 @@ lbACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-famil
                 }
                 if (newValue.intValue() == 0) {
                     allValues = SIL_KeyMap.getAllValuesList();
-} else if (newValue.intValue() == 1) {
+                } else if (newValue.intValue() == 1) {
                     allValues = Yunghkio_KeyMap.getAllValuesList();
                 } else if (newValue.intValue() == 2) {
                     allValues = Panglong_KeyMap.getAllValuesList();
@@ -324,7 +335,7 @@ lbACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-famil
         });
 
         lessonList = new ArrayList<>();
-        cbLevel.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) ->{
+        cbLevel.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 if (loggedInUser != null && !isInitializing) {
                     loggedInUser.setLevel(newValue.intValue());
@@ -376,20 +387,20 @@ lbACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-famil
         InputStream is;
         if (i == 0) {
             is = getClass().getResourceAsStream("/assets/lesson_1.csv");
-        } else if (i == 1){
+        } else if (i == 1) {
             is = getClass().getResourceAsStream("/assets/lesson_2.csv");
         } else if (i == 2) {
             is = getClass().getResourceAsStream("/assets/lesson_3.csv");
         } else {
             is = getClass().getResourceAsStream("/assets/lesson_4.csv");
         }
-        try(BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
                 line = line.replaceAll("\\uFEFF", "");
                 String[] values = line.split(",");
                 int no = Integer.parseInt(values[0].trim());
-String title = values[1].trim();
+                String title = values[1].trim();
                 String content = values[2].replace("\"", "").trim();
                 lessonList.add(new Lesson(no, title, content));
             }
@@ -439,7 +450,7 @@ String title = values[1].trim();
             if (event.getCharacter().equals("\u200B") || (!typingWithEnglish && consumeShanCharacter)) {
                 consumeShanCharacter = false;
                 typingWithEnglish = false;
-event.consume();
+                event.consume();
             }
         });
         tfPractice.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -449,7 +460,7 @@ event.consume();
                 misTyped = 0;
                 end = false;
             }
-           calculateOutcome();
+            calculateOutcome();
             if (swap) {
                 swap = false;
                 consumeShanCharacter = true;
@@ -667,7 +678,7 @@ event.consume();
 //                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
 //                        if (afterTyping.equals("ႆ")) {
 //valueToType ="ၢႆ";
-//                     }
+//                 }
 //                    } catch (Exception ignored) {
 //                    }
 //                }
@@ -703,7 +714,7 @@ event.consume();
 //                        String afterTyping =testText.substring(indexOfPractice + 1,indexOfPractice + 2);
 //                        if (afterTyping.equals("ူ")) {
 //                            valueToType = "ႁူ";
-//                       } else if (afterTyping.equals("ွ")) {
+//                   } else if (afterTyping.equals("ွ")) {
 //                            valueToType = "ႁွ";
 //                        }
 //                    } catch (Exception ignored) {
@@ -741,7 +752,7 @@ event.consume();
 
     private void tutorTyping() {
         int keyboard = cbKeyboard.getSelectionModel().getSelectedIndex();
-        String testText =tfView.getText();
+        String testText = tfView.getText();
         if (keyboard != 3) {
             testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1031", "\u1031$1$2$3");
             testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1084", "\u1084$1$2$3");
@@ -755,13 +766,13 @@ event.consume();
             // For the typing tutor to know exactly what key we need to type
             indexOfPractice = practiceText.length();
             String mustType = testText.substring(indexOfPractice - 1, indexOfPractice);
-            typing = practiceText.substring(indexOfPractice- 1, indexOfPractice);
+            typing = practiceText.substring(indexOfPractice - 1, indexOfPractice);
             if (Utils.isEnglishCharacter(typing) && !isConverted) {
                 // Config for Namkhone Keyboard
                 if (keyboard == 3) {
                     // Show  ိံ  key
                     if (mustType.equals("ိ")) {
-                       String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
+                        String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
                         if (afterTyping.equals("ံ")) {
                             mustType = "ိံ";
                         }
@@ -810,7 +821,7 @@ event.consume();
                     }
 
                     // Show ေႃkey
-                    if(mustType.equals("ေ")) {
+                    if (mustType.equals("ေ")) {
                         try {
                             String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
                             if (afterTyping.equals("ႃ")) {
@@ -818,7 +829,7 @@ event.consume();
                             }
                         } catch (Exception ignored) {
                         }
-}
+                    }
 
                     // Show ို key
                     if (mustType.equals("ိ")) {
@@ -845,7 +856,7 @@ event.consume();
                     // Show ိူ key
                     if (mustType.equals("ိ")) {
                         try {
-                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice+ 1);
+                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
                             if (afterTyping.equals("ူ")) {
                                 mustType = "ိူ";
                             }
@@ -892,7 +903,7 @@ event.consume();
                     misTyped++;
                     stop = true;
                     tfPractice.setText(tfPractice.getText().substring(0, indexOfPractice - 1));
-                   playMistypedSound();
+                    playMistypedSound();
                     return;
                 }
             }
@@ -914,7 +925,7 @@ event.consume();
             if (practiceText.length() == tfView.getText().length()) {
                 end = true;
                 clearToTypeValues();
-                ProgressService.saveProgress(loggedInUser.getId(),cbLevel.getSelectionModel().getSelectedIndex(), cbLessons.getSelectionModel().getSelectedIndex());
+                ProgressService.saveProgress(loggedInUser.getId(), cbLevel.getSelectionModel().getSelectedIndex(), cbLessons.getSelectionModel().getSelectedIndex());
 
                 // Save detailed lesson progress
                 saveLessonProgress();
@@ -939,10 +950,10 @@ event.consume();
                         valueToType = "ိံ";
                     }
                 }
-                //Show  ျွ key
+                //Showျွ key
                 if (valueToType.equals("ျ")) {
                     String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
-                   if (afterTyping.equals("ွ")) {
+                    if (afterTyping.equals("ွ")) {
                         valueToType = "ျွ";
                     }
                 }
@@ -951,7 +962,7 @@ event.consume();
                 if (valueToType.equals("ြ")) {
                     try {
                         String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
-                        if(afterTyping.equals("ႃ")) {
+                        if (afterTyping.equals("ႃ")) {
                             valueToType = "ြႃ";
                         }
                     } catch (Exception ignored) {
@@ -984,7 +995,7 @@ event.consume();
                 // Show ေႃ key
                 if (valueToType.equals("ေ")) {
                     try {
-                        String afterTyping = testText.substring(indexOfPractice +1, indexOfPractice + 2);
+                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
                         if (afterTyping.equals("ႃ")) {
                             valueToType = "ေႃ";
                         }
@@ -996,7 +1007,7 @@ event.consume();
                 if (valueToType.equals("ိ")) {
                     try {
                         String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
-                       if (afterTyping.equals("ု")) {
+                        if (afterTyping.equals("ု")) {
                             valueToType = "ို";
                         }
                     } catch (Exception ignored) {
@@ -1007,7 +1018,7 @@ event.consume();
                 // Show ိူ key
                 if (valueToType.equals("ိ")) {
                     try {
-                        String afterTyping = testText.substring(indexOfPractice+ 1, indexOfPractice + 2);
+                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
                         if (afterTyping.equals("ူ")) {
                             valueToType = "ိူ";
                         }
@@ -1018,7 +1029,7 @@ event.consume();
                 // Show ိူ key
                 if (valueToType.equals("ိ")) {
                     try {
-                        String afterTyping = testText.substring(indexOfPractice +1, indexOfPractice + 2);
+                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
                         if (afterTyping.equals("ူ")) {
                             valueToType = "ိူ";
                         }
@@ -1040,7 +1051,7 @@ event.consume();
 
             }
             // Show ႂ်  key
-            if (valueToType.equals("ႂ")){
+            if (valueToType.equals("ႂ")) {
                 String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
                 if (afterTyping.equals("်")) valueToType = "ႂ်";
             }
@@ -1053,13 +1064,13 @@ event.consume();
                     Map<String, String> row = allValues.get(x);
                     if (row.containsValue(valueToType)) {
                         List<String> values = row.values().stream().toList();
-                        for(int y = 0; y < values.size(); y++) {
+                        for (int y = 0; y < values.size(); y++) {
                             String val = values.get(y);
                             if (valueToType.equals(val)) {
                                 typeThisValue(x, y);
                                 if (x % 2 == 1) {
                                     highlightThisValue("SHIFT", x, y);
-                               }
+                                }
                                 break;
                             }
                         }
@@ -1080,7 +1091,7 @@ event.consume();
         System.out.println("Lesson progress save attempt completed.");
     }
 
-    private void checkLevelCompletion(){
+    private void checkLevelCompletion() {
         int levelIndex = cbLevel.getSelectionModel().getSelectedIndex();
         int totalLessons = cbLessons.getItems().size(); // For other levels, use actualsize
 
@@ -1126,7 +1137,7 @@ event.consume();
         } catch (IOException e) {
             e.printStackTrace();
         }
-   }
+    }
 
     private void showCertificate(int levelIndex) {
         try {
@@ -1136,7 +1147,7 @@ event.consume();
             stage.initOwner(primaryStage);
             Scene scene = new Scene(loader.load());
 
-//Apply thecurrenttheme to thecertificate window
+//Apply thecurrent theme to the certificate window
             Theme theme = Theme.fromIndex(loggedInUser.getTheme());
             String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
             scene.getStylesheets().add(stylesheet);
@@ -1155,16 +1166,18 @@ event.consume();
     private MediaPlayer errorPlayer;
     private MediaPlayer backgroundMusicPlayer;
 
-    private void playMistypedSound(){
-        // Get theselected error sound from settings
-        String errorSound = "error1.mp3"; // default
-        if (settingsController != null) {
-            errorSound = settingsController.getSelectedErrorSound();
+    private void playMistypedSound() {
+        // Check if user has enabled error sounds
+        if (loggedInUser.getErrorSound() <= 0) {
+            return; // User has disabled error sounds
         }
+
+        // Get the selected error sound from user settings
+        String errorSound = "error" + loggedInUser.getErrorSound() + ".mp3";
 
         // Stop any currently playing error sound
         if (errorPlayer != null) {
-           errorPlayer.stop();
+            errorPlayer.stop();
         }
 
         // Load and play the selected error sound
@@ -1173,17 +1186,26 @@ event.consume();
             errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
             errorPlayer.play();
         } else {
-            // Fallbackto default error soundsoundURL = getClass().getResource("/audio/error1.mp3");
-            if (errorPlayer == null && soundURL != null) {
+            // Try other extensions
+            errorSound = "error" + loggedInUser.getErrorSound() + ".m4a";
+            soundURL = getClass().getResource("/audio/" + errorSound);
+            if (soundURL != null) {
                 errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
-            }
-            if (errorPlayer != null) {
                 errorPlayer.play();
+            } else {
+                // Fallback to default error sound
+                soundURL = getClass().getResource("/audio/error1.mp3");
+                if (errorPlayer == null && soundURL != null) {
+                    errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
+                }
+                if (errorPlayer != null) {
+                    errorPlayer.play();
+                }
             }
         }
     }
 
-//Background music methods
+    //Backgroundmusic methods
     public void playBackgroundMusic(String musicFileName) {
         // Stop any currently playing background music
         if (backgroundMusicPlayer != null) {
@@ -1191,7 +1213,7 @@ event.consume();
         }
 
         // Load and play the selected background music
-        var musicURL = getClass().getResource("/audio/"+ musicFileName);
+        var musicURL = getClass().getResource("/audio/" + musicFileName);
         if (musicURL != null) {
             backgroundMusicPlayer = new MediaPlayer(new Media(musicURL.toString()));
             backgroundMusicPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop indefinitely
@@ -1214,14 +1236,21 @@ event.consume();
         }
     }
 
+    public void setSelectedErrorSound(int errorSoundIndex, User user) {
+        // This method will be called when error sound is updated in settings
+        user.setErrorSound(errorSoundIndex);
+        UserService.updateUser(user);
+
+    }
+
     private boolean isConverted;
 
-   private String convertToShanChar(String character) {
+    private String convertToShanChar(String character) {
         String shanChar;
         int keyboard = cbKeyboard.getSelectionModel().getSelectedIndex();
         if (keyboard == 0) {
             shanChar = SIL_KeyMap.getAllValuesMap().getOrDefault(character, "");
-        } else if (keyboard == 1){
+        } else if (keyboard == 1) {
             shanChar = Yunghkio_KeyMap.getAllValuesMap().getOrDefault(character, "");
         } else if (keyboard == 2) {
             shanChar = Panglong_KeyMap.getAllValuesMap().getOrDefault(character, "");
@@ -1234,7 +1263,7 @@ event.consume();
     private void clearToTypeValues() {
         if (toTypeNode != null) toTypeNode.setId("key-node-default");
         if (toTypeSecNode != null) toTypeSecNode.setId("key-node-default");
-}
+    }
 
     private void highlightThisValue(String key, int row, int col) {
         if (toTypeSecNode != null) {
@@ -1251,7 +1280,7 @@ event.consume();
             }
             case "SPACE" -> {
                 if (toTypeNode != null) {
-toTypeNode.setId("key-node-default");
+                    toTypeNode.setId("key-node-default");
                 }
                 toTypeSecNode = row5.getChildren().get(3);
             }
@@ -1259,7 +1288,7 @@ toTypeNode.setId("key-node-default");
         if (toTypeSecNode != null) toTypeSecNode.setId("key-node-to-type");
     }
 
-    private void typeThisValue(int x, int y){
+    private void typeThisValue(int x, int y) {
         if (toTypeNode != null) {
             toTypeNode.setId("key-node-default");
         }
@@ -1267,11 +1296,11 @@ toTypeNode.setId("key-node-default");
             toTypeSecNode.setId("key-node-default");
         }
         switch (x) {
-            case 0, 1 -> toTypeNode =row1.getChildren().get(y);
+            case 0, 1 -> toTypeNode = row1.getChildren().get(y);
             case 2, 3 -> toTypeNode = row2.getChildren().get(y);
             case 4, 5 -> toTypeNode = row3.getChildren().get(y);
             case 6, 7 -> toTypeNode = row4.getChildren().get(y);
-       }
+        }
         if (toTypeNode != null) {
             toTypeNode.setId("key-node-to-type");
         }
@@ -1283,7 +1312,7 @@ toTypeNode.setId("key-node-default");
             Iterator<String> taiVal = allValues.get(i).values().iterator();
             Iterator<String> engShiftVal = allValues.get(i + 1).keySet().iterator();
             Iterator<String> taiShiftVal = allValues.get(i + 1).values().iterator();
-           while (engVal.hasNext() && taiVal.hasNext() && engShiftVal.hasNext() && taiShiftVal.hasNext()) {
+            while (engVal.hasNext() && taiVal.hasNext() && engShiftVal.hasNext() && taiShiftVal.hasNext()) {
                 HBox row = null;
                 switch (i) {
                     case 0 -> row = row1;
@@ -1300,7 +1329,7 @@ toTypeNode.setId("key-node-default");
                     if (eng.equalsIgnoreCase("Back"))
                         row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 8 * 0.02));
                     else if (eng.equalsIgnoreCase("Tab"))
-                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 7* 0.02));
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 7 * 0.02));
                     else if (eng.equalsIgnoreCase("Caps"))
                         row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 8 * 0.02));
                     else if (eng.equalsIgnoreCase("Enter"))
@@ -1326,7 +1355,7 @@ toTypeNode.setId("key-node-default");
     private VBox createKey(Key key) {
         VBox keyNode;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/key.fxml"));
-        try{
+        try {
             keyNode = fxmlLoader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -1335,26 +1364,26 @@ toTypeNode.setId("key-node-default");
         return keyNode;
     }
 
-    private void setCharacterOnButton(VBox vBox,Key key, String fontFamily, double fontSize) {
+    private void setCharacterOnButton(VBox vBox, Key key, String fontFamily, double fontSize) {
         Label charTaiShift = (Label) ((HBox) vBox.getChildren().get(0)).getChildren().get(0);
         charTaiShift.setText(key.getTaiShift());
-        charTaiShift.setStyle("-fx-font-size:" + Perc.getDynamicPixel(fontSize)+ "; -fx-font-family: '" + fontFamily + "';");
+        charTaiShift.setStyle("-fx-font-size:" + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
         Label charEngShift = (Label) ((HBox) vBox.getChildren().get(0)).getChildren().get(1);
         charEngShift.setText(key.getEngShift());
         charEngShift.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family:'" + fontFamily + "';");
         Label charTai = (Label) ((HBox) vBox.getChildren().get(1)).getChildren().get(0);
         charTai.setText(key.getTai());
-        charTai.setStyle("-fx-font-size: " +Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
+        charTai.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
         Label charEng = (Label) ((HBox) vBox.getChildren().get(1)).getChildren().get(1);
         charEng.setText(key.getEng());
-        charEng.setStyle("-fx-font-size: "+ Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
+        charEng.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
     }
 
     private VBox createKeyWithCustomWidth(Key key, double width) {
         VBox vBox;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/key.fxml"));
         try {
-            vBox= fxmlLoader.load();
+            vBox = fxmlLoader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -1371,7 +1400,7 @@ toTypeNode.setId("key-node-default");
         if (tfPractice.getText().length() > 1 && !end) {
             wpm = calculateWPM();
             accuracy = calculateACCU();
-           awpm = calculateAWPM(wpm, accuracy);
+            awpm = calculateAWPM(wpm, accuracy);
         }
     }
 
@@ -1381,11 +1410,11 @@ toTypeNode.setId("key-node-default");
         return avgWPM;
     }
 
-   private double calculateACCU() {
+    private double calculateACCU() {
         double accuracy = (double) (tfPractice.getText().length() - misTyped) / tfPractice.getText().length();
         DecimalFormat format = new DecimalFormat("#0.00");
         lbMIST.setText(String.valueOf(misTyped));
-        lbACCU.setText(format.format(accuracy *100) + "%");
+        lbACCU.setText(format.format(accuracy * 100) + "%");
         return accuracy;
     }
 
@@ -1393,7 +1422,7 @@ toTypeNode.setId("key-node-default");
         long elapsedTime = System.currentTimeMillis() - startTime;
         int characterCount = tfPractice.getText().length();
         double minutes = (double) elapsedTime / 60000;
-        var interimWPM =Math.round((characterCount / 5.0) / minutes);
+        var interimWPM = Math.round((characterCount / 5.0) / minutes);
         lbWPM.setText(String.valueOf(interimWPM));
         return Math.toIntExact(interimWPM);
     }
@@ -1416,7 +1445,7 @@ toTypeNode.setId("key-node-default");
         if (currentIndex != 0) {
             cbLessons.getSelectionModel().selectPrevious();
             return true;
-        } else if (cbLevel.getSelectionModel().getSelectedIndex() !=0) {
+        } else if (cbLevel.getSelectionModel().getSelectedIndex() != 0) {
             cbLevel.getSelectionModel().selectPrevious();
             cbLessons.getSelectionModel().selectLast();
             return true;

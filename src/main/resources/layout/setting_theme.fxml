@@ -21,11 +21,6 @@
                 <VBox spacing="15.0" style="-fx-padding: 20; -fx-background-radius: 10; -fx-background-color: -fx-key-color;" VBox.vgrow="ALWAYS">
                     <children>
                         <ListView fx:id="lvThemes" VBox.vgrow="ALWAYS" />
-                        <Button fx:id="btnApplyTheme" mnemonicParsing="false" onAction="#onApplyTheme" prefHeight="40.0" prefWidth="150.0" text="Apply Theme">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Button>
                     </children>
                     <VBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" />

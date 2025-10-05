@@ -21,15 +21,6 @@
                 <VBox spacing="15.0" style="-fx-padding: 20; -fx-background-radius: 10; -fx-background-color: -fx-key-color;" VBox.vgrow="ALWAYS">
                     <children>
                         <ListView fx:id="lvMusic" VBox.vgrow="ALWAYS" />
-                        <HBox spacing="15.0">
-                            <children>
-                                <Button fx:id="btnStopMusic" mnemonicParsing="false" onAction="#onStopMusic" prefHeight="40.0" prefWidth="100.0" text="Stop">
-                                    <font>
-                                        <Font size="14.0" />
-                                    </font>
-                                </Button>
-                            </children>
-                        </HBox>
                     </children>
                     <VBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" />

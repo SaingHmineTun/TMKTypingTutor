@@ -9,13 +9,15 @@ import java.util.List;
 public class UserService {
 
     public static void saveUser(User user) {
-        String sql = "INSERT INTO users(username, displayName, password) VALUES(?,?,?)";
+        String sql = "INSERT INTO users(username, displayName, password, background_music, error_sound) VALUES(?,?,?,?,?,?)";
 
         try (Connection conn = DatabaseService.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getDisplayName());
             pstmt.setString(3, user.getPassword());
+            pstmt.setInt(4, user.getBackgroundMusic());
+            pstmt.setInt(5, user.getErrorSound());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -40,7 +42,9 @@ public class UserService {
                         rs.getInt("theme"),
                         rs.getInt("lesson"),
                         rs.getInt("level"),
-                        rs.getInt("keyboard")
+                        rs.getInt("keyboard"),
+                        rs.getInt("background_music"),
+                        rs.getInt("error_sound")
                 );
             }
         } catch (SQLException e) {
@@ -67,7 +71,9 @@ public class UserService {
                         rs.getInt("theme"),
                         rs.getInt("lesson"),
                         rs.getInt("level"),
-                        rs.getInt("keyboard")
+                        rs.getInt("keyboard"),
+                        rs.getInt("background_music"),
+                        rs.getInt("error_sound")
                 );
             }
         } catch (SQLException e) {
@@ -93,7 +99,9 @@ public class UserService {
                         rs.getInt("theme"),
                         rs.getInt("lesson"),
                         rs.getInt("level"),
-                        rs.getInt("keyboard")
+                        rs.getInt("keyboard"),
+                        rs.getInt("background_music"),
+                        rs.getInt("error_sound")
                 ));
             }
         } catch (SQLException e) {
@@ -103,7 +111,7 @@ public class UserService {
     }
 
     public static void updateUser(User user) {
-        String sql = "UPDATE users SET displayName = ?, theme = ?, lesson = ?, level = ?, keyboard = ? WHERE id = ?";
+        String sql = "UPDATE users SET displayName = ?, theme = ?, lesson = ?, level = ?, keyboard = ?, background_music = ?, error_sound = ? WHERE id = ?";
 
         try (Connection conn = DatabaseService.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -113,7 +121,9 @@ public class UserService {
             pstmt.setInt(3, user.getLesson());
             pstmt.setInt(4, user.getLevel());
             pstmt.setInt(5, user.getKeyboard());
-            pstmt.setInt(6, user.getId());
+            pstmt.setInt(6, user.getBackgroundMusic());
+            pstmt.setInt(7, user.getErrorSound());
+            pstmt.setInt(8, user.getId());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
