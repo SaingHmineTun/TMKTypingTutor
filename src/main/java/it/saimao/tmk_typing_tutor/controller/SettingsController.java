@@ -262,16 +262,16 @@ public class SettingsController implements Initializable {
 
         // Map user-friendly names to actual file names
         Map<String, String> musicNameToFileMap = new HashMap<>();
-        musicNameToFileMap.put("Classroom Timer with Relaxing WAVES Music", "1 Min Classroom Timer __ WAVES __ Relaxing Music(MP3_160K).mp3");
-        musicNameToFileMap.put("Soft Peaceful Music Timer", "1 Minute Timer - Soft Peaceful Music(M4A_128K).m4a");
-        musicNameToFileMap.put("Timer with Relaxing Music and Alarm", "1 Minute Timer with Relaxing Music and Alarm(M4A_128K).m4a");
+        musicNameToFileMap.put("Classroom Timer with Relaxing WAVES Music", "bgsound1.mp3");
+        musicNameToFileMap.put("Soft Peaceful Music Timer", "bgsound2.m4a");
+        musicNameToFileMap.put("Timer with Relaxing Music and Alarm", "bgsound3.m4a");
         musicNameToFileMap.put("Nature Background Sound", "1-MinuteNature Background Sound(M4A_128K).m4a");
-        musicNameToFileMap.put("Peaceful Ambient Stress Relief", "1_Minute_Relaxing_Music_Peaceful_Ambient_Stress_Relief_Nature_Background.m4a");
-        musicNameToFileMap.put("Calm Nature Sounds", "1_Minute_of_Calm_Nature_Sounds_Relaxing_Music_Breathe_stressrelief.m4a");
-        musicNameToFileMap.put("Rainand Thunderstorm Sounds", "1_Minute_of_Rain_and_Thunderstorm_Sounds_For_Focus_Relaxing_and.m4a");
-        musicNameToFileMap.put("Waterfall Relaxing Nature Sounds", "Relax 1 min - Waterfall - Relaxing Nature Sounds(M4A_128K).m4a");
-        musicNameToFileMap.put("Relaxing Music for Stress Relief", "1_Minute_Relaxing_Music_Peaceful_Ambient_Stress_Relief_Nature_Background.mp3");
-        musicNameToFileMap.put("Nature Sounds for Focus", "1 Minute Timer with Relaxing Music and Alarm(MP3_160K).mp3");
+        musicNameToFileMap.put("Peaceful Ambient Stress Relief", "bgsound8.m4a");
+        musicNameToFileMap.put("Calm Nature Sounds", "bgsound6.m4a");
+        musicNameToFileMap.put("Rainand Thunderstorm Sounds", "bgsound5.m4a");
+        musicNameToFileMap.put("Waterfall Relaxing Nature Sounds", "bgsound10.m4a");
+        musicNameToFileMap.put("Relaxing Music for Stress Relief", "bgsound4.mp3");
+        musicNameToFileMap.put("Nature Sounds for Focus", "bgsound9.mp3");
 
         if (lvMusic != null) {
             lvMusic.setItems(musicList);
@@ -541,16 +541,16 @@ public class SettingsController implements Initializable {
         if (selectedMusic != null) {
             // Mapuser-friendly names to actual file names
             Map<String, String> musicNameToFileMap = new HashMap<>();
-            musicNameToFileMap.put("Classroom Timer with Relaxing WAVES Music", "1 Min Classroom Timer __ WAVES __ Relaxing Music(MP3_160K).mp3");
-            musicNameToFileMap.put("Soft Peaceful Music Timer", "1 Minute Timer - Soft Peaceful Music(M4A_128K).m4a");
-            musicNameToFileMap.put("Timer with Relaxing Music and Alarm", "1 Minute Timer with Relaxing Music and Alarm(M4A_128K).m4a");
-            musicNameToFileMap.put("Nature Background Sound", "1-Minute Nature Background Sound(M4A_128K).m4a");
-            musicNameToFileMap.put("Peaceful Ambient Stress Relief", "1_Minute_Relaxing_Music_Peaceful_Ambient_Stress_Relief_Nature_Background.m4a");
-            musicNameToFileMap.put("Calm Nature Sounds", "1_Minute_of_Calm_Nature_Sounds_Relaxing_Music_Breathe_stressrelief.m4a");
-            musicNameToFileMap.put("Rain and Thunderstorm Sounds", "1_Minute_of_Rain_and_Thunderstorm_Sounds_For_Focus_Relaxing_and.m4a");
-            musicNameToFileMap.put("Waterfall Relaxing Nature Sounds", "Relax 1 min - Waterfall - Relaxing Nature Sounds(M4A_128K).m4a");
-            musicNameToFileMap.put("Relaxing Music for Stress Relief", "1_Minute_Relaxing_Music_Peaceful_Ambient_Stress_Relief_Nature_Background.mp3");
-            musicNameToFileMap.put("Nature Sounds for Focus", "1 Minute Timer with Relaxing Music and Alarm(MP3_160K).mp3");
+            musicNameToFileMap.put("Classroom Timer with Relaxing WAVES Music", "bgsound1.mp3");
+            musicNameToFileMap.put("Soft Peaceful Music Timer", "bgsound2.m4a");
+            musicNameToFileMap.put("Timer with Relaxing Music and Alarm", "bgsound3.m4a");
+            musicNameToFileMap.put("Nature Background Sound", "bgsound7.m4a");
+            musicNameToFileMap.put("Peaceful Ambient Stress Relief", "bgsound8.m4a");
+            musicNameToFileMap.put("Calm Nature Sounds", "bgsound6.m4a");
+            musicNameToFileMap.put("Rain and Thunderstorm Sounds", "bgsound5.m4a");
+            musicNameToFileMap.put("Waterfall Relaxing Nature Sounds", "bgsound10.m4a");
+            musicNameToFileMap.put("Relaxing Music for Stress Relief", "bgsound4.mp3");
+            musicNameToFileMap.put("Nature Sounds for Focus", "bgsound9.mp3");
 
             String fileName = musicNameToFileMap.get(selectedMusic);
             if (fileName != null) {
