@@ -8,7 +8,8 @@ import it.saimao.tmk_typing_tutor.model.*;
 import it.saimao.tmk_typing_tutor.services.LessonProgressService;
 import it.saimao.tmk_typing_tutor.services.ProgressService;
 import it.saimao.tmk_typing_tutor.services.UserService;
-import it.saimao.tmk_typing_tutor.utils.*;
+import it.saimao.tmk_typing_tutor.utils.Perc;
+import it.saimao.tmk_typing_tutor.utils.Utils;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -132,16 +133,28 @@ public class MainController implements Initializable {
         reqFocusOnPracticeField();
     }
 
+    private SettingsController settingsController;
+
     // Static method to get the main controller instance
     public static MainController getInstance() {
         return instance;
+    }
+
+    // Method to set settings controller instance
+    public void setSettingsController(SettingsController settingsController) {
+        this.settingsController = settingsController;
+    }
+
+    //Methodto get settings controller instance
+    public SettingsController getSettingsController() {
+        return settingsController;
     }
 
     // Method to navigate to a specific lesson
     public void navigateToLesson(int levelIndex, int lessonIndex) {
         Platform.runLater(() -> {
             try {
-                // Select the level
+// Select the level
                 cbLevel.getSelectionModel().select(levelIndex);
 
                 // Wait a bit for the level change to propagate, then select the lesson
@@ -164,6 +177,17 @@ public class MainController implements Initializable {
         Platform.runLater(() -> {
             cbTheme.getSelectionModel().select(loggedInUser.getTheme());
             cbKeyboard.getSelectionModel().select(loggedInUser.getKeyboard());
+
+            // Play background music if user has selected one (only when not already playing)
+            if (loggedInUser.getBackgroundMusic() > 0) {
+                String backgroundMusicFile = "bgsound" + loggedInUser.getBackgroundMusic() + ".mp3";
+                // Check if mp3 exists, otherwise try m4a
+                var musicURL = getClass().getResource("/audio/" + backgroundMusicFile);
+                if (musicURL == null && backgroundMusicFile.endsWith(".mp3")) {
+                    backgroundMusicFile = "bgsound" + loggedInUser.getBackgroundMusic() + ".m4a";
+                }
+                playBackgroundMusic(backgroundMusicFile);
+            }
         });
     }
 
@@ -202,13 +226,13 @@ public class MainController implements Initializable {
         imgMinimize.setFitHeight(Perc.getDynamicPixel(15));
         imgMinimize.setFitWidth(Perc.getDynamicPixel(15));
         cbLessons.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
-        cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + ";-fx-font-family: 'NamKhoneUnicode'");
+        cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + ";-fx-font-family: 'AJ 00 Regular'");
         cbLevel.setPrefSize(Perc.getDynamicPixel(150), Perc.getDynamicPixel(50));
-        cbLevel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + ";-fx-font-family: 'NamKhoneUnicode';");
+        cbLevel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + ";-fx-font-family: 'AJ 00 Regular';");
         cbTheme.setPrefSize(Perc.getDynamicPixel(150), Perc.getDynamicPixel(50));
-        cbTheme.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'NamKhoneUnicode';");
+        cbTheme.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'AJ 00 Regular';");
         cbKeyboard.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
-        cbKeyboard.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'NamKhoneUnicode'");
+        cbKeyboard.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'AJ 00 Regular'");
         btNext.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
         btPrev.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
         tfView.setPrefHeight(Perc.getDynamicPixel(50));
@@ -220,7 +244,7 @@ public class MainController implements Initializable {
         lblAWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lbAWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lblWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
-        lbWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
+        lbWPM.setStyle("-fx-font-size:" + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lblMIST.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lbMIST.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lblACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
@@ -239,7 +263,7 @@ public class MainController implements Initializable {
             Stage stage = (Stage) source.getScene().getWindow();
             stage.setIconified(true);
         });
-        vbProfile.setOnMouseClicked(event -> showProfile());
+        vbProfile.setOnMouseClicked(event -> showSettings());
     }
 
     private void initComboBoxItems() {
@@ -414,7 +438,7 @@ public class MainController implements Initializable {
     private boolean end;
 
     private void initPracticeListener() {
-        var soundURL = getClass().getResource("/audio/error.mp3");
+        var soundURL = getClass().getResource("/audio/error1.mp3");
         errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
         tfPractice.setOnMouseClicked(mouseEvent -> tfPractice.end());
         tfPractice.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
@@ -460,7 +484,7 @@ public class MainController implements Initializable {
 
 //   private void tutorTyping() {
 //     intkeyboard =cbKeyboard.getSelectionModel().getSelectedIndex();
-//        String testText = tfView.getText();
+//        StringtestText = tfView.getText();
 //        String reorderedTestText = testText;
 //        if (keyboard != 3) {
 //            reorderedTestText = reorderedTestText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1031", "\\u1031$1$2$3");
@@ -654,7 +678,7 @@ public class MainController implements Initializable {
 //                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
 //                        if (afterTyping.equals("ႆ")) {
 //valueToType ="ၢႆ";
-//                        }
+//                 }
 //                    } catch (Exception ignored) {
 //                    }
 //                }
@@ -677,20 +701,20 @@ public class MainController implements Initializable {
 //                    }
 //                }
 //                if (valueToType.equals("ိ")) {
-//                    try {
-//                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
+//try{
+//                        String afterTyping =testText.substring(indexOfPractice + 1, indexOfPractice + 2);
 //                 if (afterTyping.equals("ူ")) {
 //                            valueToType = "ိူ";
 //                        }
 //                    } catch (Exception ignored) {
 //                    }
-//                }
+//}
 //                if (valueToType.equals("ႁ")) {
 //                    try {
-//                        String afterTyping = testText.substring(indexOfPractice + 1,indexOfPractice + 2);
+//                        String afterTyping =testText.substring(indexOfPractice + 1,indexOfPractice + 2);
 //                        if (afterTyping.equals("ူ")) {
 //                            valueToType = "ႁူ";
-//                        } else if (afterTyping.equals("ွ")) {
+//                   } else if (afterTyping.equals("ွ")) {
 //                            valueToType = "ႁွ";
 //                        }
 //                    } catch (Exception ignored) {
@@ -698,7 +722,7 @@ public class MainController implements Initializable {
 //                }
 //            }
 //            if (valueToType.equals("ႂ")) {
-//               String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
+//               String afterTyping =testText.substring(indexOfPractice + 1, indexOfPractice + 2);
 //                if (afterTyping.equals("်"))
 //                    valueToType ="ႂ်";
 //            }
@@ -719,7 +743,7 @@ public class MainController implements Initializable {
 //                                break;
 //                            }
 //                        }
-//                     break;
+//                   break;
 //                    }
 //                }
 //           }
@@ -919,14 +943,14 @@ public class MainController implements Initializable {
             // Know whichvalue to type next
             String valueToType = testText.substring(indexOfPractice, indexOfPractice + 1);
             if (keyboard == 3) {
-                // Show  ိံ  key
+                // Show  ိံ key
                 if (valueToType.equals("ိ")) {
                     String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
                     if (afterTyping.equals("ံ")) {
                         valueToType = "ိံ";
                     }
                 }
-                // Show  ျွ key
+                //Showျွ key
                 if (valueToType.equals("ျ")) {
                     String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
                     if (afterTyping.equals("ွ")) {
@@ -1077,27 +1101,37 @@ public class MainController implements Initializable {
         }
     }
 
-    private void showProfile() {
+    private void showSettings() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/profile.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/settings.fxml"));
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(primaryStage);
-            stage.setTitle("User Profile");
+            stage.setTitle("Settings");
             Scene scene = new Scene(loader.load());
 
-            // Apply the current theme to the profile window
+            // Apply the current theme to the settings window
             Theme theme = Theme.fromIndex(loggedInUser.getTheme());
             String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
             scene.getStylesheets().add(stylesheet);
 
             stage.setScene(scene);
-            stage.setOnCloseRequest(event -> stage.close());
+            stage.setOnCloseRequest(event -> {
+// When settings window is closed, ensure any background music continues playing
+                if (settingsController != null) {
+                    String selectedMusic = settingsController.getSelectedBackgroundMusic();
+                    if (selectedMusic != null) {
+                        playBackgroundMusic(selectedMusic);
+                    }
+                }
+                stage.close();
+            });
 
-            ProfileController controller = loader.getController();
-            controller.initData(loggedInUser);
-            // Pass the reference to this main controller
-            controller.setMainController(this);
+            SettingsController controller = loader.getController();
+            controller.initData(loggedInUser, this);
+
+            // Set the settings controller instance
+            setSettingsController(controller);
 
             stage.show();
         } catch (IOException e) {
@@ -1113,7 +1147,7 @@ public class MainController implements Initializable {
             stage.initOwner(primaryStage);
             Scene scene = new Scene(loader.load());
 
-//Apply the currenttheme to the certificate window
+//Apply thecurrent theme to the certificate window
             Theme theme = Theme.fromIndex(loggedInUser.getTheme());
             String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
             scene.getStylesheets().add(stylesheet);
@@ -1121,7 +1155,7 @@ public class MainController implements Initializable {
             stage.setScene(scene);
 
             CertificateController controller = loader.getController();
-            controller.initData(loggedInUser.getUsername(), "Level " + (levelIndex + 1));
+            controller.initData(loggedInUser.getDisplayName(), "Level " + (levelIndex + 1));
 
             stage.show();
         } catch (IOException e) {
@@ -1130,14 +1164,83 @@ public class MainController implements Initializable {
     }
 
     private MediaPlayer errorPlayer;
+    private MediaPlayer backgroundMusicPlayer;
 
     private void playMistypedSound() {
-        if (errorPlayer == null) {
-            var soundURL = getClass().getResource("/audio/error.mp3");
-            errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
+        // Check if user has enabled error sounds
+        if (loggedInUser.getErrorSound() <= 0) {
+            return; // User has disabled error sounds
         }
-        errorPlayer.stop();
-        errorPlayer.play();
+
+        // Get the selected error sound from user settings
+        String errorSound = "error" + loggedInUser.getErrorSound() + ".mp3";
+
+        // Stop any currently playing error sound
+        if (errorPlayer != null) {
+            errorPlayer.stop();
+        }
+
+        // Load and play the selected error sound
+        var soundURL = getClass().getResource("/audio/" + errorSound);
+        if (soundURL != null) {
+            errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
+            errorPlayer.play();
+        } else {
+            // Try other extensions
+            errorSound = "error" + loggedInUser.getErrorSound() + ".m4a";
+            soundURL = getClass().getResource("/audio/" + errorSound);
+            if (soundURL != null) {
+                errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
+                errorPlayer.play();
+            } else {
+                // Fallback to default error sound
+                soundURL = getClass().getResource("/audio/error1.mp3");
+                if (errorPlayer == null && soundURL != null) {
+                    errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
+                }
+                if (errorPlayer != null) {
+                    errorPlayer.play();
+                }
+            }
+        }
+    }
+
+    //Backgroundmusic methods
+    public void playBackgroundMusic(String musicFileName) {
+        // Stop any currently playing background music
+        if (backgroundMusicPlayer != null) {
+            backgroundMusicPlayer.stop();
+        }
+
+        // Load and play the selected background music
+        var musicURL = getClass().getResource("/audio/" + musicFileName);
+        if (musicURL != null) {
+            backgroundMusicPlayer = new MediaPlayer(new Media(musicURL.toString()));
+            backgroundMusicPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop indefinitely
+            backgroundMusicPlayer.setVolume(0.3); // Set volume to 30% tonotoverpower typing
+            backgroundMusicPlayer.play();
+        }
+    }
+
+    public void stopBackgroundMusic() {
+        if (backgroundMusicPlayer != null) {
+            backgroundMusicPlayer.stop();
+        }
+    }
+
+    public void setSelectedBackgroundMusic(String musicFileName) {
+        if (musicFileName != null && !musicFileName.isEmpty()) {
+            playBackgroundMusic(musicFileName);
+        } else {
+            stopBackgroundMusic();
+        }
+    }
+
+    public void setSelectedErrorSound(int errorSoundIndex, User user) {
+        // This method will be called when error sound is updated in settings
+        user.setErrorSound(errorSoundIndex);
+        UserService.updateUser(user);
+
     }
 
     private boolean isConverted;
@@ -1257,14 +1360,14 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        setCharacterOnButton(keyNode, key, "NamKhoneUnicode", 16);
+        setCharacterOnButton(keyNode, key, "AJ 00 Regular", 16);
         return keyNode;
     }
 
     private void setCharacterOnButton(VBox vBox, Key key, String fontFamily, double fontSize) {
         Label charTaiShift = (Label) ((HBox) vBox.getChildren().get(0)).getChildren().get(0);
         charTaiShift.setText(key.getTaiShift());
-        charTaiShift.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
+        charTaiShift.setStyle("-fx-font-size:" + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
         Label charEngShift = (Label) ((HBox) vBox.getChildren().get(0)).getChildren().get(1);
         charEngShift.setText(key.getEngShift());
         charEngShift.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family:'" + fontFamily + "';");

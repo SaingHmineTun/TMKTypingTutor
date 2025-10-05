@@ -40,7 +40,7 @@ public class LoginController implements Initializable {
         // Load all users into the list view
         lvUsers.getItems().setAll(UserService.getAllUsers());
         
-        // Customize the appearance of list cells
+        // Customize the appearanceof list cells
         lvUsers.setCellFactory(new Callback<>() {
             @Override
             public ListCell<User> call(ListView<User> listView) {
@@ -48,7 +48,7 @@ public class LoginController implements Initializable {
                     @Override
                     protected void updateItem(User user, boolean empty) {
                         super.updateItem(user, empty);
-                        if (empty || user == null) {
+if (empty || user == null) {
                             setText(null);
                             setGraphic(null);
                         } else {
@@ -77,7 +77,7 @@ public class LoginController implements Initializable {
 
         // Add a listener to handle user selection
         lvUsers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
+           if (newValue != null) {
                 selectedUser = newValue;
                 lblSelectedUser.setText("Logging in as: " + selectedUser.getUsername());
                 pfPassword.setVisible(true);
@@ -85,6 +85,9 @@ public class LoginController implements Initializable {
                 pfPassword.requestFocus();
             }
         });
+
+        if (!lvUsers.getItems().isEmpty())
+            lvUsers.getSelectionModel().selectFirst();
     }
 
     @FXML
@@ -96,7 +99,7 @@ public class LoginController implements Initializable {
         }
 
         String password = pfPassword.getText();
-        if (selectedUser.getPassword().equals(password)) {
+        if (selectedUser.getPassword().equals(password)){
             // Successful login, open the main window
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/main.fxml"));
@@ -108,11 +111,23 @@ public class LoginController implements Initializable {
                 // Pass the logged-in user and the primary stage to the MainController
                 MainController mainController = fxmlLoader.getController();
                 mainController.initData(selectedUser, stage);
+                
+                // Play background music if user has selected one
+                if (selectedUser.getBackgroundMusic() > 0) {
+// Assuming there are multiplebackground music options
+                    String backgroundMusicFile = "bgsound" + selectedUser.getBackgroundMusic() + ".mp3";
+                    // Check if mp3 exists, otherwise try m4a
+                    var musicURL = mainController.getClass().getResource("/audio/" + backgroundMusicFile);
+                    if (musicURL ==null && backgroundMusicFile.endsWith(".mp3")) {
+                        backgroundMusicFile = "bgsound" + selectedUser.getBackgroundMusic() + ".m4a";
+                    }
+                    mainController.playBackgroundMusic(backgroundMusicFile);
+                }
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
+        } else{
             lbError.setText("Invalid password!");
             lbError.setVisible(true);
         }

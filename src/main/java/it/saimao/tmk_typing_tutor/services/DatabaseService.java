@@ -42,11 +42,14 @@ public class DatabaseService {
         String createUserTableSql= "CREATE TABLE IF NOT EXISTS users (\n"
                 + " id integer PRIMARY KEY AUTOINCREMENT,\n"
                 + " username text NOT NULL UNIQUE,\n"
+                + " displayName text NOT NULL DEFAULT '',\n"
                 + " password text NOT NULL,\n"
                 + " theme INTEGER DEFAULT 0,\n"
                 + " lesson INTEGER DEFAULT 0,\n"
                 + " level INTEGER DEFAULT 0,\n"
-                + " keyboard INTEGER DEFAULT 0\n"
+                + " keyboard INTEGER DEFAULT 0,\n"
+                + " background_music INTEGER DEFAULT 0,\n"
+                + " error_sound INTEGER DEFAULT 0\n"
                 + ");";
 
         String createProgressTableSql = "CREATE TABLE IF NOT EXISTS progress (\n"
@@ -88,6 +91,19 @@ public class DatabaseService {
             }
             if(!columnExists(conn, "users", "keyboard")) {
                 stmt.execute("ALTER TABLE users ADD COLUMN keyboard INTEGER DEFAULT 0");
+            }
+
+            if(!columnExists(conn, "users", "displayName")) {
+                stmt.execute("ALTER TABLE users ADD COLUMN displayName text NOT NULL DEFAULT ''");
+            }
+            
+            // 添加新列
+            if(!columnExists(conn, "users", "background_music")) {
+                stmt.execute("ALTER TABLE users ADD COLUMN background_music INTEGER DEFAULT 0");
+            }
+            
+            if(!columnExists(conn, "users", "error_sound")) {
+                stmt.execute("ALTER TABLE users ADD COLUMN error_sound INTEGER DEFAULT 0");
             }
 
         } catch (SQLException e) {
