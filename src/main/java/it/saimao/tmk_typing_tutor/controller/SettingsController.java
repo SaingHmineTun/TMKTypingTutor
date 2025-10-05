@@ -770,7 +770,7 @@ public class SettingsController implements Initializable {
             double overallAvgWpm = levelCount > 0 ? totalWpm / levelCount : 0;
             DecimalFormat df = new DecimalFormat("#.##");
 
-            controller.initData(user.getUsername(), "Master Typist", df.format(overallAvgWpm));
+            controller.initData(user.getDisplayName(), "Master Typist", df.format(overallAvgWpm));
 
             stage.show();
         } catch (IOException e) {
@@ -797,7 +797,7 @@ public class SettingsController implements Initializable {
             double averageWpm = LessonProgressService.getAverageWpmForLevel(user.getId(), levelIndex);
             DecimalFormat df = new DecimalFormat("#.##");
 
-            controller.initData(user.getUsername(), "Level " + (levelIndex + 1), df.format(averageWpm));
+            controller.initData(user.getDisplayName(), "Level " + (levelIndex + 1), df.format(averageWpm));
 
             stage.show();
         } catch (IOException e) {

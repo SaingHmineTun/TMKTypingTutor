@@ -44,6 +44,8 @@ public class User {
     }
 
     public String getDisplayName() {
+        if (displayName == null || displayName.isBlank())
+            return username;
         return displayName;
     }
 

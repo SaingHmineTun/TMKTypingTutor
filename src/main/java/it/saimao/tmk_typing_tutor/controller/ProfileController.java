@@ -191,7 +191,7 @@ stage.initOwner(btnClose.getScene().getWindow());
            double averageWpm = LessonProgressService.getAverageWpmForLevel(user.getId(), levelIndex);
             DecimalFormat df = new DecimalFormat("#.##");
             
-            controller.initData(user.getUsername(), "Level " + (levelIndex + 1), df.format(averageWpm));
+            controller.initData(user.getDisplayName(), "Level " + (levelIndex + 1), df.format(averageWpm));
 
             stage.show();
         } catch (IOException e) {

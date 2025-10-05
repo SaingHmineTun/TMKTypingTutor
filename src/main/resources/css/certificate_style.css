@@ -1,7 +1,11 @@
 @import "using_font.css";
 
-.certificate-pane {
+.certificate-parent {
+
     -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #e3f2fd, #bbdefb);
+}
+
+.certificate-pane {
     -fx-border-color: #2c5aa0;
     -fx-border-width: 5;
     -fx-border-radius: 10;

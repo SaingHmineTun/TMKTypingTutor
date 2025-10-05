@@ -1144,7 +1144,7 @@ event.consume();
             stage.setScene(scene);
 
             CertificateController controller = loader.getController();
-            controller.initData(loggedInUser.getUsername(), "Level " + (levelIndex + 1));
+            controller.initData(loggedInUser.getDisplayName(), "Level " + (levelIndex + 1));
 
             stage.show();
         } catch (IOException e) {
