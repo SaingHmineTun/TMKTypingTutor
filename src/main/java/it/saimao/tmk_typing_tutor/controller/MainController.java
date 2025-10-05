@@ -49,7 +49,7 @@ public class MainController implements Initializable {
     private VBox vbMinimize;
     @FXML
     private VBox vbProfile;
-    @FXML
+   @FXML
     private ImageView imgClose;
     @FXML
     private ImageView imgMinimize;
@@ -82,7 +82,7 @@ public class MainController implements Initializable {
     @FXML
     private Label lbACCU;
     @FXML
-    private Label lblACCU;
+   private Label lblACCU;
     @FXML
     private Label lbAWPM;
     @FXML
@@ -94,7 +94,7 @@ public class MainController implements Initializable {
     @FXML
     private VBox vbKeyboardView;
     @FXML
-    private HBox hbSelection;
+private HBox hbSelection;
     @FXML
     private HBox titleBar;
     @FXML
@@ -107,7 +107,7 @@ public class MainController implements Initializable {
     private boolean isInitializing = false;
 
     private Node toTypeNode;
-    private Node toTypeSecNode;
+   private Node toTypeSecNode;
     private List<Map<String, String>> allValues;
 
     private boolean consumeShanCharacter;
@@ -141,7 +141,7 @@ public class MainController implements Initializable {
     }
 
     // Method to set settings controller instance
-    public void setSettingsController(SettingsController settingsController) {
+    public void setSettingsController(SettingsController settingsController){
         this.settingsController = settingsController;
     }
 
@@ -173,7 +173,7 @@ public class MainController implements Initializable {
     public void initData(User user, Stage stage) {
         this.loggedInUser = user;
         this.primaryStage = stage;
-        isInitializing = true;
+        isInitializing =true;
         Platform.runLater(() -> {
             cbTheme.getSelectionModel().select(loggedInUser.getTheme());
             cbKeyboard.getSelectionModel().select(loggedInUser.getKeyboard());
@@ -184,7 +184,7 @@ public class MainController implements Initializable {
     private void resetLevels(int keyboard) {
         levelList.clear();
         if (keyboard == 3)
-            levelList.addAll(Arrays.asList("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3", "ၵၢၼ်ၽိုၵ်း 4").stream().toList());
+            levelList.addAll(Arrays.asList("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3","ၵၢၼ်ၽိုၵ်း 4").stream().toList());
         else {
             levelList.addAll(Arrays.asList("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3").stream().toList());
         }
@@ -208,16 +208,16 @@ public class MainController implements Initializable {
         imgLogo.setFitWidth(Perc.getDynamicPixel(25));
         tLabel.setPrefHeight(Perc.getDynamicPixel(35));
         tLabel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(22));
-        vbClose.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(35));
+        vbClose.setPrefSize(Perc.getDynamicPixel(50),Perc.getDynamicPixel(35));
         imgClose.setFitHeight(Perc.getDynamicPixel(15));
         imgClose.setFitWidth(Perc.getDynamicPixel(15));
         vbMinimize.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(35));
         imgMinimize.setFitHeight(Perc.getDynamicPixel(15));
         imgMinimize.setFitWidth(Perc.getDynamicPixel(15));
         cbLessons.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
-        cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + ";-fx-font-family: 'NamKhoneUnicode'");
+        cbLessons.setStyle("-fx-font-size: "+ Perc.getDynamicPixel(18) + ";-fx-font-family: 'NamKhoneUnicode'");
         cbLevel.setPrefSize(Perc.getDynamicPixel(150), Perc.getDynamicPixel(50));
-        cbLevel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + ";-fx-font-family: 'NamKhoneUnicode';");
+        cbLevel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18)+ ";-fx-font-family: 'NamKhoneUnicode';");
         cbTheme.setPrefSize(Perc.getDynamicPixel(150), Perc.getDynamicPixel(50));
         cbTheme.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'NamKhoneUnicode';");
         cbKeyboard.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
@@ -233,17 +233,17 @@ public class MainController implements Initializable {
         lblAWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lbAWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lblWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
-        lbWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
+lbWPM.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lblMIST.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
-        lbMIST.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
+lbMIST.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
         lblACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
-        lbACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
+lbACCU.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'VistolSans-Black'");
     }
 
     private void initTopBar() {
         titleBar.setPrefHeight(Perc.getDynamicPixel(40));
         vbClose.setOnMouseClicked(event -> {
-            Node source = (Node) event.getSource();
+           Node source = (Node) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
             stage.close();
         });
@@ -266,7 +266,7 @@ public class MainController implements Initializable {
                 }
                 if (newValue.intValue() == 0) {
                     allValues = SIL_KeyMap.getAllValuesList();
-                } else if (newValue.intValue() == 1) {
+} else if (newValue.intValue() == 1) {
                     allValues = Yunghkio_KeyMap.getAllValuesList();
                 } else if (newValue.intValue() == 2) {
                     allValues = Panglong_KeyMap.getAllValuesList();
@@ -324,7 +324,7 @@ public class MainController implements Initializable {
         });
 
         lessonList = new ArrayList<>();
-        cbLevel.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+        cbLevel.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) ->{
             if (newValue != null) {
                 if (loggedInUser != null && !isInitializing) {
                     loggedInUser.setLevel(newValue.intValue());
@@ -376,20 +376,20 @@ public class MainController implements Initializable {
         InputStream is;
         if (i == 0) {
             is = getClass().getResourceAsStream("/assets/lesson_1.csv");
-        } else if (i == 1) {
+        } else if (i == 1){
             is = getClass().getResourceAsStream("/assets/lesson_2.csv");
         } else if (i == 2) {
             is = getClass().getResourceAsStream("/assets/lesson_3.csv");
         } else {
             is = getClass().getResourceAsStream("/assets/lesson_4.csv");
         }
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
                 line = line.replaceAll("\\uFEFF", "");
                 String[] values = line.split(",");
                 int no = Integer.parseInt(values[0].trim());
-                String title = values[1].trim();
+String title = values[1].trim();
                 String content = values[2].replace("\"", "").trim();
                 lessonList.add(new Lesson(no, title, content));
             }
@@ -439,7 +439,7 @@ public class MainController implements Initializable {
             if (event.getCharacter().equals("\u200B") || (!typingWithEnglish && consumeShanCharacter)) {
                 consumeShanCharacter = false;
                 typingWithEnglish = false;
-                event.consume();
+event.consume();
             }
         });
         tfPractice.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -449,7 +449,7 @@ public class MainController implements Initializable {
                 misTyped = 0;
                 end = false;
             }
-            calculateOutcome();
+           calculateOutcome();
             if (swap) {
                 swap = false;
                 consumeShanCharacter = true;
@@ -667,7 +667,7 @@ public class MainController implements Initializable {
 //                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
 //                        if (afterTyping.equals("ႆ")) {
 //valueToType ="ၢႆ";
-//                      }
+//                     }
 //                    } catch (Exception ignored) {
 //                    }
 //                }
@@ -703,7 +703,7 @@ public class MainController implements Initializable {
 //                        String afterTyping =testText.substring(indexOfPractice + 1,indexOfPractice + 2);
 //                        if (afterTyping.equals("ူ")) {
 //                            valueToType = "ႁူ";
-//                        } else if (afterTyping.equals("ွ")) {
+//                       } else if (afterTyping.equals("ွ")) {
 //                            valueToType = "ႁွ";
 //                        }
 //                    } catch (Exception ignored) {
@@ -711,7 +711,7 @@ public class MainController implements Initializable {
 //                }
 //            }
 //            if (valueToType.equals("ႂ")) {
-//               String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
+//               String afterTyping =testText.substring(indexOfPractice + 1, indexOfPractice + 2);
 //                if (afterTyping.equals("်"))
 //                    valueToType ="ႂ်";
 //            }
@@ -741,7 +741,7 @@ public class MainController implements Initializable {
 
     private void tutorTyping() {
         int keyboard = cbKeyboard.getSelectionModel().getSelectedIndex();
-        String testText = tfView.getText();
+        String testText =tfView.getText();
         if (keyboard != 3) {
             testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1031", "\u1031$1$2$3");
             testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1084", "\u1084$1$2$3");
@@ -755,13 +755,13 @@ public class MainController implements Initializable {
             // For the typing tutor to know exactly what key we need to type
             indexOfPractice = practiceText.length();
             String mustType = testText.substring(indexOfPractice - 1, indexOfPractice);
-            typing = practiceText.substring(indexOfPractice - 1, indexOfPractice);
+            typing = practiceText.substring(indexOfPractice- 1, indexOfPractice);
             if (Utils.isEnglishCharacter(typing) && !isConverted) {
                 // Config for Namkhone Keyboard
                 if (keyboard == 3) {
                     // Show  ိံ  key
                     if (mustType.equals("ိ")) {
-                        String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
+                       String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
                         if (afterTyping.equals("ံ")) {
                             mustType = "ိံ";
                         }
@@ -810,7 +810,7 @@ public class MainController implements Initializable {
                     }
 
                     // Show ေႃkey
-                    if (mustType.equals("ေ")) {
+                    if(mustType.equals("ေ")) {
                         try {
                             String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
                             if (afterTyping.equals("ႃ")) {
@@ -818,7 +818,7 @@ public class MainController implements Initializable {
                             }
                         } catch (Exception ignored) {
                         }
-                    }
+}
 
                     // Show ို key
                     if (mustType.equals("ိ")) {
@@ -845,7 +845,7 @@ public class MainController implements Initializable {
                     // Show ိူ key
                     if (mustType.equals("ိ")) {
                         try {
-                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
+                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice+ 1);
                             if (afterTyping.equals("ူ")) {
                                 mustType = "ိူ";
                             }
@@ -892,7 +892,7 @@ public class MainController implements Initializable {
                     misTyped++;
                     stop = true;
                     tfPractice.setText(tfPractice.getText().substring(0, indexOfPractice - 1));
-                    playMistypedSound();
+                   playMistypedSound();
                     return;
                 }
             }
@@ -914,7 +914,7 @@ public class MainController implements Initializable {
             if (practiceText.length() == tfView.getText().length()) {
                 end = true;
                 clearToTypeValues();
-                ProgressService.saveProgress(loggedInUser.getId(), cbLevel.getSelectionModel().getSelectedIndex(), cbLessons.getSelectionModel().getSelectedIndex());
+                ProgressService.saveProgress(loggedInUser.getId(),cbLevel.getSelectionModel().getSelectedIndex(), cbLessons.getSelectionModel().getSelectedIndex());
 
                 // Save detailed lesson progress
                 saveLessonProgress();
@@ -942,7 +942,7 @@ public class MainController implements Initializable {
                 //Show  ျွ key
                 if (valueToType.equals("ျ")) {
                     String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
-                    if (afterTyping.equals("ွ")) {
+                   if (afterTyping.equals("ွ")) {
                         valueToType = "ျွ";
                     }
                 }
@@ -951,7 +951,7 @@ public class MainController implements Initializable {
                 if (valueToType.equals("ြ")) {
                     try {
                         String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
-                        if (afterTyping.equals("ႃ")) {
+                        if(afterTyping.equals("ႃ")) {
                             valueToType = "ြႃ";
                         }
                     } catch (Exception ignored) {
@@ -984,7 +984,7 @@ public class MainController implements Initializable {
                 // Show ေႃ key
                 if (valueToType.equals("ေ")) {
                     try {
-                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
+                        String afterTyping = testText.substring(indexOfPractice +1, indexOfPractice + 2);
                         if (afterTyping.equals("ႃ")) {
                             valueToType = "ေႃ";
                         }
@@ -996,7 +996,7 @@ public class MainController implements Initializable {
                 if (valueToType.equals("ိ")) {
                     try {
                         String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
-                        if (afterTyping.equals("ု")) {
+                       if (afterTyping.equals("ု")) {
                             valueToType = "ို";
                         }
                     } catch (Exception ignored) {
@@ -1007,7 +1007,7 @@ public class MainController implements Initializable {
                 // Show ိူ key
                 if (valueToType.equals("ိ")) {
                     try {
-                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
+                        String afterTyping = testText.substring(indexOfPractice+ 1, indexOfPractice + 2);
                         if (afterTyping.equals("ူ")) {
                             valueToType = "ိူ";
                         }
@@ -1018,7 +1018,7 @@ public class MainController implements Initializable {
                 // Show ိူ key
                 if (valueToType.equals("ိ")) {
                     try {
-                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
+                        String afterTyping = testText.substring(indexOfPractice +1, indexOfPractice + 2);
                         if (afterTyping.equals("ူ")) {
                             valueToType = "ိူ";
                         }
@@ -1040,7 +1040,7 @@ public class MainController implements Initializable {
 
             }
             // Show ႂ်  key
-            if (valueToType.equals("ႂ")) {
+            if (valueToType.equals("ႂ")){
                 String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
                 if (afterTyping.equals("်")) valueToType = "ႂ်";
             }
@@ -1053,13 +1053,13 @@ public class MainController implements Initializable {
                     Map<String, String> row = allValues.get(x);
                     if (row.containsValue(valueToType)) {
                         List<String> values = row.values().stream().toList();
-                        for (int y = 0; y < values.size(); y++) {
+                        for(int y = 0; y < values.size(); y++) {
                             String val = values.get(y);
                             if (valueToType.equals(val)) {
                                 typeThisValue(x, y);
                                 if (x % 2 == 1) {
                                     highlightThisValue("SHIFT", x, y);
-                                }
+                               }
                                 break;
                             }
                         }
@@ -1080,7 +1080,7 @@ public class MainController implements Initializable {
         System.out.println("Lesson progress save attempt completed.");
     }
 
-    private void checkLevelCompletion() {
+    private void checkLevelCompletion(){
         int levelIndex = cbLevel.getSelectionModel().getSelectedIndex();
         int totalLessons = cbLessons.getItems().size(); // For other levels, use actualsize
 
@@ -1126,7 +1126,7 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+   }
 
     private void showCertificate(int levelIndex) {
         try {
@@ -1136,7 +1136,7 @@ public class MainController implements Initializable {
             stage.initOwner(primaryStage);
             Scene scene = new Scene(loader.load());
 
-//Apply the currenttheme to thecertificate window
+//Apply thecurrenttheme to thecertificate window
             Theme theme = Theme.fromIndex(loggedInUser.getTheme());
             String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
             scene.getStylesheets().add(stylesheet);
@@ -1155,7 +1155,7 @@ public class MainController implements Initializable {
     private MediaPlayer errorPlayer;
     private MediaPlayer backgroundMusicPlayer;
 
-    private void playMistypedSound() {
+    private void playMistypedSound(){
         // Get theselected error sound from settings
         String errorSound = "error1.mp3"; // default
         if (settingsController != null) {
@@ -1164,7 +1164,7 @@ public class MainController implements Initializable {
 
         // Stop any currently playing error sound
         if (errorPlayer != null) {
-            errorPlayer.stop();
+           errorPlayer.stop();
         }
 
         // Load and play the selected error sound
@@ -1173,7 +1173,7 @@ public class MainController implements Initializable {
             errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
             errorPlayer.play();
         } else {
-            // Fallback to default error soundsoundURL = getClass().getResource("/audio/error1.mp3");
+            // Fallbackto default error soundsoundURL = getClass().getResource("/audio/error1.mp3");
             if (errorPlayer == null && soundURL != null) {
                 errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
             }
@@ -1183,7 +1183,7 @@ public class MainController implements Initializable {
         }
     }
 
-    //Background music methods
+//Background music methods
     public void playBackgroundMusic(String musicFileName) {
         // Stop any currently playing background music
         if (backgroundMusicPlayer != null) {
@@ -1191,11 +1191,11 @@ public class MainController implements Initializable {
         }
 
         // Load and play the selected background music
-        var musicURL = getClass().getResource("/audio/" + musicFileName);
+        var musicURL = getClass().getResource("/audio/"+ musicFileName);
         if (musicURL != null) {
             backgroundMusicPlayer = new MediaPlayer(new Media(musicURL.toString()));
             backgroundMusicPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop indefinitely
-            backgroundMusicPlayer.setVolume(0.3); // Set volume to 30% to notoverpower typing
+            backgroundMusicPlayer.setVolume(0.3); // Set volume to 30% tonotoverpower typing
             backgroundMusicPlayer.play();
         }
     }
@@ -1206,14 +1206,22 @@ public class MainController implements Initializable {
         }
     }
 
+    public void setSelectedBackgroundMusic(String musicFileName) {
+        if (musicFileName != null && !musicFileName.isEmpty()) {
+            playBackgroundMusic(musicFileName);
+        } else {
+            stopBackgroundMusic();
+        }
+    }
+
     private boolean isConverted;
 
-    private String convertToShanChar(String character) {
+   private String convertToShanChar(String character) {
         String shanChar;
         int keyboard = cbKeyboard.getSelectionModel().getSelectedIndex();
         if (keyboard == 0) {
             shanChar = SIL_KeyMap.getAllValuesMap().getOrDefault(character, "");
-        } else if (keyboard == 1) {
+        } else if (keyboard == 1){
             shanChar = Yunghkio_KeyMap.getAllValuesMap().getOrDefault(character, "");
         } else if (keyboard == 2) {
             shanChar = Panglong_KeyMap.getAllValuesMap().getOrDefault(character, "");
@@ -1226,7 +1234,7 @@ public class MainController implements Initializable {
     private void clearToTypeValues() {
         if (toTypeNode != null) toTypeNode.setId("key-node-default");
         if (toTypeSecNode != null) toTypeSecNode.setId("key-node-default");
-    }
+}
 
     private void highlightThisValue(String key, int row, int col) {
         if (toTypeSecNode != null) {
@@ -1243,7 +1251,7 @@ public class MainController implements Initializable {
             }
             case "SPACE" -> {
                 if (toTypeNode != null) {
-                    toTypeNode.setId("key-node-default");
+toTypeNode.setId("key-node-default");
                 }
                 toTypeSecNode = row5.getChildren().get(3);
             }
@@ -1251,7 +1259,7 @@ public class MainController implements Initializable {
         if (toTypeSecNode != null) toTypeSecNode.setId("key-node-to-type");
     }
 
-    private void typeThisValue(int x, int y) {
+    private void typeThisValue(int x, int y){
         if (toTypeNode != null) {
             toTypeNode.setId("key-node-default");
         }
@@ -1259,11 +1267,11 @@ public class MainController implements Initializable {
             toTypeSecNode.setId("key-node-default");
         }
         switch (x) {
-            case 0, 1 -> toTypeNode = row1.getChildren().get(y);
+            case 0, 1 -> toTypeNode =row1.getChildren().get(y);
             case 2, 3 -> toTypeNode = row2.getChildren().get(y);
             case 4, 5 -> toTypeNode = row3.getChildren().get(y);
             case 6, 7 -> toTypeNode = row4.getChildren().get(y);
-        }
+       }
         if (toTypeNode != null) {
             toTypeNode.setId("key-node-to-type");
         }
@@ -1275,7 +1283,7 @@ public class MainController implements Initializable {
             Iterator<String> taiVal = allValues.get(i).values().iterator();
             Iterator<String> engShiftVal = allValues.get(i + 1).keySet().iterator();
             Iterator<String> taiShiftVal = allValues.get(i + 1).values().iterator();
-            while (engVal.hasNext() && taiVal.hasNext() && engShiftVal.hasNext() && taiShiftVal.hasNext()) {
+           while (engVal.hasNext() && taiVal.hasNext() && engShiftVal.hasNext() && taiShiftVal.hasNext()) {
                 HBox row = null;
                 switch (i) {
                     case 0 -> row = row1;
@@ -1292,7 +1300,7 @@ public class MainController implements Initializable {
                     if (eng.equalsIgnoreCase("Back"))
                         row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 8 * 0.02));
                     else if (eng.equalsIgnoreCase("Tab"))
-                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 7 * 0.02));
+                        row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 7* 0.02));
                     else if (eng.equalsIgnoreCase("Caps"))
                         row.getChildren().add(createKeyWithCustomWidth(new Key("", eng, "", ""), 8 * 0.02));
                     else if (eng.equalsIgnoreCase("Enter"))
@@ -1318,7 +1326,7 @@ public class MainController implements Initializable {
     private VBox createKey(Key key) {
         VBox keyNode;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/key.fxml"));
-        try {
+        try{
             keyNode = fxmlLoader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -1327,26 +1335,26 @@ public class MainController implements Initializable {
         return keyNode;
     }
 
-    private void setCharacterOnButton(VBox vBox, Key key, String fontFamily, double fontSize) {
+    private void setCharacterOnButton(VBox vBox,Key key, String fontFamily, double fontSize) {
         Label charTaiShift = (Label) ((HBox) vBox.getChildren().get(0)).getChildren().get(0);
         charTaiShift.setText(key.getTaiShift());
-        charTaiShift.setStyle("-fx-font-size:" + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
+        charTaiShift.setStyle("-fx-font-size:" + Perc.getDynamicPixel(fontSize)+ "; -fx-font-family: '" + fontFamily + "';");
         Label charEngShift = (Label) ((HBox) vBox.getChildren().get(0)).getChildren().get(1);
         charEngShift.setText(key.getEngShift());
         charEngShift.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family:'" + fontFamily + "';");
         Label charTai = (Label) ((HBox) vBox.getChildren().get(1)).getChildren().get(0);
         charTai.setText(key.getTai());
-        charTai.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
+        charTai.setStyle("-fx-font-size: " +Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
         Label charEng = (Label) ((HBox) vBox.getChildren().get(1)).getChildren().get(1);
         charEng.setText(key.getEng());
-        charEng.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
+        charEng.setStyle("-fx-font-size: "+ Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
     }
 
     private VBox createKeyWithCustomWidth(Key key, double width) {
         VBox vBox;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/key.fxml"));
         try {
-            vBox = fxmlLoader.load();
+            vBox= fxmlLoader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -1363,7 +1371,7 @@ public class MainController implements Initializable {
         if (tfPractice.getText().length() > 1 && !end) {
             wpm = calculateWPM();
             accuracy = calculateACCU();
-            awpm = calculateAWPM(wpm, accuracy);
+           awpm = calculateAWPM(wpm, accuracy);
         }
     }
 
@@ -1373,11 +1381,11 @@ public class MainController implements Initializable {
         return avgWPM;
     }
 
-    private double calculateACCU() {
+   private double calculateACCU() {
         double accuracy = (double) (tfPractice.getText().length() - misTyped) / tfPractice.getText().length();
         DecimalFormat format = new DecimalFormat("#0.00");
         lbMIST.setText(String.valueOf(misTyped));
-        lbACCU.setText(format.format(accuracy * 100) + "%");
+        lbACCU.setText(format.format(accuracy *100) + "%");
         return accuracy;
     }
 
@@ -1385,7 +1393,7 @@ public class MainController implements Initializable {
         long elapsedTime = System.currentTimeMillis() - startTime;
         int characterCount = tfPractice.getText().length();
         double minutes = (double) elapsedTime / 60000;
-        var interimWPM = Math.round((characterCount / 5.0) / minutes);
+        var interimWPM =Math.round((characterCount / 5.0) / minutes);
         lbWPM.setText(String.valueOf(interimWPM));
         return Math.toIntExact(interimWPM);
     }
@@ -1408,7 +1416,7 @@ public class MainController implements Initializable {
         if (currentIndex != 0) {
             cbLessons.getSelectionModel().selectPrevious();
             return true;
-        } else if (cbLevel.getSelectionModel().getSelectedIndex() != 0) {
+        } else if (cbLevel.getSelectionModel().getSelectedIndex() !=0) {
             cbLevel.getSelectionModel().selectPrevious();
             cbLessons.getSelectionModel().selectLast();
             return true;

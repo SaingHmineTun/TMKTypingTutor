@@ -10,39 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Clean the project.&#10;Re-design the certificate.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SettingsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/1 Min Classroom Timer __ WAVES __ Relaxing Music(MP3_160K).mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/1 Minute Timer - Soft Peaceful Music(M4A_128K).m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/1 Minute Timer with Relaxing Music and Alarm(M4A_128K).m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/1 Minute Timer with Relaxing Music and Alarm(MP3_160K).mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/1-Minute Nature Background Sound(M4A_128K).m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/1_Minute_Relaxing_Music_Peaceful_Ambient_Stress_Relief_Nature_Background.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/1_Minute_Relaxing_Music_Peaceful_Ambient_Stress_Relief_Nature_Background.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/1_Minute_of_Calm_Nature_Sounds_Relaxing_Music_Breathe_stressrelief.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/1_Minute_of_Rain_and_Thunderstorm_Sounds_For_Focus_Relaxing_and.m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/Relax 1 min - Waterfall - Relaxing Nature Sounds(M4A_128K).m4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/error2.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/error3.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/error4.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/error5.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/error6.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/error7.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_about.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_background_music.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_certificate.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_credits.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_key_error_sound.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_theme.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_user_profile.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_user_progress.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/settings.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/auth/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/auth/RegisterController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/services/DatabaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/services/DatabaseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/audio/error.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/audio/error1.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SettingsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/setting_background_music.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_background_music.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +62,14 @@
     &quot;repository&quot;: &quot;TMKTypingTutor&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://C:/Program Files/Zulu/zulu-25/lib/src.zip!/javafx.controls/javafx/scene/control/Control.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://C:/Program Files/Zulu/zulu-25/lib/src.zip!/javafx.controls/javafx/scene/control/TableColumn.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://C:/Program Files/Zulu/zulu-25/lib/src.zip!/javafx.controls/javafx/scene/control/TableColumnBase.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://C:/Program Files/Zulu/zulu-25/lib/src.zip!/javafx.controls/javafx/scene/control/TableView.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://C:/Program Files/Zulu/zulu-25/lib/src.zip!/javafx.graphics/javafx/scene/Parent.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://C:/Program Files/Zulu/zulu-25/lib/src.zip!/javafx.graphics/javafx/scene/layout/Region.java" root0="SKIP_INSPECTION" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -257,7 +236,8 @@
       <workItem from="1759576349291" duration="4766000" />
       <workItem from="1759583687314" duration="3976000" />
       <workItem from="1759587749852" duration="1701000" />
-      <workItem from="1759642375677" duration="1943000" />
+      <workItem from="1759642375677" duration="2283000" />
+      <workItem from="1759645527844" duration="941000" />
     </task>
     <task id="LOCAL-00001" summary="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!">
       <option name="closed" value="true" />
@@ -563,7 +543,23 @@
       <option name="project" value="LOCAL" />
       <updated>1759584036807</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Clean the project.&#10;Re-design the certificate.">
+      <option name="closed" value="true" />
+      <created>1759645174368</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1759645174368</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Clean the project.&#10;Re-design the certificate.">
+      <option name="closed" value="true" />
+      <created>1759645391665</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1759645391665</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

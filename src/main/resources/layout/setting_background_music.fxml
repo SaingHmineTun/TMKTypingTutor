@@ -27,11 +27,6 @@
                         <ListView fx:id="lvMusic" VBox.vgrow="ALWAYS" />
                         <HBox spacing="15.0">
                             <children>
-                                <Button fx:id="btnPlayMusic" mnemonicParsing="false" onAction="#onPlayMusic" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Play">
-                                    <font>
-                                        <Font size="14.0" />
-                                    </font>
-                                </Button>
                                 <Button fx:id="btnStopMusic" mnemonicParsing="false" onAction="#onStopMusic" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #f44336; -fx-text-fill: white;" text="Stop">
                                     <font>
                                         <Font size="14.0" />

@@ -16,6 +16,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
@@ -33,7 +36,7 @@ public class SettingsController implements Initializable {
     // Navigation Buttons
     @FXML
     private Button btnUserProfile;
-    @FXML
+@FXML
     private Button btnUserProgress;
     @FXML
     private Button btnTheme;
@@ -45,7 +48,7 @@ public class SettingsController implements Initializable {
     private Button btnCertificate;
     @FXML
     private Button btnCredits;
-    @FXML
+   @FXML
     private Button btnAbout;
     @FXML
     private Button btnClose;
@@ -59,7 +62,7 @@ public class SettingsController implements Initializable {
     private Button btnChangeDisplayName;
 
     // User Progress Tab
-    private TableView<Profile> tvProgress;
+private TableView<Profile> tvProgress;
     private TableColumn<Profile, String> tcLevel;
     private TableColumn<Profile, String> tcProgress;
     private TableColumn<Profile, Button> tcCertificate;
@@ -71,7 +74,6 @@ public class SettingsController implements Initializable {
 
     // Background Music Tab
     private ListView<String> lvMusic;
-    private Button btnPlayMusic;
     private Button btnStopMusic;
 
     // Key Error Sound Tab
@@ -97,7 +99,7 @@ public class SettingsController implements Initializable {
         javafx.concurrent.Task<Void> task = new javafx.concurrent.Task<Void>() {
             @Override
             protected Void call() throws Exception {
-                // Wait for JavaFX to initialize
+                // Waitfor JavaFX to initialize
                 Thread.sleep(100);
                 return null;
             }
@@ -109,7 +111,7 @@ public class SettingsController implements Initializable {
                         loadTabContent("/layout/setting_user_profile.fxml");
                         // Highlightthe first button as selected
                         if (btnUserProfile != null) {
-                            btnUserProfile.setStyle("-fx-background-color: #007acc; -fx-text-fill: white; -fx-border-color: #007acc; -fx-border-radius: 5;");
+                            btnUserProfile.setStyle("-fx-background-color: #007acc; -fx-text-fill: white; -fx-border-color: #007acc; -fx-border-radius:5;");
                         }
                     }
                 } catch (Exception e) {
@@ -134,7 +136,7 @@ public class SettingsController implements Initializable {
         AnchorPane tabContent = loader.load();
         apContent.getChildren().add(tabContent);
 
-        // Initialize the content based on the tab
+        // Initialize the contentbased on the tab
         switch (fxmlPath) {
             case "/layout/setting_user_profile.fxml":
                 initUserProfileTab(tabContent);
@@ -164,7 +166,7 @@ public class SettingsController implements Initializable {
         }
 
         node = tabContent.lookup("#lblDisplayName");
-        if (node instanceof Label) {
+        if(node instanceof Label) {
             lblDisplayName = (Label) node;
         }
 
@@ -175,24 +177,24 @@ public class SettingsController implements Initializable {
 
         // Load user profile data
         if (lblUsername != null) {
-            lblUsername.setText("Username: " + user.getUsername());
+           lblUsername.setText("Username: " + user.getUsername());
         }
         if (lblDisplayName != null) {
-            lblDisplayName.setText("Display Name: " + user.getDisplayName());
+            lblDisplayName.setText("DisplayName: " + user.getDisplayName());
         }
     }
 
     private void initUserProgressTab(AnchorPane tabContent) {
         Node node = tabContent.lookup("#tvProgress");
-        if (node instanceof TableView) {
+       if (node instanceof TableView) {
             tvProgress = (TableView<Profile>) node;
         }
 
-// Initializetable columns only if elements are found
+//Initializetable columns onlyifelements are found
         if (tvProgress != null) {
             // Get the columns from the table view
             if (tvProgress.getColumns().size() >= 4) {
-                tcLevel = (TableColumn<Profile, String>) tvProgress.getColumns().get(0);
+tcLevel = (TableColumn<Profile, String>) tvProgress.getColumns().get(0);
                 tcProgress = (TableColumn<Profile, String>) tvProgress.getColumns().get(1);
                 tcCertificate = (TableColumn<Profile, Button>) tvProgress.getColumns().get(2);
                 tcDetails = (TableColumn<Profile, Button>) tvProgress.getColumns().get(3);
@@ -236,19 +238,15 @@ public class SettingsController implements Initializable {
             lvMusic = (ListView<String>) node;
         }
 
-        node = tabContent.lookup("#btnPlayMusic");
-        if (node instanceof Button) {
-            btnPlayMusic = (Button) node;
-        }
-
         node = tabContent.lookup("#btnStopMusic");
         if (node instanceof Button) {
             btnStopMusic = (Button) node;
         }
 
-        // Initialize music list withuser-friendly names
+        // Initialize music list with user-friendly names
         ObservableList<String> musicList = FXCollections.observableArrayList(
-                "Classroom Timer with Relaxing WAVES Music",
+                "No Background Music",
+                "Classroom Timer withRelaxing WAVES Music",
                 "Soft Peaceful Music Timer",
                 "Timer with Relaxing Music and Alarm",
                 "Nature Background Sound",
@@ -262,25 +260,94 @@ public class SettingsController implements Initializable {
 
         // Map user-friendly names to actual file names
         Map<String, String> musicNameToFileMap = new HashMap<>();
+       musicNameToFileMap.put("No Background Music", "");
         musicNameToFileMap.put("Classroom Timer with Relaxing WAVES Music", "bgsound1.mp3");
         musicNameToFileMap.put("Soft Peaceful Music Timer", "bgsound2.m4a");
         musicNameToFileMap.put("Timer with Relaxing Music and Alarm", "bgsound3.m4a");
         musicNameToFileMap.put("Nature Background Sound", "1-MinuteNature Background Sound(M4A_128K).m4a");
         musicNameToFileMap.put("Peaceful Ambient Stress Relief", "bgsound8.m4a");
         musicNameToFileMap.put("Calm Nature Sounds", "bgsound6.m4a");
-        musicNameToFileMap.put("Rainand Thunderstorm Sounds", "bgsound5.m4a");
+        musicNameToFileMap.put("Rain and Thunderstorm Sounds", "bgsound5.m4a");
         musicNameToFileMap.put("Waterfall Relaxing Nature Sounds", "bgsound10.m4a");
         musicNameToFileMap.put("Relaxing Music for Stress Relief", "bgsound4.mp3");
         musicNameToFileMap.put("Nature Sounds for Focus", "bgsound9.mp3");
 
         if (lvMusic != null) {
             lvMusic.setItems(musicList);
-            // Add listener to automatically play when selection changes
-            lvMusic.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue != null) {
-                    String fileName = musicNameToFileMap.get(newValue);
-                    if (fileName != null) {
-                        playMusicFile(fileName);
+
+            // Set custom cell factory
+            lvMusic.setCellFactory(param -> new ListCell<String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (empty || item == null) {
+                        setText(null);
+                        setGraphic(null);
+                    } else {
+                        setText(null);
+
+                        Label nameLabel = new Label(item);
+                        nameLabel.setMaxWidth(Double.MAX_VALUE);
+
+                        Button playButton = new Button("Play");
+                        playButton.setOnAction(e -> {
+                            String fileName = musicNameToFileMap.get(item);
+                            if (fileName != null && !fileName.isEmpty()){
+                                playMusicFile(fileName);
+                            } else {
+                                // Stop any currently playing music
+                                if (mediaPlayer != null) {
+                                    mediaPlayer.stop();
+                                }
+
+                                // Also stop in main controller
+                                if (mainController != null) {
+                                    mainController.stopBackgroundMusic();
+                                }
+
+                                selectedBackgroundMusic =null;
+                                showAlert("Musicstopped", Alert.AlertType.INFORMATION);
+                            }
+                        });
+
+                        Button selectButton = new Button("Select");
+                        selectButton.setOnAction(e -> {
+                            String fileName = musicNameToFileMap.get(item);
+                            if (fileName != null && !fileName.isEmpty()) {
+                                playMusicFile(fileName);
+                               selectedBackgroundMusic = fileName;
+                                showAlert("Selected: " + item, Alert.AlertType.INFORMATION);
+
+                                // Also update in main controller
+                                if (mainController != null) {
+                                    mainController.setSelectedBackgroundMusic(fileName);
+                                }
+                            } else {
+                                // Stop any currently playing music
+                                if (mediaPlayer!= null) {
+                                    mediaPlayer.stop();
+                                }
+
+                                // Also stop in main controller
+                                if (mainController != null) {
+                                    mainController.stopBackgroundMusic();
+                                   mainController.setSelectedBackgroundMusic(null);
+                                }
+
+                                selectedBackgroundMusic = null;
+                                showAlert("No background music selected", Alert.AlertType.INFORMATION);
+                            }
+                        });
+
+                        Region spacer = new Region();
+                        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+                        HBox hbox = new HBox(nameLabel,spacer, playButton, selectButton);
+                        hbox.setSpacing(10);
+                        hbox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+
+                        setGraphic(hbox);
                     }
                 }
             });
@@ -298,13 +365,13 @@ public class SettingsController implements Initializable {
             btnPlayErrorSound = (Button) node;
         }
 
-        // Initialize errorsounds list
-        ObservableList<String> errorSoundsList = FXCollections.observableArrayList(
-                "Error Sound 1 (error1.mp3)",
+        // Initializeerrorsounds list
+         ObservableList<String> errorSoundsList = FXCollections.observableArrayList(
+                "ErrorSound 1 (error1.mp3)",
                 "Error Sound 2 (error2.mp3)",
-                "Error Sound 3 (error3.mp3)",
+                "Error Sound 3(error3.mp3)",
                 "Error Sound 4 (error4.mp3)",
-                "Error Sound 5 (error5.mp3)",
+                "ErrorSound 5 (error5.mp3)",
                 "Error Sound 6 (error6.mp3)",
                 "Error Sound 7 (error7.mp3)"
         );
@@ -321,7 +388,7 @@ public class SettingsController implements Initializable {
 
         node = tabContent.lookup("#btnViewCertificate");
         if (node instanceof Button) {
-            btnViewCertificate = (Button) node;
+            btnViewCertificate = (Button)node;
         }
 
         // Initially disable certificate button
@@ -334,13 +401,13 @@ public class SettingsController implements Initializable {
     }
 
     private void loadProgress() {
-        if (tvProgress == null || user == null) return;
+        if (tvProgress == null || user ==null) return;
 
         ObservableList<Profile> profiles = FXCollections.observableArrayList();
         for (int i = 0; i < 4; i++) { // Assuming 4 levels
             int completed = ProgressService.getCompletedLessonCount(user.getId(), i);
             int total = lessonsPerLevel[i];
-            Profile profile = new Profile("Level " + (i + 1), completed + " / " + total);
+           Profile profile = new Profile("Level " + (i + 1), completed + " /" + total);
             profile.setLevelIndex(i); // Store level index for later use
 
             if (completed >= total) {
@@ -352,8 +419,8 @@ public class SettingsController implements Initializable {
 
                 profile.getDetailsButton().setDisable(false);
                 profile.getDetailsButton().setOnAction(event -> showDetailedProgress(levelIndex));
-            } else if (completed > 0) {
-                // For partially completed levels, enable only Details button
+           } else if (completed > 0) {
+                // For partially completed levels, enable only Detailsbutton
                 profile.getDetailsButton().setText("Details");
                 profile.getDetailsButton().setDisable(false);
                 final int levelIndex = i;
@@ -369,7 +436,7 @@ public class SettingsController implements Initializable {
 
         boolean allLevelsCompleted = true;
         for (int i = 0; i < 4; i++) {
-            int completed = ProgressService.getCompletedLessonCount(user.getId(), i);
+            int completed= ProgressService.getCompletedLessonCount(user.getId(), i);
             int total = lessonsPerLevel[i];
             if (completed < total) {
                 allLevelsCompleted = false;
@@ -388,7 +455,7 @@ public class SettingsController implements Initializable {
     private void onUserProfileTab() throws IOException {
         if (apContent != null) {
             loadTabContent("/layout/setting_user_profile.fxml");
-            // Update button styles to show selection
+           //Update button styles to show selection
             updateButtonStyles(btnUserProfile);
         }
     }
@@ -398,7 +465,7 @@ public class SettingsController implements Initializable {
         if (apContent != null) {
             loadTabContent("/layout/setting_user_progress.fxml");
             // Update button styles to show selection
-            updateButtonStyles(btnUserProgress);
+           updateButtonStyles(btnUserProgress);
         }
     }
 
@@ -411,12 +478,11 @@ public class SettingsController implements Initializable {
         }
     }
 
-    @FXML
+@FXML
     private void onBackgroundMusicTab() throws IOException {
         if (apContent != null) {
             loadTabContent("/layout/setting_background_music.fxml");
-            // Update button styles to show selection
-            updateButtonStyles(btnBackgroundMusic);
+            // Update button styles to show selectionupdateButtonStyles(btnBackgroundMusic);
         }
     }
 
@@ -431,9 +497,9 @@ public class SettingsController implements Initializable {
 
     @FXML
     private void onCertificateTab() throws IOException {
-        if (apContent != null) {
+       if (apContent != null) {
             loadTabContent("/layout/setting_certificate.fxml");
-            // Update button styles to show selection
+            // Update button stylesto show selection
             updateButtonStyles(btnCertificate);
         }
     }
@@ -451,31 +517,29 @@ public class SettingsController implements Initializable {
     private void onAboutTab() throws IOException {
         if (apContent != null) {
             loadTabContent("/layout/setting_about.fxml");
-            // Update button styles to show selection
-            updateButtonStyles(btnAbout);
+            // Update button styles to show selectionupdateButtonStyles(btnAbout);
         }
     }
 
-    // Helper method to update button styles
-    private void updateButtonStyles(Button selectedButton) {
-        // Reset allbuttons to default style
-        Button[] allButtons = {btnUserProfile, btnUserProgress, btnTheme, btnBackgroundMusic,
+    // Helper method to update button stylesprivate void updateButtonStyles(Button selectedButton) {
+    // Reset allbuttons to default style
+    public void updateButtonStyles(Button selectedButton) {
+        Button[] allButtons = {btnUserProfile, btnUserProgress, btnTheme,btnBackgroundMusic,
                 btnKeyErrorSound, btnCertificate, btnCredits, btnAbout};
 
-        for (Button button : allButtons) {
+        for (
+                Button button : allButtons) {
             if (button != null) {
                 button.setStyle("-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-radius: 5;");
             }
         }
 
-        // Highlight selected button
-        if (selectedButton != null) {
-            selectedButton.setStyle("-fx-background-color: #007acc; -fx-text-fill: white; -fx-border-color: #007acc; -fx-border-radius: 5;");
-        }
+        // Highlight selected buttonif (selectedButton != null) {
+        selectedButton.setStyle("-fx-background-color: #007acc; -fx-text-fill: white; -fx-border-color: #007acc; -fx-border-radius: 5;");
     }
 
     @FXML
-    private void onChangeDisplayName() {
+private void onChangeDisplayName() {
         if (user == null) return;
 
         TextInputDialog dialog = new TextInputDialog(user.getDisplayName());
@@ -483,8 +547,8 @@ public class SettingsController implements Initializable {
         dialog.setHeaderText("Enter your new display name:");
         dialog.setContentText("Display Name:");
 
-        // Apply theme to dialog
-        Theme theme = Theme.fromIndex(user.getTheme());
+        // Applytheme to dialog
+        Theme theme= Theme.fromIndex(user.getTheme());
         String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
         dialog.getDialogPane().getStylesheets().add(stylesheet);
 
@@ -503,7 +567,7 @@ public class SettingsController implements Initializable {
     }
 
     @FXML
-    private void onApplyTheme() {
+   private void onApplyTheme() {
         if (lvThemes == null) return;
 
         Theme selectedTheme = lvThemes.getSelectionModel().getSelectedItem();
@@ -511,9 +575,9 @@ public class SettingsController implements Initializable {
             user.setTheme(selectedTheme.ordinal());
             UserService.updateUser(user);
 
-            // Apply theme to main window
-            if (mainController != null) {
-                // Select the theme in main controller which will automatically trigger the listener
+            // Apply theme to mainwindow
+            if (mainController!= null) {
+                // Selectthe theme in main controller which will automatically trigger the listener
                 mainController.getCbTheme().getSelectionModel().select(selectedTheme.ordinal());
             }
 
@@ -525,7 +589,7 @@ public class SettingsController implements Initializable {
             // Show confirmation
             showAlert("Theme updated successfully!", Alert.AlertType.INFORMATION);
         } else {
-            showAlert("Please select a theme first!", Alert.AlertType.WARNING);
+            showAlert("Please select atheme first!", Alert.AlertType.WARNING);
         }
     }
 
@@ -539,22 +603,37 @@ public class SettingsController implements Initializable {
 
         String selectedMusic = lvMusic.getSelectionModel().getSelectedItem();
         if (selectedMusic != null) {
-            // Mapuser-friendly names to actual file names
+            //Map user-friendly names to actual file names
             Map<String, String> musicNameToFileMap = new HashMap<>();
+            musicNameToFileMap.put("No Background Music", "");
             musicNameToFileMap.put("Classroom Timer with Relaxing WAVES Music", "bgsound1.mp3");
-            musicNameToFileMap.put("Soft Peaceful Music Timer", "bgsound2.m4a");
+           musicNameToFileMap.put("Soft Peaceful Music Timer", "bgsound2.m4a");
             musicNameToFileMap.put("Timer with Relaxing Music and Alarm", "bgsound3.m4a");
-            musicNameToFileMap.put("Nature Background Sound", "bgsound7.m4a");
-            musicNameToFileMap.put("Peaceful Ambient Stress Relief", "bgsound8.m4a");
+            musicNameToFileMap.put("Nature Background Sound", "1-MinuteNature Background Sound(M4A_128K).m4a");
+           musicNameToFileMap.put("Peaceful Ambient Stress Relief", "bgsound8.m4a");
             musicNameToFileMap.put("Calm Nature Sounds", "bgsound6.m4a");
             musicNameToFileMap.put("Rain and Thunderstorm Sounds", "bgsound5.m4a");
-            musicNameToFileMap.put("Waterfall Relaxing Nature Sounds", "bgsound10.m4a");
+           musicNameToFileMap.put("Waterfall Relaxing Nature Sounds", "bgsound10.m4a");
             musicNameToFileMap.put("Relaxing Music for Stress Relief", "bgsound4.mp3");
             musicNameToFileMap.put("Nature Sounds for Focus", "bgsound9.mp3");
 
-            String fileName = musicNameToFileMap.get(selectedMusic);
-            if (fileName != null) {
+           String fileName = musicNameToFileMap.get(selectedMusic);
+            if (fileName != null && !fileName.isEmpty()) {
                 playMusicFile(fileName);
+                selectedBackgroundMusic = fileName;
+            } else if (fileName != null) {
+                // Handle "No Background Music" case
+                if (mediaPlayer != null) {
+mediaPlayer.stop();
+                }
+
+                // Also stop in main controller
+                if (mainController != null) {
+                    mainController.stopBackgroundMusic();
+                }
+
+                selectedBackgroundMusic = null;
+                showAlert("No background music selected", Alert.AlertType.INFORMATION);
             }
         }
     }
@@ -569,15 +648,15 @@ public class SettingsController implements Initializable {
         String musicPath = "/audio/" + fileName;
         try {
             URL musicURL = getClass().getResource(musicPath);
-            if (musicURL != null) {
+            if (musicURL!= null) {
                 mediaPlayer = new MediaPlayer(new Media(musicURL.toString()));
-                mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop indefinitely
+                mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);// Loop indefinitely
                 mediaPlayer.play();
 
                 // Also send to main controller to play in background
                 if (mainController != null) {
                     mainController.playBackgroundMusic(fileName);
-                }
+               }
 
                 selectedBackgroundMusic = fileName;
             } else {
@@ -589,7 +668,7 @@ public class SettingsController implements Initializable {
         }
     }
 
-    @FXML
+@FXML
     private void onStopMusic() {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
@@ -601,7 +680,7 @@ public class SettingsController implements Initializable {
             mainController.stopBackgroundMusic();
         }
 
-        selectedBackgroundMusic = null;
+       selectedBackgroundMusic = null;
     }
 
     @FXML
@@ -610,8 +689,9 @@ public class SettingsController implements Initializable {
 
         String selectedSound = lvErrorSounds.getSelectionModel().getSelectedItem();
         if (selectedSound != null) {
-            // Extract the actual filename from the display text
+            // Extract the actual filename fromthe display text
             String[] parts = selectedSound.split("\\(");
+
             if (parts.length > 1) {
                 selectedErrorSound = parts[1].replace(")", "");
 
@@ -620,14 +700,14 @@ public class SettingsController implements Initializable {
                     errorSoundPlayer.stop();
                 }
 
-                // Play the selected error sound
+               // Play the selected error sound
                 String soundPath = "/audio/" + selectedErrorSound;
                 try {
                     URL soundURL = getClass().getResource(soundPath);
                     if (soundURL != null) {
                         errorSoundPlayer = new MediaPlayer(new Media(soundURL.toString()));
                         errorSoundPlayer.play();
-                        showAlert("Playing error sound: " + selectedSound, Alert.AlertType.INFORMATION);
+                        showAlert("Playing error sound:" + selectedSound, Alert.AlertType.INFORMATION);
                     }
                 } catch (Exception e) {
                     showAlert("Error playing sound: " + e.getMessage(), Alert.AlertType.ERROR);
@@ -638,7 +718,7 @@ public class SettingsController implements Initializable {
         }
     }
 
-    public String getSelectedErrorSound() {
+public String getSelectedErrorSound() {
         return selectedErrorSound;
     }
 
@@ -650,7 +730,7 @@ public class SettingsController implements Initializable {
     private void onViewCertificate() {
         if (user == null) return;
 
-        // Check if all levels are completed
+        // Check if all levelsare completed
         boolean allLevelsCompleted = true;
         for (int i = 0; i < 4; i++) {
             int completed = ProgressService.getCompletedLessonCount(user.getId(), i);
@@ -658,10 +738,10 @@ public class SettingsController implements Initializable {
             if (completed < total) {
                 allLevelsCompleted = false;
                 break;
-            }
+}
         }
 
-        if (allLevelsCompleted) {
+        if (allLevelsCompleted){
             showMainCertificate();
         } else {
             showAlert("You need to complete all tests to view the certificate!", Alert.AlertType.WARNING);
@@ -688,7 +768,7 @@ public class SettingsController implements Initializable {
             double totalWpm = 0;
             int levelCount = 0;
             for (int i = 0; i < 4; i++) {
-                double avgWpm = LessonProgressService.getAverageWpmForLevel(user.getId(), i);
+                double avgWpm= LessonProgressService.getAverageWpmForLevel(user.getId(), i);
                 if (avgWpm > 0) {
                     totalWpm += avgWpm;
                     levelCount++;
@@ -708,15 +788,14 @@ public class SettingsController implements Initializable {
 
     private void showCertificate(int levelIndex) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/certificate.fxml"));
+           FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/certificate.fxml"));
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(btnClose.getScene().getWindow());
             Scene scene = new Scene(loader.load());
 
-            // Apply certificate specific styles
-            scene.getStylesheets().clear();
-            scene.getStylesheets().add(getClass().getResource("/css/certificate_style.css").toExternalForm());
+            // Apply certificate specific stylesscene.getStylesheets().clear();
+scene.getStylesheets().add(getClass().getResource("/css/certificate_style.css").toExternalForm());
 
             stage.setScene(scene);
 
@@ -741,7 +820,7 @@ public class SettingsController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(btnClose.getScene().getWindow());
             Scene scene = new Scene(loader.load());
-// Apply the current theme to the lesson progress window
+// Apply the current theme to thelesson progress window
             Theme theme = Theme.fromIndex(user.getTheme());
             String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
             scene.getStylesheets().add(stylesheet);
@@ -762,7 +841,7 @@ public class SettingsController implements Initializable {
         if (btnClose != null) {
             Stage stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
-        }
+       }
     }
 
     private void showAlert(String message, Alert.AlertType alertType) {
@@ -773,7 +852,7 @@ public class SettingsController implements Initializable {
 
         // Apply theme to alert
         Theme theme = Theme.fromIndex(user.getTheme());
-        String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
+        String stylesheet= getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
         alert.getDialogPane().getStylesheets().add(stylesheet);
 
         alert.showAndWait();
