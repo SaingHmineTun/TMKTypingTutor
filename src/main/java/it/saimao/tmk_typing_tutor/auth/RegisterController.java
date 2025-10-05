@@ -47,7 +47,9 @@ public class RegisterController {
             return;
         }
 
-        UserService.saveUser(new User(username, password));
+        User user = new User(username, password);
+        user.setDisplayName(username); // Set display name to username by default
+        UserService.saveUser(user);
         showLogin();
     }
 

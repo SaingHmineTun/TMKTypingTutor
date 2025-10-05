@@ -3,6 +3,7 @@ package it.saimao.tmk_typing_tutor.model;
 public class User {
     private int id;
     private String username;
+    private String displayName;
     private String password;
     private int theme;
     private int lesson;
@@ -11,12 +12,14 @@ public class User {
 
     public User(String username, String password) {
         this.username = username;
+        this.displayName = username;
         this.password = password;
     }
 
-    public User(int id, String username, String password, int theme, int lesson, int level, int keyboard) {
+    public User(int id, String username, String displayName, String password, int theme, int lesson, int level, int keyboard) {
         this.id = id;
         this.username = username;
+        this.displayName = displayName;
         this.password = password;
         this.theme = theme;
         this.lesson = lesson;
@@ -38,6 +41,14 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public String getPassword() {

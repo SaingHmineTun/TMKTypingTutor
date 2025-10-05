@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="650.0" prefWidth="900.0" stylesheets="@../css/list_styles.css"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="it.saimao.tmk_typing_tutor.controller.SettingsController">
+    
+    <!-- Top section with title -->
+    <top>
+        <VBox>
+            <children>
+                <Label text="Settings">
+                    <font>
+                        <Font name="System Bold" size="32.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets left="20.0" top="20.0"/>
+                    </VBox.margin>
+                </Label>
+            </children>
+            <VBox.margin>
+                <Insets bottom="20.0"/>
+            </VBox.margin>
+        </VBox>
+    </top>
+    
+    <!-- Left section with navigation -->
+    <left>
+        <VBox prefWidth="200.0" minWidth="200.0" spacing="5.0" style="-fx-background-color: #f0f0f0; -fx-background-radius: 10; -fx-padding: 10;">
+            <children>
+                <Label text="Navigation" textFill="#333333">
+                    <font>
+                        <Font name="System Bold" size="16.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="10.0"/>
+                    </VBox.margin>
+                </Label>
+
+                <Button fx:id="btnUserProfile" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308"
+                        mnemonicParsing="false" onAction="#onUserProfileTab" prefHeight="40.0"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-radius: 5;"
+                        text="User Profile">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Button>
+
+                <Button fx:id="btnUserProgress" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308"
+                        mnemonicParsing="false" onAction="#onUserProgressTab" prefHeight="40.0"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-radius: 5;"
+                        text="User Progress">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Button>
+
+                <Button fx:id="btnTheme" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308"
+                        mnemonicParsing="false" onAction="#onThemeTab" prefHeight="40.0"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-radius: 5;"
+                        text="Theme">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Button>
+
+                <Button fx:id="btnBackgroundMusic" alignment="BASELINE_LEFT"
+                        maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                        onAction="#onBackgroundMusicTab" prefHeight="40.0"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-radius: 5;"
+                        text="Background Music">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Button>
+
+                <Button fx:id="btnKeyErrorSound" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308"
+                        mnemonicParsing="false" onAction="#onKeyErrorSoundTab" prefHeight="40.0"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-radius: 5;"
+                        text="Key Error Sound">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Button>
+
+                <Button fx:id="btnCertificate" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308"
+                        mnemonicParsing="false" onAction="#onCertificateTab" prefHeight="40.0"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-radius: 5;"
+                        text="Certificate">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Button>
+
+                <Button fx:id="btnCredits" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308"
+                        mnemonicParsing="false" onAction="#onCreditsTab" prefHeight="40.0"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-radius: 5;"
+                        text="Credits">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Button>
+
+                <Button fx:id="btnAbout" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308"
+                        mnemonicParsing="false" onAction="#onAboutTab" prefHeight="40.0"
+                        style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-radius: 5;"
+                        text="About">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Button>
+            </children>
+            <BorderPane.margin>
+                <Insets left="20.0"/>
+            </BorderPane.margin>
+        </VBox>
+    </left>
+    
+    <!-- Center section with content -->
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true">
+            <content>
+                <AnchorPane fx:id="apContent" minHeight="0.0" minWidth="0.0"/>
+            </content>
+            <BorderPane.margin>
+                <Insets right="20.0"/>
+            </BorderPane.margin>
+        </ScrollPane>
+    </center>
+    
+    <!-- Bottom section with close button -->
+    <bottom>
+        <HBox alignment="CENTER_RIGHT">
+            <children>
+                <Button fx:id="btnClose" mnemonicParsing="false" onAction="#onClose" prefHeight="40.0"
+                        prefWidth="120.0" style="-fx-background-color: #007acc; -fx-text-fill: white;"
+                        text="Close">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Button>
+            </children>
+            <BorderPane.margin>
+                <Insets bottom="20.0" right="20.0"/>
+            </BorderPane.margin>
+        </HBox>
+    </bottom>
+    
+</BorderPane>

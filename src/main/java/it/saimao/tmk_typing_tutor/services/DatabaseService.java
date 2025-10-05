@@ -42,6 +42,7 @@ public class DatabaseService {
         String createUserTableSql= "CREATE TABLE IF NOT EXISTS users (\n"
                 + " id integer PRIMARY KEY AUTOINCREMENT,\n"
                 + " username text NOT NULL UNIQUE,\n"
+                + " displayName text NOT NULL DEFAULT '',\n"
                 + " password text NOT NULL,\n"
                 + " theme INTEGER DEFAULT 0,\n"
                 + " lesson INTEGER DEFAULT 0,\n"
@@ -88,6 +89,10 @@ public class DatabaseService {
             }
             if(!columnExists(conn, "users", "keyboard")) {
                 stmt.execute("ALTER TABLE users ADD COLUMN keyboard INTEGER DEFAULT 0");
+            }
+
+            if(!columnExists(conn, "users", "displayName")) {
+                stmt.execute("ALTER TABLE users ADD COLUMN displayName text NOT NULL DEFAULT ''");
             }
 
         } catch (SQLException e) {

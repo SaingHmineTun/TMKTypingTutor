@@ -9,7 +9,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Adding user progress for each lesson" />
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Clean the project.&#10;Re-design the certificate.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SettingsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/1 Min Classroom Timer __ WAVES __ Relaxing Music(MP3_160K).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/1 Minute Timer - Soft Peaceful Music(M4A_128K).m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/1 Minute Timer with Relaxing Music and Alarm(M4A_128K).m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/1 Minute Timer with Relaxing Music and Alarm(MP3_160K).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/1-Minute Nature Background Sound(M4A_128K).m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/1_Minute_Relaxing_Music_Peaceful_Ambient_Stress_Relief_Nature_Background.m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/1_Minute_Relaxing_Music_Peaceful_Ambient_Stress_Relief_Nature_Background.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/1_Minute_of_Calm_Nature_Sounds_Relaxing_Music_Breathe_stressrelief.m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/1_Minute_of_Rain_and_Thunderstorm_Sounds_For_Focus_Relaxing_and.m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/Relax 1 min - Waterfall - Relaxing Nature Sounds(M4A_128K).m4a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/error2.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/error3.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/error4.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/error5.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/error6.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/audio/error7.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_about.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_background_music.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_certificate.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_credits.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_key_error_sound.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_theme.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_user_profile.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_user_progress.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/settings.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/auth/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/auth/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/services/DatabaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/services/DatabaseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/audio/error.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/audio/error1.mp3" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,7 +64,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="generate-certificate" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -68,44 +102,44 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.TMK Typing.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "#5 on generate-certificate",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/JavaProjects/TMKTypingTutor/src/main/resources/images",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.TMK Typing.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;setting&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/JavaProjects/TMKTypingTutor/src/main/resources/audio&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\JavaProjects\TMKTypingTutor\src\main\resources\audio" />
       <recent name="D:\JavaProjects\TMKTypingTutor\src\main\resources\images" />
       <recent name="D:\JavaProjects\TMKTypingTutor\src\main\resources" />
       <recent name="D:\JavaProjects\TMKTypingTutor\src\main\resources\css" />
       <recent name="D:\JavaProjects\TMKTypingTutor\src\main\resources\fonts" />
-      <recent name="C:\AndroiodProjects\TMKTypingTutor\src\main\resources\audio" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\JavaProjects\TMKTypingTutor\src\main\resources\layout" />
@@ -223,6 +257,7 @@
       <workItem from="1759576349291" duration="4766000" />
       <workItem from="1759583687314" duration="3976000" />
       <workItem from="1759587749852" duration="1701000" />
+      <workItem from="1759642375677" duration="1943000" />
     </task>
     <task id="LOCAL-00001" summary="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!">
       <option name="closed" value="true" />
@@ -547,7 +582,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="false" />
-    <MESSAGE value="Added - Ability to type with English keyboard!&#10;Issue - In English, when Typing s or a that are no match with the toTypeWord, some characters are deleted unexpectedly!&#10;Issue - Using shn_sil keyboard to type is sill not working properly when typing ေ &amp; ႄ" />
     <MESSAGE value="Fix - Error typing with Shan Keyboard!&#10;Modified - Combobox Style" />
     <MESSAGE value="Added - Dynamic Keyboard Creation approach. This is to be able to adapt to other language!&#10;Added - WPM, AWPM, ACCURACY, MISTYPE labels!&#10;Added - MODE (EASY, INTERMEDIATE)&#10;Modified - Next &amp; Previous buttons!" />
     <MESSAGE value="2.3 version. Almost finished! 95% DONE!!!" />
@@ -572,6 +606,7 @@
     <MESSAGE value="Change summary's icon colors to match theme color!" />
     <MESSAGE value="Adding user profile and cerficate page." />
     <MESSAGE value="Adding user progress for each lesson" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding user progress for each lesson" />
+    <MESSAGE value="Clean the project.&#10;Re-design the certificate." />
+    <option name="LAST_COMMIT_MESSAGE" value="Clean the project.&#10;Re-design the certificate." />
   </component>
 </project>

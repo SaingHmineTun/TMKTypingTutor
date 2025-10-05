@@ -13,12 +13,13 @@ import java.util.List;
 public class UserService {
 
     public static void saveUser(User user) {
-        String sql = "INSERT INTO users(username, password) VALUES(?,?)";
+        String sql = "INSERT INTO users(username, displayName, password) VALUES(?,?,?)";
 
         try (Connection conn = DatabaseService.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getUsername());
-            pstmt.setString(2, user.getPassword());
+            pstmt.setString(2, user.getDisplayName());
+            pstmt.setString(3, user.getPassword());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -38,6 +39,7 @@ public class UserService {
                 return new User(
                         rs.getInt("id"),
                         rs.getString("username"),
+                        rs.getString("displayName"),
                         rs.getString("password"),
                         rs.getInt("theme"),
                         rs.getInt("lesson"),
@@ -64,6 +66,7 @@ public class UserService {
                 return new User(
                         rs.getInt("id"),
                         rs.getString("username"),
+                        rs.getString("displayName"),
                         rs.getString("password"),
                         rs.getInt("theme"),
                         rs.getInt("lesson"),
@@ -89,6 +92,7 @@ public class UserService {
                 users.add(new User(
                         rs.getInt("id"),
                         rs.getString("username"),
+                        rs.getString("displayName"),
                         rs.getString("password"),
                         rs.getInt("theme"),
                         rs.getInt("lesson"),
@@ -103,16 +107,17 @@ public class UserService {
     }
 
     public static void updateUser(User user) {
-        String sql = "UPDATE users SET theme = ?, lesson = ?, level = ?, keyboard = ? WHERE id = ?";
+        String sql = "UPDATE users SET displayName = ?, theme = ?, lesson = ?, level = ?, keyboard = ? WHERE id = ?";
 
         try (Connection conn = DatabaseService.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, user.getTheme());
-            pstmt.setInt(2, user.getLesson());
-            pstmt.setInt(3, user.getLevel());
-            pstmt.setInt(4, user.getKeyboard());
-            pstmt.setInt(5, user.getId());
+            pstmt.setString(1, user.getDisplayName());
+            pstmt.setInt(2, user.getTheme());
+            pstmt.setInt(3, user.getLesson());
+            pstmt.setInt(4, user.getLevel());
+            pstmt.setInt(5, user.getKeyboard());
+            pstmt.setInt(6, user.getId());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
