@@ -4,7 +4,6 @@ import it.saimao.tmk_typing_tutor.model.Profile;
 import it.saimao.tmk_typing_tutor.model.Theme;
 import it.saimao.tmk_typing_tutor.model.User;
 import it.saimao.tmk_typing_tutor.services.LessonProgressService;
-import it.saimao.tmk_typing_tutor.services.ProgressService;
 import it.saimao.tmk_typing_tutor.services.UserService;
 import it.saimao.tmk_typing_tutor.utils.Toast;
 import javafx.collections.FXCollections;
@@ -70,6 +69,7 @@ public class SettingsController implements Initializable {
     private TableColumn<Profile, String> tcProgress;
     private TableColumn<Profile, Button> tcCertificate;
     private TableColumn<Profile, Button> tcDetails;
+    private TableColumn<Profile, Button> tcReset;
 
     // Theme Tab
     private ListView<Theme> lvThemes;
@@ -195,6 +195,10 @@ public class SettingsController implements Initializable {
             tvProgress = (TableView<Profile>) node;
         }
 
+        node = tabContent.lookup("#btnResetAll");
+        if (node instanceof Button btn)
+            btn.setOnAction(event -> resetAllProgress());
+
         // Initializetablecolumnsonly ifelementsarefound
         if (tvProgress != null) {
             // Get the columnsfromthetableview
@@ -203,21 +207,50 @@ public class SettingsController implements Initializable {
                 tcProgress = (TableColumn<Profile, String>) tvProgress.getColumns().get(1);
                 tcCertificate = (TableColumn<Profile, Button>) tvProgress.getColumns().get(2);
                 tcDetails = (TableColumn<Profile, Button>) tvProgress.getColumns().get(3);
+                tcReset = (TableColumn<Profile, Button>) tvProgress.getColumns().get(4);
 
                 tcLevel.setCellValueFactory(new PropertyValueFactory<>("levelName"));
                 tcProgress.setCellValueFactory(new PropertyValueFactory<>("progress"));
                 tcCertificate.setCellValueFactory(new PropertyValueFactory<>("certificateButton"));
                 tcDetails.setCellValueFactory(new PropertyValueFactory<>("detailsButton"));
+                tcReset.setCellValueFactory(new PropertyValueFactory<>("resetButton"));
 
                 // Applyspecificstyles to columns
                 tcLevel.getStyleClass().add("text-column");
                 tcProgress.getStyleClass().add("text-column");
                 tcCertificate.getStyleClass().add("button-column");
                 tcDetails.getStyleClass().add("button-column");
+                tcReset.getStyleClass().add("button-column");
             }
 
             loadProgress();
         }
+    }
+
+
+    private void resetAllProgress() {
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("ResetAll Progress");
+        confirmAlert.setHeaderText("Reset All Progress");
+        confirmAlert.setContentText("Are you sure you want toreset allprogress? This action cannot be undone.");
+
+        // Apply theme to the alert dialog
+        Theme theme = Theme.fromIndex(user.getTheme());
+        String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
+        confirmAlert.getDialogPane().getStylesheets().add(stylesheet);
+
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                // Delete progress for all levels usingLessonProgressService since weremoved theprogress table
+                LessonProgressService.deleteAllProgress(user.getId());
+
+                // Reload progress to reflect changes
+                loadProgress();
+
+                // Showsuccess message
+                Toast.showToast(mainController.getStage(), "All progress has been reset successfully.", 2000);
+            }
+        });
     }
 
     private void initThemeTab(AnchorPane tabContent) {
@@ -523,42 +556,68 @@ public class SettingsController implements Initializable {
 
         ObservableList<Profile> profiles = FXCollections.observableArrayList();
         for (int i = 0; i < 4; i++) {// Assuming 4 levels
-            int completed = ProgressService.getCompletedLessonCount(user.getId(), i);
+            int completed = LessonProgressService.getCompletedLessonCount(user.getId(), i);
             int total = lessonsPerLevel[i];
             Profile profile = new Profile("Level " + (i + 1), completed + "/" + total);
             profile.setLevelIndex(i);// Store level indexforlateruse
-            if (completed >= total) {
+            final int levelIndex = i;
 
+
+            if (completed >= total) {
                 // Forcompletedlevels, enable both GenerateandDetailsbuttons
                 profile.getCertificateButton().setDisable(false);
                 profile.getCertificateButton().setText("Generate");
-                final int levelIndex = i;
-
-                profile.getCertificateButton().setDisable(false);
                 profile.getCertificateButton().setOnAction(event -> showCertificate(levelIndex));
+            }
 
-                profile.getDetailsButton().setDisable(false);
-                profile.getDetailsButton().setOnAction(event -> showDetailedProgress(levelIndex));
-            } else if (completed > 0) {
-                // Forpartiallycompletedlevels, enable onlyDetailsbutton
+            if (completed > 0) {
+                // For partially completed levels, enable Details button and Reset button as well
                 profile.getDetailsButton().setText("Details");
                 profile.getDetailsButton().setDisable(false);
-                final int levelIndex = i;
                 profile.getDetailsButton().setOnAction(event -> showDetailedProgress(levelIndex));
+
+                profile.getResetButton().setDisable(false);
+                profile.getResetButton().setOnAction(event -> {
+                    resetLevelProgress(levelIndex);
+                    loadProgress();
+                });
             }
             profiles.add(profile);
         }
-        tvProgress.
-
-                setItems(profiles);
+        tvProgress.setItems(profiles);
     }
+
+    private void resetLevelProgress(int levelIndex) {
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Reset Level Progress");
+        confirmAlert.setHeaderText("Reset Level Progress");
+        confirmAlert.setContentText("Are you sure you want to reset progress for Level " + (levelIndex + 1) + "? This action cannot be undone.");
+
+        // Apply theme to the alert dialog
+        Theme theme = Theme.fromIndex(user.getTheme());
+        String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
+        confirmAlert.getDialogPane().getStylesheets().add(stylesheet);
+
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                // Delete progress for thislevel using LessonProgressService since we removedthe progresstableLessonProgressService.deleteLessonProgressForLevel(user.getId(), levelIndex);
+
+                // Reload progress to reflect changes
+                loadProgress();
+
+                // Show success message
+                Toast.showToast(mainController.getStage(), "Progress for Level " + (levelIndex + 1) + " has been reset successfully.", 2000);
+            }
+        });
+    }
+
 
     private void checkCertificateStatus() {
         if (user == null) return;
 
         boolean allLevelsCompleted = true;
         for (int i = 0; i < 3; i++) {
-            int completed = ProgressService.getCompletedLessonCount(user.getId(), i);
+            int completed = LessonProgressService.getCompletedLessonCount(user.getId(), i);
             int total = lessonsPerLevel[i];
             if (completed < total) {
                 allLevelsCompleted = false;
@@ -770,7 +829,7 @@ public class SettingsController implements Initializable {
         // Check if all level sare completed
         boolean allLevelsCompleted = true;
         for (int i = 0; i < 3; i++) {
-            int completed = ProgressService.getCompletedLessonCount(user.getId(), i);
+            int completed = LessonProgressService.getCompletedLessonCount(user.getId(), i);
             int total = lessonsPerLevel[i];
             if (completed < total) {
                 allLevelsCompleted = false;
@@ -866,7 +925,7 @@ public class SettingsController implements Initializable {
             stage.setScene(scene);
 
             LessonProgressController controller = loader.getController();
-            controller.initData(user.getId(), levelIndex);
+            controller.initData(user, levelIndex);
 
             stage.show();
         } catch (IOException e) {

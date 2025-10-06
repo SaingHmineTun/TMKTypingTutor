@@ -6,7 +6,6 @@ import it.saimao.tmk_typing_tutor.key_map.SIL_KeyMap;
 import it.saimao.tmk_typing_tutor.key_map.Yunghkio_KeyMap;
 import it.saimao.tmk_typing_tutor.model.*;
 import it.saimao.tmk_typing_tutor.services.LessonProgressService;
-import it.saimao.tmk_typing_tutor.services.ProgressService;
 import it.saimao.tmk_typing_tutor.services.UserService;
 import it.saimao.tmk_typing_tutor.utils.Perc;
 import it.saimao.tmk_typing_tutor.utils.Utils;
@@ -30,6 +29,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -136,7 +136,7 @@ public class MainController implements Initializable {
 
     private SettingsController settingsController;
 
-    // Static method to get the main controller instance
+    // Static method to get the main controllerinstance
     public static MainController getInstance() {
         return instance;
     }
@@ -158,9 +158,9 @@ public class MainController implements Initializable {
 // Select the level
                 cbLevel.getSelectionModel().select(levelIndex);
 
-                // Wait a bit for the level change to propagate, then select the lesson
+                // Wait a bit for the level change to propagate,then select the lesson
                 Platform.runLater(() -> {
-                    // Ensure the lessons areloaded
+                    // Ensurethe lessons areloaded
                     if (cbLessons.getItems().size() > lessonIndex) {
                         cbLessons.getSelectionModel().select(lessonIndex);
                     }
@@ -184,10 +184,10 @@ public class MainController implements Initializable {
                 cbTheme.getSelectionModel().select(loggedInUser.getTheme());
                 cbKeyboard.getSelectionModel().select(loggedInUser.getKeyboard());
 
-                // Play background music if user has selected one (only when not already playing)
+                //Play background music if user has selected one (only when not already playing)
                 if (loggedInUser.getBackgroundMusic() > 0) {
                     String backgroundMusicFile = "bgsound" + loggedInUser.getBackgroundMusic() + ".mp3";
-                    // Checkif mp3 exists, otherwise try m4a
+                    // Checkif mp3 exists, otherwise trym4a
                     var musicURL = getClass().getResource("/audio/" + backgroundMusicFile);
                     if (musicURL == null && backgroundMusicFile.endsWith(".mp3")) {
                         backgroundMusicFile = "bgsound" + loggedInUser.getBackgroundMusic() + ".m4a";
@@ -216,12 +216,12 @@ public class MainController implements Initializable {
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.APPLICATION_MODAL);
             dialogStage.setTitle("Loading");
-            
+
             Scene scene = new Scene(loader.load());
             dialogStage.setScene(scene);
             dialogStage.setResizable(false);
             dialogStage.show();
-            
+
             return dialogStage;
         } catch (IOException e) {
             e.printStackTrace();
@@ -232,8 +232,7 @@ public class MainController implements Initializable {
 
     private void resetLevels(int keyboard) {
         levelList.clear();
-        if (keyboard == 3)
-            levelList.addAll(normalLevelList);
+        if (keyboard == 3) levelList.addAll(normalLevelList);
         else {
             levelList.addAll(namkhoneLevelList);
         }
@@ -694,12 +693,13 @@ public class MainController implements Initializable {
             if (practiceText.length() == tfView.getText().length()) {
                 end = true;
                 clearToTypeValues();
-                ProgressService.saveProgress(loggedInUser.getId(), cbLevel.getSelectionModel().getSelectedIndex(), cbLessons.getSelectionModel().getSelectedIndex());
+                //Save progress using lesson_progress table instead of the redundant progress table
+                LessonProgressService.saveProgress(loggedInUser.getId(), cbLevel.getSelectionModel().getSelectedIndex(), cbLessons.getSelectionModel().getSelectedIndex());
 
                 // Save detailed lesson progress
                 saveLessonProgress();
 
-                String title = cbLevel.getValue() + " : " + cbLessons.getValue().getTitle();
+                String title = cbLevel.getValue() + " :" + cbLessons.getValue().getTitle();
                 SummaryController summaryControllerDialog = new SummaryController(this, primaryStage);
                 summaryControllerDialog.showDialog(title, wpm, accuracy, misTyped, awpm);
                 return;
@@ -708,7 +708,7 @@ public class MainController implements Initializable {
         }
 
         if (indexOfPractice < tfView.getText().length()) {
-            // Know which value to type next
+            // Knowwhich value to type next
             String valueToType = testText.substring(indexOfPractice, indexOfPractice + 1);
             if (keyboard == 3) {
                 // Show  ိံ key
@@ -737,7 +737,7 @@ public class MainController implements Initializable {
                     }
                 }
 
-                // Show ႁႂ် key
+// Show ႁႂ် key
                 if (valueToType.equals("ႁ")) {
                     try {
                         String afterTyping2 = testText.substring(indexOfPractice + 2, indexOfPractice + 3);
@@ -926,7 +926,7 @@ public class MainController implements Initializable {
                 errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
                 errorPlayer.play();
             } else {
-                // Fallback to default error sound
+                // Fallback todefault error sound
                 soundURL = getClass().getResource("/audio/error1.mp3");
                 if (errorPlayer == null && soundURL != null) {
                     errorPlayer = new MediaPlayer(new Media(soundURL.toString()));
@@ -1199,5 +1199,9 @@ public class MainController implements Initializable {
     public ComboBox<Theme> getCbTheme() {
 
         return cbTheme;
+    }
+
+    public Window getStage() {
+        return root.getScene().getWindow();
     }
 }

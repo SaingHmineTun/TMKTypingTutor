@@ -9,7 +9,7 @@ import java.util.List;
 public class UserService {
 
     public static void saveUser(User user) {
-        String sql = "INSERT INTO users(username, displayName, password, background_music, error_sound) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO users (username, displayName, password, background_music, error_sound) VALUES(?,?,?,?,?)";
 
         try (Connection conn = DatabaseService.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

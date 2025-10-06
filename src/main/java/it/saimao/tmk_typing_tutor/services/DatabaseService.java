@@ -5,11 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class DatabaseService {
 
@@ -20,7 +16,7 @@ public class DatabaseService {
             String dbDir = System.getProperty("user.home") + File.separator + ".tmk_typing_tutor";
             Path dbDirPath = Paths.get(dbDir);
             if (Files.notExists(dbDirPath)) {
-             Files.createDirectories(dbDirPath);
+                Files.createDirectories(dbDirPath);
             }
             String dbPath = dbDir + File.separator + "typing_tutor.db";
             DB_URL = "jdbc:sqlite:" + dbPath;
@@ -29,7 +25,7 @@ public class DatabaseService {
         }
     }
 
- public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException {
         try {
             Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException e) {
@@ -39,70 +35,40 @@ public class DatabaseService {
     }
 
     public static void initializeDatabase() {
-        String createUserTableSql= "CREATE TABLE IF NOT EXISTS users (\n"
-                + " id integer PRIMARY KEY AUTOINCREMENT,\n"
-                + " username text NOT NULL UNIQUE,\n"
-                + " displayName text NOT NULL DEFAULT '',\n"
-                + " password text NOT NULL,\n"
-                + " theme INTEGER DEFAULT 0,\n"
-                + " lesson INTEGER DEFAULT 0,\n"
-                + " level INTEGER DEFAULT 0,\n"
-                + " keyboard INTEGER DEFAULT 0,\n"
-                + " background_music INTEGER DEFAULT 0,\n"
-                + " error_sound INTEGER DEFAULT 0\n"
-                + ");";
+        String createUserTableSql = "CREATE TABLE IF NOT EXISTS users (\n" + " id integer PRIMARY KEY AUTOINCREMENT,\n" + " username text NOT NULL UNIQUE,\n" + " displayName text NOT NULL DEFAULT '',\n" + " password text NOT NULL,\n" + " theme INTEGER DEFAULT 0,\n" + " lesson INTEGER DEFAULT 0,\n" + " level INTEGER DEFAULT 0,\n" + " keyboard INTEGER DEFAULT 0,\n" + " background_music INTEGER DEFAULT 0,\n" + " error_sound INTEGER DEFAULT 0\n" + ");";
 
-        String createProgressTableSql = "CREATE TABLE IF NOT EXISTS progress (\n"
-                + " id integer PRIMARY KEY AUTOINCREMENT,\n"
-                + " user_id INTEGER NOT NULL,\n"
-                + " level_index INTEGER NOT NULL,\n"
-                + " lesson_index INTEGER NOT NULL,\n"
-                + " FOREIGN KEY (user_id) REFERENCES users (id),\n"
-                + " UNIQUE(user_id, level_index, lesson_index)\n"
-                + ");";
-                
-        String createLessonProgressTableSql = "CREATE TABLE IF NOT EXISTS lesson_progress (\n"
-                + " id integer PRIMARY KEY AUTOINCREMENT,\n"
-                + " user_id INTEGER NOT NULL,\n"
-                + " level_index INTEGER NOT NULL,\n"
-                + " lesson_index INTEGER NOT NULL,\n"
-                + " wpm INTEGERNOTNULL,\n"
-                + " accuracy REAL NOT NULL,\n"
-                + " mistakes INTEGER NOT NULL,\n"
-                + " FOREIGN KEY (user_id) REFERENCES users (id),\n"
-                + " UNIQUE(user_id, level_index, lesson_index)\n"
-                + ");";
+        //Removedthe progress table since it's redundant with lesson_progress table
+        String createLessonProgressTableSql = "CREATE TABLE IF NOT EXISTS lesson_progress (\n" + " id integer PRIMARY KEY AUTOINCREMENT,\n" + " user_id INTEGER NOT NULL,\n" + " level_index INTEGER NOT NULL,\n" + " lesson_index INTEGER NOT NULL,\n" + " wpm INTEGER NOT NULL,\n" + " accuracy REAL NOT NULL,\n" + " mistakes INTEGER NOT NULL,\n" + " FOREIGN KEY (user_id) REFERENCES users (id),\n" + " UNIQUE(user_id,level_index, lesson_index)\n" + ");";
 
-        try (Connection conn=getConnection();
-             Statement stmt = conn.createStatement()) {
+        try (Connection conn = getConnection(); Statement stmt = conn.createStatement()) {
             stmt.execute(createUserTableSql);
-            stmt.execute(createProgressTableSql);
+            //Only create the lesson_progress table, not the redundant progress table
             stmt.execute(createLessonProgressTableSql);
-            System.out.println("Database tables created successfully");
+            System.out.println("Databasetables created successfully");
 
             if (!columnExists(conn, "users", "theme")) {
-                stmt.execute("ALTER TABLEusers ADD COLUMN theme INTEGER DEFAULT 0");
-           }
+                stmt.execute("ALTER TABLE usersADD COLUMN theme INTEGER DEFAULT 0");
+            }
             if (!columnExists(conn, "users", "lesson")) {
                 stmt.execute("ALTER TABLE users ADD COLUMN lesson INTEGER DEFAULT 0");
             }
             if (!columnExists(conn, "users", "level")) {
                 stmt.execute("ALTER TABLE users ADD COLUMN level INTEGER DEFAULT 0");
             }
-            if(!columnExists(conn, "users", "keyboard")) {
+            if (!columnExists(conn, "users", "keyboard")) {
                 stmt.execute("ALTER TABLE users ADD COLUMN keyboard INTEGER DEFAULT 0");
             }
 
-            if(!columnExists(conn, "users", "displayName")) {
+            if (!columnExists(conn, "users", "displayName")) {
                 stmt.execute("ALTER TABLE users ADD COLUMN displayName text NOT NULL DEFAULT ''");
             }
-            
+
             // 添加新列
-            if(!columnExists(conn, "users", "background_music")) {
+            if (!columnExists(conn, "users", "background_music")) {
                 stmt.execute("ALTER TABLE users ADD COLUMN background_music INTEGER DEFAULT 0");
             }
-            
-            if(!columnExists(conn, "users", "error_sound")) {
+
+            if (!columnExists(conn, "users", "error_sound")) {
                 stmt.execute("ALTER TABLE users ADD COLUMN error_sound INTEGER DEFAULT 0");
             }
 
@@ -110,9 +76,9 @@ public class DatabaseService {
             System.out.println("Error initializing database: " + e.getMessage());
             e.printStackTrace();
         }
-   }
+    }
 
-   private static boolean columnExists(Connection connection, String tableName, String columnName) throws SQLException {
+    private static boolean columnExists(Connection connection, String tableName, String columnName) throws SQLException {
         ResultSet rs = connection.getMetaData().getColumns(null, null, tableName, columnName);
         return rs.next();
     }

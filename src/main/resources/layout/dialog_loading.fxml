@@ -4,9 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #ffffff;" stylesheets="@../css/light_theme.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" prefHeight="180.0" prefWidth="300.0" spacing="20.0" style="-fx-background-color: #ffffff;" stylesheets="@../css/light_theme.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
 
-    <Label style="-fx-font-weight: regular;" text="Loading User Data" />
+    <Label style="-fx-font-weight: bold;" text="Loading User Data" />
 
     <ProgressIndicator prefWidth="200.0" style="-fx-accent: #4a90e2;" />
    <padding>

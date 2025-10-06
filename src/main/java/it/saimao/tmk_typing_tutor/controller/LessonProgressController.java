@@ -5,7 +5,6 @@ import it.saimao.tmk_typing_tutor.model.LessonProgress;
 import it.saimao.tmk_typing_tutor.model.Theme;
 import it.saimao.tmk_typing_tutor.model.User;
 import it.saimao.tmk_typing_tutor.services.LessonProgressService;
-import it.saimao.tmk_typing_tutor.services.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,7 +22,7 @@ import java.util.ResourceBundle;
 public class LessonProgressController implements Initializable {
 
     @FXML
-    private TableView<LessonProgress>tvLessonProgress;
+    private TableView<LessonProgress> tvLessonProgress;
     @FXML
     private TableColumn<LessonProgress, String> tcLesson; // Changed from Integer to String
     @FXML
@@ -39,9 +38,8 @@ public class LessonProgressController implements Initializable {
     @FXML
     private Button btnClose;
 
-    private int userId;
     private int levelIndex;
-    private String[] levelNames = {"Level 1:Basic Shan Typing", "Level 2: Numbers and Punctuation", "Level 3: Advanced Shan Typing", "Level 4: Complex Texts"};
+    private String[] levelNames = {"Level 1: Basic Shan Typing", "Level 2: Numbers and Punctuation", "Level 3: Advanced Shan Typing", "Level 4: Complex Texts"};
     private User user;
     private List<Lesson> lessonList; // Added to store lessons
 
@@ -69,10 +67,10 @@ public class LessonProgressController implements Initializable {
         });
         tcMistakes.setCellValueFactory(new PropertyValueFactory<>("mistakes"));
         tcAction.setCellValueFactory(new PropertyValueFactory<>("retryButton"));
-        
+
         // Set styling for the TableView
         tvLessonProgress.getStyleClass().add("progress-table");
-        
+
         // Apply specific styles to columns
         tcLesson.getStyleClass().add("text-column");
         tcWPM.getStyleClass().add("text-column");
@@ -81,10 +79,9 @@ public class LessonProgressController implements Initializable {
         tcAction.getStyleClass().add("button-column");
     }
 
-    public void initData(int userId, int levelIndex) {
-        this.userId =userId;
+    public void initData(User user, int levelIndex) {
         this.levelIndex = levelIndex;
-        this.user = UserService.getUserById(userId);
+        this.user = user;
         lblLevel.setText(levelNames[levelIndex]);
         loadLessons(); // Load lessons first
         loadLessonProgress();
@@ -99,7 +96,7 @@ public class LessonProgressController implements Initializable {
         if (user != null && btnClose.getScene() != null) {
             Theme theme = Theme.fromIndex(user.getTheme());
             String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
-            
+
             Scene scene = btnClose.getScene();
             // Apply the user's selected theme
             scene.getStylesheets().clear();
@@ -110,11 +107,11 @@ public class LessonProgressController implements Initializable {
     }
 
     private void loadLessonProgress() {
-        System.out.println("Loading lesson progress for User=" + userId + ", Level=" + levelIndex);
-        List<LessonProgress> lessonProgressList = LessonProgressService.getAllLessonProgressForLevel(userId, levelIndex);
+        System.out.println("Loading lesson progress for User=" + user.getId() + ", Level=" + levelIndex);
+        List<LessonProgress> lessonProgressList = LessonProgressService.getAllLessonProgressForLevel(user.getId(), levelIndex);
         System.out.println("Retrieved " + lessonProgressList.size() + " records");
         ObservableList<LessonProgress> observableList = FXCollections.observableArrayList(lessonProgressList);
-        
+
         // Add retry buttons to each lesson progress and set lesson titles
         for (LessonProgress progress : observableList) {
             // Set the lesson title based on the lesson index
@@ -124,7 +121,7 @@ public class LessonProgressController implements Initializable {
             } else {
                 progress.setLessonTitle("Lesson " + (progress.getLessonIndex() + 1));
             }
-            
+
             Button retryButton = new Button("Retry");
             retryButton.setOnAction(event -> retryLesson(progress));
             progress.setRetryButton(retryButton);
@@ -137,11 +134,11 @@ public class LessonProgressController implements Initializable {
         // Close the current dialog
         Stage currentStage = (Stage) btnClose.getScene().getWindow();
         currentStage.close();
-        
+
         // Navigate to the lesson in the main application
         navigateToLessonInMainApplication(progress.getLevelIndex(), progress.getLessonIndex());
     }
-    
+
     private void navigateToLessonInMainApplication(int levelIndex, int lessonIndex) {
         try {
             // Get the main controller instance

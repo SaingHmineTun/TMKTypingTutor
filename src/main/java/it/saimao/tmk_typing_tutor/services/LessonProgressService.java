@@ -17,30 +17,55 @@ import java.util.List;
 
 public class LessonProgressService {
 
-    public static void saveLessonProgress(LessonProgress lessonProgress) {
+    public static void saveProgress(int userId, int levelIndex, int lessonIndex) {
         String sql = "INSERT OR REPLACE INTO lesson_progress(user_id, level_index, lesson_index, wpm, accuracy, mistakes) VALUES(?,?,?,?,?,?)";
+
+        try (Connection conn = DatabaseService.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, userId);
+            pstmt.setInt(2, levelIndex);
+            pstmt.setInt(3, lessonIndex);
+            pstmt.setInt(4, 0); // Default WPM
+            pstmt.setDouble(5, 0.0); // Default accuracy
+            pstmt.setInt(6, 0); // Default mistakes
+
+            // Add debugging output
+            System.out.println("Saving progress: User=" + userId +
+                    ", Level=" + levelIndex +
+                    ", Lesson=" + lessonIndex);
+
+            int result = pstmt.executeUpdate();
+            System.out.println("Rows affected: " + result);
+        } catch (SQLException e) {
+            System.out.println("Errorsaving progress: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveLessonProgress(LessonProgress lessonProgress) {
+        String sql = "INSERT OR REPLACE INTO lesson_progress (user_id, level_index, lesson_index, wpm, accuracy, mistakes) VALUES(?,?,?,?,?,?)";
 
         try (Connection conn = DatabaseService.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, lessonProgress.getUserId());
             pstmt.setInt(2, lessonProgress.getLevelIndex());
-           pstmt.setInt(3, lessonProgress.getLessonIndex());
+            pstmt.setInt(3, lessonProgress.getLessonIndex());
             pstmt.setInt(4, lessonProgress.getWpm());
             pstmt.setDouble(5, lessonProgress.getAccuracy());
             pstmt.setInt(6, lessonProgress.getMistakes());
-            
-            // Add debugging output
-            System.out.println("Saving lesson progress: User="+ lessonProgress.getUserId() + 
-                             ", Level=" + lessonProgress.getLevelIndex() + 
-                             ", Lesson=" + lessonProgress.getLessonIndex() + 
-                             ", WPM=" + lessonProgress.getWpm() + 
-                            ", Accuracy=" + lessonProgress.getAccuracy() + 
-                             ", Mistakes=" +lessonProgress.getMistakes());
-            
+
+// Add debugging output
+            System.out.println("Saving lesson progress: User=" + lessonProgress.getUserId() +
+                    ", Level=" + lessonProgress.getLevelIndex() +
+                    ", Lesson=" + lessonProgress.getLessonIndex() +
+                    ", WPM=" + lessonProgress.getWpm() +
+                    ", Accuracy=" + lessonProgress.getAccuracy() +
+                    ", Mistakes=" + lessonProgress.getMistakes());
+
             int result = pstmt.executeUpdate();
             System.out.println("Rows affected: " + result);
         } catch (SQLException e) {
-            System.out.println("Error saving lesson progress: " + e.getMessage());
+            System.out.println("Errorsaving lesson progress: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -52,13 +77,13 @@ public class LessonProgressService {
         try (Connection conn = DatabaseService.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-           pstmt.setInt(1, userId);
+            pstmt.setInt(1, userId);
             pstmt.setInt(2, levelIndex);
             pstmt.setInt(3, lessonIndex);
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                lessonProgress =new LessonProgress();
+                lessonProgress = new LessonProgress();
                 lessonProgress.setId(rs.getInt("id"));
                 lessonProgress.setUserId(rs.getInt("user_id"));
                 lessonProgress.setLevelIndex(rs.getInt("level_index"));
@@ -67,7 +92,7 @@ public class LessonProgressService {
                 lessonProgress.setAccuracy(rs.getDouble("accuracy"));
                 lessonProgress.setMistakes(rs.getInt("mistakes"));
             }
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return lessonProgress;
@@ -82,10 +107,10 @@ public class LessonProgressService {
 
             pstmt.setInt(1, userId);
             pstmt.setInt(2, levelIndex);
-            
-            // Add debugging output
-            System.out.println("Fetching lesson progress for User=" +userId + ", Level=" + levelIndex);
-            
+
+// Add debugging output
+            System.out.println("Fetchinglesson progress for User=" + userId + ", Level=" + levelIndex);
+
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -93,32 +118,31 @@ public class LessonProgressService {
                 lessonProgress.setId(rs.getInt("id"));
                 lessonProgress.setUserId(rs.getInt("user_id"));
                 lessonProgress.setLevelIndex(rs.getInt("level_index"));
-lessonProgress.setLessonIndex(rs.getInt("lesson_index"));
+                lessonProgress.setLessonIndex(rs.getInt("lesson_index"));
                 lessonProgress.setWpm(rs.getInt("wpm"));
                 lessonProgress.setAccuracy(rs.getDouble("accuracy"));
                 lessonProgress.setMistakes(rs.getInt("mistakes"));
-                
+
 // Add debugging output
-                System.out.println("Found lesson progress: ID=" + lessonProgress.getId() + 
-                                 ", User=" + lessonProgress.getUserId() + 
-                                 ", Level=" + lessonProgress.getLevelIndex() + 
-                                 ", Lesson=" + lessonProgress.getLessonIndex() + 
-                                 ", WPM=" + lessonProgress.getWpm() + 
-                                 ", Accuracy=" + lessonProgress.getAccuracy() + 
-                                 ", Mistakes=" + lessonProgress.getMistakes());
-                
+                System.out.println("Found lesson progress: ID=" + lessonProgress.getId() +
+                        ", User=" + lessonProgress.getUserId() +
+                        ", Level=" + lessonProgress.getLevelIndex() +
+                        ", Lesson=" + lessonProgress.getLessonIndex() +
+                        ", WPM=" + lessonProgress.getWpm() +
+                        ", Accuracy=" + lessonProgress.getAccuracy() + ", Mistakes=" + lessonProgress.getMistakes());
+
                 lessonProgressList.add(lessonProgress);
             }
         } catch (SQLException e) {
-            System.out.println("Error fetching lesson progress: "+e.getMessage());
+            System.out.println("Error fetching lesson progress: " + e.getMessage());
             e.printStackTrace();
         }
-        System.out.println("Total records found: " + lessonProgressList.size());
+        System.out.println("Total recordsfound: " + lessonProgressList.size());
         return lessonProgressList;
     }
 
     public static double getAverageWpmForLevel(int userId, int levelIndex) {
-        String sql = "SELECT AVG(wpm) as average_wpm FROM lesson_progress WHERE user_id = ? AND level_index = ?";
+        String sql = "SELECT AVG(wpm) as average_wpm FROM lesson_progress WHERE user_id = ?AND level_index = ?";
         double averageWpm = 0.0;
 
         try (Connection conn = DatabaseService.getConnection();
@@ -126,9 +150,9 @@ lessonProgress.setLessonIndex(rs.getInt("lesson_index"));
 
             pstmt.setInt(1, userId);
             pstmt.setInt(2, levelIndex);
-            ResultSet rs= pstmt.executeQuery();
+            ResultSet rs = pstmt.executeQuery();
 
-            if(rs.next()) {
+            if (rs.next()) {
                 averageWpm = rs.getDouble("average_wpm");
             }
         } catch (SQLException e) {
@@ -136,11 +160,11 @@ lessonProgress.setLessonIndex(rs.getInt("lesson_index"));
         }
         return averageWpm;
     }
-    
+
     public static List<Lesson> getLessonsForLevel(int levelIndex) {
-List<Lesson> lessonList = new ArrayList<>();
+        List<Lesson> lessonList = new ArrayList<>();
         InputStream is = null;
-        
+
         try {
             if (levelIndex == 0) {
                 is = LessonProgressService.class.getResourceAsStream("/assets/lesson_1.csv");
@@ -151,7 +175,7 @@ List<Lesson> lessonList = new ArrayList<>();
             } else if (levelIndex == 3) {
                 is = LessonProgressService.class.getResourceAsStream("/assets/lesson_4.csv");
             }
-            
+
             if (is != null) {
                 try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
                     String line;
@@ -171,29 +195,74 @@ List<Lesson> lessonList = new ArrayList<>();
             System.out.println("Error loading lessons for level " + levelIndex + ": " + e.getMessage());
             e.printStackTrace();
         }
-        
+
         return lessonList;
     }
-    
-public static boolean isUserLevelCompleted(int userId, int levelIndex) {
+
+    public static void deleteLessonProgressForLevel(int userId, int levelIndex) {
+        String sql = "DELETE FROM lesson_progress WHERE user_id = ? AND level_index =?";
+
+        try (Connection conn = DatabaseService.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, userId);
+            pstmt.setInt(2, levelIndex);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void deleteAllProgress(int userId) {
+        String sql = "DELETE FROM lesson_progress WHERE user_id = ?";
+
+        try (Connection conn = DatabaseService.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, userId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static int getCompletedLessonCount(int userId, int levelIndex) {
+        String sql = "SELECT COUNT(DISTINCT lesson_index) FROM lesson_progress WHERE user_id = ? AND level_index = ?";
+        int count = 0;
+
+        try (Connection conn = DatabaseService.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, userId);
+            pstmt.setInt(2, levelIndex);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return count;
+    }
+
+    public static boolean isUserLevelCompleted(int userId, int levelIndex) {
         // 获取该级别的总课程数
         List<Lesson> lessons = getLessonsForLevel(levelIndex);
         int totalLessons = lessons.size();
-        
+
         // 如果没有课程，则认为未完成
         if (totalLessons <= 0) {
             return false;
         }
-        
+
         // 获取用户在该级别已完成的课程数
         List<LessonProgress> completedLessons = getAllLessonProgressForLevel(userId, levelIndex);
         int completedCount = completedLessons.size();
-        
+
         // 特殊处理：对于级别0（基础级别），需要完成9节课
         if (levelIndex == 0) {
             totalLessons = 9; // 基础级别需要完成9节课
         }
-        
+
         // 检查用户是否完成了足够的课程
         return completedCount >= totalLessons;
     }
