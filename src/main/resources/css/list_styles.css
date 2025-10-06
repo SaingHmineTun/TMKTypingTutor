@@ -60,7 +60,7 @@
     -fx-border-width: 1;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
-    -fx-font-family: 'AJ 00 Regular';
+    -fx-font-family: 'AJ 00';
 }
 
 .table-view .table-column {
@@ -97,12 +97,12 @@
     -fx-font-weight: bold;
     -fx-font-size: 16;
     -fx-padding: 12 10 12 10;
-    -fx-font-family: 'AJ 00 Regular';
+    -fx-font-family: 'AJ 00';
 }
 
 .table-view .table-column .label {
     -fx-text-fill: -fx-key-color;
-    -fx-font-family: 'AJ 00 Regular';
+    -fx-font-family: 'AJ 00';
 }
 
 /* Custom styles for specific columns */

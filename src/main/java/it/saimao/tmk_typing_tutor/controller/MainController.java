@@ -141,7 +141,7 @@ public class MainController implements Initializable {
         return instance;
     }
 
-    // Method to set settings controller instance
+    // Method to setsettings controller instance
     public void setSettingsController(SettingsController settingsController) {
         this.settingsController = settingsController;
     }
@@ -160,7 +160,7 @@ public class MainController implements Initializable {
 
                 // Wait a bit for the level change to propagate, then select the lesson
                 Platform.runLater(() -> {
-                    // Ensure the lessons are loaded
+                    // Ensure the lessons areloaded
                     if (cbLessons.getItems().size() > lessonIndex) {
                         cbLessons.getSelectionModel().select(lessonIndex);
                     }
@@ -171,29 +171,62 @@ public class MainController implements Initializable {
         });
     }
 
-    public void initData(User user, Stage stage, Alert alert) {
+    public void initData(User user, Stage stage) {
         this.loggedInUser = user;
         this.primaryStage = stage;
         isInitializing = true;
+
+        var dialog = showProgressLoadingDialog();
+
         Platform.runLater(() -> {
-            cbTheme.getSelectionModel().select(loggedInUser.getTheme());
-            cbKeyboard.getSelectionModel().select(loggedInUser.getKeyboard());
+            try {
 
-            // Play background music if user has selected one (only when not already playing)
-            if (loggedInUser.getBackgroundMusic() > 0) {
-                String backgroundMusicFile = "bgsound" + loggedInUser.getBackgroundMusic() + ".mp3";
-                // Check if mp3 exists, otherwise try m4a
-                var musicURL = getClass().getResource("/audio/" + backgroundMusicFile);
-                if (musicURL == null && backgroundMusicFile.endsWith(".mp3")) {
-                    backgroundMusicFile = "bgsound" + loggedInUser.getBackgroundMusic() + ".m4a";
+                cbTheme.getSelectionModel().select(loggedInUser.getTheme());
+                cbKeyboard.getSelectionModel().select(loggedInUser.getKeyboard());
+
+                // Play background music if user has selected one (only when not already playing)
+                if (loggedInUser.getBackgroundMusic() > 0) {
+                    String backgroundMusicFile = "bgsound" + loggedInUser.getBackgroundMusic() + ".mp3";
+                    // Checkif mp3 exists, otherwise try m4a
+                    var musicURL = getClass().getResource("/audio/" + backgroundMusicFile);
+                    if (musicURL == null && backgroundMusicFile.endsWith(".mp3")) {
+                        backgroundMusicFile = "bgsound" + loggedInUser.getBackgroundMusic() + ".m4a";
+                    }
+                    playBackgroundMusic(backgroundMusicFile);
                 }
-                playBackgroundMusic(backgroundMusicFile);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (dialog != null) {
+                    dialog.close();
+                }
+                if (stage != null) {
+                    stage.show();
+                    stage.setMaximized(true);
+                }
+                isInitializing = false;
             }
-
-            alert.close();
-            stage.show();
-            stage.setMaximized(true);
         });
+    }
+
+
+    private Stage showProgressLoadingDialog() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/dialog_loading.fxml"));
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.setTitle("Loading");
+            
+            Scene scene = new Scene(loader.load());
+            dialogStage.setScene(scene);
+            dialogStage.setResizable(false);
+            dialogStage.show();
+            
+            return dialogStage;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 
@@ -231,13 +264,13 @@ public class MainController implements Initializable {
         imgMinimize.setFitHeight(Perc.getDynamicPixel(15));
         imgMinimize.setFitWidth(Perc.getDynamicPixel(15));
         cbLessons.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
-        cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + ";-fx-font-family: 'AJ 00 Regular'");
+        cbLessons.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + ";-fx-font-family: 'AJ 00'");
         cbLevel.setPrefSize(Perc.getDynamicPixel(150), Perc.getDynamicPixel(50));
-        cbLevel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + ";-fx-font-family: 'AJ 00 Regular';");
+        cbLevel.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + ";-fx-font-family: 'AJ 00';");
         cbTheme.setPrefSize(Perc.getDynamicPixel(150), Perc.getDynamicPixel(50));
-        cbTheme.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'AJ 00 Regular';");
+        cbTheme.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'AJ 00';");
         cbKeyboard.setPrefSize(Perc.getDynamicPixel(200), Perc.getDynamicPixel(50));
-        cbKeyboard.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'AJ 00 Regular'");
+        cbKeyboard.setStyle("-fx-font-size: " + Perc.getDynamicPixel(18) + "; -fx-font-family: 'AJ 00'");
         btNext.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
         btPrev.setPrefSize(Perc.getDynamicPixel(50), Perc.getDynamicPixel(50));
         tfView.setPrefHeight(Perc.getDynamicPixel(50));
@@ -514,7 +547,7 @@ public class MainController implements Initializable {
                             mustType = "ိံ";
                         }
                     }
-                    // Show  ျွ  key
+                    // Show ျွ  key
                     if (mustType.equals("ျ")) {
                         String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
                         if (afterTyping.equals("ွ")) {
@@ -534,7 +567,7 @@ public class MainController implements Initializable {
                         }
                     }
 
-                    // Showႁႂ် key
+                    //Showႁႂ် key
                     if (mustType.equals("ႁ")) {
                         try {
                             String afterTyping2 = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
@@ -853,7 +886,7 @@ public class MainController implements Initializable {
             SettingsController controller = loader.getController();
             controller.initData(loggedInUser, this);
 
-            // Set the settings controller instance
+            // Set the settingscontroller instance
             setSettingsController(controller);
 
             stage.show();
@@ -912,7 +945,7 @@ public class MainController implements Initializable {
             backgroundMusicPlayer.stop();
         }
 
-        // Load and play the selected background music
+        // Load and play the selectedbackground music
         var musicURL = getClass().getResource("/audio/" + musicFileName);
         if (musicURL != null) {
             backgroundMusicPlayer = new MediaPlayer(new Media(musicURL.toString()));
@@ -1059,7 +1092,7 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        setCharacterOnButton(keyNode, key, "AJ 00 Regular", 16);
+        setCharacterOnButton(keyNode, key, "AJ 00", 16);
         return keyNode;
     }
 
@@ -1075,7 +1108,7 @@ public class MainController implements Initializable {
         charTai.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
         Label charEng = (Label) ((HBox) vBox.getChildren().get(1)).getChildren().get(1);
         charEng.setText(key.getEng());
-        charEng.setStyle("-fx-font-size: " + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
+        charEng.setStyle("-fx-font-size:" + Perc.getDynamicPixel(fontSize) + "; -fx-font-family: '" + fontFamily + "';");
     }
 
     private VBox createKeyWithCustomWidth(Key key, double width) {

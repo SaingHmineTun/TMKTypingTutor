@@ -3,20 +3,16 @@ package it.saimao.tmk_typing_tutor.auth;
 import it.saimao.tmk_typing_tutor.controller.MainController;
 import it.saimao.tmk_typing_tutor.model.User;
 import it.saimao.tmk_typing_tutor.services.UserService;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,7 +52,7 @@ public class LoginController implements Initializable {
                             hbox.setSpacing(15);
                             hbox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
 
-                            Label userIcon = new Label("\uD83D\uDC64"); // Unicode user icon
+                            Label userIcon = new Label("\uD83D\uDC64"); // Unicodeuser icon
 
                             Label usernameLabel = new Label(user.getUsername());
 
@@ -91,27 +87,13 @@ public class LoginController implements Initializable {
     @FXML
     private void login() {
         if (selectedUser == null) {
-            lbError.setText("Please select a user from the list.");
+            lbError.setText("Please select auser from the list.");
             lbError.setVisible(true);
             return;
         }
 
         String password = pfPassword.getText();
         if (selectedUser.getPassword().equals(password)) {
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("TMK Typing Tutor");
-            alert.setContentText("Please wait while loading user data...");
-            alert.setHeaderText("Please wait");
-            alert.show();
-            alert.showingProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue) {
-                    alert.show();
-                }
-            });
-//
-//            Timeline timeline = new Timeline();
-//            timeline.setDelay(Duration.millis(1000));
 
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/main.fxml"));
@@ -120,14 +102,16 @@ public class LoginController implements Initializable {
                 stage.hide();
                 stage.setScene(scene);
 
-
-                // Pass the logged-in user and the primary stage to the MainController
+                //Pass the logged-in user and the primary stage to the MainController
                 MainController mainController = fxmlLoader.getController();
-                mainController.initData(selectedUser, stage, alert);
+                mainController.initData(selectedUser, stage);
 
             } catch (IOException e) {
+                Stage stage = (Stage) btnLogin.getScene().getWindow();
+                stage.show(); // Show the login window again
                 e.printStackTrace();
             }
+
         } else {
             lbError.setText("Invalid password!");
             lbError.setVisible(true);
