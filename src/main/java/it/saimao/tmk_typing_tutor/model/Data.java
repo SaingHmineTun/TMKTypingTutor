@@ -21,4 +21,9 @@ public class Data {
             musicList.get(7), "bgsound7.mp3",
             musicList.get(8), "bgsound8.mp3",
             musicList.get(9), "bgsound9.mp3");
+
+    public static final List<String> keyboards = List.of("လွၵ်းမိုဝ်း လၵ်းၸဵင်", "လွၵ်းမိုဝ်း ယုင်းၶဵဝ်", "လွၵ်းမိုဝ်း ပၢင်လူင်", "လွၵ်းမိုဝ်း ၼမ်ႉၶူင်း");
+    public static final List<String> normalLevelList = List.of("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3");
+    public static final List<String> namkhoneLevelList = List.of("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3", "ၵၢၼ်ၽိုၵ်း 4");
+
 }

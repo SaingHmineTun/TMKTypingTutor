@@ -4,6 +4,7 @@
 .root {
     -fx-background-color: #ccc;
     -fx-key-color: #fff;
+    -fx-btn-border: #aaa;
     -fx-outcome-color: #123;
     -fx-outcome-miscolor: #54070f;
     -fx-title-color: #396fad;
@@ -78,9 +79,9 @@
 .button {
     -fx-background-color: -fx-key-color;
     -fx-text-fill: -fx-text-color;
-    -fx-border-radius: 50;
-    -fx-background-radius: 50;
-    -fx-border-color: #FFF;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-border-color: -fx-btn-border;
 }
 
 .button:hover {
@@ -207,7 +208,7 @@
 }
 
 .list-view .list-cell:selected {
-    -fx-background-color: -fx-title-color;
+    -fx-background-color: derive(-fx-title-color, 30%);
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
@@ -220,22 +221,6 @@
 
 .list-view .scroll-bar .thumb:hover {
     -fx-background-color: derive(-fx-key-color, -40%);
-}
-
-/* Custom styles for user list cells in login view */
-.user-list-cell {
-    -fx-spacing: 10;
-    -fx-alignment: center-left;
-}
-
-.user-icon {
-    -fx-font-size: 20px;
-    -fx-text-fill: -fx-text-color;
-}
-
-.username-label {
-    -fx-font-size: 16px;
-    -fx-text-fill: -fx-text-color;
 }
 
 /* Improved TableView styling */

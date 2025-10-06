@@ -22,13 +22,13 @@
                      </VBox.margin>
                       </ImageView>
                         <Label styleClass="certificate-text" text="This is to certify that" />
-                        <Label fx:id="lblUsername" styleClass="certificate-username" text="Sai Mao">
+                        <Label fx:id="lblUsername" styleClass="certificate-username" text="[Name]">
                         </Label>
                         <Label styleClass="certificate-text" text="has successfully completed" />
-                        <Label fx:id="lblLevel" styleClass="certificate-level" text="Level 1">
+                        <Label fx:id="lblLevel" styleClass="certificate-level" text="[Level]">
                         </Label>
-                        <Label styleClass="certificate-text" text="of Shan Typing with an average speed of" />
-                        <Label fx:id="lblAwpm" styleClass="certificate-awpm" text="30 AWPM">
+                        <Label styleClass="certificate-text" text="with an average speed of" />
+                        <Label fx:id="lblAwpm" styleClass="certificate-awpm" text="[AWPM]">
                         </Label>
                   <HBox alignment="CENTER">
                      <children>

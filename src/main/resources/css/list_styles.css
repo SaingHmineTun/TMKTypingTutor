@@ -23,7 +23,7 @@
 }
 
 .list-view .list-cell:selected {
-    -fx-background-color: -fx-title-color;
+    -fx-background-color: derive(-fx-title-color, 30%);
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }

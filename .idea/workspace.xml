@@ -9,26 +9,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Play Background Music!">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/aj00_regular.ttf" afterDir="false" />
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="update font from namkhone to aj00 regular.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/auth/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/auth/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/CertificateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/CertificateController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/crimson_red_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/crimson_red_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/dark_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/dark_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/frost_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/frost_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/golden_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/golden_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/green_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/green_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SettingsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/Data.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/light_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/light_theme.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/list_styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/list_styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/midnight_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/midnight_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/monochrome_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/monochrome_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/neon_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/neon_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/ocean_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/ocean_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/pastel_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/pastel_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/pinky_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/pinky_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/sunset_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/sunset_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/using_font.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/using_font.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fonts/NamKhoneUnicode.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/certificate.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/certificate.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/setting_about.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_about.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/setting_certificate.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_certificate.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/setting_credits.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_credits.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +58,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/SaingHmineTun/TMKTypingTutor.git&quot;,
-    &quot;accountId&quot;: &quot;218b4023-0bde-49db-920b-888683dc4056&quot;
+    &quot;accountId&quot;: &quot;58574154-8f06-4698-b37d-24b219f7a1f7&quot;
   },
   &quot;recentNewPullRequestHead&quot;: {
     &quot;server&quot;: {
@@ -113,7 +107,7 @@
     &quot;git-widget-placeholder&quot;: &quot;setting&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/JavaProjects/TMKTypingTutor/src/main/resources/audio&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/saimao/java/TMKTypingTutor/src/main/resources/fonts&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -129,11 +123,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/fonts" />
       <recent name="D:\JavaProjects\TMKTypingTutor\src\main\resources\audio" />
       <recent name="D:\JavaProjects\TMKTypingTutor\src\main\resources\images" />
       <recent name="D:\JavaProjects\TMKTypingTutor\src\main\resources" />
       <recent name="D:\JavaProjects\TMKTypingTutor\src\main\resources\css" />
-      <recent name="D:\JavaProjects\TMKTypingTutor\src\main\resources\fonts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\JavaProjects\TMKTypingTutor\src\main\resources\layout" />
@@ -583,7 +577,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759647625932</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="update font from namkhone to aj00 regular.">
+      <option name="closed" value="true" />
+      <created>1759677943307</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1759677943307</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -602,7 +604,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="false" />
-    <MESSAGE value="Added - Dynamic Keyboard Creation approach. This is to be able to adapt to other language!&#10;Added - WPM, AWPM, ACCURACY, MISTYPE labels!&#10;Added - MODE (EASY, INTERMEDIATE)&#10;Modified - Next &amp; Previous buttons!" />
     <MESSAGE value="2.3 version. Almost finished! 95% DONE!!!" />
     <MESSAGE value="Added - Support Yunghkio Keyboard Layout!&#10;Added - Retry option in Summary Dialog!" />
     <MESSAGE value="Modified - Show Lesson title in Summary Dialog!" />
@@ -627,14 +628,15 @@
     <MESSAGE value="Adding user progress for each lesson" />
     <MESSAGE value="Clean the project.&#10;Re-design the certificate." />
     <MESSAGE value="Play Background Music!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Play Background Music!" />
+    <MESSAGE value="update font from namkhone to aj00 regular." />
+    <option name="LAST_COMMIT_MESSAGE" value="update font from namkhone to aj00 regular." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SettingsController.java</url>
-          <line>608</line>
+          <line>624</line>
           <properties class="it.saimao.tmk_typing_tutor.controller.SettingsController">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -643,8 +645,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SettingsController.java</url>
-          <line>504</line>
-          <properties class="it.saimao.tmk_typing_tutor.controller.SettingsController">
+          <line>520</line>
+          <properties class="it.saimao.tmk_typing_tutor.controller.SettingsController" method="loadProgress">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>

@@ -40,6 +40,8 @@ import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.util.*;
 
+import static it.saimao.tmk_typing_tutor.model.Data.*;
+
 public class MainController implements Initializable {
     @FXML
     private BorderPane root;
@@ -125,7 +127,6 @@ public class MainController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //Set the static instance
         instance = this;
-
         initTopBar();
         initComboBoxItems();
         initPracticeListener();
@@ -145,7 +146,7 @@ public class MainController implements Initializable {
         this.settingsController = settingsController;
     }
 
-    //Methodto get settings controller instance
+    //Method to get settings controller instance
     public SettingsController getSettingsController() {
         return settingsController;
     }
@@ -170,7 +171,7 @@ public class MainController implements Initializable {
         });
     }
 
-    public void initData(User user, Stage stage) {
+    public void initData(User user, Stage stage, Alert alert) {
         this.loggedInUser = user;
         this.primaryStage = stage;
         isInitializing = true;
@@ -188,6 +189,10 @@ public class MainController implements Initializable {
                 }
                 playBackgroundMusic(backgroundMusicFile);
             }
+
+            alert.close();
+            stage.show();
+            stage.setMaximized(true);
         });
     }
 
@@ -195,9 +200,9 @@ public class MainController implements Initializable {
     private void resetLevels(int keyboard) {
         levelList.clear();
         if (keyboard == 3)
-            levelList.addAll(Arrays.asList("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3", "ၵၢၼ်ၽိုၵ်း 4").stream().toList());
+            levelList.addAll(normalLevelList);
         else {
-            levelList.addAll(Arrays.asList("ၵၢၼ်ၽိုၵ်း 1", "ၵၢၼ်ၽိုၵ်း 2", "ၵၢၼ်ၽိုၵ်း 3").stream().toList());
+            levelList.addAll(namkhoneLevelList);
         }
         cbLevel.getItems().setAll(FXCollections.observableArrayList(levelList));
         if (!isInitializing) {
@@ -268,7 +273,7 @@ public class MainController implements Initializable {
 
     private void initComboBoxItems() {
         levelList = new ArrayList<>();
-        cbKeyboard.getItems().setAll("လွၵ်းမိုဝ်း လၵ်းၸဵင်", "လွၵ်းမိုဝ်း ယုင်းၶဵဝ်", "လွၵ်းမိုဝ်း ပၢင်လူင်", "လွၵ်းမိုဝ်း ၼမ်ႉၶူင်း");
+        cbKeyboard.getItems().setAll(keyboards);
         cbKeyboard.getSelectionModel().selectedIndexProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue != null) {
                 if (loggedInUser != null && !isInitializing) {
@@ -416,7 +421,7 @@ public class MainController implements Initializable {
 
     private List<String> replace_A_WithOtherCharacters(List<String> lessons) {
         List<String> newList = new LinkedList<>();
-        String[] characters = cbLessons.getItems().get(0).getLesson().split(" ");
+        String[] characters = cbLessons.getItems().getFirst().getLesson().split(" ");
         for (String lesson : lessons) {
             String newValue = lesson.replaceAll("ဢ", characters[new Random().nextInt(characters.length)]);
             newList.add(newValue);
@@ -481,274 +486,6 @@ public class MainController implements Initializable {
             tutorTyping();
         });
     }
-
-//   private void tutorTyping() {
-//     intkeyboard =cbKeyboard.getSelectionModel().getSelectedIndex();
-//        StringtestText = tfView.getText();
-//        String reorderedTestText = testText;
-//        if (keyboard != 3) {
-//            reorderedTestText = reorderedTestText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1031", "\\u1031$1$2$3");
-//            reorderedTestText = reorderedTestText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1084", "\\u1084$1$2$3");
-//        }
-//
-//        String practiceText = tfPractice.getText();
-//        int indexOfPractice = 0;
-//        String typing;
-//        if (tfPractice.getText() != null && !tfPractice.getText().isEmpty()) {
-//            indexOfPractice = practiceText.length();
-//            String mustType = reorderedTestText.substring(indexOfPractice - 1, indexOfPractice);
-//            typing = practiceText.substring(indexOfPractice - 1, indexOfPractice);
-//
-//            if (Utils.isEnglishCharacter(typing) && !isConverted) {
-//                // ...(English to Shan conversion logic remains the same)
-//                if (keyboard == 3) {
-//                    if (mustType.equals("ိ")) {
-//                        String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
-//                        if (afterTyping.equals("ံ")) {
-//mustType = "ိံ";
-//                        }
-//                    }
-//                    if (mustType.equals("ျ")) {
-//                        String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
-//                        if (afterTyping.equals("ွ")) {
-//                            mustType="ျွ";
-//                        }
-//                    }
-//                    if (mustType.equals("ြ")) {
-//                        try {
-//                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
-//                            if (afterTyping.equals("ႃ")) {
-//                               mustType="ြႃ";
-//                            }
-//                        } catch (Exception ignored) {
-//                        }
-//                    }
-//                    if (mustType.equals("ႁ")) {
-//                        try {
-//                            String afterTyping2 = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
-//StringafterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
-//                            if (afterTyping.equals("ႂ") && afterTyping2.equals("်")) {
-//                                mustType = "ႁႂ်";
-//                            }
-//                        } catch (Exceptionignored){
-//                       }
-//                    }
-//                    if (mustType.equals("ၢ")) {
-//                        try {
-//                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
-//                            if (afterTyping.equals("ႆ")) {
-//                                mustType = "ၢႆ";
-//}
-//} catch (Exception ignored) {
-//                        }
-//                    }
-//                    if (mustType.equals("ေ")) {
-//                        try {
-//                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
-//                            if (afterTyping.equals("ႃ")){
-//                               mustType="ေႃ";
-//                            }
-//                        } catch (Exception ignored) {
-//                        }
-//                    }
-//                    if (mustType.equals("ိ")) {
-//                        try {
-//                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
-//                           if (afterTyping.equals("ု")) {
-//                                mustType = "ို";
-//                            }
-//                        } catch (Exception ignored) {
-//                        }
-//                    }
-//                    if (mustType.equals("ိ")) {
-//                        try {
-//                            String afterTyping = testText.substring(indexOfPractice, indexOfPractice +1);
-//                            if (afterTyping.equals("ူ")) {
-//                                mustType = "ိူ";
-//                            }
-//                        } catch (Exception ignored) {
-//                        }
-//                    }
-//                    if (mustType.equals("ႁ")) {
-//                        try {
-//                            String afterTyping =testText.substring(indexOfPractice, indexOfPractice + 1);
-//                           if (afterTyping.equals("ူ")) {
-//                                mustType = "ႁူ";
-//                            } else if (afterTyping.equals("ွ")) {
-//                                mustType = "ႁွ";
-//                            }
-//} catch (Exception ignored) {
-//                        }
-//                    }
-//                }
-//                if (mustType.equals("ႂ")) {
-//                    String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
-//                    if (afterTyping.equals("်"))
-//                        mustType="ႂ်";
-//                }
-//                typingWithEnglish = true;
-//                String shanChar = convertToShanChar(typing);
-//                tfPractice.setText(null);
-//                if (mustType.equals(shanChar)) {
-//                    isConverted = true;
-//                    tfPractice.setText(practiceText.substring(0, indexOfPractice - 1) + shanChar);
-//                } else {
-//                    misTyped++;
-//                    stop = true;
-//                    tfPractice.setText(practiceText.substring(0, indexOfPractice - 1));
-//                    playMistypedSound();
-//                }
-//                return;
-//
-//            } else {
-//                isConverted = false;
-//                if (!mustType.equals(typing)) {
-//                    misTyped++;
-//                    stop= true;
-//                    tfPractice.setText(tfPractice.getText().substring(0, indexOfPractice - 1));
-//                    playMistypedSound();
-//                   return;
-//                }
-//            }
-//
-//            if (keyboard != 3) {
-//                if (mustSwap) {
-//                    String beforeTyping= practiceText.substring(indexOfPractice - 2, indexOfPractice - 1);
-//                    if (beforeTyping.equals("ေ") || beforeTyping.equals("ႄ")) {
-//                        swap = true;
-//                        mustSwap = false;
-//                        String newText = tfPractice.getText(0, indexOfPractice- 2) + typing + beforeTyping;
-//                        tfPractice.setText(newText);
-//                        return;
-//                    }
-//                }
-//                if(typing.equals("ေ") || typing.equals("ႄ")) {
-//                    mustSwap = true;
-//                }
-//            }
-//
-//
-//            if(practiceText.length() == tfView.getText().length()) {
-//                end = true;
-//                clearToTypeValues();
-//                ProgressService.saveProgress(loggedInUser.getId(), cbLevel.getSelectionModel().getSelectedIndex(), cbLessons.getSelectionModel().getSelectedIndex());
-//                checkLevelCompletion();
-//                String title= cbLevel.getValue() + " : " + cbLessons.getValue().getTitle();
-//                Summary summaryDialog = new Summary(this, primaryStage);
-//                summaryDialog.showDialog(title, wpm, accuracy, misTyped, awpm);
-//                return;
-//            }
-//        }
-//        if (indexOfPractice <tfView.getText().length()) {
-//            String valueToType = reorderedTestText.substring(indexOfPractice, indexOfPractice + 1);
-//            if (keyboard==3) {
-//                if (valueToType.equals("ိ")) {
-//                    String afterTyping = testText.substring(indexOfPractice +1, indexOfPractice + 2);
-//                    if (afterTyping.equals("ံ")) {
-//                        valueToType = "ိံ";
-//}
-//}
-//                if (valueToType.equals("ျ")) {
-//                    String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
-//                    if (afterTyping.equals("ွ")) {
-//                        valueToType = "ျွ";
-//                   }
-//}
-//                if (valueToType.equals("ြ")) {
-//                    try {
-//                        String afterTyping= testText.substring(indexOfPractice + 1, indexOfPractice + 2);
-//                        if (afterTyping.equals("ႃ")) {
-//                            valueToType= "ြႃ";
-//                        }
-//                    } catch (Exception ignored) {
-//                    }
-//                }
-//                if (valueToType.equals("ႁ")) {
-//                    try {
-//                        String afterTyping2 = testText.substring(indexOfPractice + 2, indexOfPractice + 3);
-//                        StringafterTyping =testText.substring(indexOfPractice + 1, indexOfPractice + 2);
-//                        if (afterTyping.equals("ႂ") && afterTyping2.equals("်")) {
-//                            valueToType = "ႁႂ်";
-//                        }
-//}catch(Exception ignored){
-//                   }
-//}
-//                if (valueToType.equals("ၢ")) {
-//                    try {
-//                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
-//                        if (afterTyping.equals("ႆ")) {
-//valueToType ="ၢႆ";
-//                 }
-//                    } catch (Exception ignored) {
-//                    }
-//                }
-//                if (valueToType.equals("ေ")) {
-//                    try {
-//                        String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice+ 2);
-//if (afterTyping.equals("ႃ")) {
-//                            valueToType = "ေႃ";
-//                        }
-//                    } catch (Exception ignored) {
-//                    }
-//                }
-//                if (valueToType.equals("ိ")) {
-//                    try {
-//                        String afterTyping= testText.substring(indexOfPractice+ 1, indexOfPractice + 2);
-//                        if (afterTyping.equals("ု")) {
-//                            valueToType = "ို";
-//                        }
-//                    } catch (Exception ignored) {
-//                    }
-//                }
-//                if (valueToType.equals("ိ")) {
-//try{
-//                        String afterTyping =testText.substring(indexOfPractice + 1, indexOfPractice + 2);
-//                 if (afterTyping.equals("ူ")) {
-//                            valueToType = "ိူ";
-//                        }
-//                    } catch (Exception ignored) {
-//                    }
-//}
-//                if (valueToType.equals("ႁ")) {
-//                    try {
-//                        String afterTyping =testText.substring(indexOfPractice + 1,indexOfPractice + 2);
-//                        if (afterTyping.equals("ူ")) {
-//                            valueToType = "ႁူ";
-//                   } else if (afterTyping.equals("ွ")) {
-//                            valueToType = "ႁွ";
-//                        }
-//                    } catch (Exception ignored) {
-//                    }
-//                }
-//            }
-//            if (valueToType.equals("ႂ")) {
-//               String afterTyping =testText.substring(indexOfPractice + 1, indexOfPractice + 2);
-//                if (afterTyping.equals("်"))
-//                    valueToType ="ႂ်";
-//            }
-//            if (valueToType.equals(" ")) {
-//                highlightThisValue("SPACE", 0, 5);
-//            } else {
-//                for (int x = 0; x < allValues.size();x++) {
-//                    Map<String, String>row = allValues.get(x);
-//                    if (row.containsValue(valueToType)) {
-//                        List<String> values =row.values().stream().toList();
-//                        for (int y = 0; y < values.size(); y++) {
-//                            String val=values.get(y);
-//                            if (valueToType.equals(val)) {
-//                                typeThisValue(x, y);
-//                                if (x % 2 == 1) {
-//                                    highlightThisValue("SHIFT", x, y);
-//                                }
-//                                break;
-//                            }
-//                        }
-//                   break;
-//                    }
-//                }
-//           }
-//        }
-//    }
 
     private void tutorTyping() {
         int keyboard = cbKeyboard.getSelectionModel().getSelectedIndex();
@@ -883,7 +620,6 @@ public class MainController implements Initializable {
                     if (afterTyping.equals("်")) mustType = "ႂ်";
                 }
                 typingWithEnglish = true;
-                // TODO - Need to decide what keyboard to use
                 String shanChar = convertToShanChar(typing);
                 tfPractice.setText(null);
                 if (mustType.equals(shanChar)) {
@@ -930,7 +666,6 @@ public class MainController implements Initializable {
                 // Save detailed lesson progress
                 saveLessonProgress();
 
-                checkLevelCompletion();
                 String title = cbLevel.getValue() + " : " + cbLessons.getValue().getTitle();
                 SummaryController summaryControllerDialog = new SummaryController(this, primaryStage);
                 summaryControllerDialog.showDialog(title, wpm, accuracy, misTyped, awpm);
@@ -940,7 +675,7 @@ public class MainController implements Initializable {
         }
 
         if (indexOfPractice < tfView.getText().length()) {
-            // Know whichvalue to type next
+            // Know which value to type next
             String valueToType = testText.substring(indexOfPractice, indexOfPractice + 1);
             if (keyboard == 3) {
                 // Show  ိံ key
@@ -958,7 +693,7 @@ public class MainController implements Initializable {
                     }
                 }
 
-                // Showိုkey
+                // Show ို key
                 if (valueToType.equals("ြ")) {
                     try {
                         String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
@@ -1084,21 +819,8 @@ public class MainController implements Initializable {
     private void saveLessonProgress() {
         // Create a lesson progress object with the current stats
         LessonProgress lessonProgress = new LessonProgress(loggedInUser.getId(), cbLevel.getSelectionModel().getSelectedIndex(), cbLessons.getSelectionModel().getSelectedIndex(), wpm, accuracy, misTyped);
-
         // Save the lesson progress
-        System.out.println("Attempting to save lesson progress...");
         LessonProgressService.saveLessonProgress(lessonProgress);
-        System.out.println("Lesson progress save attempt completed.");
-    }
-
-    private void checkLevelCompletion() {
-        int levelIndex = cbLevel.getSelectionModel().getSelectedIndex();
-        int totalLessons = cbLessons.getItems().size(); // For other levels, use actualsize
-
-        int completedLessons = ProgressService.getCompletedLessonCount(loggedInUser.getId(), levelIndex);
-        if (completedLessons >= totalLessons) {
-            showCertificate(levelIndex);
-        }
     }
 
     private void showSettings() {
@@ -1107,6 +829,7 @@ public class MainController implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(primaryStage);
+            stage.setResizable(false);
             stage.setTitle("Settings");
             Scene scene = new Scene(loader.load());
 
@@ -1139,29 +862,6 @@ public class MainController implements Initializable {
         }
     }
 
-    private void showCertificate(int levelIndex) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layout/certificate.fxml"));
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initOwner(primaryStage);
-            Scene scene = new Scene(loader.load());
-
-//Apply thecurrent theme to the certificate window
-            Theme theme = Theme.fromIndex(loggedInUser.getTheme());
-            String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
-            scene.getStylesheets().add(stylesheet);
-
-            stage.setScene(scene);
-
-            CertificateController controller = loader.getController();
-            controller.initData(loggedInUser.getDisplayName(), "Level " + (levelIndex + 1));
-
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private MediaPlayer errorPlayer;
     private MediaPlayer backgroundMusicPlayer;
@@ -1205,7 +905,7 @@ public class MainController implements Initializable {
         }
     }
 
-    //Backgroundmusic methods
+    //Background music methods
     public void playBackgroundMusic(String musicFileName) {
         // Stop any currently playing background music
         if (backgroundMusicPlayer != null) {
@@ -1217,7 +917,6 @@ public class MainController implements Initializable {
         if (musicURL != null) {
             backgroundMusicPlayer = new MediaPlayer(new Media(musicURL.toString()));
             backgroundMusicPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop indefinitely
-            backgroundMusicPlayer.setVolume(0.3); // Set volume to 30% tonotoverpower typing
             backgroundMusicPlayer.play();
         }
     }
