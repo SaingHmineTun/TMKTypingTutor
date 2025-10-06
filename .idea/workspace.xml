@@ -9,19 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Revamp Background Music, Error Sound and Theme functionalities.">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/aj00_bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/layout/dialog_loading.fxml" afterDir="false" />
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Implemented Showing Loading Progress Dialog after login success.&#10;Added bold font for AJ 00">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/auth/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/auth/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/crimson_red_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/crimson_red_theme.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/dark_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/dark_theme.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/frost_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/frost_theme.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/golden_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/golden_theme.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/green_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/green_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/light_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/light_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/list_styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/list_styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/midnight_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/midnight_theme.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/monochrome_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/monochrome_theme.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/neon_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/neon_theme.css" afterDir="false" />
@@ -29,7 +23,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/pastel_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/pastel_theme.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/pinky_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/pinky_theme.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/sunset_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/sunset_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/using_font.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/using_font.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/setting_credits.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_credits.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,7 +252,7 @@
       <workItem from="1759649387767" duration="1097000" />
       <workItem from="1759668901302" duration="2218000" />
       <workItem from="1759672818418" duration="4109000" />
-      <workItem from="1759724722563" duration="2112000" />
+      <workItem from="1759724722563" duration="3446000" />
     </task>
     <task id="LOCAL-00001" summary="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!">
       <option name="closed" value="true" />
@@ -604,7 +598,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759667151694</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Implemented Showing Loading Progress Dialog after login success.&#10;Added bold font for AJ 00">
+      <option name="closed" value="true" />
+      <created>1759726912598</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1759726912598</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -623,8 +625,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="false" />
-    <MESSAGE value="2.3 version. Almost finished! 95% DONE!!!" />
-    <MESSAGE value="Added - Support Yunghkio Keyboard Layout!&#10;Added - Retry option in Summary Dialog!" />
     <MESSAGE value="Modified - Show Lesson title in Summary Dialog!" />
     <MESSAGE value="Modified - Double the list of ka, kha, nga to train users!" />
     <MESSAGE value="Added - Panlong Keyboard&#10;Added - Namkhone Keyboard" />
@@ -648,7 +648,9 @@
     <MESSAGE value="Clean the project.&#10;Re-design the certificate." />
     <MESSAGE value="Play Background Music!" />
     <MESSAGE value="Implemented Save and Print Certificate option." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented Save and Print Certificate option." />
+    <MESSAGE value="Implemented Showing Loading Progress Dialog after login success." />
+    <MESSAGE value="Implemented Showing Loading Progress Dialog after login success.&#10;Added bold font for AJ 00" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented Showing Loading Progress Dialog after login success.&#10;Added bold font for AJ 00" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -76,8 +76,8 @@
 .button {
     -fx-background-color: #f7cfcf;
     -fx-text-fill: #5c5c6d;
-    -fx-border-radius: 50;
-    -fx-background-radius: 50;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
     -fx-border-color: #d6c8d9;
 }
 

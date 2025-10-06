@@ -28,7 +28,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                         </Label>
-                  <Label layoutX="30.0" layoutY="60.0" style="-fx-font-size: 20;" text="- Shan Institute of Information Technologies (SIIT)">
+                  <Label layoutX="30.0" layoutY="60.0" text="- Shan Institute of Information Technology (SIIT)">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -41,7 +41,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                        <Label style="-fx-font-size: 20;" text="- Jao Kunheing (A J Kunheing)">
+                        <Label text="- Jao Kunheing (A J Kunheing)">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -54,7 +54,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                        <Label style="-fx-font-size: 20;" text="- Jao Tai Num">
+                        <Label text="- Jao Tai Num">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -66,6 +66,16 @@
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
+                  </Label>
+                  <Label layoutX="30.0" layoutY="199.0" text="- Sai Tawng Pha">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="30.0" layoutY="229.0" text="For the idea to create the keyboard and many uncountable helps and supports" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
                   </Label>
                     </children>
                     <VBox.margin>

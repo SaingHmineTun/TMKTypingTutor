@@ -76,8 +76,8 @@
 .button {
     -fx-background-color: #ff00ff;
     -fx-text-fill: #111111;
-    -fx-border-radius: 50;
-    -fx-background-radius: 50;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
     -fx-border-color: #ff00ff;
     -fx-font-weight: bold;
     -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0, 0, 0);
