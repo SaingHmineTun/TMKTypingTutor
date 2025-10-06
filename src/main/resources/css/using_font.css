@@ -15,6 +15,12 @@
 }
 
 @font-face {
-    font-family: 'AJ 00 Regular';
+    font-family: 'AJ 00';
     src: url("../fonts/aj00_regular.ttf");
+}
+
+@font-face {
+    font-family: 'AJ 00';
+    font-weight: bold;
+    src: url("../fonts/aj00_bold.ttf");
 }

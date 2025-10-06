@@ -18,25 +18,47 @@
                     </VBox.margin>
                 </Label>
                 
-                <VBox spacing="20.0" style="-fx-padding: 20; -fx-background-radius: 10; -fx-background-color: -fx-key-color;" VBox.vgrow="ALWAYS">
+                <VBox style="-fx-padding: 20; -fx-background-radius: 10; -fx-background-color: -fx-key-color;" VBox.vgrow="ALWAYS">
                     <children>
-                        <Label text="About TMK Group" wrapText="true">
-                            <font>
-                                <Font name="System Bold" size="22.0" />
-                            </font>
-                        </Label>
-                        <Label text="TMK Group is dedicated to providing quality typing tutor applications for Shan language. Our mission is to help people learn and improve their Shan language typing skills through innovative and user-friendly applications." wrapText="true">
+                        <Label text="This project is called TMK Typing Tutor and is a computer software that can be installed on Windows, Linux and Mac OS and is developed by Sai Mao (TMK Muse) using JavaFX Technology." wrapText="true">
                             <font>
                                 <Font size="16.0" />
                             </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
                         </Label>
-                        <Label text="We believe that everyone should have access to quality educational tools regardless of the language they speak or type in. This is why we have developed this typing tutor application specifically for the Shan language." wrapText="true">
+                        <Label text="The purpose of this project is to provide Shan people practice Shan typing on their own machine. Because there are 4 typing keyboards in Shan language and this project is designed to support them all. Using this software requires no keyboard installed but would be better if users do so." wrapText="true">
                             <font>
                                 <Font size="16.0" />
                             </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
                         </Label>
-                        <!-- 添加弹性区域，使内容能够填充整个可用空间 -->
-                        <VBox VBox.vgrow="ALWAYS" />
+                  <Label layoutX="30.0" layoutY="90.0" text="This project is opensource and redistribution is allowed but reselling or redistribution with a cost in any way are strongly forbidden." wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label layoutX="30.0" layoutY="150.0" text="If users have issue and want to report, feel free to connect us via the following contacts" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="30.0" layoutY="250.0" text="- Email: tmk.muse@gmail.com" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="30.0" layoutY="290.0" text="- Facebook: TMK Muse" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
                     </children>
                     <VBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" />

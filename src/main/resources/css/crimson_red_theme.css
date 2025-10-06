@@ -11,7 +11,7 @@
 }
 
 .text, .text-field {
-    -fx-font-family: 'AJ 00 Regular';
+    -fx-font-family: 'AJ 00';
     -fx-font-size: 16;
 }
 
@@ -69,8 +69,8 @@
 .button {
     -fx-background-color: -fx-key-color;
     -fx-text-fill: -fx-text-color;
-    -fx-border-radius: 50;
-    -fx-background-radius: 50;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
     -fx-border-color: #ffeaea;
 }
 

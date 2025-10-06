@@ -4,7 +4,6 @@ import it.saimao.tmk_typing_tutor.model.Profile;
 import it.saimao.tmk_typing_tutor.model.Theme;
 import it.saimao.tmk_typing_tutor.model.User;
 import it.saimao.tmk_typing_tutor.services.LessonProgressService;
-import it.saimao.tmk_typing_tutor.services.ProgressService;
 import it.saimao.tmk_typing_tutor.services.UserService;
 import it.saimao.tmk_typing_tutor.utils.Toast;
 import javafx.collections.FXCollections;
@@ -30,8 +29,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
-import static it.saimao.tmk_typing_tutor.model.Data.musicList;
-import static it.saimao.tmk_typing_tutor.model.Data.musicNameToFileMap;
+import static it.saimao.tmk_typing_tutor.model.Data.*;
 
 
 public class SettingsController implements Initializable {
@@ -71,6 +69,7 @@ public class SettingsController implements Initializable {
     private TableColumn<Profile, String> tcProgress;
     private TableColumn<Profile, Button> tcCertificate;
     private TableColumn<Profile, Button> tcDetails;
+    private TableColumn<Profile, Button> tcReset;
 
     // Theme Tab
     private ListView<Theme> lvThemes;
@@ -135,7 +134,7 @@ public class SettingsController implements Initializable {
         AnchorPane tabContent = loader.load();
         apContent.getChildren().add(tabContent);
 
-        // Initializethe contentbasedonthe tab
+        // Initialize the content based on the tab
         switch (fxmlPath) {
             case "/layout/setting_user_profile.fxml":
                 initUserProfileTab(tabContent);
@@ -196,6 +195,10 @@ public class SettingsController implements Initializable {
             tvProgress = (TableView<Profile>) node;
         }
 
+        node = tabContent.lookup("#btnResetAll");
+        if (node instanceof Button btn)
+            btn.setOnAction(event -> resetAllProgress());
+
         // Initializetablecolumnsonly ifelementsarefound
         if (tvProgress != null) {
             // Get the columnsfromthetableview
@@ -204,21 +207,50 @@ public class SettingsController implements Initializable {
                 tcProgress = (TableColumn<Profile, String>) tvProgress.getColumns().get(1);
                 tcCertificate = (TableColumn<Profile, Button>) tvProgress.getColumns().get(2);
                 tcDetails = (TableColumn<Profile, Button>) tvProgress.getColumns().get(3);
+                tcReset = (TableColumn<Profile, Button>) tvProgress.getColumns().get(4);
 
                 tcLevel.setCellValueFactory(new PropertyValueFactory<>("levelName"));
                 tcProgress.setCellValueFactory(new PropertyValueFactory<>("progress"));
                 tcCertificate.setCellValueFactory(new PropertyValueFactory<>("certificateButton"));
                 tcDetails.setCellValueFactory(new PropertyValueFactory<>("detailsButton"));
+                tcReset.setCellValueFactory(new PropertyValueFactory<>("resetButton"));
 
                 // Applyspecificstyles to columns
                 tcLevel.getStyleClass().add("text-column");
                 tcProgress.getStyleClass().add("text-column");
                 tcCertificate.getStyleClass().add("button-column");
                 tcDetails.getStyleClass().add("button-column");
+                tcReset.getStyleClass().add("button-column");
             }
 
             loadProgress();
         }
+    }
+
+
+    private void resetAllProgress() {
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("ResetAll Progress");
+        confirmAlert.setHeaderText("Reset All Progress");
+        confirmAlert.setContentText("Are you sure you want toreset allprogress? This action cannot be undone.");
+
+        // Apply theme to the alert dialog
+        Theme theme = Theme.fromIndex(user.getTheme());
+        String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
+        confirmAlert.getDialogPane().getStylesheets().add(stylesheet);
+
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                // Delete progress for all levels usingLessonProgressService since weremoved theprogress table
+                LessonProgressService.deleteAllProgress(user.getId());
+
+                // Reload progress to reflect changes
+                loadProgress();
+
+                // Showsuccess message
+                Toast.showToast(mainController.getStage(), "All progress has been reset successfully.", 2000);
+            }
+        });
     }
 
     private void initThemeTab(AnchorPane tabContent) {
@@ -231,7 +263,7 @@ public class SettingsController implements Initializable {
         if (lvThemes != null) {
             lvThemes.setItems(FXCollections.observableArrayList(Theme.values()));
 
-//Setcustom cell factory to show theme nameand select button
+//Set custom cell factory to show theme nameand select button
             lvThemes.setCellFactory(param -> new ListCell<Theme>() {
                 @Override
                 protected void updateItem(Theme item, boolean empty) {
@@ -256,6 +288,7 @@ public class SettingsController implements Initializable {
                         selectButton.setOnAction(e -> {
                             // Apply theme immediately
                             user.setTheme(item.ordinal());
+                            lvThemes.getSelectionModel().select(item);
                             UserService.updateUser(user);
 
                             // Apply theme to main window
@@ -288,6 +321,11 @@ public class SettingsController implements Initializable {
                 }
 
             });
+
+            //Pre-select the current error sound
+            if (user != null && user.getTheme() < Theme.values().length) {
+                lvThemes.getSelectionModel().select(user.getTheme());
+            }
         }
     }
 
@@ -297,90 +335,98 @@ public class SettingsController implements Initializable {
             lvMusic = (ListView<String>) node;
         }
 
-        //Initializemusiclist withuser-friendlynames// Map user-friendly namesto actual filenamesif(lvMusic!=null) {
-        lvMusic.setItems(musicList);
+        //Initialize music list with user-friendly names
+        if (lvMusic != null) {
+            lvMusic.setItems(musicList);
 
-        // Set custom cell factory
-        lvMusic.setCellFactory(param -> new ListCell<String>() {
-            @Override
-            protected void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
+            // Set custom cell factory
+            lvMusic.setCellFactory(param -> new ListCell<String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
 
-                if (empty || item == null) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    setText(null);
+                    if (empty || item == null) {
+                        setText(null);
+                        setGraphic(null);
+                    } else {
+                        setText(null);
 
-                    Label nameLabel = new Label(item);
-                    nameLabel.setMaxWidth(Double.MAX_VALUE);
+                        Label nameLabel = new Label(item);
+                        nameLabel.setMaxWidth(Double.MAX_VALUE);
 
-                    Button selectButton = new Button("Select");
+                        Button selectButton = new Button("Select");
 
-                    // Check if this is the currently selected music
-                    if (user != null && musicNameToFileMap.get(item) != null && musicNameToFileMap.get(item).equals(user.getBackgroundMusic() > 0 ? "bgsound" + user.getBackgroundMusic() + ".mp3" : "")) {
-                        selectButton.setText("\u2713"); //Unicode checkmark
-                        selectButton.setDisable(true);
-                        lvMusic.getSelectionModel().select(user.getBackgroundMusic());
-                    }
-
-                    selectButton.setOnAction(e -> {
-                        String fileName = musicNameToFileMap.get(item);
-                        if (fileName != null && !fileName.isEmpty()) {
-                            playMusicFile(fileName);
-                            selectedBackgroundMusic = fileName;
-
-                            // Save theselection tothe database
-                            if (user != null) {
-                                int musicIndex = musicList.indexOf(item);
-                                user.setBackgroundMusic(musicIndex);
-                                UserService.updateUser(user);
-
-                                // Alsoupdatein main controller
-                                if (mainController != null) {
-                                    mainController.setSelectedBackgroundMusic(fileName);
-                                }
-                            }
-
-                            Toast.showToast(btnClose.getScene().getWindow(), "Selected: " + item, 2000);
-                        } else {
-                            //Stop any currently playing music
-                            if (mediaPlayer != null) {
-                                mediaPlayer.stop();
-                            }
-
-                            // Also stop in main controller
-                            if (mainController != null) {
-                                mainController.stopBackgroundMusic();
-                                mainController.setSelectedBackgroundMusic(null);
-                            }
-
-                            selectedBackgroundMusic = null;
-
-                            // Savethe selection to the database
-                            if (user != null) {
-                                user.setBackgroundMusic(0);
-                                UserService.updateUser(user);
-                            }
-
-                            showAlert("No background music selected", Alert.AlertType.INFORMATION);
+                        // Check if this is the currently selected music
+                        if (user != null && musicNameToFileMap.get(item) != null && musicNameToFileMap.get(item).equals(user.getBackgroundMusic() > 0 ? "bgsound" + user.getBackgroundMusic() + ".mp3" : "")) {
+                            selectButton.setText("\u2713"); //Unicode checkmark
+                            selectButton.setDisable(true);
                         }
 
-                        // Refresh the list to update button text
-                        lvMusic.refresh();
-                    });
+                        selectButton.setOnAction(e -> {
+                            String fileName = musicNameToFileMap.get(item);
+                            lvMusic.getSelectionModel().select(item);
+                            if (fileName != null && !fileName.isEmpty()) {
+                                playMusicFile(fileName);
+                                selectedBackgroundMusic = fileName;
 
-                    Region spacer = new Region();
-                    HBox.setHgrow(spacer, Priority.ALWAYS);
+                                // Save the selection to the database
+                                if (user != null) {
+                                    int musicIndex = musicList.indexOf(item);
+                                    user.setBackgroundMusic(musicIndex);
+                                    UserService.updateUser(user);
 
-                    HBox hbox = new HBox(nameLabel, spacer, selectButton);
-                    hbox.setSpacing(10);
-                    hbox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+                                    // Also update in main controller
+                                    if (mainController != null) {
+                                        mainController.setSelectedBackgroundMusic(fileName);
+                                    }
+                                }
 
-                    setGraphic(hbox);
+                                Toast.showToast(btnClose.getScene().getWindow(), "Selected: " + item, 2000);
+                            } else {
+                                //Stop any currently playing music
+                                if (mediaPlayer != null) {
+                                    mediaPlayer.stop();
+                                }
+
+                                // Also stop in main controller
+                                if (mainController != null) {
+                                    mainController.stopBackgroundMusic();
+                                    mainController.setSelectedBackgroundMusic(null);
+                                }
+
+                                selectedBackgroundMusic = null;
+
+                                // Save the selection to the database
+                                if (user != null) {
+                                    user.setBackgroundMusic(0);
+                                    UserService.updateUser(user);
+                                }
+
+                                showAlert("No background music selected", Alert.AlertType.INFORMATION);
+                            }
+
+                            // Refresh the list to update button text
+                            lvMusic.refresh();
+                        });
+
+                        Region spacer = new Region();
+                        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+                        HBox hbox = new HBox(nameLabel, spacer, selectButton);
+                        hbox.setSpacing(10);
+                        hbox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+
+                        setGraphic(hbox);
+                    }
+
                 }
+            });
+
+            //Pre-select the current error sound
+            if (user != null && user.getBackgroundMusic() < musicList.size()) {
+                lvMusic.getSelectionModel().select(user.getBackgroundMusic());
             }
-        });
+        }
     }
 
     private void initKeyErrorSoundTab(AnchorPane tabContent) {
@@ -406,7 +452,7 @@ public class SettingsController implements Initializable {
                     } else {
                         setText(null);
 
-                        //Createlabelwithtickmark for selected item
+                        //Create label with tick mark for selected item
                         Label nameLabel = new Label();
 
                         nameLabel.setText(item);
@@ -425,11 +471,13 @@ public class SettingsController implements Initializable {
                         selectButton.setOnAction(e -> {
                             // Find index of selected item
                             int selectedIndex = lvErrorSounds.getItems().indexOf(item);
+                            lvErrorSounds.getSelectionModel().select(selectedIndex);
 
-                            // Update user's errorsoundsettinguser.setErrorSound(selectedIndex);
+                            // Update user's error sound setting
+                            user.setErrorSound(selectedIndex);
                             UserService.updateUser(user);
 
-                            // Also update in main controllerifneeded
+                            // Also update in main controller if needed
                             if (mainController != null) {
                                 mainController.setSelectedErrorSound(selectedIndex, user);
                             }
@@ -455,7 +503,7 @@ public class SettingsController implements Initializable {
                                     showAlert("Error playingsound: " + ex.getMessage(), Alert.AlertType.ERROR);
                                 }
                             } else {
-                                //When"No ErrorSound" is selected, just showaconfirmation
+                                //When "No ErrorSound" is selected, just show a confirmation
                                 showAlert("Error sound disabled successfully!", Alert.AlertType.INFORMATION);
                             }
 
@@ -475,7 +523,7 @@ public class SettingsController implements Initializable {
                 }
             });
 
-            //Pre-select thecurrenterrorsound
+            //Pre-select the current error sound
             if (user != null && user.getErrorSound() < errorSoundsList.size()) {
                 lvErrorSounds.getSelectionModel().select(user.getErrorSound());
             }
@@ -491,6 +539,7 @@ public class SettingsController implements Initializable {
         node = tabContent.lookup("#btnViewCertificate");
         if (node instanceof Button) {
             btnViewCertificate = (Button) node;
+            btnViewCertificate.setOnAction(event -> onViewCertificate());
         }
 
         //Initiallydisablecertificatebutton
@@ -507,42 +556,68 @@ public class SettingsController implements Initializable {
 
         ObservableList<Profile> profiles = FXCollections.observableArrayList();
         for (int i = 0; i < 4; i++) {// Assuming 4 levels
-            int completed = ProgressService.getCompletedLessonCount(user.getId(), i);
+            int completed = LessonProgressService.getCompletedLessonCount(user.getId(), i);
             int total = lessonsPerLevel[i];
             Profile profile = new Profile("Level " + (i + 1), completed + "/" + total);
             profile.setLevelIndex(i);// Store level indexforlateruse
-            if (completed >= total) {
+            final int levelIndex = i;
 
+
+            if (completed >= total) {
                 // Forcompletedlevels, enable both GenerateandDetailsbuttons
                 profile.getCertificateButton().setDisable(false);
                 profile.getCertificateButton().setText("Generate");
-                final int levelIndex = i;
-
-                profile.getCertificateButton().setDisable(false);
                 profile.getCertificateButton().setOnAction(event -> showCertificate(levelIndex));
+            }
 
-                profile.getDetailsButton().setDisable(false);
-                profile.getDetailsButton().setOnAction(event -> showDetailedProgress(levelIndex));
-            } else if (completed > 0) {
-                // Forpartiallycompletedlevels, enable onlyDetailsbutton
+            if (completed > 0) {
+                // For partially completed levels, enable Details button and Reset button as well
                 profile.getDetailsButton().setText("Details");
                 profile.getDetailsButton().setDisable(false);
-                final int levelIndex = i;
                 profile.getDetailsButton().setOnAction(event -> showDetailedProgress(levelIndex));
+
+                profile.getResetButton().setDisable(false);
+                profile.getResetButton().setOnAction(event -> {
+                    resetLevelProgress(levelIndex);
+                    loadProgress();
+                });
             }
             profiles.add(profile);
         }
-        tvProgress.
-
-                setItems(profiles);
+        tvProgress.setItems(profiles);
     }
+
+    private void resetLevelProgress(int levelIndex) {
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Reset Level Progress");
+        confirmAlert.setHeaderText("Reset Level Progress");
+        confirmAlert.setContentText("Are you sure you want to reset progress for Level " + (levelIndex + 1) + "? This action cannot be undone.");
+
+        // Apply theme to the alert dialog
+        Theme theme = Theme.fromIndex(user.getTheme());
+        String stylesheet = getClass().getResource("/css/" + theme.id() + ".css").toExternalForm();
+        confirmAlert.getDialogPane().getStylesheets().add(stylesheet);
+
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                // Delete progress for thislevel using LessonProgressService since we removedthe progresstableLessonProgressService.deleteLessonProgressForLevel(user.getId(), levelIndex);
+
+                // Reload progress to reflect changes
+                loadProgress();
+
+                // Show success message
+                Toast.showToast(mainController.getStage(), "Progress for Level " + (levelIndex + 1) + " has been reset successfully.", 2000);
+            }
+        });
+    }
+
 
     private void checkCertificateStatus() {
         if (user == null) return;
 
         boolean allLevelsCompleted = true;
-        for (int i = 0; i < 4; i++) {
-            int completed = ProgressService.getCompletedLessonCount(user.getId(), i);
+        for (int i = 0; i < 3; i++) {
+            int completed = LessonProgressService.getCompletedLessonCount(user.getId(), i);
             int total = lessonsPerLevel[i];
             if (completed < total) {
                 allLevelsCompleted = false;
@@ -551,7 +626,7 @@ public class SettingsController implements Initializable {
         }
 
         if (allLevelsCompleted && lblCertificateStatus != null && btnViewCertificate != null) {
-            lblCertificateStatus.setText("Congratulations! You have completedalltests.");
+            lblCertificateStatus.setText("Congratulations! You have completed all tests.");
             btnViewCertificate.setDisable(false);
         }
     }
@@ -561,7 +636,7 @@ public class SettingsController implements Initializable {
     private void onUserProfileTab() throws IOException {
         if (apContent != null) {
             loadTabContent("/layout/setting_user_profile.fxml");
-            // Updatebutton stylesto show selection
+            // Update button stylesto show selection
             updateButtonStyles(btnUserProfile);
         }
     }
@@ -597,7 +672,7 @@ public class SettingsController implements Initializable {
     private void onKeyErrorSoundTab() throws IOException {
         if (apContent != null) {
             loadTabContent("/layout/setting_key_error_sound.fxml");
-            // Update button stylesto show selection
+            // Update button styles to show selection
             updateButtonStyles(btnKeyErrorSound);
         }
     }
@@ -606,7 +681,7 @@ public class SettingsController implements Initializable {
     private void onCertificateTab() throws IOException {
         if (apContent != null) {
             loadTabContent("/layout/setting_certificate.fxml");
-            // Update button stylesto show selection
+            // Update button styles to show selection
             updateButtonStyles(btnCertificate);
         }
     }
@@ -615,7 +690,8 @@ public class SettingsController implements Initializable {
     private void onCreditsTab() throws IOException {
         if (apContent != null) {
             loadTabContent("/layout/setting_credits.fxml");
-            // Update button styles to show selectionupdateButtonStyles(btnCredits);
+            // Update button styles to show selection
+            updateButtonStyles(btnCredits);
         }
     }
 
@@ -628,9 +704,9 @@ public class SettingsController implements Initializable {
         }
     }
 
-    //Helpermethodtoupdatebutton styles
+    //Helper method to update button styles
     private void updateButtonStyles(Button selectedButton) {
-//Resetall buttons to default style
+        //Reset all buttons to default style
         Button[] allButtons = {btnUserProfile, btnUserProgress, btnTheme, btnBackgroundMusic, btnKeyErrorSound, btnCertificate, btnCredits, btnAbout};
 
         for (Button button : allButtons) {
@@ -685,7 +761,7 @@ public class SettingsController implements Initializable {
 
         String selectedMusic = lvMusic.getSelectionModel().getSelectedItem();
         if (selectedMusic != null) {
-            // Mapuser-friendly namesto actual file names
+            // Map user-friendly names to actual file names
 
             String fileName = musicNameToFileMap.get(selectedMusic);
             if (fileName != null && !fileName.isEmpty()) {
@@ -697,24 +773,24 @@ public class SettingsController implements Initializable {
                     mediaPlayer.stop();
                 }
 
-                // Alsostopin main controller
+                // Also stop in main controller
                 if (mainController != null) {
                     mainController.stopBackgroundMusic();
                 }
 
                 selectedBackgroundMusic = null;
-                showAlert("No backgroundmusicselected", Alert.AlertType.INFORMATION);
+                showAlert("No background music selected", Alert.AlertType.INFORMATION);
             }
         }
     }
 
     private void playMusicFile(String fileName) {
-        //Stopany currently playing music
+        //Stop any currently playing music
         if (mediaPlayer != null) {
             mediaPlayer.stop();
         }
 
-        // Play theselectedmusic
+        // Play the selected music
         String musicPath = "/audio/" + fileName;
         try {
             URL musicURL = getClass().getResource(musicPath);
@@ -738,61 +814,6 @@ public class SettingsController implements Initializable {
         }
     }
 
-    @FXML
-    private void onPlayErrorSound() {
-        if (lvErrorSounds == null) return;
-
-        String selectedSound = lvErrorSounds.getSelectionModel().getSelectedItem();
-        if (selectedSound != null) {
-            int selectedIndex = lvErrorSounds.getItems().indexOf(selectedSound);
-
-            // If "No ErrorSound" isselected (index 0)or invalidselection
-            if (selectedIndex == 0) {
-                showAlert("No error sound is selected. No sound will be played.", Alert.AlertType.INFORMATION);
-                return;
-            }
-
-            // For actualerror sounds (index 1-7)
-            if (selectedIndex > 0 && selectedIndex <= 7) {
-                String soundFileName = "error" + selectedIndex + ".mp3";
-
-                // Stop any currently playing sound
-                if (errorSoundPlayer != null) {
-                    errorSoundPlayer.stop();
-                }
-
-                //Play the selected errorsound
-                String soundPath = "/audio/" + soundFileName;
-                try {
-                    URL soundURL = getClass().getResource(soundPath);
-                    if (soundURL != null) {
-                        errorSoundPlayer = new MediaPlayer(new Media(soundURL.toString()));
-                        errorSoundPlayer.play();
-                        showAlert("Playing errorsound: " + selectedSound, Alert.AlertType.INFORMATION);
-                    } else {
-                        showAlert("Could not findsoundfile: " + soundFileName, Alert.AlertType.ERROR);
-                    }
-                } catch (Exception e) {
-                    showAlert("Error playing sound: " + e.getMessage(), Alert.AlertType.ERROR);
-                    e.printStackTrace();
-                }
-            } else {
-                showAlert("Invalid selection!", Alert.AlertType.WARNING);
-            }
-        } else {
-
-            showAlert("Pleaseselect anerror sound first!", Alert.AlertType.WARNING);
-        }
-    }
-
-    public void setSelectedErrorSound(int errorSoundIndex) {
-        // This methodcan be called toupdate the error sound fromothercontrollers
-        if (user != null) {
-            user.setErrorSound(errorSoundIndex);
-            UserService.updateUser(user);
-        }
-    }
-
     public String getSelectedErrorSound() {
         return selectedErrorSound;
     }
@@ -805,10 +826,10 @@ public class SettingsController implements Initializable {
     private void onViewCertificate() {
         if (user == null) return;
 
-        // Check if all levelsare completed
+        // Check if all level sare completed
         boolean allLevelsCompleted = true;
-        for (int i = 0; i < 4; i++) {
-            int completed = ProgressService.getCompletedLessonCount(user.getId(), i);
+        for (int i = 0; i < 3; i++) {
+            int completed = LessonProgressService.getCompletedLessonCount(user.getId(), i);
             int total = lessonsPerLevel[i];
             if (completed < total) {
                 allLevelsCompleted = false;
@@ -819,42 +840,9 @@ public class SettingsController implements Initializable {
         if (allLevelsCompleted) {
             showMainCertificate();
         } else {
-            showAlert("You need to complete all tests toview the certificate!", Alert.AlertType.WARNING);
+            showAlert("You need to complete all tests tov iew the certificate!", Alert.AlertType.WARNING);
         }
     }
-
-// This method is no longer needed since we removed the Apply Theme button
-    /*
-    @FXML
-    private void onApplyTheme() {
-       if (lvThemes == null) return;
-
-        Theme selectedTheme = lvThemes.getSelectionModel().getSelectedItem();
-        if (selectedTheme !=null) {
-            user.setTheme(selectedTheme.ordinal());
-            UserService.updateUser(user);
-
-            // Apply theme to mainwindow
-            if (mainController != null) {
-//Selectthetheme in main controller which will automatically trigger the listener
-                mainController.getCbTheme().getSelectionModel().select(selectedTheme.ordinal());
-}
-
-            // Alsoapply theme to current settings window
-            String stylesheet = getClass().getResource("/css/" + selectedTheme.id() + ".css").toExternalForm();
-            btnApplyTheme.getScene().getRoot().getStylesheets().clear();
-            btnApplyTheme.getScene().getRoot().getStylesheets().add(stylesheet);
-
-            // Refresh thetheme list to show the tick mark on the correct item
-            lvThemes.refresh();
-            
-            // Show confirmationshowAlert("Theme updated successfully!",Alert.AlertType.INFORMATION);
-        } else {
-
-            showAlert("Please select a theme first!", Alert.AlertType.WARNING);
-        }
-    }
-   */
 
     private void showMainCertificate() {
         try {
@@ -872,10 +860,10 @@ public class SettingsController implements Initializable {
 
             CertificateController controller = loader.getController();
 
-            // Calculate average WPM acrossalllevels
+            // Calculate average WPM across all levels
             double totalWpm = 0;
             int levelCount = 0;
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < normalLevelList.size(); i++) {
                 double avgWpm = LessonProgressService.getAverageWpmForLevel(user.getId(), i);
                 if (avgWpm > 0) {
                     totalWpm += avgWpm;
@@ -886,7 +874,7 @@ public class SettingsController implements Initializable {
             double overallAvgWpm = levelCount > 0 ? totalWpm / levelCount : 0;
             DecimalFormat df = new DecimalFormat("#.##");
 
-            controller.initData(user.getDisplayName(), "Master Typist", df.format(overallAvgWpm));
+            controller.initData(user.getDisplayName(), "Shan Typing Tutor", df.format(overallAvgWpm));
 
             stage.show();
         } catch (IOException e) {
@@ -937,7 +925,7 @@ public class SettingsController implements Initializable {
             stage.setScene(scene);
 
             LessonProgressController controller = loader.getController();
-            controller.initData(user.getId(), levelIndex);
+            controller.initData(user, levelIndex);
 
             stage.show();
         } catch (IOException e) {
@@ -987,7 +975,8 @@ public class SettingsController implements Initializable {
             dialog.setDialogPane(changePasswordDialogPane);
             dialog.setTitle("Change Password");
 
-            //Show thedialogandwaitforuserresponsedialog.showAndWait();
+            //Show the dialog and wait for user response
+            dialog.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Error opening change password dialog", Alert.AlertType.ERROR);

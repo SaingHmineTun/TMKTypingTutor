@@ -11,7 +11,7 @@
 }
 
 .text, .text-field {
-    -fx-font-family: 'AJ 00 Regular';
+    -fx-font-family: 'AJ 00';
     -fx-font-size: 16;
     -fx-text-fill: -fx-text-color;
 }
@@ -76,8 +76,8 @@
 .button {
     -fx-background-color: #ff00ff;
     -fx-text-fill: #111111;
-    -fx-border-radius: 50;
-    -fx-background-radius: 50;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
     -fx-border-color: #ff00ff;
     -fx-font-weight: bold;
     -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0, 0, 0);
@@ -241,7 +241,7 @@
     -fx-border-width: 1;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
-    -fx-font-family: 'AJ 00 Regular';
+    -fx-font-family: 'AJ 00';
 }
 
 .table-view .table-column {
@@ -277,11 +277,11 @@
     -fx-font-weight: bold;
     -fx-font-size: 16;
     -fx-padding: 12 10 12 10;
-    -fx-font-family: 'AJ 00 Regular';
+    -fx-font-family: 'AJ 00';
 }
 
 .table-view .table-column .label {
     -fx-text-fill: white;
-    -fx-font-family: 'AJ 00 Regular';
+    -fx-font-family: 'AJ 00';
 }
 

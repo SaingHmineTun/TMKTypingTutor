@@ -30,8 +30,6 @@
                                 <Font size="16.0" />
                             </font>
                         </Button>
-                        <!-- 添加弹性区域，使内容能够垂直居中并填充整个可用空间 -->
-                        <VBox VBox.vgrow="ALWAYS" />
                     </children>
                     <VBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" />

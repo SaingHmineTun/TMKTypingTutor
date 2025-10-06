@@ -6,16 +6,19 @@ public class Profile {
     private String levelName;
     private String progress;
     private Button certificateButton;
-    private Button detailsButton; // New button for details
+    private Button detailsButton;
+    private Button resetButton;
     private int levelIndex;
 
     public Profile(String levelName, String progress) {
         this.levelName = levelName;
         this.progress = progress;
         this.certificateButton = new Button("Generate");
-        this.certificateButton.setDisable(true); // Disabled by default
+        this.certificateButton.setDisable(true);
         this.detailsButton = new Button("Details");
-        this.detailsButton.setDisable(true); // Disabled by default
+        this.detailsButton.setDisable(true);
+        this.resetButton = new Button("Reset");
+        this.resetButton.setDisable(true);
     }
 
     public String getLevelName() {
@@ -48,6 +51,14 @@ public class Profile {
 
     public void setDetailsButton(Button detailsButton) {
         this.detailsButton = detailsButton;
+    }
+
+    public Button getResetButton() {
+        return resetButton;
+    }
+
+    public void setResetButton(Button resetButton) {
+        this.resetButton = resetButton;
     }
 
     public int getLevelIndex() {

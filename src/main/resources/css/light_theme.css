@@ -4,6 +4,7 @@
 .root {
     -fx-background-color: #ccc;
     -fx-key-color: #fff;
+    -fx-btn-border: #aaa;
     -fx-outcome-color: #123;
     -fx-outcome-miscolor: #54070f;
     -fx-title-color: #396fad;
@@ -12,7 +13,7 @@
 }
 
 .text, .text-field {
-    -fx-font-family: 'AJ 00 Regular';
+    -fx-font-family: 'AJ 00';
     -fx-font-size: 16;
 }
 
@@ -78,9 +79,9 @@
 .button {
     -fx-background-color: -fx-key-color;
     -fx-text-fill: -fx-text-color;
-    -fx-border-radius: 50;
-    -fx-background-radius: 50;
-    -fx-border-color: #FFF;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-border-color: -fx-btn-border;
 }
 
 .button:hover {
@@ -207,7 +208,7 @@
 }
 
 .list-view .list-cell:selected {
-    -fx-background-color: -fx-title-color;
+    -fx-background-color: derive(-fx-title-color, 30%);
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
@@ -222,22 +223,6 @@
     -fx-background-color: derive(-fx-key-color, -40%);
 }
 
-/* Custom styles for user list cells in login view */
-.user-list-cell {
-    -fx-spacing: 10;
-    -fx-alignment: center-left;
-}
-
-.user-icon {
-    -fx-font-size: 20px;
-    -fx-text-fill: -fx-text-color;
-}
-
-.username-label {
-    -fx-font-size: 16px;
-    -fx-text-fill: -fx-text-color;
-}
-
 /* Improved TableView styling */
 .table-view {
     -fx-background-color: transparent;
@@ -246,7 +231,7 @@
     -fx-border-width: 1;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
-    -fx-font-family: 'AJ 00 Regular';
+    -fx-font-family: 'AJ 00';
 }
 
 .table-view .table-column {
@@ -282,10 +267,10 @@
     -fx-font-weight: bold;
     -fx-font-size: 16;
     -fx-padding: 12 10 12 10;
-    -fx-font-family: 'AJ 00 Regular';
+    -fx-font-family: 'AJ 00';
 }
 
 .table-view .table-column .label {
     -fx-text-fill: white;
-    -fx-font-family: 'AJ 00 Regular';
+    -fx-font-family: 'AJ 00';
 }

@@ -1,5 +1,7 @@
 package it.saimao.tmk_typing_tutor.controller;
 
+import it.saimao.tmk_typing_tutor.model.User;
+import it.saimao.tmk_typing_tutor.services.LessonProgressService;
 import it.saimao.tmk_typing_tutor.utils.Toast;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -16,6 +18,7 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -69,11 +72,10 @@ public class CertificateController {
     }
 
 
-    public void initData(String displayName, String levelName) {
-        lblUsername.setText(displayName);
-        lblLevel.setText(levelName);
-        // Set current date
-        lblDate.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("MMMM dd, yyyy")));
+    public void initData(User user, String levelName, int levelIndex) {
+        double averageWpm = LessonProgressService.getAverageWpmForLevel(user.getId(), levelIndex);
+        DecimalFormat df = new DecimalFormat("#.##");
+        initData(user.getDisplayName(), levelName, df.format(averageWpm));
     }
 
     public void initData(String displayName, String levelName, String averageWpm) {
