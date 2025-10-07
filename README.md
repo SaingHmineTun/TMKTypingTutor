@@ -149,7 +149,8 @@ sudo apt-get install gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreame
 
 Without these packages, the application may fail to start or throw errors related to media playback on Ubuntu systems.
 
-###Installation1. Clone or download the repository:
+###Installation
+1. Clone or download the repository:
    ```
    git clone https://github.com/SaingHmineTun/TMKTypingTutor.git
    ```
