@@ -3,7 +3,6 @@ module it.saimao.tmk_typing_tutor {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.media;
-    requires java.prefs;
     requires java.sql;
     requires org.xerial.sqlitejdbc;
     requires javafx.graphics;

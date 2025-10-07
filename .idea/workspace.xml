@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Re-write the README.md to tell users about G-Streamer requirement to run on Ubuntu.">
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Included UUID to use while packaging as msi installer.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -243,14 +243,6 @@
       <workItem from="1759724722563" duration="14715000" />
       <workItem from="1759770096942" duration="5153000" />
       <workItem from="1759806263334" duration="11688000" />
-    </task>
-    <task id="LOCAL-00002" summary="Solved : When all the lesson texts are typed, stop the typing!&#10;Solved : Except asai &amp; esai, when you type a character that is not similar to the what you have to type, do not type in the textbox.&#10;Added : Small Test Texts are added! Will make it as easy mode later on!">
-      <option name="closed" value="true" />
-      <created>1688873570663</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1688873570663</updated>
     </task>
     <task id="LOCAL-00003" summary="Added - Ability to type with English keyboard!&#10;Issue - In English, when Typing s or a that are no match with the toTypeWord, some characters are deleted unexpectedly!&#10;Issue - Using shn_sil keyboard to type is sill not working properly when typing ေ &amp; ႄ">
       <option name="closed" value="true" />
@@ -636,7 +628,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759834050859</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Included UUID to use while packaging as msi installer.">
+      <option name="closed" value="true" />
+      <created>1759835942253</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1759835942254</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -655,7 +655,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="false" />
-    <MESSAGE value="Version 1.1 Release!" />
     <MESSAGE value="Added Light Theme!" />
     <MESSAGE value="Changed Light Theme.&#10;Plan to add &quot;change theme&quot; option" />
     <MESSAGE value="Added Change Theme function!" />
@@ -680,7 +679,8 @@
     <MESSAGE value="Implemented 2 more themes!&#10;Update hand images.&#10;Remove the custom top app bar and just use system bar." />
     <MESSAGE value="Update README.md" />
     <MESSAGE value="Re-write the README.md to tell users about G-Streamer requirement to run on Ubuntu." />
-    <option name="LAST_COMMIT_MESSAGE" value="Re-write the README.md to tell users about G-Streamer requirement to run on Ubuntu." />
+    <MESSAGE value="Included UUID to use while packaging as msi installer." />
+    <option name="LAST_COMMIT_MESSAGE" value="Included UUID to use while packaging as msi installer." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
