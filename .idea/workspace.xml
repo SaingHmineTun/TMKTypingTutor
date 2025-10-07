@@ -9,40 +9,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Implemented keyboard with hand images showing which key to type.">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/css/dark_blue_theme.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/css/dark_green_theme.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/setting_dark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/setting_white.png" afterDir="false" />
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Implemented 2 more themes!&#10;Update hand images.&#10;Remove the custom top app bar and just use system bar.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/CertificateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/CertificateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SummaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SummaryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/Theme.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/Theme.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/LessonProgressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/LessonProgressController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SettingsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/crimson_red_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/crimson_red_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/dark_blue_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/dark_blue_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/dark_green_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/dark_green_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/dark_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/dark_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/frost_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/frost_theme.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/golden_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/golden_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/green_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/green_theme.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/light_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/light_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/list_styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/list_styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/list_styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/midnight_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/midnight_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/monochrome_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/monochrome_theme.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/neon_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/neon_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/ocean_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/ocean_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/pastel_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/pastel_theme.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/css/pinky_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/pinky_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/left_hand.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/left_hand.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/left_index.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/left_index.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/left_middle.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/left_middle.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/left_pinky.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/left_pinky.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/left_ring.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/left_ring.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/left_thumb.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/left_thumb.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/right_hand.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/right_hand.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/right_index.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/right_index.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/right_middle.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/right_middle.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/right_pinky.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/right_pinky.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/right_ring.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/right_ring.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/right_thumb.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/right_thumb.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/setting.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/certificate.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/certificate.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/setting_about.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_about.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/setting_credits.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_credits.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/sunset_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/sunset_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/lesson_progress.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/lesson_progress.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/settings.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,7 +263,7 @@
       <workItem from="1759672818418" duration="4109000" />
       <workItem from="1759724722563" duration="14715000" />
       <workItem from="1759770096942" duration="5153000" />
-      <workItem from="1759806263334" duration="10490000" />
+      <workItem from="1759806263334" duration="11688000" />
     </task>
     <task id="LOCAL-00001" summary="Need to add wpm!&#10;Failed to pause the writing when typing wrong character!">
       <option name="closed" value="true" />
@@ -644,7 +633,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759809408517</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Implemented 2 more themes!&#10;Update hand images.&#10;Remove the custom top app bar and just use system bar.">
+      <option name="closed" value="true" />
+      <created>1759819148203</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1759819148203</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -663,7 +660,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="false" />
-    <MESSAGE value="Added - Panlong Keyboard&#10;Added - Namkhone Keyboard" />
     <MESSAGE value="Added - Minimize Option" />
     <MESSAGE value="Version 1.1" />
     <MESSAGE value="Version 1.1 Release!" />
@@ -688,14 +684,15 @@
     <MESSAGE value="Implemented Showing Loading Progress Dialog after login success.&#10;Added bold font for AJ 00" />
     <MESSAGE value="Change the buttons to be rounded rectangular instead of circular." />
     <MESSAGE value="Implemented keyboard with hand images showing which key to type." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented keyboard with hand images showing which key to type." />
+    <MESSAGE value="Implemented 2 more themes!&#10;Update hand images.&#10;Remove the custom top app bar and just use system bar." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented 2 more themes!&#10;Update hand images.&#10;Remove the custom top app bar and just use system bar." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SettingsController.java</url>
-          <line>683</line>
+          <line>682</line>
           <properties class="it.saimao.tmk_typing_tutor.controller.SettingsController">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -722,7 +719,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SettingsController.java</url>
-          <line>365</line>
+          <line>364</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>

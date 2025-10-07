@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="650.0" prefWidth="900.0" stylesheets="@../css/list_styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.controller.SettingsController">
+<BorderPane prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.controller.SettingsController">
     
     <!-- Top section with title -->
     <top>

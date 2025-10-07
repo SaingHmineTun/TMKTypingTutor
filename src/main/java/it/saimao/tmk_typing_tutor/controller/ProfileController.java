@@ -94,8 +94,6 @@ public class ProfileController implements Initializable {
             scene.getStylesheets().clear();
             // Apply the user's selected theme
             scene.getStylesheets().add(stylesheet);
-            // Add list styles
-            scene.getStylesheets().add(getClass().getResource("/css/list_styles.css").toExternalForm());
         }
     }
 

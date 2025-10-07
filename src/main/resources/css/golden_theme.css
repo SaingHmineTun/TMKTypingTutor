@@ -7,7 +7,7 @@
     -fx-outcome-color: #fef3c7; /* keyText: 'text-yellow-100' */
     -fx-outcome-miscolor: #f59e0b; /* accent: 'text-amber-400' for mistakes */
     -fx-title-color: #fbbf24; /* accent: 'text-amber-400' for title */
-    -fx-to-type-node-color: #fde68a; /* highlight: 'from-yellow-300 to-amber-500' */
+    -fx-to-type-node-color: #514204; /* highlight: 'from-yellow-300 to-amber-500' */
     -fx-text-color: #fef3c7; /* textPrimary: 'text-yellow-50' */
 }
 
@@ -289,12 +289,12 @@
     -fx-text-fill: #111827;
 }
 
-.table-view .column-header-background {
+.table-view .column-header {
     /* highlight: 'from-yellow-300 to-amber-500' */
     -fx-background-color: linear-gradient(to right, #fde68a, #f59e0b);
 }
 
-.table-view .column-header-background .label {
+.table-view .column-header .label {
     -fx-text-fill: #111827; /* highlight text: 'text-gray-900' */
     -fx-font-weight: bold;
     -fx-font-size: 16;

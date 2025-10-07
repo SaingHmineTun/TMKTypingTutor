@@ -101,8 +101,6 @@ public class LessonProgressController implements Initializable {
             // Apply the user's selected theme
             scene.getStylesheets().clear();
             scene.getStylesheets().add(stylesheet);
-            // Add list styles
-            scene.getStylesheets().add(getClass().getResource("/css/list_styles.css").toExternalForm());
         }
     }
 

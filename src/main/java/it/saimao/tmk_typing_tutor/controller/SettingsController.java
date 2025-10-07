@@ -259,11 +259,11 @@ public class SettingsController implements Initializable {
             lvThemes = (ListView<Theme>) node;
         }
 
-        // Initializethemeslist
+        // Initialize themes list
         if (lvThemes != null) {
             lvThemes.setItems(FXCollections.observableArrayList(Theme.values()));
 
-//Set custom cell factory to show theme nameand select button
+//Set custom cell factory to show theme name and select button
             lvThemes.setCellFactory(param -> new ListCell<Theme>() {
                 @Override
                 protected void updateItem(Theme item, boolean empty) {
@@ -303,10 +303,9 @@ public class SettingsController implements Initializable {
                                 getScene().getRoot().getStylesheets().add(stylesheet);
                             }
 
-// Refreshthe themelist to update button text
                             lvThemes.refresh();
 
-                            showAlert("Theme updated successfully!", Alert.AlertType.INFORMATION);
+                            Toast.showToast(mainController.getStage(), "Theme updated successfully!", 2000);
                         });
 
                         Region spacer = new Region();

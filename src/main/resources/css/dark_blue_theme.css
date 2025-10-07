@@ -303,12 +303,12 @@
     -fx-text-fill: #040d21;
 }
 
-.table-view .column-header-background {
+.table-view .column-header {
     /* highlight: 'from-cyan-400 to-teal-500' */
     -fx-background-color: linear-gradient(to right, #22d3ee, #14b8a6);
 }
 
-.table-view .column-header-background .label {
+.table-view .column-header .label {
     /* text-blue-950 */
     -fx-text-fill: #040d21;
     -fx-font-weight: bold;
