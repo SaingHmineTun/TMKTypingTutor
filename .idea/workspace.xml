@@ -10,28 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Implemented 2 more themes!&#10;Update hand images.&#10;Remove the custom top app bar and just use system bar.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/LessonProgressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/LessonProgressController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/ProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/SettingsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/crimson_red_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/crimson_red_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/dark_blue_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/dark_blue_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/dark_green_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/dark_green_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/dark_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/dark_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/frost_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/frost_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/golden_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/golden_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/green_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/green_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/light_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/light_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/list_styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/midnight_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/midnight_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/monochrome_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/monochrome_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/neon_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/neon_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/ocean_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/ocean_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/pastel_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/pastel_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/pinky_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/pinky_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/sunset_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/sunset_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/lesson_progress.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/lesson_progress.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/settings.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +94,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "hand-images",
+    "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/JavaProjects/TMKTypingTutor/src/main/resources/images",
@@ -702,7 +681,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/LessonProgressController.java</url>
           <line>81</line>
-          <properties class="it.saimao.tmk_typing_tutor.controller.LessonProgressController" method="initData">
+          <properties class="it.saimao.tmk_typing_tutor.controller.LessonProgressController">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
