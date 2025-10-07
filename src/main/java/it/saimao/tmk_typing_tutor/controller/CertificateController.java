@@ -4,9 +4,7 @@ import it.saimao.tmk_typing_tutor.model.User;
 import it.saimao.tmk_typing_tutor.services.LessonProgressService;
 import it.saimao.tmk_typing_tutor.utils.Toast;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.print.PrinterJob;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -94,26 +92,6 @@ public class CertificateController {
     private void close() {
         Stage stage = (Stage) btnClose.getScene().getWindow();
         stage.close();
-    }
-
-
-    @FXML
-    public void print() {
-        // 创建打印任务
-        PrinterJob job = PrinterJob.createPrinterJob();
-
-        if (job != null) {
-            // 设置打印内容为整个证书面板
-            boolean success = job.showPrintDialog(btnClose.getScene().getWindow());
-
-            if (success) {
-                // 执行打印
-                boolean printed = job.printPage(vbCertificate);
-                if (printed) {
-                    job.endJob();
-                }
-            }
-        }
     }
 
 }

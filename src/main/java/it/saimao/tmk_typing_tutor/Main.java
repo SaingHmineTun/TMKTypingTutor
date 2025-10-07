@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -26,8 +25,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image(getClass().getResource("/images/app_icon.png").toExternalForm()));
         primaryStage.setTitle("TMK Typing Tutor");
-        // Remove the Windows title bar and use custom title bar
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 }

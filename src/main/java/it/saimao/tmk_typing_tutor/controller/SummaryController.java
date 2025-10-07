@@ -16,6 +16,8 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
+import static it.saimao.tmk_typing_tutor.utils.Utils.createIcon;
+
 public class SummaryController {
     @FXML
     private Label sTitle;
@@ -115,10 +117,10 @@ public class SummaryController {
         Theme selectedTheme = mainController.getCbTheme().getSelectionModel().getSelectedItem();
         String iconColor = selectedTheme != null ? selectedTheme.iconColor() : "white";
 //Change icon color for CLOSE, PREV, RETRY, NEXT according to the theme
-        sClose.setGraphic(createIcon("close", iconColor));
-        sPrev.setGraphic(createIcon("prev", iconColor));
-        sRetry.setGraphic(createIcon("retry", iconColor));
-        sNext.setGraphic(createIcon("next", iconColor));
+        sClose.setGraphic(new ImageView(createIcon("close", iconColor)));
+        sPrev.setGraphic(new ImageView(createIcon("prev", iconColor)));
+        sRetry.setGraphic(new ImageView(createIcon("retry", iconColor)));
+        sNext.setGraphic(new ImageView(createIcon("next", iconColor)));
 
         // Apply the theme's stylesheet to the stage
         String themeId = selectedTheme != null ? selectedTheme.id() : "light_theme";
@@ -126,30 +128,4 @@ public class SummaryController {
         stage.getScene().getStylesheets().add(stylesheet);
     }
 
-    private ImageView createIcon(String iconName, String iconColor) {
-        String imagePath = String.format("/images/%s_%s.png", iconName, iconColor);
-
-        // Check if the specific icon exists, if not use appropriate fallback
-        if (getClass().getResourceAsStream(imagePath) == null) {
-            // For close, prev, next and retry icons, fallback to either dark orwhite depending on what's available
-            if ("close".equals(iconName) || "prev".equals(iconName) || "next".equals(iconName) || "retry".equals(iconName)) {
-                String fallbackColor = "white".equals(iconColor) ? "dark" : "white";
-                String fallbackPath = String.format("/images/%s_%s.png", iconName, fallbackColor);
-                if (getClass().getResourceAsStream(fallbackPath) != null) {
-                    imagePath = fallbackPath;
-                } else {
-                    // If neither color variant exists, use the default one without color suffix
-                    imagePath = String.format("/images/%s.png", iconName);
-                }
-            }
-        }
-
-        // Final check to ensure we have a valid image path
-        if (getClass().getResourceAsStream(imagePath) == null) {
-            imagePath = "/images/" + iconName + ".png";
-        }
-
-        Image image = new Image(getClass().getResourceAsStream(imagePath), 20, 20, true, true);
-        return new ImageView(image);
-    }
 }

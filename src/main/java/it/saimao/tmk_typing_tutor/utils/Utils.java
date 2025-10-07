@@ -1,6 +1,9 @@
 package it.saimao.tmk_typing_tutor.utils;
 
+import it.saimao.tmk_typing_tutor.Main;
 import it.saimao.tmk_typing_tutor.model.Hand;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class Utils {
     public static boolean isEnglishCharacter(String value) {
@@ -32,6 +35,33 @@ public class Utils {
             }
         }
         return hand;
+    }
+
+    public static Image createIcon(String iconName, String iconColor) {
+        String imagePath = String.format("/images/%s_%s.png", iconName, iconColor);
+
+        // Check if the specific icon exists, if not use appropriate fallback
+        if (Main.class.getResourceAsStream(imagePath) == null) {
+            // For close, prev, next and retry icons, fallback to either dark orwhite depending on what's available
+            if ("close".equals(iconName) || "prev".equals(iconName) || "next".equals(iconName) || "retry".equals(iconName)) {
+                String fallbackColor = "white".equals(iconColor) ? "dark" : "white";
+                String fallbackPath = String.format("/images/%s_%s.png", iconName, fallbackColor);
+                if (Main.class.getResourceAsStream(fallbackPath) != null) {
+                    imagePath = fallbackPath;
+                } else {
+                    // If neither color variant exists, use the default one without color suffix
+                    imagePath = String.format("/images/%s.png", iconName);
+                }
+            }
+        }
+
+        // Final check to ensure we have a valid image path
+        if (Main.class.getResourceAsStream(imagePath) == null) {
+            imagePath = "/images/" + iconName + ".png";
+        }
+
+        Image image = new Image(Main.class.getResourceAsStream(imagePath), 20, 20, true, true);
+        return image;
     }
 
 

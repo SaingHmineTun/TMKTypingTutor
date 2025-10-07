@@ -8,53 +8,6 @@
 <?import javafx.scene.paint.*?>
 
 <BorderPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="800.0" stylesheets="@../css/light_theme.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.controller.MainController">
-   <top>
-
-      <HBox id="title" fx:id="titleBar" alignment="CENTER" minHeight="35.0" prefHeight="35.0">
-         <children>
-            <VBox fx:id="tLogo" alignment="CENTER" prefHeight="35.0" prefWidth="50.0">
-               <children>
-                  <ImageView fx:id="imgLogo" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/app_icon_256.png" />
-                     </image></ImageView>
-               </children>
-               <padding>
-                  <Insets left="5.0" />
-               </padding>
-            </VBox>
-            <Label id="title" fx:id="tLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" style="-fx-font-size: 22;" text="TMK Typing Tutor" textFill="WHITE" HBox.hgrow="ALWAYS">
-            </Label>
-            <VBox fx:id="vbProfile" alignment="CENTER" prefHeight="35.0" prefWidth="50.0">
-               <children>
-                  <ImageView fx:id="imgProfile" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/setting.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </VBox>
-            <VBox id="vbMinimize" fx:id="vbMinimize" alignment="CENTER" layoutX="760.0" layoutY="10.0" prefHeight="35.0" prefWidth="50.0">
-               <children>
-                  <ImageView fx:id="imgMinimize" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/minimize.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </VBox>
-            <VBox id="vbClose" fx:id="vbClose" alignment="CENTER" prefHeight="35.0" prefWidth="50.0">
-               <children>
-                  <ImageView fx:id="imgClose" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/close_white.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-   </top>
    <center>
       <VBox prefHeight="285.0" prefWidth="716.0" spacing="15.0">
          <children>
@@ -102,9 +55,9 @@
                   </ComboBox>
                   <Button fx:id="btPrev" contentDisplay="GRAPHIC_ONLY" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Prev">
                      <graphic>
-                        <ImageView fx:id="ivPrev" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/prev_white.png" />
+                              <Image url="@../images/prev_dark.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -132,9 +85,28 @@
                      </effect></ComboBox>
                   <Button fx:id="btNext" contentDisplay="GRAPHIC_ONLY" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Next">
                      <graphic>
-                        <ImageView fx:id="ivNext" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/next_white.png" />
+                              <Image url="@../images/next_dark.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <effect>
+                        <Lighting diffuseConstant="1.2">
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect>
+                  </Button>
+                  <Button fx:id="btSetting" contentDisplay="GRAPHIC_ONLY" layoutX="699.0" layoutY="10.0" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Setting">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/setting_dark.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -151,7 +123,7 @@
                   </Button>
                </children>
             </HBox>
-            <TextField id="view" fx:id="tfView" editable="false" focusTraversable="false" layoutX="10.0" layoutY="26.0" minHeight="-Infinity" prefHeight="50.0" text="ၵဝႃႈၵႆႇ ၵွပ်ႈတႆႇ မႆႉၼိူဝ်ၵွၼ်း။ ၶဝႃႈၶႆႇ မႄႈမၼ်း တႆႇမႃးငွမ်း။">
+            <TextField id="view" fx:id="tfView" editable="false" focusTraversable="false" layoutX="10.0" layoutY="26.0" minHeight="-Infinity" prefHeight="50.0">
                <effect>
                   <Lighting diffuseConstant="2.0" specularConstant="0.23" specularExponent="10.92" surfaceScale="0.61">
                      <bumpInput>
@@ -168,7 +140,7 @@
                </effect></TextField>
             <TextField id="practice" fx:id="tfPractice" minHeight="-Infinity" prefHeight="50.0" translateZ="100" />
              <HBox alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-               <ImageView fx:id="ivLeftHand" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fx:id="ivLeftHand" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@../images/left_hand.png" />
                   </image></ImageView>
@@ -179,7 +151,7 @@
                      <HBox fx:id="row4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" VBox.vgrow="ALWAYS" />
                      <HBox fx:id="row5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" VBox.vgrow="ALWAYS" />
                  </VBox>
-               <ImageView fx:id="ivRightHand" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fx:id="ivRightHand" fitHeight="250.0" fitWidth="250.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@../images/right_hand.png" />
                   </image>

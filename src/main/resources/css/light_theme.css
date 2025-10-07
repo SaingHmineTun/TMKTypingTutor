@@ -219,6 +219,11 @@
     -fx-background-radius: 4;
 }
 
+.list-view .list-cell:empty {
+    -fx-background-color: transparent;
+    -fx-cursor: default;
+}
+
 .list-view .scroll-bar .thumb:hover {
     -fx-background-color: derive(-fx-key-color, -40%);
 }

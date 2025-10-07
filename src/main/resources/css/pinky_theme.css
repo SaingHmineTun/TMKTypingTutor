@@ -1,13 +1,14 @@
 @import "using_font.css";
 
 .root {
-    -fx-background-color: #fce4ec;         /* light pink background */
-    -fx-key-color: #ec407a;                /* vibrant pink for keys */
-    -fx-outcome-color: #880e4f;            /* deep rose for outcome text */
-    -fx-outcome-miscolor: #b71c1c;         /* deep red-pink for mistake */
-    -fx-title-color: #f06292;              /* medium pink for title bar */
-    -fx-to-type-node-color: #f8bbd0;       /* soft pink for highlight */
-    -fx-text-color: #880e4f;               /* deep rose text */
+    /* bg: 'bg-gradient-to-br from-pink-950 via-pink-900 to-fuchsia-950' */
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #500724, #831843, #701a75);
+    -fx-key-color: #9d174d80; /* keyBg: 'bg-pink-800/80' with transparency */
+    -fx-outcome-color: #fce7f3; /* keyText: 'text-pink-100' */
+    -fx-outcome-miscolor: #e879f9; /* accent: 'text-fuchsia-400' for mistakes */
+    -fx-title-color: #d946ef; /* accent: 'text-fuchsia-400' for title */
+    -fx-to-type-node-color: #f0abfc; /* highlight: 'from-fuchsia-400 to-pink-500' */
+    -fx-text-color: #fdf2f8; /* textPrimary: 'text-pink-50' */
 }
 
 .text, .text-field {
@@ -25,22 +26,28 @@
 }
 
 #vbClose:pressed {
-    -fx-background-color: #b71c1c77;
+    -fx-background-color: #e879f977;
 }
 
 #vbMinimize:hover, #vbTheme:hover {
-    -fx-background-color: #d81b60;
+    /* highlight: 'from-fuchsia-400 to-pink-500' */
+    -fx-background-color: linear-gradient(to right, #e879f9, #ec4899);
+    /* text-pink-950 */
+    -fx-text-fill: #500724;
 }
 
 #vbMinimize:pressed, #vbTheme:pressed {
-    -fx-background-color: #ad1457;
+    -fx-background-color: #d946ef;
 }
 
 .key {
-    -fx-border-color: #fff;
-    -fx-border-width: 1;
-    -fx-text-fill: -fx-text-color;
+    /* keyBg: 'bg-pink-800/80 backdrop-blur-sm' */
     -fx-background-color: -fx-key-color;
+    /* keyBorder: 'border-pink-700/50' */
+    -fx-border-color: #be185d80;
+    -fx-border-width: 1;
+    /* keyText: 'text-pink-100' */
+    -fx-text-fill: -fx-outcome-color;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
@@ -55,34 +62,44 @@
 }
 
 #view {
-    -fx-border-color: -fx-text-color;
+    /* cardBg: 'bg-pink-800/60 backdrop-blur-md' */
+    -fx-background-color: #9d174d99;
     -fx-text-fill: -fx-text-color;
+    /* keyBorder: 'border-pink-700/50' */
+    -fx-border-color: #be185d80;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
 
 #practice {
-    -fx-background-color: #fce4ec; /* soft pink */
+    /* cardBg: 'bg-pink-800/60 backdrop-blur-md' */
+    -fx-background-color: #9d174d99;
     -fx-text-fill: -fx-text-color;
-    -fx-border-color: -fx-text-color;
+    /* keyBorder: 'border-pink-700/50' */
+    -fx-border-color: #be185d80;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
 
 .button {
-    -fx-background-color: -fx-key-color;
+    /* stats[0]: 'bg-gradient-to-r from-fuchsia-600 to-fuchsia-700' */
+    -fx-background-color: linear-gradient(to right, #c026d3, #a21caf);
     -fx-text-fill: -fx-text-color;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
-    -fx-border-color: #FFF;
+    /* shadow-lg shadow-fuchsia-500/25 */
+    -fx-effect: dropshadow(gaussian, #d946ef40, 10, 0, 0, 0);
 }
 
 .button:hover {
-    -fx-background-color: #f48fb1;
+    /* highlight: 'from-fuchsia-400 to-pink-500' */
+    -fx-background-color: linear-gradient(to right, #e879f9, #ec4899);
+    /* text-pink-950 */
+    -fx-text-fill: #500724;
 }
 
 .button:pressed {
-    -fx-background-color: #ec407a;
+    -fx-background-color: #d946ef;
 }
 
 .combo-box .text-field {
@@ -94,18 +111,25 @@
 }
 
 .combo-box {
-    -fx-background-color: -fx-key-color;
-    -fx-border-color: white;
+    /* stats[1]: 'bg-gradient-to-r from-pink-600 to-pink-700' */
+    -fx-background-color: linear-gradient(to right, #db2777, #be185d);
+    /* keyBorder: 'border-pink-700/50' */
+    -fx-border-color: #be185d80;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
+    /* shadow-lg shadow-pink-500/25 */
+    -fx-effect: dropshadow(gaussian, #ec489940, 10, 0, 0, 0);
 }
 
 .combo-box:hover {
-    -fx-background-color: #f8bbd0;
+    /* highlight: 'from-fuchsia-400 to-pink-500' */
+    -fx-background-color: linear-gradient(to right, #e879f9, #ec4899);
+    /* text-pink-950 */
+    -fx-text-fill: #500724;
 }
 
 .combo-box:pressed {
-    -fx-background-color: #f06292;
+    -fx-background-color: #d946ef;
 }
 
 .combo-box .cell {
@@ -118,21 +142,30 @@
 }
 
 .combo-box-popup .list-view {
-    -fx-background-color: -fx-key-color;
-    -fx-border-color: white;
+    /* panelBg: 'bg-pink-900/90 backdrop-blur-lg' */
+    -fx-background-color: #831843e6;
+    /* keyBorder: 'border-pink-700/50' */
+    -fx-border-color: #be185d80;
 }
 
 .combo-box-popup .list-view .list-cell {
+    /* keyBg: 'bg-pink-800/80 backdrop-blur-sm' */
     -fx-background-color: -fx-key-color;
     -fx-text-fill: -fx-text-color;
 }
 
 .combo-box-popup .list-view .list-cell:hover {
-    -fx-background-color: #f8bbd0;
+    /* highlight: 'from-fuchsia-400 to-pink-500' */
+    -fx-background-color: linear-gradient(to right, #e879f9, #ec4899);
+    /* text-pink-950 */
+    -fx-text-fill: #500724;
 }
 
 .combo-box-popup .list-view .list-cell:selected {
-    -fx-text-fill: -fx-outcome-color;
+    /* highlight: 'from-fuchsia-400 to-pink-500' */
+    -fx-background-color: linear-gradient(to right, #e879f9, #ec4899);
+    /* text-pink-950 */
+    -fx-text-fill: #500724;
     -fx-font-weight: bold;
 }
 
@@ -142,22 +175,32 @@
 }
 
 .combo-box .scroll-bar {
-    -fx-background-color: #f8bbd0;
+    /* stats[2]: 'bg-gradient-to-r from-rose-600 to-rose-700' */
+    -fx-background-color: linear-gradient(to right, #e11d48, #be123c);
 }
 
 #title {
-    -fx-background-color: -fx-title-color;
-    -fx-text-fill: -fx-text-color;
+    /* highlight: 'from-fuchsia-400 to-pink-500' */
+    -fx-background-color: linear-gradient(to right, #e879f9, #ec4899);
+    /* text-pink-950 */
+    -fx-text-fill: #500724;
     -fx-font-size: 24;
     -fx-font-family: 'VistolSans-Black';
+    /* shadow-lg shadow-fuchsia-500/25 */
+    -fx-effect: dropshadow(gaussian, #d946ef40, 10, 0, 0, 0);
 }
 
 .key-label {
-    -fx-text-fill: -fx-text-color;
+    -fx-text-fill: -fx-outcome-color;
 }
 
 #key-node-to-type {
-    -fx-background-color: -fx-to-type-node-color;
+    /* highlight: 'from-fuchsia-400 to-pink-500' */
+    -fx-background-color: linear-gradient(to right, #e879f9, #ec4899);
+    /* text-pink-950 */
+    -fx-text-fill: #500724;
+    /* shadow-lg shadow-fuchsia-500/25 */
+    -fx-effect: dropshadow(gaussian, #d946ef40, 10, 0, 0, 0);
 }
 
 #key-node-default {
@@ -166,8 +209,10 @@
 
 /* Improved ListView styling */
 .list-view {
-    -fx-background-color: -fx-key-color;
-    -fx-border-color: derive(-fx-key-color, -20%);
+    /* panelBg: 'bg-pink-900/90 backdrop-blur-lg' */
+    -fx-background-color: #831843e6;
+    /* keyBorder: 'border-pink-700/50' */
+    -fx-border-color: #be185d80;
     -fx-border-width: 1;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
@@ -175,6 +220,7 @@
 }
 
 .list-view .list-cell {
+    /* keyBg: 'bg-pink-800/80 backdrop-blur-sm' */
     -fx-background-color: -fx-key-color;
     -fx-text-fill: -fx-text-color;
     -fx-padding: 12 16 12 16;
@@ -184,31 +230,42 @@
 }
 
 .list-view .list-cell:hover {
-    -fx-background-color: derive(-fx-key-color, -10%);
+    /* highlight: 'from-fuchsia-400 to-pink-500' */
+    -fx-background-color: linear-gradient(to right, #e879f9, #ec4899);
+    /* text-pink-950 */
+    -fx-text-fill: #500724;
     -fx-cursor: hand;
 }
 
 .list-view .list-cell:selected {
-    -fx-background-color: -fx-title-color;
-    -fx-text-fill: white;
+    /* highlight: 'from-fuchsia-400 to-pink-500' */
+    -fx-background-color: linear-gradient(to right, #e879f9, #ec4899);
+    /* text-pink-950 */
+    -fx-text-fill: #500724;
     -fx-font-weight: bold;
 }
 
 .list-view .scroll-bar .thumb {
-    -fx-background-color: derive(-fx-key-color, -30%);
+    /* stats[3]: 'bg-gradient-to-r from-purple-600 to-purple-700' */
+    -fx-background-color: linear-gradient(to right, #9333ea, #7e22ce);
     -fx-background-insets: 0;
     -fx-background-radius: 4;
 }
 
 .list-view .scroll-bar .thumb:hover {
-    -fx-background-color: derive(-fx-key-color, -40%);
+    /* highlight: 'from-fuchsia-400 to-pink-500' */
+    -fx-background-color: linear-gradient(to right, #e879f9, #ec4899);
+    /* text-pink-950 */
+    -fx-text-fill: #500724;
 }
 
 /* Improved TableView styling */
 .table-view {
-    -fx-background-color: transparent;
+    /* panelBg: 'bg-pink-900/90 backdrop-blur-lg' */
+    -fx-background-color: #831843e6;
     -fx-table-cell-border-color: transparent;
-    -fx-border-color: derive(-fx-key-color, -20%);
+    /* keyBorder: 'border-pink-700/50' */
+    -fx-border-color: #be185d80;
     -fx-border-width: 1;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
@@ -227,24 +284,33 @@
 }
 
 .table-view .table-row-cell {
+    /* keyBg: 'bg-pink-800/80 backdrop-blur-sm' */
     -fx-background-color: -fx-key-color;
     -fx-border-color: transparent;
 }
 
 .table-view .table-row-cell:hover {
-    -fx-background-color: derive(-fx-key-color, -10%);
+    /* highlight: 'from-fuchsia-400 to-pink-500' */
+    -fx-background-color: linear-gradient(to right, #e879f9, #ec4899);
+    /* text-pink-950 */
+    -fx-text-fill: #500724;
 }
 
 .table-view .table-row-cell:selected {
-    -fx-background-color: derive(-fx-title-color, 50%);
+    /* highlight: 'from-fuchsia-400 to-pink-500' */
+    -fx-background-color: linear-gradient(to right, #e879f9, #ec4899);
+    /* text-pink-950 */
+    -fx-text-fill: #500724;
 }
 
 .table-view .column-header-background {
-    -fx-background-color: -fx-title-color;
+    /* highlight: 'from-fuchsia-400 to-pink-500' */
+    -fx-background-color: linear-gradient(to right, #e879f9, #ec4899);
 }
 
 .table-view .column-header-background .label {
-    -fx-text-fill: white;
+    /* text-pink-950 */
+    -fx-text-fill: #500724;
     -fx-font-weight: bold;
     -fx-font-size: 16;
     -fx-padding: 12 10 12 10;
@@ -252,7 +318,7 @@
 }
 
 .table-view .table-column .label {
-    -fx-text-fill: white;
+    /* text-pink-950 */
+    -fx-text-fill: #500724;
     -fx-font-family: 'AJ 00';
 }
-
