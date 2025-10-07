@@ -876,6 +876,7 @@ public class SettingsController implements Initializable {
 
             controller.initData(user.getDisplayName(), "Shan Typing Tutor", df.format(overallAvgWpm));
 
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -902,8 +903,9 @@ public class SettingsController implements Initializable {
             double averageWpm = LessonProgressService.getAverageWpmForLevel(user.getId(), levelIndex);
             DecimalFormat df = new DecimalFormat("#.##");
 
-            controller.initData(user.getDisplayName(), "Level " + (levelIndex + 1), df.format(averageWpm));
+            controller.initData(user.getDisplayName(), "Level " + (levelIndex + 1) + " in Shan Typing Tutor", df.format(averageWpm));
 
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
