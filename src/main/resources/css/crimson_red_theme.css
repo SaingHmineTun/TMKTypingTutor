@@ -160,3 +160,56 @@
 #key-node-default {
     -fx-background-color: -fx-key-color;
 }
+/* ListView 样式 */
+.list-view {
+    -fx-background-color: -fx-key-color;
+    -fx-border-color: #ffeaea;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.list-view .list-cell {
+    -fx-background-color: -fx-key-color;
+    -fx-text-fill: -fx-text-color;
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: #ef5350;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: -fx-title-color;
+    -fx-text-fill: -fx-text-color;
+    -fx-font-weight: bold;
+}
+
+/* TableView 样式 */
+.table-view {
+    -fx-background-color: -fx-key-color;
+    -fx-border-color: #ffeaea;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: -fx-key-color;
+    -fx-text-fill: -fx-text-color;
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: #ef5350;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: -fx-title-color;
+    -fx-text-fill: -fx-text-color;
+    -fx-font-weight: bold;
+}
+
+.table-view .column-header {
+    -fx-background-color: -fx-title-color;
+}
+
+.table-view .table-column {
+    -fx-text-fill: -fx-text-color;
+}

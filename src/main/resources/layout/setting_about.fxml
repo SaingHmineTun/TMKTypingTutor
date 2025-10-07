@@ -28,7 +28,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                         </Label>
-                        <Label text="The purpose of this project is to provide Shan people practice Shan typing on their own machine. Because there are 4 typing keyboards in Shan language and this project is designed to support them all. Using this software requires no keyboard installed but would be better if users do so." wrapText="true">
+                        <Label text="The purpose of this project is to provide Shan people practice Shan typing on their own machine. Because there are 4 typing keyboards in Shan language, this project is designed to support them all. Using this software requires no keyboard installed but would be better if users do so." wrapText="true">
                             <font>
                                 <Font size="16.0" />
                             </font>

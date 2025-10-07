@@ -88,7 +88,7 @@ public class SettingsController implements Initializable {
     private User user;
     private MainController mainController;
     private final int[] lessonsPerLevel = {9, 82, 82, 130};
-    private MediaPlayer mediaPlayer;
+    private static MediaPlayer mediaPlayer;
     private MediaPlayer errorSoundPlayer;
     private String selectedErrorSound = "error1.mp3";
     private String selectedBackgroundMusic = null;
@@ -259,11 +259,11 @@ public class SettingsController implements Initializable {
             lvThemes = (ListView<Theme>) node;
         }
 
-        // Initializethemeslist
+        // Initialize themes list
         if (lvThemes != null) {
             lvThemes.setItems(FXCollections.observableArrayList(Theme.values()));
 
-//Set custom cell factory to show theme nameand select button
+//Set custom cell factory to show theme name and select button
             lvThemes.setCellFactory(param -> new ListCell<Theme>() {
                 @Override
                 protected void updateItem(Theme item, boolean empty) {
@@ -303,10 +303,9 @@ public class SettingsController implements Initializable {
                                 getScene().getRoot().getStylesheets().add(stylesheet);
                             }
 
-// Refreshthe themelist to update button text
                             lvThemes.refresh();
 
-                            showAlert("Theme updated successfully!", Alert.AlertType.INFORMATION);
+                            Toast.showToast(mainController.getStage(), "Theme updated successfully!", 2000);
                         });
 
                         Region spacer = new Region();
@@ -788,6 +787,7 @@ public class SettingsController implements Initializable {
         //Stop any currently playing music
         if (mediaPlayer != null) {
             mediaPlayer.stop();
+            mediaPlayer = null;
         }
 
         // Play the selected music
@@ -806,7 +806,7 @@ public class SettingsController implements Initializable {
 
                 selectedBackgroundMusic = fileName;
             } else {
-                showAlert("Couldnot findmusicfile: " + fileName, Alert.AlertType.ERROR);
+                showAlert("Could not findmusicfile: " + fileName, Alert.AlertType.ERROR);
             }
         } catch (Exception e) {
             showAlert("Error playing music:" + e.getMessage(), Alert.AlertType.ERROR);

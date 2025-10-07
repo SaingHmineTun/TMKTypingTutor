@@ -1,15 +1,17 @@
 package it.saimao.tmk_typing_tutor.model;
 
 public enum Theme {
-    DARK("dark_theme", "Dark", "white"),
     LIGHT("light_theme", "Light", "dark"),
-    GREEN("green_theme", "DarkGreen", "white"),
-    CRIMSON_RED("crimson_red_theme", "Red", "white"),
+    DARK("dark_theme", "Dark", "white"),
+    DARK_BLUE("dark_blue_theme", "Verdant Grove", "white"),
+    DARK_GREEN("dark_green_theme", "Forest Twilight", "white"),
+    CRIMSON_RED("crimson_red_theme", "Crimson Red", "white"),
     FROST("frost_theme", "Frost", "dark"),
     GOLDEN("golden_theme", "Golden", "dark"),
     MIDNIGHT("midnight_theme", "Midnight", "white"),
     MONOCHROME("monochrome_theme", "Monochrome", "white"),
     OCEAN("ocean_theme", "Ocean", "dark"),
+    GREEN("green_theme", "Jade Shadow", "white"),
     PASTEL("pastel_theme", "Pastel", "dark"),
     PINKY("pinky_theme", "Pinky", "dark"),
     SUNSET("sunset_theme", "Sunset", "dark"),

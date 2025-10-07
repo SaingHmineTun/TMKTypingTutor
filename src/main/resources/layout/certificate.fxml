@@ -50,7 +50,6 @@
     <bottom>
         <HBox alignment="CENTER" prefHeight="100.0" spacing="20.0">
             <children>
-                <Button fx:id="btnPrint" mnemonicParsing="false" onAction="#print" prefHeight="40.0" prefWidth="120.0" text="Print" />
                 <Button fx:id="btnSave" mnemonicParsing="false" onAction="#save" prefHeight="40.0" prefWidth="120.0" text="Save" />
                 <Button fx:id="btnClose" mnemonicParsing="false" onAction="#close" prefHeight="40.0" prefWidth="120.0" text="Close" />
             </children>

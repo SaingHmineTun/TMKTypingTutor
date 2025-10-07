@@ -1,14 +1,14 @@
 @import "using_font.css";
 
-
 .root {
-    -fx-background-color: #fff8e1;           /* soft golden background */
-    -fx-key-color: #fbc02d;                  /* golden yellow for keys */
-    -fx-outcome-color: #795548;              /* dark brown for outcome text */
-    -fx-outcome-miscolor: #c62828;           /* red for mistakes */
-    -fx-title-color: #fdd835;                /* brighter gold for title bar */
-    -fx-to-type-node-color: #fff176;         /* light yellow highlight */
-    -fx-text-color: #5d4037;                 /* coffee brown text */
+    /* bg: 'bg-gradient-to-br from-gray-950 via-gray-900 to-yellow-950' */
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #0a0a0a, #171717, #78350f);
+    -fx-key-color: #1f2937cc; /* keyBg: 'bg-gray-800/80' with transparency */
+    -fx-outcome-color: #fef3c7; /* keyText: 'text-yellow-100' */
+    -fx-outcome-miscolor: #f59e0b; /* accent: 'text-amber-400' for mistakes */
+    -fx-title-color: #fbbf24; /* accent: 'text-amber-400' for title */
+    -fx-to-type-node-color: #514204; /* highlight: 'from-yellow-300 to-amber-500' */
+    -fx-text-color: #fef3c7; /* textPrimary: 'text-yellow-50' */
 }
 
 .text, .text-field {
@@ -26,22 +26,26 @@
 }
 
 #vbClose:pressed {
-    -fx-background-color: #c6282877;
+    -fx-background-color: #f59e0b77;
 }
 
 #vbMinimize:hover, #vbTheme:hover {
-    -fx-background-color: #fbc02d;
+    /* highlight: 'from-yellow-300 to-amber-500' */
+    -fx-background-color: linear-gradient(to right, #fde68a, #f59e0b);
 }
 
 #vbMinimize:pressed, #vbTheme:pressed {
-    -fx-background-color: #f9a825;
+    -fx-background-color: #f59e0b;
 }
 
 .key {
-    -fx-border-color: #fff;
-    -fx-border-width: 1;
-    -fx-text-fill: -fx-text-color;
+    /* keyBg: 'bg-gray-800/80 backdrop-blur-sm' */
     -fx-background-color: -fx-key-color;
+    /* keyBorder: 'border-yellow-700/50' */
+    -fx-border-color: #a1620780;
+    -fx-border-width: 1;
+    /* keyText: 'text-yellow-100' */
+    -fx-text-fill: -fx-outcome-color;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
@@ -56,34 +60,44 @@
 }
 
 #view {
-    -fx-border-color: -fx-text-color;
+    /* cardBg: 'bg-gray-800/60 backdrop-blur-md' */
+    -fx-background-color: #1f293799;
     -fx-text-fill: -fx-text-color;
+    /* keyBorder: 'border-yellow-700/50' */
+    -fx-border-color: #a1620780;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
 
 #practice {
-    -fx-background-color: #fffde7; /* pale golden yellow */
+    /* cardBg: 'bg-gray-800/60 backdrop-blur-md' */
+    -fx-background-color: #1f293799;
     -fx-text-fill: -fx-text-color;
-    -fx-border-color: -fx-text-color;
+    /* keyBorder: 'border-yellow-700/50' */
+    -fx-border-color: #a1620780;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
 
 .button {
-    -fx-background-color: -fx-key-color;
+    /* stats[0]: 'bg-gradient-to-r from-amber-600 to-amber-700' */
+    -fx-background-color: linear-gradient(to right, #d97706, #b45309);
     -fx-text-fill: -fx-text-color;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
-    -fx-border-color: #FFF;
+    /* shadow-lg shadow-amber-500/25 */
+    -fx-effect: dropshadow(gaussian, #f59e0b40, 10, 0, 0, 0);
 }
 
 .button:hover {
-    -fx-background-color: #ffe082;
+    /* highlight: 'from-yellow-300 to-amber-500' */
+    -fx-background-color: linear-gradient(to right, #fde68a, #f59e0b);
+    /* highlight text: 'text-gray-900' */
+    -fx-text-fill: #111827;
 }
 
 .button:pressed {
-    -fx-background-color: #ffca28;
+    -fx-background-color: #f59e0b;
 }
 
 .combo-box .text-field {
@@ -95,18 +109,23 @@
 }
 
 .combo-box {
-    -fx-background-color: -fx-key-color;
-    -fx-border-color: white;
+    /* stats[1]: 'bg-gradient-to-r from-yellow-600 to-yellow-700' */
+    -fx-background-color: linear-gradient(to right, #ca8a04, #a16207);
+    /* keyBorder: 'border-yellow-700/50' */
+    -fx-border-color: #a1620780;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
+    /* shadow-lg shadow-yellow-500/25 */
+    -fx-effect: dropshadow(gaussian, #eab30840, 10, 0, 0, 0);
 }
 
 .combo-box:hover {
-    -fx-background-color: #ffe082;
+    /* highlight: 'from-yellow-300 to-amber-500' */
+    -fx-background-color: linear-gradient(to right, #fde68a, #f59e0b);
 }
 
 .combo-box:pressed {
-    -fx-background-color: #ffca28;
+    -fx-background-color: #f59e0b;
 }
 
 .combo-box .cell {
@@ -119,21 +138,28 @@
 }
 
 .combo-box-popup .list-view {
-    -fx-background-color: -fx-key-color;
-    -fx-border-color: white;
+    /* panelBg: 'bg-gray-900/90 backdrop-blur-lg' */
+    -fx-background-color: #111827e6;
+    /* keyBorder: 'border-yellow-700/50' */
+    -fx-border-color: #a1620780;
 }
 
 .combo-box-popup .list-view .list-cell {
+    /* keyBg: 'bg-gray-800/80 backdrop-blur-sm' */
     -fx-background-color: -fx-key-color;
     -fx-text-fill: -fx-text-color;
 }
 
 .combo-box-popup .list-view .list-cell:hover {
-    -fx-background-color: #ffe082;
+    /* highlight: 'from-yellow-300 to-amber-500' */
+    -fx-background-color: linear-gradient(to right, #fde68a, #f59e0b);
+    -fx-text-fill: #111827;
 }
 
 .combo-box-popup .list-view .list-cell:selected {
-    -fx-text-fill: -fx-outcome-color;
+    /* highlight: 'from-yellow-300 to-amber-500' */
+    -fx-background-color: linear-gradient(to right, #fde68a, #f59e0b);
+    -fx-text-fill: #111827;
     -fx-font-weight: bold;
 }
 
@@ -143,33 +169,42 @@
 }
 
 .combo-box .scroll-bar {
-    -fx-background-color: #ffe082;
+    /* stats[2]: 'bg-gradient-to-r from-orange-600 to-orange-700' */
+    -fx-background-color: linear-gradient(to right, #c2410c, #b45309);
 }
 
 #title {
-    -fx-background-color: -fx-title-color;
-    -fx-text-fill: -fx-text-color;
+    /* highlight: 'from-yellow-300 to-amber-500' */
+    -fx-background-color: linear-gradient(to right, #fde68a, #f59e0b);
+    -fx-text-fill: #111827; /* highlight text: 'text-gray-900' */
     -fx-font-size: 24;
     -fx-font-family: 'VistolSans-Black';
+    /* shadow-lg shadow-yellow-500/25 */
+    -fx-effect: dropshadow(gaussian, #f59e0b40, 10, 0, 0, 0);
 }
 
 .key-label {
-    -fx-text-fill: -fx-text-color;
+    -fx-text-fill: -fx-outcome-color;
 }
 
 #key-node-to-type {
-    -fx-background-color: -fx-to-type-node-color;
+    /* highlight: 'from-yellow-300 to-amber-500' */
+    -fx-background-color: linear-gradient(to right, #fde68a, #f59e0b);
+    -fx-text-fill: #111827; /* highlight text: 'text-gray-900' */
+    /* shadow-lg shadow-yellow-500/25 */
+    -fx-effect: dropshadow(gaussian, #f59e0b40, 10, 0, 0, 0);
 }
 
 #key-node-default {
     -fx-background-color: -fx-key-color;
 }
 
-
 /* Improved ListView styling */
 .list-view {
-    -fx-background-color: -fx-key-color;
-    -fx-border-color: derive(-fx-key-color, -20%);
+    /* panelBg: 'bg-gray-900/90 backdrop-blur-lg' */
+    -fx-background-color: #111827e6;
+    /* keyBorder: 'border-yellow-700/50' */
+    -fx-border-color: #a1620780;
     -fx-border-width: 1;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
@@ -177,6 +212,7 @@
 }
 
 .list-view .list-cell {
+    /* keyBg: 'bg-gray-800/80 backdrop-blur-sm' */
     -fx-background-color: -fx-key-color;
     -fx-text-fill: -fx-text-color;
     -fx-padding: 12 16 12 16;
@@ -186,31 +222,38 @@
 }
 
 .list-view .list-cell:hover {
-    -fx-background-color: derive(-fx-key-color, -10%);
+    /* highlight: 'from-yellow-300 to-amber-500' */
+    -fx-background-color: linear-gradient(to right, #fde68a, #f59e0b);
+    -fx-text-fill: #111827; /* highlight text: 'text-gray-900' */
     -fx-cursor: hand;
 }
 
 .list-view .list-cell:selected {
-    -fx-background-color: -fx-title-color;
-    -fx-text-fill: white;
+    /* highlight: 'from-yellow-300 to-amber-500' */
+    -fx-background-color: linear-gradient(to right, #fde68a, #f59e0b);
+    -fx-text-fill: #111827;
     -fx-font-weight: bold;
 }
 
 .list-view .scroll-bar .thumb {
-    -fx-background-color: derive(-fx-key-color, -30%);
+    /* stats[3]: 'bg-gradient-to-r from-gray-600 to-gray-700' */
+    -fx-background-color: linear-gradient(to right, #57534e, #44403c);
     -fx-background-insets: 0;
     -fx-background-radius: 4;
 }
 
 .list-view .scroll-bar .thumb:hover {
-    -fx-background-color: derive(-fx-key-color, -40%);
+    /* highlight: 'from-yellow-300 to-amber-500' */
+    -fx-background-color: linear-gradient(to right, #fde68a, #f59e0b);
 }
 
 /* Improved TableView styling */
 .table-view {
-    -fx-background-color: transparent;
+    /* panelBg: 'bg-gray-900/90 backdrop-blur-lg' */
+    -fx-background-color: #111827e6;
     -fx-table-cell-border-color: transparent;
-    -fx-border-color: derive(-fx-key-color, -20%);
+    /* keyBorder: 'border-yellow-700/50' */
+    -fx-border-color: #a1620780;
     -fx-border-width: 1;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
@@ -229,24 +272,30 @@
 }
 
 .table-view .table-row-cell {
+    /* keyBg: 'bg-gray-800/80 backdrop-blur-sm' */
     -fx-background-color: -fx-key-color;
     -fx-border-color: transparent;
 }
 
 .table-view .table-row-cell:hover {
-    -fx-background-color: derive(-fx-key-color, -10%);
+    /* highlight: 'from-yellow-300 to-amber-500' */
+    -fx-background-color: linear-gradient(to right, #fde68a, #f59e0b);
+    -fx-text-fill: #111827; /* highlight text: 'text-gray-900' */
 }
 
 .table-view .table-row-cell:selected {
-    -fx-background-color: derive(-fx-title-color, 50%);
+    /* highlight: 'from-yellow-300 to-amber-500' */
+    -fx-background-color: linear-gradient(to right, #fde68a, #f59e0b);
+    -fx-text-fill: #111827;
 }
 
-.table-view .column-header-background {
-    -fx-background-color: -fx-title-color;
+.table-view .column-header {
+    /* highlight: 'from-yellow-300 to-amber-500' */
+    -fx-background-color: linear-gradient(to right, #fde68a, #f59e0b);
 }
 
-.table-view .column-header-background .label {
-    -fx-text-fill: white;
+.table-view .column-header .label {
+    -fx-text-fill: #111827; /* highlight text: 'text-gray-900' */
     -fx-font-weight: bold;
     -fx-font-size: 16;
     -fx-padding: 12 10 12 10;
@@ -254,7 +303,6 @@
 }
 
 .table-view .table-column .label {
-    -fx-text-fill: white;
+    -fx-text-fill: #111827; /* highlight text: 'text-gray-900' */
     -fx-font-family: 'AJ 00';
 }
-
