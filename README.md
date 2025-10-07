@@ -1,4 +1,4 @@
-# TMK Typing Tutor
+#TMK Typing Tutor
 
 A comprehensive typing tutor application designed to help users master Shan language typing on PC. The lessons are inspired by the "Learn Tai Easy" e-book (ပပ်ႉႁဵၼ်းလိၵ်ႈတႆးၸဵဝ်းမေႃဝႆး).
 
@@ -6,7 +6,7 @@ This software is specifically developed to teach Shan language typing on compute
 
 ## Features
 
-- **Multiple Keyboard Layouts**: Supports SIL, Yunghkio, Kawsai (Panglong), and Namkhone keyboard layouts
+- **Multiple Keyboard Layouts**: Supports SIL, Yunghkio, Kawsai (Panglong), andNamkhone keyboard layouts
 - **Extensive Lesson System**: Four progressive levels with numerous lessons covering basic to advanced Shan typing
 - **Multiple Themes**: 14+ beautiful themes including Light, Dark, Ocean, Sunset, Neon, and more
 - **Progress Tracking**: Detailed statistics and progress tracking for each lesson
@@ -17,7 +17,7 @@ This software is specifically developed to teach Shan language typing on compute
 
 1. **Registration/Login**: 
    - New users need to register an account with a username and password
-   - Returning users can log in with their existing credentials
+   - Returning users canlog in with their existing credentials
 
 2. **Select Keyboard Layout**:
    - Choose from 4 available keyboard layouts: SIL, Yunghkio, Kawsai (Panglong), or Namkhone
@@ -29,7 +29,7 @@ This software is specifically developed to teach Shan language typing on compute
 
 4. **Start Learning**:
    - Progress through 4 levels of lessons, from basic to advanced Shan typing
-   - Each lesson focuses on specific characters or typing techniques
+   - Each lesson focuseson specific characters or typing techniques
    - Practice at your own pace and track your progress
 
 5. **Track Progress**:
@@ -38,13 +38,13 @@ This software is specifically developed to teach Shan language typing on compute
    - Earn certificates as you complete lessons and levels
 
 6. **Customize Settings**:
-   - Adjust background music volume or disable it completely
+   -Adjust background music volume or disable it completely
    - Enable or disable error sounds
    - Modify other preferences to suit your learning style
 
 ## About
 
-This project is called TMK Typing Tutor and is a computer software that can be installed on Windows, Linux and Mac OS and is developed by Sai Mao (TMK Muse) using JavaFX Technology.
+This project is called TMK Typing Tutor and is a computer software that can be installed on Windows, Linux and Mac OS and is developed by Sai Mao (TMKMuse) using JavaFX Technology.
 
 The purpose of this project is to provide Shan people practice Shan typing on their own machine. Because there are 4 typing keyboards in Shan language, this project is designed to support them all. Using this software requires no keyboard installed but would be better if users do so.
 
@@ -56,19 +56,19 @@ If users have issue and want to report, feel free to connect us via the followin
 
 ## Credits
 
-We would like to thank the following people for their contributions to this project:
+We would like to thank thefollowing people for their contributions to this project:
 
 - **LMS School for English (ႁူင်းႁဵၼ်းလူင်မူႉ)**
   For the various support from Venerable Mendaka and Fohn C Kham.
 
-- **Shan Institute of Information Technology (SIIT)**
+-**Shan Institute of Information Technology (SIIT)**
   For the various advice from Sai Zom Tai and Sai Mawn Kham.
 
 - **Jao Kunheing (A J Kunheing)**
   For providing fonts to use in this project
 
 - **Jao Tai Num**
-  For the help with Namkhone Keyboard and tutorials for Level 4 in it.
+  For the helpwith Namkhone Keyboard and tutorials for Level 4 in it.
 
 - **Sai Tawng Pha (PL Dev)**
   For the idea to create the keyboard and many uncountable helps and supports
@@ -95,7 +95,7 @@ The application offers a rich selection of 14+ visually appealing themes:
 2. Dark Theme
 3. Dark Blue Theme
 4. Dark Green Theme
-5. Crimson Red Theme
+5. Crimson RedTheme
 6. Ocean Theme
 7. Frost Theme
 8. Golden Theme
@@ -107,7 +107,7 @@ The application offers a rich selection of 14+ visually appealing themes:
 14. Neon Theme
 15. Green Theme
 
-Each theme features carefully designed color schemes with gradient backgrounds and consistent UI elements for an enhanced user experience.
+Each theme features carefullydesigned color schemes with gradient backgrounds and consistent UI elements for an enhanced user experience.
 
 ## Screenshots
 
@@ -125,7 +125,7 @@ Each theme features carefully designed color schemes with gradient backgrounds a
 - **Framework**: JavaFX
 - **Build Tool**: Maven
 - **UI Design**: FXML with CSS styling
-- **Database**: SQLite
+-**Database**: SQLite
 
 ## Getting Started
 
@@ -133,9 +133,23 @@ Each theme features carefully designed color schemes with gradient backgrounds a
 - Java 25 or higher
 - Maven
 
-### Installation
+### Linux(Ubuntu/Debian) Additional Requirements
+On Ubuntu or Debian-based systems, JavaFX Media Player requires gstreamer plugins to function properly. If you encounter media playback errors, you need to install the following packages:
 
-1. Clone or download the repository:
+```bash
+sudo apt-get update
+sudo apt-get install libgstreamer-plugins-base1.0-0 gstreamer1.0-plugins-base libgstreamer1.0-0
+```
+
+For some systems, you might also need additional gstreamer plugins:
+
+```bash
+sudo apt-get install gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly
+```
+
+Without these packages, the application may fail to start or throw errors related to media playback on Ubuntu systems.
+
+###Installation1. Clone or download the repository:
    ```
    git clone https://github.com/SaingHmineTun/TMKTypingTutor.git
    ```
