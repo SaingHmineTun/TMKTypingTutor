@@ -56,6 +56,11 @@ public class MainController implements Initializable {
     @FXML
     private ImageView imgMinimize;
     @FXML
+    private ImageView ivLeftHand;
+
+    @FXML
+    private ImageView ivRightHand;
+    @FXML
     private VBox tLogo;
     @FXML
     private ImageView imgLogo;
@@ -473,6 +478,7 @@ public class MainController implements Initializable {
     private long startTime;
     private int misTyped;
     private boolean end;
+    private SummaryController summaryControllerDialog;
 
     private void initPracticeListener() {
         var soundURL = getClass().getResource("/audio/error1.mp3");
@@ -537,6 +543,12 @@ public class MainController implements Initializable {
             String mustType = testText.substring(indexOfPractice - 1, indexOfPractice);
             typing = practiceText.substring(indexOfPractice - 1, indexOfPractice);
             if (Utils.isEnglishCharacter(typing) && !isConverted) {
+
+                // Setting the hand image based on the key to type!
+                Hand hand = Utils.getAppropriateHand(typing.toLowerCase());
+                ivLeftHand.setImage(hand.getLeftHand());
+                ivRightHand.setImage(hand.getRightHand());
+
                 // Config for Namkhone Keyboard
                 if (keyboard == 3) {
                     // Show  ိံ  key
@@ -700,15 +712,17 @@ public class MainController implements Initializable {
                 saveLessonProgress();
 
                 String title = cbLevel.getValue() + " :" + cbLessons.getValue().getTitle();
-                SummaryController summaryControllerDialog = new SummaryController(this, primaryStage);
+                if (summaryControllerDialog == null)
+                    summaryControllerDialog = new SummaryController(this, primaryStage);
                 summaryControllerDialog.showDialog(title, wpm, accuracy, misTyped, awpm);
                 return;
             }
 
         }
 
+
         if (indexOfPractice < tfView.getText().length()) {
-            // Knowwhich value to type next
+            // Know which value to type next
             String valueToType = testText.substring(indexOfPractice, indexOfPractice + 1);
             if (keyboard == 3) {
                 // Show  ိံ key
@@ -826,7 +840,7 @@ public class MainController implements Initializable {
 
 
             if (valueToType.equals(" ")) {
-                highlightThisValue("SPACE", 0, 5);
+                highlightThisValue("SPACE", 5, new Hand());
             } else {
                 for (int x = 0; x < allValues.size(); x++) {
                     Map<String, String> row = allValues.get(x);
@@ -835,9 +849,11 @@ public class MainController implements Initializable {
                         for (int y = 0; y < values.size(); y++) {
                             String val = values.get(y);
                             if (valueToType.equals(val)) {
+                                Hand hand = getHand(keyboard, valueToType);
+                                updateHand(hand);
                                 typeThisValue(x, y);
                                 if (x % 2 == 1) {
-                                    highlightThisValue("SHIFT", x, y);
+                                    highlightThisValue("SHIFT", y, hand);
                                 }
                                 break;
                             }
@@ -847,6 +863,38 @@ public class MainController implements Initializable {
                 }
             }
         }
+    }
+
+    private void updateHand(Hand hand) {
+        ivRightHand.setImage(hand.getRightHand());
+        ivLeftHand.setImage(hand.getLeftHand());
+    }
+
+    private Hand getHand(int keyboardIndex, String valueToType) {
+        Map<String, String> allValues;
+        if (keyboardIndex == 0) {
+            allValues = SIL_KeyMap.getAllValuesMap();
+        } else if (keyboardIndex == 1) {
+            allValues = Yunghkio_KeyMap.getAllValuesMap();
+        } else if (keyboardIndex == 2) {
+            allValues = Panglong_KeyMap.getAllValuesMap();
+        } else if (keyboardIndex == 3) {
+            allValues = NamKhone_KeyMap.getAllValuesMap();
+        } else {
+            throw new RuntimeException("Keyboard is not selected");
+        }
+
+        for (var entry : allValues.entrySet()) {
+            if (entry.getValue().equals(valueToType)) {
+                System.out.println("Update hand for " + entry.getKey().toLowerCase());
+                Hand hand = Utils.getAppropriateHand(entry.getKey().toLowerCase());
+                ivLeftHand.setImage(hand.getLeftHand());
+                ivRightHand.setImage(hand.getRightHand());
+                return hand;
+            }
+        }
+        return new Hand();
+
     }
 
     private void saveLessonProgress() {
@@ -997,7 +1045,8 @@ public class MainController implements Initializable {
         if (toTypeSecNode != null) toTypeSecNode.setId("key-node-default");
     }
 
-    private void highlightThisValue(String key, int row, int col) {
+    private void highlightThisValue(String key, int col, Hand hand) {
+        System.out.println("Highlight this value: " + key);
         if (toTypeSecNode != null) {
             toTypeSecNode.setId("key-node-default");
         }
@@ -1006,8 +1055,10 @@ public class MainController implements Initializable {
                 int determination = 5;
                 if (col > determination) {
                     toTypeSecNode = row4.getChildren().get(0);
+                    hand.setLeftHand("left_pinky");
                 } else {
                     toTypeSecNode = row4.getChildren().get(row4.getChildren().size() - 1);
+                    hand.setRightHand("right_pinky");
                 }
             }
             case "SPACE" -> {
@@ -1015,8 +1066,11 @@ public class MainController implements Initializable {
                     toTypeNode.setId("key-node-default");
                 }
                 toTypeSecNode = row5.getChildren().get(3);
+                hand.setRightHand("right_thumb");
+                hand.setLeftHand("left_thumb");
             }
         }
+        updateHand(hand);
         if (toTypeSecNode != null) toTypeSecNode.setId("key-node-to-type");
     }
 

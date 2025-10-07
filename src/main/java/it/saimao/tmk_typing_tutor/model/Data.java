@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Data {
-    public static final ObservableList<String> musicList = FXCollections.observableArrayList("No Background Music", "Classroom Timer withRelaxing WAVES Music", "Soft Peaceful Music Timer", "Timer with Relaxing MusicandAlarm", "NatureBackground Sound", "Peaceful Ambient StressRelief", "CalmNature Sounds", "Rain and Thunderstorm Sounds", "Waterfall Relaxing Nature Sounds", "Relaxing Music for Stress Relief");
+    public static final ObservableList<String> musicList = FXCollections.observableArrayList("No Background Music", "Classroom Timer withRelaxing WAVES Music", "Soft Peaceful Music Timer", "Timer with Relaxing MusicandAlarm", "Nature Background Sound", "Peaceful Ambient StressRelief", "CalmNature Sounds", "Rain and Thunderstorm Sounds", "Waterfall Relaxing Nature Sounds", "Sunset, Ocean and Moon");
 
     public static final Map<String, String> musicNameToFileMap = Map.of(
             musicList.get(0), "",

@@ -88,7 +88,7 @@ public class SettingsController implements Initializable {
     private User user;
     private MainController mainController;
     private final int[] lessonsPerLevel = {9, 82, 82, 130};
-    private MediaPlayer mediaPlayer;
+    private static MediaPlayer mediaPlayer;
     private MediaPlayer errorSoundPlayer;
     private String selectedErrorSound = "error1.mp3";
     private String selectedBackgroundMusic = null;
@@ -788,6 +788,7 @@ public class SettingsController implements Initializable {
         //Stop any currently playing music
         if (mediaPlayer != null) {
             mediaPlayer.stop();
+            mediaPlayer = null;
         }
 
         // Play the selected music
@@ -806,7 +807,7 @@ public class SettingsController implements Initializable {
 
                 selectedBackgroundMusic = fileName;
             } else {
-                showAlert("Couldnot findmusicfile: " + fileName, Alert.AlertType.ERROR);
+                showAlert("Could not findmusicfile: " + fileName, Alert.AlertType.ERROR);
             }
         } catch (Exception e) {
             showAlert("Error playing music:" + e.getMessage(), Alert.AlertType.ERROR);
