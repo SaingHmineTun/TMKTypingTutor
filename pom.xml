@@ -6,7 +6,7 @@
 
     <groupId>it.saimao</groupId>
     <artifactId>tmk_typing_tutor</artifactId>
-    <version>1.4</version>
+    <version>1.5</version>
     <name>TMK Typing Tutor</name>
 
     <properties>
@@ -45,7 +45,6 @@
                 <version>0.0.8</version>
                 <executions>
                     <execution>
-                        <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>it.saimao.tmk_typing_tutor.Main</mainClass>

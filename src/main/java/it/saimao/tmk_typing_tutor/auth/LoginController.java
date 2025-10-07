@@ -3,6 +3,7 @@ package it.saimao.tmk_typing_tutor.auth;
 import it.saimao.tmk_typing_tutor.controller.MainController;
 import it.saimao.tmk_typing_tutor.model.User;
 import it.saimao.tmk_typing_tutor.services.UserService;
+import it.saimao.tmk_typing_tutor.utils.Toast;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -52,14 +53,36 @@ public class LoginController implements Initializable {
                             hbox.setSpacing(15);
                             hbox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
 
-                            Label userIcon = new Label("\uD83D\uDC64"); // Unicodeuser icon
+                            Label userIcon = new Label("\uD83D\uDC64"); // Unicode user icon
 
                             Label usernameLabel = new Label(user.getUsername());
 
                             Region spacer = new Region();
                             HBox.setHgrow(spacer, Priority.ALWAYS);
 
-                            hbox.getChildren().addAll(userIcon, usernameLabel, spacer);
+                            Button deleteButton = new Button("❌");
+                            deleteButton.setStyle("-fx-background-color: transparent; -fx-cursor: hand;");
+                            deleteButton.setOnAction(event -> {
+                                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                                alert.setTitle("Delete User");
+                                alert.setHeaderText("Delete User: " + user.getUsername());
+                                alert.setContentText("Are you sure you want to delete this user and all associated data? This action cannot be undone.");
+                                
+                                alert.showAndWait().ifPresent(response -> {
+                                    if (response == ButtonType.OK) {
+                                        UserService.deleteUser(user.getId());
+                                        lvUsers.getItems().remove(user);
+                                        if (lvUsers.getItems().isEmpty()) {
+                                            pfPassword.setVisible(false);
+                                            btnLogin.setVisible(false);
+                                            lblSelectedUser.setText("");
+                                        }
+                                        Toast.showToast(btnLogin.getScene().getWindow(), "User deleted successfully!", 2000);
+                                    }
+                                });
+                            });
+
+                            hbox.getChildren().addAll(userIcon, usernameLabel, spacer, deleteButton);
                             setGraphic(hbox);
                         }
                     }
@@ -87,7 +110,7 @@ public class LoginController implements Initializable {
     @FXML
     private void login() {
         if (selectedUser == null) {
-            lbError.setText("Please select auser from the list.");
+            lbError.setText("Please select a user from the list.");
             lbError.setVisible(true);
             return;
         }

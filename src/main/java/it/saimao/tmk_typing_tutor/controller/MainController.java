@@ -18,7 +18,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -214,8 +213,9 @@ public class MainController implements Initializable {
 
     private void resetLevels(int keyboard) {
         levelList.clear();
-        if (keyboard == 3) levelList.addAll(normalLevelList);
-        else {
+        if (keyboard != 3) {
+            levelList.addAll(normalLevelList);
+        } else {
             levelList.addAll(namkhoneLevelList);
         }
         cbLevel.getItems().setAll(FXCollections.observableArrayList(levelList));
@@ -853,9 +853,7 @@ public class MainController implements Initializable {
     }
 
     private void saveLessonProgress() {
-        // Create a lesson progress object with the current stats
         LessonProgress lessonProgress = new LessonProgress(loggedInUser.getId(), cbLevel.getSelectionModel().getSelectedIndex(), cbLessons.getSelectionModel().getSelectedIndex(), wpm, accuracy, misTyped);
-        // Save the lesson progress
         LessonProgressService.saveLessonProgress(lessonProgress);
     }
 
@@ -903,7 +901,6 @@ public class MainController implements Initializable {
     private MediaPlayer backgroundMusicPlayer;
 
     private void playMistypedSound() {
-        // Check if user has enabled error sounds
         if (loggedInUser.getErrorSound() <= 0) {
             return; // User has disabled error sounds
         }
@@ -972,7 +969,6 @@ public class MainController implements Initializable {
     }
 
     public void setSelectedErrorSound(int errorSoundIndex, User user) {
-        // This method will be called when error sound is updated in settings
         user.setErrorSound(errorSoundIndex);
         UserService.updateUser(user);
 

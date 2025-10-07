@@ -20,7 +20,7 @@
                 
                 <VBox alignment="CENTER" spacing="25.0" style="-fx-padding: 20; -fx-background-radius: 10; -fx-background-color: -fx-key-color;" VBox.vgrow="ALWAYS">
                     <children>
-                        <Label fx:id="lblCertificateStatus" text="Complete all the tests to achieve a certificate" wrapText="true">
+                        <Label fx:id="lblCertificateStatus" text="You will get certificate after completing level 1, 2 and 3." wrapText="true">
                             <font>
                                 <Font size="18.0" />
                             </font>

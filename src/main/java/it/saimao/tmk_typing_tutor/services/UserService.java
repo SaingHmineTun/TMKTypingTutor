@@ -144,4 +144,24 @@ public class UserService {
         }
     }
 
+    public static void deleteUser(int userId) {
+        String deleteUserSql = "DELETE FROM users WHERE id = ?";
+        String deleteProgressSql = "DELETE FROM lesson_progress WHERE user_id = ?";
+
+        try (Connection conn = DatabaseService.getConnection();
+             PreparedStatement deleteUserStmt = conn.prepareStatement(deleteUserSql);
+             PreparedStatement deleteProgressStmt = conn.prepareStatement(deleteProgressSql)) {
+
+            // First delete all progress records for this user
+            deleteProgressStmt.setInt(1, userId);
+            deleteProgressStmt.executeUpdate();
+
+            // Then delete the user
+            deleteUserStmt.setInt(1, userId);
+            deleteUserStmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
