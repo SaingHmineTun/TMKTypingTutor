@@ -190,6 +190,7 @@ public class MainController implements Initializable {
                     stage.setY(screenBounds.getMinY());
                     stage.setWidth(screenBounds.getWidth());
                     stage.setHeight(screenBounds.getHeight());
+                    stage.setMaximized(true);
 
                     stage.show();
                 }
