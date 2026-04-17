@@ -149,21 +149,6 @@ sudo apt-get install gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreame
 
 Without these packages, the application may fail to start or throw errors related to media playback on Ubuntu systems.
 
-###Installation
-1. Clone or download the repository:
-   ```
-   git clone https://github.com/SaingHmineTun/TMKTypingTutor.git
-   ```
-
-2. Build the project using Maven:
-   ```
-   mvn clean install
-   ```
-
-3. Run the application:
-   ```
-   mvn javafx:run
-   ```
 
 Alternatively, you can import the project into your favorite IDE (IntelliJ IDEA, Eclipse, etc.) and run it from there.
 
