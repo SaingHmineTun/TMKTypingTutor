@@ -3,6 +3,7 @@ package it.saimao.tmk_typing_tutor.controller;
 import it.saimao.tmk_typing_tutor.key_map.NamKhone_KeyMap;
 import it.saimao.tmk_typing_tutor.key_map.Panglong_KeyMap;
 import it.saimao.tmk_typing_tutor.key_map.SIL_KeyMap;
+import it.saimao.tmk_typing_tutor.key_map.TMK_KeyMap;
 import it.saimao.tmk_typing_tutor.key_map.Yunghkio_KeyMap;
 import it.saimao.tmk_typing_tutor.model.*;
 import it.saimao.tmk_typing_tutor.services.LessonProgressService;
@@ -45,6 +46,12 @@ import static it.saimao.tmk_typing_tutor.model.Data.*;
 import static it.saimao.tmk_typing_tutor.utils.Utils.createIcon;
 
 public class MainController implements Initializable {
+    private static final int STANDARD_KEYBOARD = 0;
+    private static final int YUNGHKIO_KEYBOARD = 1;
+    private static final int PANGLONG_KEYBOARD = 2;
+    private static final int NAMKHONE_KEYBOARD = 3;
+    private static final int TMK_KEYBOARD = 4;
+
     @FXML
     private BorderPane root;
     @FXML
@@ -223,7 +230,7 @@ public class MainController implements Initializable {
 
     private void resetLevels(int keyboard) {
         levelList.clear();
-        if (keyboard != 3) {
+        if (keyboard != NAMKHONE_KEYBOARD) {
             levelList.addAll(normalLevelList);
         } else {
             levelList.addAll(namkhoneLevelList);
@@ -278,14 +285,18 @@ public class MainController implements Initializable {
                     loggedInUser.setKeyboard(newValue.intValue());
                     UserService.updateUser(loggedInUser);
                 }
-                if (newValue.intValue() == 0) {
+                if (newValue.intValue() == STANDARD_KEYBOARD) {
                     allValues = SIL_KeyMap.getAllValuesList();
-                } else if (newValue.intValue() == 1) {
+                } else if (newValue.intValue() == YUNGHKIO_KEYBOARD) {
                     allValues = Yunghkio_KeyMap.getAllValuesList();
-                } else if (newValue.intValue() == 2) {
+                } else if (newValue.intValue() == PANGLONG_KEYBOARD) {
                     allValues = Panglong_KeyMap.getAllValuesList();
-                } else {
+                } else if (newValue.intValue() == NAMKHONE_KEYBOARD) {
                     allValues = NamKhone_KeyMap.getAllValuesList();
+                } else if (newValue.intValue() == TMK_KEYBOARD) {
+                    allValues = TMK_KeyMap.getAllValuesList();
+                } else {
+                    throw new RuntimeException("Keyboard is not selected");
                 }
                 resetKeyboard();
                 createKeyBoard();
@@ -493,7 +504,7 @@ public class MainController implements Initializable {
     private void tutorTyping() {
         int keyboard = cbKeyboard.getSelectionModel().getSelectedIndex();
         String testText = tfView.getText();
-        if (keyboard != 3) {
+        if (requiresPrebaseVowelTyping(keyboard)) {
             testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1031", "\u1031$1$2$3");
             testText = testText.replaceAll("([\\u1000-\\u1021\\u1075-\\u1081\\u1022\\u108f\\u1029\\u106e\\u106f\\u1086\\u1090\\u1091\\u1092\\u1097])([\\u1060-\\u1069\\u106c\\u106d\\u1070-\\u107c\\u1085\\u108a])?([\\u103b-\\u103e]*)?\\u1084", "\u1084$1$2$3");
         }
@@ -515,7 +526,7 @@ public class MainController implements Initializable {
                 ivRightHand.setImage(hand.getRightHand());
 
                 // Config for Namkhone Keyboard
-                if (keyboard == 3) {
+                if (keyboard == NAMKHONE_KEYBOARD) {
                     // Show  ိံ  key
                     if (mustType.equals("ိ")) {
                         String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
@@ -624,7 +635,9 @@ public class MainController implements Initializable {
 
                 }
 
-                if (mustType.equals("ႂ")) {
+                if (keyboard == TMK_KEYBOARD) {
+                    mustType = getTmkCombinedValue(testText, indexOfPractice - 1);
+                } else if (mustType.equals("ႂ")) {
                     String afterTyping = testText.substring(indexOfPractice, indexOfPractice + 1);
                     if (afterTyping.equals("်")) mustType = "ႂ်";
                 }
@@ -652,7 +665,7 @@ public class MainController implements Initializable {
                     return;
                 }
             }
-            if (practiceText.length() >= 2 && keyboard != 3) {
+            if (practiceText.length() >= 2 && requiresPrebaseVowelTyping(keyboard)) {
                 String beforeTyping = practiceText.substring(indexOfPractice - 2, indexOfPractice - 1);
                 if (beforeTyping.equals("ေ") || beforeTyping.equals("ႄ")) {
                     if (mustSwap) {
@@ -663,7 +676,7 @@ public class MainController implements Initializable {
                     }
                 }
             }
-            if ((typing.equals("ေ") || typing.equals("ႄ")) && keyboard != 3) {
+            if ((typing.equals("ေ") || typing.equals("ႄ")) && requiresPrebaseVowelTyping(keyboard)) {
                 mustSwap = true;
             }
 
@@ -689,7 +702,7 @@ public class MainController implements Initializable {
         if (indexOfPractice < tfView.getText().length()) {
             // Know which value to type next
             String valueToType = testText.substring(indexOfPractice, indexOfPractice + 1);
-            if (keyboard == 3) {
+            if (keyboard == NAMKHONE_KEYBOARD) {
                 // Show  ိံ key
                 if (valueToType.equals("ိ")) {
                     String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
@@ -797,8 +810,9 @@ public class MainController implements Initializable {
                 }
 
             }
-            // Show ႂ်  key
-            if (valueToType.equals("ႂ")) {
+            if (keyboard == TMK_KEYBOARD) {
+                valueToType = getTmkCombinedValue(testText, indexOfPractice);
+            } else if (valueToType.equals("ႂ")) {
                 String afterTyping = testText.substring(indexOfPractice + 1, indexOfPractice + 2);
                 if (afterTyping.equals("်")) valueToType = "ႂ်";
             }
@@ -835,16 +849,40 @@ public class MainController implements Initializable {
         ivLeftHand.setImage(hand.getLeftHand());
     }
 
+    private boolean requiresPrebaseVowelTyping(int keyboard) {
+        return keyboard != NAMKHONE_KEYBOARD && keyboard != TMK_KEYBOARD;
+    }
+
+    private String getTmkCombinedValue(String text, int index) {
+        String value = text.substring(index, index + 1);
+        if (index + 1 >= text.length()) {
+            return value;
+        }
+        String afterValue = text.substring(index + 1, index + 2);
+        if (value.equals("ႂ") && afterValue.equals("်")) {
+            return "ႂ်";
+        }
+        if (value.equals("ိ") && afterValue.equals("ု")) {
+            return "ို";
+        }
+        if (value.equals("ိ") && afterValue.equals("ူ")) {
+            return "ိူ";
+        }
+        return value;
+    }
+
     private Hand getHand(int keyboardIndex, String valueToType) {
         Map<String, String> allValues;
-        if (keyboardIndex == 0) {
+        if (keyboardIndex == STANDARD_KEYBOARD) {
             allValues = SIL_KeyMap.getAllValuesMap();
-        } else if (keyboardIndex == 1) {
+        } else if (keyboardIndex == YUNGHKIO_KEYBOARD) {
             allValues = Yunghkio_KeyMap.getAllValuesMap();
-        } else if (keyboardIndex == 2) {
+        } else if (keyboardIndex == PANGLONG_KEYBOARD) {
             allValues = Panglong_KeyMap.getAllValuesMap();
-        } else if (keyboardIndex == 3) {
+        } else if (keyboardIndex == NAMKHONE_KEYBOARD) {
             allValues = NamKhone_KeyMap.getAllValuesMap();
+        } else if (keyboardIndex == TMK_KEYBOARD) {
+            allValues = TMK_KeyMap.getAllValuesMap();
         } else {
             throw new RuntimeException("Keyboard is not selected");
         }
@@ -989,14 +1027,18 @@ public class MainController implements Initializable {
     private String convertToShanChar(String character) {
         String shanChar;
         int keyboard = cbKeyboard.getSelectionModel().getSelectedIndex();
-        if (keyboard == 0) {
+        if (keyboard == STANDARD_KEYBOARD) {
             shanChar = SIL_KeyMap.getAllValuesMap().getOrDefault(character, "");
-        } else if (keyboard == 1) {
+        } else if (keyboard == YUNGHKIO_KEYBOARD) {
             shanChar = Yunghkio_KeyMap.getAllValuesMap().getOrDefault(character, "");
-        } else if (keyboard == 2) {
+        } else if (keyboard == PANGLONG_KEYBOARD) {
             shanChar = Panglong_KeyMap.getAllValuesMap().getOrDefault(character, "");
-        } else {
+        } else if (keyboard == NAMKHONE_KEYBOARD) {
             shanChar = NamKhone_KeyMap.getAllValuesMap().getOrDefault(character, "");
+        } else if (keyboard == TMK_KEYBOARD) {
+            shanChar = TMK_KeyMap.getAllValuesMap().getOrDefault(character, "");
+        } else {
+            shanChar = "";
         }
         return shanChar;
     }

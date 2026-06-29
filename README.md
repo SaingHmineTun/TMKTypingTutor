@@ -6,7 +6,7 @@ This software is specifically developed to teach Shan language typing on compute
 
 ## Features
 
-- **Multiple Keyboard Layouts**: Supports SIL, Yunghkio, Kawsai (Panglong), andNamkhone keyboard layouts
+- **Multiple Keyboard Layouts**: Supports SIL, Yunghkio, Kawsai (Panglong), Namkhone, and TMK Keyboard layouts
 - **Extensive Lesson System**: Four progressive levels with numerous lessons covering basic to advanced Shan typing
 - **Multiple Themes**: 14+ beautiful themes including Light, Dark, Ocean, Sunset, Neon, and more
 - **Progress Tracking**: Detailed statistics and progress tracking for each lesson
@@ -20,7 +20,7 @@ This software is specifically developed to teach Shan language typing on compute
    - Returning users canlog in with their existing credentials
 
 2. **Select Keyboard Layout**:
-   - Choose from 4 available keyboard layouts: SIL, Yunghkio, Kawsai (Panglong), or Namkhone
+   - Choose from 5 available keyboard layouts: SIL, Yunghkio, Kawsai (Panglong), Namkhone, or TMK Keyboard
    - The keyboard layout can be changed at any time in the settings
 
 3. **Choose Theme**:
@@ -46,7 +46,7 @@ This software is specifically developed to teach Shan language typing on compute
 
 This project is called TMK Typing Tutor and is a computer software that can be installed on Windows, Linux and Mac OS and is developed by Sai Mao (TMKMuse) using JavaFX Technology.
 
-The purpose of this project is to provide Shan people practice Shan typing on their own machine. Because there are 4 typing keyboards in Shan language, this project is designed to support them all. Using this software requires no keyboard installed but would be better if users do so.
+The purpose of this project is to provide Shan people practice Shan typing on their own machine. Because there are 5 typing keyboards in Shan language, this project is designed to support them all. Using this software requires no keyboard installed but would be better if users do so.
 
 This project is opensource and redistribution is allowed but reselling or redistribution with a cost in any way are strongly forbidden.
 

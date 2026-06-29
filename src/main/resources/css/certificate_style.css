@@ -1,72 +1,171 @@
 @import "using_font.css";
 
-.certificate-parent {
-
-    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #e3f2fd, #bbdefb);
+.certificate-window {
+    -fx-background-color: #161616;
 }
 
-.certificate-pane {
-    -fx-border-color: #2c5aa0;
-    -fx-border-width: 5;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
+.certificate-preview {
+    -fx-padding: 22;
 }
 
-.label, .text {
-    -fx-font-family: 'AJ 02 Regular';
+.certificate-page {
+    -fx-background-color: #f6efe1;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.45), 26, 0.18, 0, 10);
+}
+
+.certificate-paper {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #fffdf7, #f5ecd9);
+}
+
+.certificate-header {
+    -fx-background-color: #070707;
+}
+
+.certificate-header-rule {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #c6a950, #f8e37b, #c6a950);
+}
+
+.certificate-outer-border {
+    -fx-background-color: transparent;
+    -fx-border-color: #080808;
+    -fx-border-width: 2;
+}
+
+.certificate-inner-border {
+    -fx-background-color: transparent;
+    -fx-border-color: #c6a950;
+    -fx-border-width: 1.5;
+}
+
+.label {
     -fx-font-smoothing-type: lcd;
 }
 
+.certificate-brand {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 70;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f0e2f1;
+}
+
+.certificate-brand-subtitle {
+    -fx-font-family: "Courier New";
+    -fx-font-size: 18;
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+    -fx-text-fill: #fff36c;
+}
+
+.certificate-title {
+    -fx-font-family: "VistolSans-Black";
+    -fx-font-size: 36;
+    -fx-text-fill: #fffaf1;
+}
+
+.certificate-title-sub {
+    -fx-font-family: "VistolSans-Black";
+    -fx-font-size: 16;
+    -fx-text-fill: #f2d66a;
+}
+
+.certificate-kicker,
+.certificate-text {
+    -fx-font-family: "VistolSans-Black";
+    -fx-font-size: 16;
+    -fx-text-fill: #4a4034;
+}
+
+.certificate-username {
+    -fx-font-family: "AJ 00";
+    -fx-font-size: 38;
+    -fx-font-weight: bold;
+    -fx-text-fill: #141414;
+}
+
+.certificate-name-rule,
+.certificate-signature-rule {
+    -fx-background-color: #c6a950;
+}
+
+.certificate-level {
+    -fx-font-family: "AJ 00";
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+    -fx-text-fill: #231d19;
+}
+
+.certificate-detail-card {
+    -fx-background-color: rgba(255, 255, 255, 0.74);
+    -fx-border-color: #dcc16a;
+    -fx-border-width: 1;
+}
+
+.certificate-detail-label {
+    -fx-font-family: "VistolSans-Black";
+    -fx-font-size: 12;
+    -fx-text-fill: #6c604e;
+}
+
+.certificate-awpm {
+    -fx-font-family: "VistolSans-Black";
+    -fx-font-size: 25;
+    -fx-text-fill: #111111;
+}
+
+.certificate-date {
+    -fx-font-family: "VistolSans-Black";
+    -fx-font-size: 17;
+    -fx-text-fill: #111111;
+}
+
+.certificate-signature {
+    -fx-font-family: "VistolSans-Black";
+    -fx-font-size: 14;
+    -fx-text-fill: #191919;
+}
+
+.certificate-signature-label {
+    -fx-font-family: "VistolSans-Black";
+    -fx-font-size: 11;
+    -fx-text-fill: #6c604e;
+}
+
+.certificate-seal-circle {
+    -fx-fill: rgba(255, 255, 255, 0.42);
+    -fx-stroke: #c6a950;
+    -fx-stroke-width: 2.5;
+}
+
+.certificate-seal-title {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 28;
+    -fx-font-weight: bold;
+    -fx-text-fill: #111111;
+}
+
+.certificate-seal-text {
+    -fx-font-family: "VistolSans-Black";
+    -fx-font-size: 9;
+    -fx-text-fill: #806f36;
+}
+
+.certificate-actions {
+    -fx-background-color: #161616;
+}
+
 .button {
-    -fx-background-color: #2c5aa0;
-    -fx-text-fill: white;
-    -fx-background-radius: 5;
-    -fx-border-radius: 5;
+    -fx-background-color: #f2d66a;
+    -fx-text-fill: #111111;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-font-family: "VistolSans-Black";
     -fx-font-size: 14;
 }
 
 .button:hover {
-    -fx-background-color: #1a3d70;
+    -fx-background-color: #fff36c;
 }
 
 .button:pressed {
-    -fx-background-color: #0d264d;
-}
-
-/* Certificate specific styles */
-.certificate-title {
-    -fx-font-size: 36px;
-    -fx-text-fill: #2c5aa0;
-}
-
-.certificate-subtitle {
-    -fx-font-size: 20px;
-    -fx-text-fill: #2c5aa0;
-}
-
-.certificate-text {
-    -fx-font-size: 18px;
-}
-
-.certificate-username {
-    -fx-font-size: 32px;
-    -fx-text-fill: #007bff;
-}
-
-.certificate-level {
-    -fx-font-size: 24px;
-    -fx-text-fill: #2c5aa0;
-}
-
-.certificate-awpm {
-    -fx-font-size: 32px;
-    -fx-text-fill: #28a745;
-}
-
-.certificate-date-label {
-    -fx-font-size: 14px;
-}
-
-.certificate-date {
-    -fx-font-size: 14px;
+    -fx-background-color: #c6a950;
 }

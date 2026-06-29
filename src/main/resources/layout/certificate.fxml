@@ -2,60 +2,80 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<BorderPane fx:id="root" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/certificate_style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.controller.CertificateController">
+<BorderPane fx:id="root" prefHeight="720.0" prefWidth="940.0" styleClass="certificate-window" stylesheets="@../css/certificate_style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.controller.CertificateController">
     <center>
-      <VBox fx:id="vbCertificate" maxHeight="595.0" maxWidth="842.0" minHeight="595.0" minWidth="842.0" prefHeight="595.0" prefWidth="842.0" styleClass="certificate-parent">
-         <children>
-              <VBox alignment="CENTER" maxHeight="575.0" maxWidth="822.0" minHeight="575.0" minWidth="822.0" prefHeight="575.0" prefWidth="822.0" styleClass="certificate-pane">
-                  <children>
-                      <Label id="certificate-title" styleClass="certificate-title" text="Certificate Of Completion">
-                </Label>
-                      <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@../images/app_icon.png" />
-                          </image>
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </VBox.margin>
-                      </ImageView>
-                        <Label styleClass="certificate-text" text="This is to certify that" />
-                        <Label fx:id="lblUsername" styleClass="certificate-username" text="[Name]">
-                        </Label>
-                        <Label styleClass="certificate-text" text="has successfully completed" />
-                        <Label fx:id="lblLevel" styleClass="certificate-level" text="[Level]">
-                        </Label>
-                        <Label styleClass="certificate-text" text="with an average speed of" />
-                        <Label fx:id="lblAwpm" styleClass="certificate-awpm" text="[AWPM]">
-                        </Label>
-                  <HBox alignment="CENTER">
-                     <children>
-                            <Label styleClass="certificate-text" text="in TMK Typing Tutor on " />
-                            <Label fx:id="lblDate" maxHeight="1.7976931348623157E308" styleClass="certificate-text" text="Oct 4, 2025" />
-                     </children>
-                  </HBox>
-                  </children>
-                  <padding>
-                      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                  </padding>
-              </VBox>
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </VBox>
+        <StackPane styleClass="certificate-preview">
+            <AnchorPane fx:id="vbCertificate" maxHeight="595.0" maxWidth="842.0" minHeight="595.0" minWidth="842.0" prefHeight="595.0" prefWidth="842.0" styleClass="certificate-page">
+                <children>
+                    <Region layoutX="20.0" layoutY="20.0" prefHeight="555.0" prefWidth="802.0" styleClass="certificate-outer-border" />
+                    <Region layoutX="34.0" layoutY="34.0" prefHeight="527.0" prefWidth="774.0" styleClass="certificate-inner-border" />
+                    <Region layoutX="42.0" layoutY="42.0" prefHeight="511.0" prefWidth="758.0" styleClass="certificate-paper" />
+
+                    <Region layoutX="42.0" layoutY="42.0" prefHeight="118.0" prefWidth="758.0" styleClass="certificate-header" />
+                    <Region layoutX="42.0" layoutY="160.0" prefHeight="4.0" prefWidth="758.0" styleClass="certificate-header-rule" />
+
+                    <Label layoutX="74.0" layoutY="50.0" prefHeight="72.0" prefWidth="250.0" styleClass="certificate-brand" text="TMK" />
+                    <Label layoutX="150.0" layoutY="119.0" prefHeight="24.0" prefWidth="170.0" styleClass="certificate-brand-subtitle" text="Typing Tutor" />
+
+                    <VBox alignment="CENTER_RIGHT" layoutX="474.0" layoutY="62.0" prefHeight="78.0" prefWidth="280.0" spacing="2.0">
+                        <children>
+                            <Label alignment="CENTER_RIGHT" prefWidth="280.0" styleClass="certificate-title" text="Certificate" />
+                            <Label alignment="CENTER_RIGHT" prefWidth="280.0" styleClass="certificate-title-sub" text="OF COMPLETION" />
+                        </children>
+                    </VBox>
+
+                    <Label alignment="CENTER" layoutX="146.0" layoutY="190.0" prefHeight="28.0" prefWidth="550.0" styleClass="certificate-kicker" text="This certificate is proudly presented to" />
+                    <Label fx:id="lblUsername" alignment="CENTER" layoutX="126.0" layoutY="228.0" prefHeight="62.0" prefWidth="590.0" styleClass="certificate-username" text="[Name]" textAlignment="CENTER" wrapText="true" />
+                    <Region layoutX="178.0" layoutY="294.0" prefHeight="2.0" prefWidth="486.0" styleClass="certificate-name-rule" />
+
+                    <Label alignment="CENTER" layoutX="146.0" layoutY="320.0" prefHeight="28.0" prefWidth="550.0" styleClass="certificate-text" text="for successfully completing" />
+                    <Label fx:id="lblLevel" alignment="CENTER" layoutX="116.0" layoutY="354.0" prefHeight="46.0" prefWidth="610.0" styleClass="certificate-level" text="[Level]" textAlignment="CENTER" wrapText="true" />
+
+                    <HBox alignment="CENTER" layoutX="166.0" layoutY="430.0" prefHeight="74.0" prefWidth="510.0" spacing="18.0">
+                        <children>
+                            <VBox alignment="CENTER" prefHeight="74.0" prefWidth="236.0" styleClass="certificate-detail-card">
+                                <children>
+                                    <Label styleClass="certificate-detail-label" text="Average Speed" />
+                                    <Label fx:id="lblAwpm" styleClass="certificate-awpm" text="[AWPM]" />
+                                </children>
+                            </VBox>
+                            <VBox alignment="CENTER" prefHeight="74.0" prefWidth="236.0" styleClass="certificate-detail-card">
+                                <children>
+                                    <Label styleClass="certificate-detail-label" text="Issued On" />
+                                    <Label fx:id="lblDate" styleClass="certificate-date" text="October 04, 2025" />
+                                </children>
+                            </VBox>
+                        </children>
+                    </HBox>
+
+                    <Region layoutX="82.0" layoutY="510.0" prefHeight="2.0" prefWidth="220.0" styleClass="certificate-signature-rule" />
+                    <Label alignment="CENTER" layoutX="82.0" layoutY="517.0" prefHeight="24.0" prefWidth="220.0" styleClass="certificate-signature" text="TMK Typing Tutor" />
+                    <Label alignment="CENTER" layoutX="82.0" layoutY="539.0" prefHeight="20.0" prefWidth="220.0" styleClass="certificate-signature-label" text="Issued by" />
+
+                    <StackPane layoutX="657.0" layoutY="462.0" prefHeight="94.0" prefWidth="94.0">
+                        <children>
+                            <Circle radius="43.0" styleClass="certificate-seal-circle" />
+                            <VBox alignment="CENTER" prefHeight="86.0" prefWidth="86.0">
+                                <children>
+                                    <Label styleClass="certificate-seal-title" text="TMK" />
+                                    <Label styleClass="certificate-seal-text" text="VERIFIED" />
+                                </children>
+                            </VBox>
+                        </children>
+                    </StackPane>
+                </children>
+            </AnchorPane>
+        </StackPane>
     </center>
     <bottom>
-        <HBox alignment="CENTER" prefHeight="100.0" spacing="20.0">
+        <HBox alignment="CENTER" prefHeight="82.0" spacing="16.0" styleClass="certificate-actions">
             <children>
-                <Button fx:id="btnSave" mnemonicParsing="false" onAction="#save" prefHeight="40.0" prefWidth="120.0" text="Save" />
-                <Button fx:id="btnClose" mnemonicParsing="false" onAction="#close" prefHeight="40.0" prefWidth="120.0" text="Close" />
+                <Button fx:id="btnSave" mnemonicParsing="false" onAction="#save" prefHeight="42.0" prefWidth="128.0" text="Save" />
+                <Button fx:id="btnClose" mnemonicParsing="false" onAction="#close" prefHeight="42.0" prefWidth="128.0" text="Close" />
             </children>
         </HBox>
     </bottom>
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
 </BorderPane>
