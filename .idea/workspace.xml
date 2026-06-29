@@ -9,17 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Included UUID to use while packaging as msi installer.">
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+    <list default="true" id="6918b279-22a7-4615-8ec0-b793a892c068" name="Changes" comment="Added TMK Keyboard (လွၵ်းမိုဝ်း ထုင်ႉမၢဝ်းၶမ်း) &#10;Redesign Completion Certificate.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/CertificateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/CertificateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/saimao/tmk_typing_tutor/model/Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/certificate_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/certificate_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/certificate.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/certificate.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/layout/setting_about.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/layout/setting_about.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/lesson_3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/lesson_3.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -254,14 +246,6 @@
       <workItem from="1759724722563" duration="14715000" />
       <workItem from="1759770096942" duration="5153000" />
       <workItem from="1759806263334" duration="11688000" />
-    </task>
-    <task id="LOCAL-00003" summary="Added - Ability to type with English keyboard!&#10;Issue - In English, when Typing s or a that are no match with the toTypeWord, some characters are deleted unexpectedly!&#10;Issue - Using shn_sil keyboard to type is sill not working properly when typing ေ &amp; ႄ">
-      <option name="closed" value="true" />
-      <created>1688924255958</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1688924255958</updated>
     </task>
     <task id="LOCAL-00004" summary="Fix - Error typing with Shan Keyboard!&#10;Modified - Combobox Style">
       <option name="closed" value="true" />
@@ -647,7 +631,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759835942254</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Added TMK Keyboard (လွၵ်းမိုဝ်း ထုင်ႉမၢဝ်းၶမ်း) &#10;Redesign Completion Certificate.">
+      <option name="closed" value="true" />
+      <created>1782753431692</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1782753431692</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -666,7 +658,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="false" />
-    <MESSAGE value="Added Light Theme!" />
     <MESSAGE value="Changed Light Theme.&#10;Plan to add &quot;change theme&quot; option" />
     <MESSAGE value="Added Change Theme function!" />
     <MESSAGE value="&#10;Re-implement Light and Dark theme" />
@@ -691,7 +682,8 @@
     <MESSAGE value="Update README.md" />
     <MESSAGE value="Re-write the README.md to tell users about G-Streamer requirement to run on Ubuntu." />
     <MESSAGE value="Included UUID to use while packaging as msi installer." />
-    <option name="LAST_COMMIT_MESSAGE" value="Included UUID to use while packaging as msi installer." />
+    <MESSAGE value="Added TMK Keyboard (လွၵ်းမိုဝ်း ထုင်ႉမၢဝ်းၶမ်း) &#10;Redesign Completion Certificate." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added TMK Keyboard (လွၵ်းမိုဝ်း ထုင်ႉမၢဝ်းၶမ်း) &#10;Redesign Completion Certificate." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

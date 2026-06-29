@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
 
 <BorderPane fx:id="root" prefHeight="720.0" prefWidth="940.0" styleClass="certificate-window" stylesheets="@../css/certificate_style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.saimao.tmk_typing_tutor.controller.CertificateController">
     <center>
@@ -50,22 +48,6 @@
                             </VBox>
                         </children>
                     </HBox>
-
-                    <Region layoutX="82.0" layoutY="510.0" prefHeight="2.0" prefWidth="220.0" styleClass="certificate-signature-rule" />
-                    <Label alignment="CENTER" layoutX="82.0" layoutY="517.0" prefHeight="24.0" prefWidth="220.0" styleClass="certificate-signature" text="TMK Typing Tutor" />
-                    <Label alignment="CENTER" layoutX="82.0" layoutY="539.0" prefHeight="20.0" prefWidth="220.0" styleClass="certificate-signature-label" text="Issued by" />
-
-                    <StackPane layoutX="657.0" layoutY="462.0" prefHeight="94.0" prefWidth="94.0">
-                        <children>
-                            <Circle radius="43.0" styleClass="certificate-seal-circle" />
-                            <VBox alignment="CENTER" prefHeight="86.0" prefWidth="86.0">
-                                <children>
-                                    <Label styleClass="certificate-seal-title" text="TMK" />
-                                    <Label styleClass="certificate-seal-text" text="VERIFIED" />
-                                </children>
-                            </VBox>
-                        </children>
-                    </StackPane>
                 </children>
             </AnchorPane>
         </StackPane>
